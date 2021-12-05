@@ -11,6 +11,7 @@ tmp/
 *.swp
 *~.nib
 *.MF
+*MANIFEST.MF
 target/
 local.properties
 .settings/
