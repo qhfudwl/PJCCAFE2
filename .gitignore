@@ -13,6 +13,8 @@ tmp/
 *.MF
 *MANIFEST.MF
 target/
+/target/
+*pom.properties
 local.properties
 .settings/
 .loadpath
