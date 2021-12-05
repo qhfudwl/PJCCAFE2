@@ -11,6 +11,7 @@ tmp/
 *.swp
 *~.nib
 *.MF
+target/
 local.properties
 .settings/
 .loadpath
