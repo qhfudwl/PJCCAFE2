@@ -5,5 +5,5 @@
 !/.gitignore !/some_other_files !/pom.xml
 
 # 포함할 폴더들을 추가한다. 
-!/cafe/
+!/cafe
 
