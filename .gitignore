@@ -2,7 +2,7 @@
 /* 
 
 # 포함할 파일을 추가한다. 
-!/.gitignore !/some_other_files !/pom.xml
+!/.gitignore !/some_other_files !/pom.xml !/.java
 
 # 포함할 폴더들을 추가한다. 
 !/cafe
