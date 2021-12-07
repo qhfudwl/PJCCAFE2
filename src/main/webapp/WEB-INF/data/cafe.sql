@@ -12,7 +12,7 @@ CREATE TABLE Employee (
    
    CONSTRAINT   	Employee_eId_UK  	UNIQUE(eId)										-- 고객 아이디는 중복 없이
 );
-
+ 
 CREATE TABLE Customer (
    id				BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,		 
    name				VARCHAR(30)			NOT NULL,										-- 고객이름
