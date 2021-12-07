@@ -1,10 +1,8 @@
 package cafe.pj.jvx330.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Menu {
 	private long id;
+	private char menuType;
 	private String menuName;
 	private double menuPrice;
 	private boolean stock;
@@ -17,14 +15,16 @@ public class Menu {
 		this.id = id;
 	}
 	
-	public Menu(String menuName, double menuPrice, boolean stock) {
+	public Menu(char menuType, String menuName, double menuPrice, boolean stock) {
+		this.setMenuType(menuType);
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
 		this.stock = stock;
 	}
 	
-	public Menu(long id, String menuName, double menuPrice, boolean stock) {
+	public Menu(long id, char menuType, String menuName, double menuPrice, boolean stock) {
 		this.id = id;
+		this.menuType = menuType;
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
 		this.stock = stock;
@@ -60,5 +60,13 @@ public class Menu {
 
 	public void setStock(boolean stock) {
 		this.stock = stock;
+	}
+
+	public char getMenuType() {
+		return menuType;
+	}
+
+	public void setMenuType(char menuType) {
+		this.menuType = menuType;
 	}
 }

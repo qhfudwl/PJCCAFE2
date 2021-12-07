@@ -15,7 +15,7 @@ public class Sales {
 
 	public Sales() {
 		
-	}
+	} 
 	
 	
 	
