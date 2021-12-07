@@ -2,13 +2,16 @@ package cafe.pj.jvx330.menu.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import cafe.pj.jvx330.domain.Menu;
-
+@Component("menuDao")
 public class MenuDaoImpl implements MenuDao {
 	private JdbcTemplate jt;
 	
+	@Autowired
 	public MenuDaoImpl(JdbcTemplate jdbcTemplate) {
 		this.jt = jdbcTemplate;
 	}

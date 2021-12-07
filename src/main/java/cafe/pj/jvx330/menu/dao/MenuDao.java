@@ -2,6 +2,8 @@ package cafe.pj.jvx330.menu.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import cafe.pj.jvx330.domain.Menu;
 
 /**

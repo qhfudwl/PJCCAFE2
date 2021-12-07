@@ -1,0 +1,34 @@
+@charset "UTF-8";
+header{
+  height: 150px;
+  background: #596271;
+}
+#gnb{
+  width: 60%; height: 150px; margin: 0 auto;
+}
+#gnb ul {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#gnb ul li {
+  float: left;
+  margin: 0 30px;
+}
+
+#gnb ul li a {
+  position: relative;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.2em;
+  font-weight: 500;
+  color:#fff;
+}
+#gnb ul li a:hover::after{
+  content:"";
+  position: absolute; bottom:1px; left:0;
+  width: 100%; height: 100%;
+
+  border-bottom : 1px solid #fff;
+}
+
