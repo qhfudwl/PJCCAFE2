@@ -1,5 +1,8 @@
 package cafe.pj.jvx330.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Menu {
 	private long id;
 	private String menuName;
