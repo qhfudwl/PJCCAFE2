@@ -27,7 +27,7 @@ public class Customer extends User {
 	}
 	
 	/**
-	 * Ãß°¡
+	 * ì¶”ê°€
 	 * @param point
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public class Customer extends User {
 	}
 	
 	/**
-	 * Ãß°¡
+	 * ì¶”ê°€
 	 * @param point
 	 * @return
 	 */
