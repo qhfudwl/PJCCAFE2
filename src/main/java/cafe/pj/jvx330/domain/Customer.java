@@ -27,7 +27,7 @@ public class Customer extends User {
 	}
 	
 	/**
-	 * 추가추가
+	 * 추가
 	 * @param point
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public class Customer extends User {
 	}
 	
 	/**
-	 * 추가추가
+	 * 추가
 	 * @param point
 	 * @return
 	 */
