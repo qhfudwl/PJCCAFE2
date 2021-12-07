@@ -12,5 +12,4 @@ public interface SalesDao {
 	Sales findSalesByOrderNumber(String orderNumber);
 	Sales UpdateSales(long sid);
 	void RemoveSales(String orderNumber);
-	
 }

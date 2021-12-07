@@ -8,6 +8,6 @@ public interface UserDao {
 	User addUser(User user);
 	List<User> findUsersByPhone(String phone);
 	List<User> findAllUsers();
-	User UpdateUserById(long id); 
+	User UpdateUserById(long id);
 	void RemoveUserId(long id);
 }
