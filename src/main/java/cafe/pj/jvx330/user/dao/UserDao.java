@@ -9,5 +9,5 @@ public interface UserDao {
 	List<User> findUsersByPhone(String phone);
 	List<User> findAllUsers();
 	User UpdateUserById(long id);
-	void RemoveUserId(long id);
+	void RemoveUserId(long id); 
 }
