@@ -12,7 +12,7 @@ public abstract class User {
 	}
 	
 	public User(char userType) {
-		this.userType = userType;
+		this.userType = userType; 
 	}
 	
 	public User(long id, char userType, Date regDate) {
