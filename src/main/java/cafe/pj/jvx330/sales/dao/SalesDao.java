@@ -10,6 +10,6 @@ public interface SalesDao {
 	List<Sales> findSalesByDate(Date date1, Date date2);
 	List<Sales> findSalesByMenuNameAndDate(String menuName, Date date1, Date date2);
 	Sales findSalesByOrderNumber(String orderNumber);
-	Sales UpdateSales(long sid);
-	void RemoveSales(String orderNumber);
+	Sales updateSales(long sid);
+	void removeSales(String orderNumber);
 }

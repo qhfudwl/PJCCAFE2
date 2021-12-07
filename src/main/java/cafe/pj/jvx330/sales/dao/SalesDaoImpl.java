@@ -35,13 +35,13 @@ public class SalesDaoImpl implements SalesDao {
 	}
 
 	@Override
-	public Sales UpdateSales(long sid) {
+	public Sales updateSales(long sid) {
 		
 		return null;
 	}
 
 	@Override
-	public void RemoveSales(String orderNumber) {
+	public void removeSales(String orderNumber) {
 		
 		
 	}
