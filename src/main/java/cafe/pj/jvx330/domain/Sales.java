@@ -12,10 +12,10 @@ public class Sales {
 	private double userPoint;
 	private List<Order> orders;
 	private Date regDate;
-	 
+
 	public Sales() {
 		
-	}
+	} 
 	
 	
 	
