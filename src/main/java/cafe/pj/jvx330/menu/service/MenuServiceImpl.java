@@ -14,39 +14,33 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public Menu addMenu(Menu menu) {
-		
-		return null;
+		md.addMenu(menu);
+		return menu;
 	}
 
 	@Override
 	public Menu findMenuByMenuName(String menuName) {
-		// TODO Auto-generated method stub
-		return null;
+		return md.findMenuByMenuName(menuName);
 	}
 
 	@Override
 	public List<Menu> findAllMenus() {
-		// TODO Auto-generated method stub
-		return null;
+		return md.findAllMenus();
 	}
 
 	@Override
-	public List<Menu> findAllMenusByMenuType() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Menu> findAllMenusByMenuType(char menuType) {
+		return md.findAllMenusByMenuType(menuType);
 	}
 
 	@Override
-	public Menu UpdateMenuById(Menu menu) {
-		// TODO Auto-generated method stub
-		return null;
+	public Menu updateMenuById(Menu menu) {
+		md.updateMenuById(menu);
+		return menu;
 	}
 
 	@Override
-	public void RemoveMenuById(Menu menu) {
-		// TODO Auto-generated method stub
-		
+	public void removeMenuById(long id) {
+		md.removeMenuById(id);
 	}
-
-	
 }

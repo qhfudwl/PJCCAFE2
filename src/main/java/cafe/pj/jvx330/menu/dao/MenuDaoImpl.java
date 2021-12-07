@@ -56,7 +56,7 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public void UpdateMenuById(Menu menu) {
+	public void updateMenuById(Menu menu) {
 		
 		String sql = "UPDATE Menu SET (menuType, menuName, menuPrice, stock)"
 				+ "=(?, ?, ?, ?) WHERE id=?";
@@ -66,11 +66,11 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public void RemoveMenuById(Menu menu) {
+	public void removeMenuById(long id) {
 		
 		String sql = "DELETE FROM Menu WHERE id=?";
 		
-		jt.update(sql, menu.getId());
+		jt.update(sql, id);
 	}
 
 }
