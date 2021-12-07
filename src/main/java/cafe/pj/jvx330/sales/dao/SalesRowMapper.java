@@ -13,6 +13,7 @@ import cafe.pj.jvx330.domain.User;
 
 public class SalesRowMapper implements RowMapper<Sales>{
 
+	
 	@Override
 	public Sales mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Sales sales = null;
@@ -23,7 +24,7 @@ public class SalesRowMapper implements RowMapper<Sales>{
 		sales.setPlace(rs.getString("place").charAt(0));
 		sales.setPays(rs.getDouble("pays"));
 		sales.setUserPoint(rs.getDouble("userPoint"));
-		
+		List<Order> orders = ArrayList<Order>();
 		sales.setOrders(rs.getArray("orders"));
 		sales.setRegDate(rs.getTimestamp("regdate"));
 		return sales;

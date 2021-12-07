@@ -1,5 +1,6 @@
 package cafe.pj.jvx330.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class Sales {
 	private double userPoint;
 	private List<Order> orders;
 	private Date regDate;
-
+	
 	public Sales() {
 		
 	} 
