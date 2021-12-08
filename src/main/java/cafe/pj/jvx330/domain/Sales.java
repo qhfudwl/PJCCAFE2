@@ -12,31 +12,54 @@ public class Sales {
 	private double pays;
 	private double userPoint;
 	private List<Product> order;
+
 	private Date regDate;
 
 	public Sales() {
 		
 	} 
 	
+
 	public Sales(User user, String orderNumber, char place, double pays, double userPoint, String productList) {
 		this.user = user;
 		this.orderNumber = orderNumber;
 		this.place = place;
 		this.pays = pays;
 		this.userPoint = userPoint;
+
 		this.order = makeOrder(productList);
+
 	}
 	
 	public Sales(long id, User user, String orderNumber, char place, double pays,
 			double userPoint, String productList, Date regDate) {
+
 		this.id = id;
 		this.user = user;
 		this.orderNumber = orderNumber;
 		this.place = place;
 		this.pays = pays;
 		this.userPoint = userPoint;
+
 		this.order = makeOrder(productList);
+
 		this.regDate = regDate;
+	}
+	
+	private List<Product> makeOrderList(String orderList) {
+//		String[] order = orderList.split("/");
+//		String[] 
+//		Menu menu = null;
+//		long test;
+//		
+//		for(String temp : order) {
+//			temp.split(","); 
+//			
+//		}
+		
+		
+		
+		return null;
 	}
 
 	/**
@@ -101,8 +124,10 @@ public class Sales {
 	public List<Product> getOrders() {
 		return order;
 	}
+
 	public void setOrders(List<Product> order) {
 		this.order = order;
+
 	}
 	public Date getRegDate() {
 		return regDate;
