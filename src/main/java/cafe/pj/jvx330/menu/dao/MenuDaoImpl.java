@@ -61,8 +61,8 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public void updateMenuById(Menu menu) {
 		
-		String sql = "UPDATE Menu SET (menuType, menuName, menuPrice, stock)"
-				+ "=(?, ?, ?, ?) WHERE id=?";
+		String sql = "UPDATE Menu SET menuType=?, menuName=?, menuPrice=?, stock=?"
+				+ " WHERE id=?";
 		
 		jt.update(sql, String.valueOf(menu.getMenuType()), menu.getMenuName(),
 				menu.getMenuPrice(), menu.isStock(), menu.getId());

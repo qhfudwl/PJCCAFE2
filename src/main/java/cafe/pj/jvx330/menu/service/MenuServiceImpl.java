@@ -2,6 +2,7 @@ package cafe.pj.jvx330.menu.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cafe.pj.jvx330.domain.Menu;
@@ -11,6 +12,7 @@ import cafe.pj.jvx330.menu.dao.MenuDao;
 public class MenuServiceImpl implements MenuService {
 	private MenuDao md;
 	
+	@Autowired
 	public MenuServiceImpl(MenuDao menuDao) {
 		this.md = menuDao;
 	}

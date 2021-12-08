@@ -69,4 +69,11 @@ public class Menu {
 	public void setMenuType(char menuType) {
 		this.menuType = menuType;
 	}
+
+	@Override
+	public String toString() {
+		return "Menu [id=" + id + ", menuType=" + menuType + ", menuName=" + menuName + ", menuPrice=" + menuPrice
+				+ ", stock=" + stock + "]";
+	}
+	
 }
