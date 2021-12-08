@@ -7,7 +7,7 @@ public class Product {
 	public Product() {
 		
 	}
-	                                               
+//	         erase this.                                      
 	public Product(Menu menu, int quantity) {
 		this.menu = menu;
 		this.quantity = quantity;
