@@ -1,4 +1,4 @@
-package cafe.pj.jvx330.menu.controller;
+package cafe.pj.jvx330.web.command;
 
 public class MenuCommand {
 	private long id;
@@ -6,6 +6,7 @@ public class MenuCommand {
 	private String menuName;
 	private double menuPrice;
 	private boolean stock;
+	private String imgPath;
 	
 	public long getId() {
 		return id;
@@ -36,5 +37,11 @@ public class MenuCommand {
 	}
 	public void setStock(boolean stock) {
 		this.stock = stock;
+	}
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 }

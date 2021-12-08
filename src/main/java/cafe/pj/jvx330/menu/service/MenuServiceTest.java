@@ -49,7 +49,7 @@ public class MenuServiceTest {
 	}
 	
 	public void findMenuByMenuNameTest(String menuName) {
-		Menu menu = ms.findMenuByMenuName(menuName);
+		Menu menu = ms.findAllMenuByMenuName(menuName).get(0);
 		System.out.println(menu);
 	}
 	
@@ -69,7 +69,7 @@ public class MenuServiceTest {
 	
 	public void updateMenuByIdTest(Menu menu) {
 		ms.updateMenuById(menu);
-		Menu m = ms.findMenuByMenuName(menu.getMenuName());
+		Menu m = ms.findAllMenuByMenuName(menu.getMenuName()).get(0);
 		System.out.println(m);
 	}
 	

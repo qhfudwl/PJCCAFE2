@@ -17,9 +17,6 @@ public class Sales {
 		
 	} 
 	
-	
-	
-	
 	public Sales(User user, String orderNumber, char place, double pays, double userPoint, List<Order> orders) {
 		this.user = user;
 		this.orderNumber = orderNumber;
@@ -28,10 +25,6 @@ public class Sales {
 		this.userPoint = userPoint;
 		this.orders = orders;
 	}
-
-
-
-
 	public Sales(long id, User user, String orderNumber, char place, double pays, double userPoint, List<Order> orders,
 			Date regDate) {
 		this.id = id;
