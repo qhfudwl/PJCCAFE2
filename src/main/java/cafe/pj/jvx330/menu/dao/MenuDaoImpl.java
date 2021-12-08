@@ -2,24 +2,27 @@ package cafe.pj.jvx330.menu.dao;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import cafe.pj.jvx330.domain.Menu;
-
+@Component("menuDao")
 public class MenuDaoImpl implements MenuDao {
 	private JdbcTemplate jt;
 	
+	@Autowired
 	public MenuDaoImpl(JdbcTemplate jdbcTemplate) {
 		this.jt = jdbcTemplate;
 	}
 
 	@Override
 	public Menu addMenu(Menu menu) {
-		String sql = "INSERT INTO Menu(menuType, menuName, menuPrice, stock)"
-				+ " VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO Menu(menuType, menuName, menuPrice, stock, imgPath)"
+				+ " VALUES (?, ?, ?, ?, ?)";
 		
 		jt.update(sql, String.valueOf(menu.getMenuType()), menu.getMenuName(),
-				menu.getMenuPrice(), menu.isStock());
+				menu.getMenuPrice(), menu.isStock(), menu.getImgPath());
 		
 		return null;
 	}
@@ -36,7 +39,7 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public List<Menu> findAllMenus() {
 		
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock"
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
 				+ " FROM Menu";
 		
 		List<Menu> menus = jt.query(sql, new MenuRowMapper());
@@ -47,7 +50,7 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public List<Menu> findAllMenusByMenuType(char menuType) {
 
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock"
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
 				+ " FROM Menu WHERE menuType=?";
 		
 		List<Menu> menus = jt.query(sql, new MenuRowMapper(), String.valueOf(menuType));
@@ -56,21 +59,21 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public void UpdateMenuById(Menu menu) {
+	public void updateMenuById(Menu menu) {
 		
-		String sql = "UPDATE Menu SET (menuType, menuName, menuPrice, stock)"
-				+ "=(?, ?, ?, ?) WHERE id=?";
+		String sql = "UPDATE Menu SET menuType=?, menuName=?, menuPrice=?, stock=?, imgPath=?"
+				+ " WHERE id=?";
 		
 		jt.update(sql, String.valueOf(menu.getMenuType()), menu.getMenuName(),
-				menu.getMenuPrice(), menu.isStock(), menu.getId());
+				menu.getMenuPrice(), menu.isStock(), menu.getId(), menu.getImgPath());
 	}
 
 	@Override
-	public void RemoveMenuById(Menu menu) {
+	public void removeMenuById(long id) {
 		
 		String sql = "DELETE FROM Menu WHERE id=?";
 		
-		jt.update(sql, menu.getId());
+		jt.update(sql, id);
 	}
 
 }

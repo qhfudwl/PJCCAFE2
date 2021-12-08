@@ -2,6 +2,8 @@ package cafe.pj.jvx330.menu.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import cafe.pj.jvx330.domain.Menu;
 
 /**
@@ -50,15 +52,12 @@ public interface MenuDao {
 	 * @param menu
 	 * @author 김보령
 	 */
-	void UpdateMenuById(Menu menu);
+	void updateMenuById(Menu menu);
 	
 	/**
-	 * 메뉴 객체를 넣어 메뉴 삭제
-	 * id 가 있어야한다.
-	 * 추후 수정 가능
-	 * > 그냥 이름으로 삭제해도 되지 않을까??
+	 * 메뉴 id를 넣어 메뉴 삭제
 	 * @param menu
 	 * @author 김보령
 	 */
-	void RemoveMenuById(Menu menu); 
+	void removeMenuById(long id); 
 }
