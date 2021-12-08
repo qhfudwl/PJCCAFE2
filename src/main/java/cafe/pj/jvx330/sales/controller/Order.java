@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class Order {
 	
+		
 		@RequestMapping(value="/sayHello",method=RequestMethod.GET)
 		public ModelAndView sayHello() {
 
