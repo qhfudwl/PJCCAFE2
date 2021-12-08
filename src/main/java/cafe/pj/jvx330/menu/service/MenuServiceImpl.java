@@ -48,4 +48,6 @@ public class MenuServiceImpl implements MenuService {
 	public void removeMenuById(long id) {
 		md.removeMenuById(id);
 	}
+	
+	
 }
