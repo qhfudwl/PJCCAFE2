@@ -14,6 +14,7 @@ import cafe.pj.jvx330.domain.User;
 
 public class UserDaoImpl implements UserDao {
 	private JdbcTemplate jdbcTemplate;
+	private Customer customer;
 	
 	public UserDaoImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -27,11 +28,12 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User addUser(User user) {
-		Customer customer = (Customer)user;
+		Customer customer = new Customer();
 		jdbcTemplate.update("INSERT INTO Customer(name, phone, birth, point) "
 				+ "VALUE( ?, ?, ?, 0.0)",customer.getCustomerName(), customer.getPhone(),
 				customer.getBirth(),customer.getPhone());
-		return user;
+		User user1 = (User)customer;
+		return user1;
 	}
 	
 	/**
@@ -40,7 +42,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<User> findUsersByPhone(String phone) {
-		String sql = "SELECT id, name, phone, birth, point"
+		String sql = "SELECT id, name, phone, birth, point ,regDate"
 				+ "FROM Customer WHERE phone = ?";
 		
 		List<User> users = jdbcTemplate.query(sql, new UserRowMapper());
@@ -66,10 +68,10 @@ public class UserDaoImpl implements UserDao {
 		String sql = "UPDATE Customer SET name,phone,birth,point "+
 					"=(?,?,?,?) WHERE id = ?";
 		User user = null;
-		Customer customer
 		jdbcTemplate.update(sql,customer.getCustomerName(), customer.getPhone(),
 				customer.getBirth(),customer.getPoint(),customer.getId());
 		user = customer;
+		
 		return user;
 	}
 	
