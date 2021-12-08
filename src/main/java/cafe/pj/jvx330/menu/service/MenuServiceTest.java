@@ -34,18 +34,18 @@ public class MenuServiceTest {
 	}
 	
 	public void addMenuTest() {
-		ms.addMenu(new Menu('B', "자몽에이드", 1000.0, true));
-		ms.addMenu(new Menu('B', "레몬에이드", 1000.0, true));
-		ms.addMenu(new Menu('B', "자스민티", 1000.0, true));
-		ms.addMenu(new Menu('C', "핫아메리카노", 1500.0, true));
-		ms.addMenu(new Menu('C', "아이스아메리카노", 1500.0, true));
-		ms.addMenu(new Menu('C', "핫카페라떼", 2000.0, true));
-		ms.addMenu(new Menu('C', "아이스카페라떼", 2000.0, true));
-		ms.addMenu(new Menu('C', "핫카페모카", 2500.0, true));
-		ms.addMenu(new Menu('C', "아이스카페모카", 2500.0, true));
-		ms.addMenu(new Menu('F', "햄치즈샌드위치", 3000.0, true));
-		ms.addMenu(new Menu('F', "촉촉한초코칩쿠키", 1000.0, true));
-		ms.addMenu(new Menu('F', "알록달록마카롱", 1000.0, true));
+		ms.addMenu(new Menu('B', "자몽에이드", 1000.0, true, ""));
+		ms.addMenu(new Menu('B', "레몬에이드", 1000.0, true, ""));
+		ms.addMenu(new Menu('B', "자스민티", 1000.0, true, ""));
+		ms.addMenu(new Menu('C', "핫아메리카노", 1500.0, true, ""));
+		ms.addMenu(new Menu('C', "아이스아메리카노", 1500.0, true, ""));
+		ms.addMenu(new Menu('C', "핫카페라떼", 2000.0, true, ""));
+		ms.addMenu(new Menu('C', "아이스카페라떼", 2000.0, true, ""));
+		ms.addMenu(new Menu('C', "핫카페모카", 2500.0, true, ""));
+		ms.addMenu(new Menu('C', "아이스카페모카", 2500.0, true, ""));
+		ms.addMenu(new Menu('F', "햄치즈샌드위치", 3000.0, true, ""));
+		ms.addMenu(new Menu('F', "촉촉한초코칩쿠키", 1000.0, true, ""));
+		ms.addMenu(new Menu('F', "알록달록마카롱", 1000.0, true, ""));
 	}
 	
 	public void findMenuByMenuNameTest(String menuName) {

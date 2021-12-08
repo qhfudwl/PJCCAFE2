@@ -17,7 +17,8 @@ public class MenuRowMapper implements RowMapper<Menu> {
 	@Override
 	public Menu mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Menu menu = new Menu(rs.getLong("id"), rs.getString("menuType").charAt(0),
-				rs.getString("menuName"), rs.getDouble("menuPrice"), rs.getBoolean("stock"));
+				rs.getString("menuName"), rs.getDouble("menuPrice"), 
+				rs.getBoolean("stock"), rs.getString("imgPath"));
 		
 		return menu;
 	}
