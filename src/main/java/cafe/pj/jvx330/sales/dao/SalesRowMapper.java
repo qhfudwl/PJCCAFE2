@@ -18,7 +18,7 @@ public class SalesRowMapper implements RowMapper<Sales>{
 	public Sales mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Sales sales = null;
 		sales.setId(rs.getLong("id"));
-		User user = new User();
+		User user = null;
 		user.setId(rs.getLong("id"));
 		sales.setOrderNumber(rs.getString("orderNumber"));
 		sales.setPlace(rs.getString("place").charAt(0));
