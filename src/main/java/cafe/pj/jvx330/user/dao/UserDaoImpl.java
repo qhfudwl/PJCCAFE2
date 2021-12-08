@@ -67,7 +67,7 @@ public class UserDaoImpl implements UserDao {
 					"=(?,?,?,?) WHERE id = ?";
 		User user = null;
 		Customer customer = (Customer)user;
-		jdbcTemplate.update(sql,(customer.getCustomerName(), customer.getPhone(),
+		jdbcTemplate.update(sql,(customer.getCustomerName() , customer.getPhone(),
 				customer.getBirth(),customer.getPoint(),customer.getId());
 		return user;
 	}

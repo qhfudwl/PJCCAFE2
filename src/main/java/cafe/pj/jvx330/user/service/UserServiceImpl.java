@@ -23,21 +23,20 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> findUsersByPhone(String phone) {
-		
-		return null;
+		users = dao.findUsersByPhone(phone);
+		return users;
 	}
 
 	@Override
 	public List<User> findAllUsers() {
-		
-		return null;
+		users = dao.findAllUsers();
+		return users;
 	}
 
 	@Override
 	public User UpdateUserById(long id) {
 		long id2 = user.getId();
-		dao.updateUserById(id2);
-		
+		user = dao.updateUserById(id2);
 		
 		return user;
 	}
