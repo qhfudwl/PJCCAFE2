@@ -1,5 +1,6 @@
 package cafe.pj.jvx330.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,48 +12,37 @@ public class Sales {
 	private double pays;
 	private double userPoint;
 	private List<Product> order;
-//	private String orderList;
+
 	private Date regDate;
 
 	public Sales() {
 		
 	} 
 	
-	public Sales(User user, String orderNumber, char place, double pays, double userPoint, List<Product> order) {
+
+	public Sales(User user, String orderNumber, char place, double pays, double userPoint, String productList) {
 		this.user = user;
 		this.orderNumber = orderNumber;
 		this.place = place;
 		this.pays = pays;
 		this.userPoint = userPoint;
-		this.order = order;
+
+		this.order = makeOrder(productList);
+
 	}
-
-
-
-
-//	public Sales(long id, User user, String orderNumber, char place, double pays, double userPoint, List<Order> orders,
-//			Date regDate) {
-//		this.id = id;
-//		this.user = user;
-//		this.orderNumber = orderNumber;
-//		this.place = place;
-//		this.pays = pays;
-//		this.userPoint = userPoint;
-//		this.orders = orders;
-//		this.regDate = regDate;
-//	}
 	
-//	Sales sales = new Sales(rs.getLong("id"), user, rs.getString("orderNumber"), rs.getString("place").charAt(0), 
-//	rs.getDouble("amount"), rs.getDouble("usePoint"), rs.getString("orderList"), rs.getDate("regDate"));
-	public Sales(long id, User user, String orderNumber, char place, double pays, double userPoint, String orderList,
-			Date regDate) {
+	public Sales(long id, User user, String orderNumber, char place, double pays,
+			double userPoint, String productList, Date regDate) {
+
 		this.id = id;
 		this.user = user;
 		this.orderNumber = orderNumber;
 		this.place = place;
 		this.pays = pays;
 		this.userPoint = userPoint;
-		this.order = makeOrderList(orderList);
+
+		this.order = makeOrder(productList);
+
 		this.regDate = regDate;
 	}
 	
@@ -72,9 +62,29 @@ public class Sales {
 		return null;
 	}
 
-
-
-
+	/**
+	 * DB에서 받은 문자열을 이용해서 order 만들기
+	 * @param productList
+	 * @return
+	 * @author 김보령, 성지원
+	 */
+	private List<Product> makeOrder(String productList) {
+		
+		List<Product> order = new ArrayList<>();
+		
+		String[] productsArr = productList.trim().split("/");
+		
+		for (String p : productsArr) {
+			String[] productArr = p.trim().split(",");
+			long menuId = Long.parseLong(productArr[0]);
+			int quantity = Integer.parseInt(productArr[1]);
+			Product product = new Product(new Menu(menuId), quantity);
+			order.add(product);
+		}
+		
+		return order;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -114,8 +124,10 @@ public class Sales {
 	public List<Product> getOrders() {
 		return order;
 	}
-	public void setOrders(List<Product> orders) {
-		this.order = orders;
+
+	public void setOrders(List<Product> order) {
+		this.order = order;
+
 	}
 	public Date getRegDate() {
 		return regDate;

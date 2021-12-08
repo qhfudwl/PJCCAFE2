@@ -7,7 +7,9 @@ public class Product {
 	public Product() {
 		
 	}
-//	         erase this222222.                                      
+                                  
+
+
 	public Product(Menu menu, int quantity) {
 		this.menu = menu;
 		this.quantity = quantity;
@@ -31,6 +33,6 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return menu.getId()+ "," + quantity + "/";
+		return menu.getId() + "," + quantity + "/";
 	}
 }

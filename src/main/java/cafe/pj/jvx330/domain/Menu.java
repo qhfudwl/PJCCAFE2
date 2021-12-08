@@ -6,6 +6,7 @@ public class Menu {
 	private String menuName;
 	private double menuPrice;
 	private boolean stock;
+	private String imgPath;
 	
 	public Menu() {
 		
@@ -15,19 +16,21 @@ public class Menu {
 		this.id = id;
 	}
 	
-	public Menu(char menuType, String menuName, double menuPrice, boolean stock) {
+	public Menu(char menuType, String menuName, double menuPrice, boolean stock, String imgPath) {
 		this.setMenuType(menuType);
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
 		this.stock = stock;
+		this.imgPath = imgPath;
 	}
 	
-	public Menu(long id, char menuType, String menuName, double menuPrice, boolean stock) {
+	public Menu(long id, char menuType, String menuName, double menuPrice, boolean stock, String imgPath) {
 		this.id = id;
 		this.menuType = menuType;
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
 		this.stock = stock;
+		this.imgPath = imgPath;
 	}
 
 	public long getId() {
@@ -70,10 +73,18 @@ public class Menu {
 		this.menuType = menuType;
 	}
 
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+
 	@Override
 	public String toString() {
 		return "Menu [id=" + id + ", menuType=" + menuType + ", menuName=" + menuName + ", menuPrice=" + menuPrice
-				+ ", stock=" + stock + "]";
+				+ ", stock=" + stock + ", imgPath=" + imgPath + "]";
 	}
 	
 }

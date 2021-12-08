@@ -22,8 +22,6 @@ CREATE TABLE Customer (
    regDate			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP			-- 등록날짜(읽기 전용)
 );
 
-
-
 CREATE TABLE Menu (
    id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
    menuType   		CHAR(1)        		NOT NULL,										-- 메뉴타입 ( Beverage / Coffee / Food )
@@ -33,6 +31,8 @@ CREATE TABLE Menu (
    
    CONSTRAINT		Menu_menuName_UK	UNIQUE(menuName)
 );
+
+ALTER TABLE Menu ADD imgPath VARCHAR(200) NOT NULL DEFAULT '';							-- 메뉴이미지 경로
 
 CREATE TABLE SalesRecord (
    id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,

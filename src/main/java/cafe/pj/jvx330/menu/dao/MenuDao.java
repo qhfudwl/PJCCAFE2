@@ -20,12 +20,20 @@ public interface MenuDao {
 	Menu addMenu(Menu menu);
 	
 	/**
-	 * 메뉴 이름으로 메뉴 객체 찾기
+	 * id를 이용해서 메뉴 객체 찾기
+	 * @param id
+	 * @return
+	 * @author 김보령
+	 */
+	Menu findMenuById(long id);
+	
+	/**
+	 * 메뉴 이름으로 해당 문자열이 포함된 메뉴 객체 리스트 찾기
 	 * @param menuName
 	 * @return
 	 * @author 김보령
 	 */
-	Menu findMenuByMenuName(String menuName);
+	List<Menu> findAllMenuByMenuName(String menuName);
 	
 	/**
 	 * 모든 메뉴 리스트 뽑기

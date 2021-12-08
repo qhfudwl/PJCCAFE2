@@ -18,28 +18,36 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public Menu addMenu(Menu menu) {
-		String sql = "INSERT INTO Menu(menuType, menuName, menuPrice, stock)"
-				+ " VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO Menu(menuType, menuName, menuPrice, stock, imgPath)"
+				+ " VALUES (?, ?, ?, ?, ?)";
 		
 		jt.update(sql, String.valueOf(menu.getMenuType()), menu.getMenuName(),
-				menu.getMenuPrice(), menu.isStock());
+				menu.getMenuPrice(), menu.isStock(), menu.getImgPath());
 		
 		return null;
 	}
 
 	@Override
-	public Menu findMenuByMenuName(String menuName) {
+	public Menu findMenuById(long id) {
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
+				+ " FROM Menu WHERE id=?";
 		
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock"
+		return jt.queryForObject(sql, new MenuRowMapper(), id);
+	}
+
+	@Override
+	public List<Menu> findAllMenuByMenuName(String menuName) {
+		
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
 				+ " FROM Menu WHERE menuName=?";
 		
-		return jt.queryForObject(sql, new MenuRowMapper(), menuName);
+		return jt.query(sql, new MenuRowMapper(), menuName);
 	}
 
 	@Override
 	public List<Menu> findAllMenus() {
 		
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock"
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
 				+ " FROM Menu";
 		
 		List<Menu> menus = jt.query(sql, new MenuRowMapper());
@@ -50,7 +58,7 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public List<Menu> findAllMenusByMenuType(char menuType) {
 
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock"
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
 				+ " FROM Menu WHERE menuType=?";
 		
 		List<Menu> menus = jt.query(sql, new MenuRowMapper(), String.valueOf(menuType));
@@ -61,11 +69,11 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public void updateMenuById(Menu menu) {
 		
-		String sql = "UPDATE Menu SET menuType=?, menuName=?, menuPrice=?, stock=?"
+		String sql = "UPDATE Menu SET menuType=?, menuName=?, menuPrice=?, stock=?, imgPath=?"
 				+ " WHERE id=?";
 		
 		jt.update(sql, String.valueOf(menu.getMenuType()), menu.getMenuName(),
-				menu.getMenuPrice(), menu.isStock(), menu.getId());
+				menu.getMenuPrice(), menu.isStock(), menu.getId(), menu.getImgPath());
 	}
 
 	@Override
