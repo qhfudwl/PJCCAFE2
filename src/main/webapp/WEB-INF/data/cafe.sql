@@ -32,7 +32,7 @@ CREATE TABLE Menu (
    CONSTRAINT		Menu_menuName_UK	UNIQUE(menuName)
 );
 
-ALTER TABLE Menu ADD imgPath VARCHAR(200) NOT NULL DEFAULT '';
+ALTER TABLE Menu ADD imgPath VARCHAR(200) NOT NULL DEFAULT '';							-- 메뉴이미지 경로
 
 CREATE TABLE SalesRecord (
    id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,

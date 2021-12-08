@@ -28,12 +28,20 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public Menu findMenuByMenuName(String menuName) {
+	public Menu findMenuById(long id) {
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
+				+ " FROM Menu WHERE id=?";
 		
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock"
+		return jt.queryForObject(sql, new MenuRowMapper(), id);
+	}
+
+	@Override
+	public List<Menu> findAllMenuByMenuName(String menuName) {
+		
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
 				+ " FROM Menu WHERE menuName=?";
 		
-		return jt.queryForObject(sql, new MenuRowMapper(), menuName);
+		return jt.query(sql, new MenuRowMapper(), menuName);
 	}
 
 	@Override

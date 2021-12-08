@@ -20,12 +20,17 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public Menu addMenu(Menu menu) {
 		md.addMenu(menu);
-		return menu;
+		return md.findAllMenuByMenuName(menu.getMenuName()).get(0);
 	}
 
 	@Override
-	public Menu findMenuByMenuName(String menuName) {
-		return md.findMenuByMenuName(menuName);
+	public Menu findMenuById(long id) {
+		return md.findMenuById(id);
+	}
+
+	@Override
+	public List<Menu> findAllMenuByMenuName(String menuName) {
+		return md.findAllMenuByMenuName(menuName);
 	}
 
 	@Override
