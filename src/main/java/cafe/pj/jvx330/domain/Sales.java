@@ -10,29 +10,41 @@ public class Sales {
 	private char place;
 	private double pays;
 	private double userPoint;
-	private List<Order> orders;
+	private List<Product> order;
+//	private String orderList;
 	private Date regDate;
 
 	public Sales() {
 		
 	} 
 	
-	
-	
-	
-	public Sales(User user, String orderNumber, char place, double pays, double userPoint, List<Order> orders) {
+	public Sales(User user, String orderNumber, char place, double pays, double userPoint, List<Product> order) {
 		this.user = user;
 		this.orderNumber = orderNumber;
 		this.place = place;
 		this.pays = pays;
 		this.userPoint = userPoint;
-		this.orders = orders;
+		this.order = order;
 	}
 
 
 
 
-	public Sales(long id, User user, String orderNumber, char place, double pays, double userPoint, List<Order> orders,
+//	public Sales(long id, User user, String orderNumber, char place, double pays, double userPoint, List<Order> orders,
+//			Date regDate) {
+//		this.id = id;
+//		this.user = user;
+//		this.orderNumber = orderNumber;
+//		this.place = place;
+//		this.pays = pays;
+//		this.userPoint = userPoint;
+//		this.orders = orders;
+//		this.regDate = regDate;
+//	}
+	
+//	Sales sales = new Sales(rs.getLong("id"), user, rs.getString("orderNumber"), rs.getString("place").charAt(0), 
+//	rs.getDouble("amount"), rs.getDouble("usePoint"), rs.getString("orderList"), rs.getDate("regDate"));
+	public Sales(long id, User user, String orderNumber, char place, double pays, double userPoint, String orderList,
 			Date regDate) {
 		this.id = id;
 		this.user = user;
@@ -40,8 +52,24 @@ public class Sales {
 		this.place = place;
 		this.pays = pays;
 		this.userPoint = userPoint;
-		this.orders = orders;
+		this.order = makeOrderList(orderList);
 		this.regDate = regDate;
+	}
+	
+	private List<Product> makeOrderList(String orderList) {
+//		String[] order = orderList.split("/");
+//		String[] 
+//		Menu menu = null;
+//		long test;
+//		
+//		for(String temp : order) {
+//			temp.split(","); 
+//			
+//		}
+		
+		
+		
+		return null;
 	}
 
 
@@ -83,11 +111,11 @@ public class Sales {
 	public void setUserPoint(double userPoint) {
 		this.userPoint = userPoint;
 	}
-	public List<Order> getOrders() {
-		return orders;
+	public List<Product> getOrders() {
+		return order;
 	}
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
+	public void setOrders(List<Product> orders) {
+		this.order = orders;
 	}
 	public Date getRegDate() {
 		return regDate;
