@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <header>
-      <h1 class="hidden"></h1>
+      <h1 class="hidden">PJCCAFE</h1>
       <nav id="gnb">
+       	<h2 class="hidden">주요메뉴</h2>
         <ul>
           <form class="" action="" method="">
             <li><a href="#">주문현황</a></li>

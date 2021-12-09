@@ -1,8 +1,17 @@
 package cafe.pj.jvx330.sales.controller;
 
+import java.net.http.HttpRequest;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,8 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import cafe.pj.jvx330.domain.Employee;
+import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.menu.service.MenuService;
+
 @Controller
-public class Order {
+public class OrderController {
+		@Resource(name="menuService")
+		MenuService ms;
+		
 	
 		//처음예제
 		/*
@@ -49,18 +65,47 @@ public class Order {
 		
 	
 	
-	
+		
 		
 		
 		/**
-		 * Get - 뿌려주는 화면
+		 *  주문 화면 불러오기 
 		 *		- 직원 직책
 		 *		- 오늘 날짜
 		 *		- 모든 메뉴
-		 *		
-		 * 
 		 */
 		
+	
+		@GetMapping("/order")
+		public ModelAndView orderForm(HttpServletRequest request) {
+			//직원 정보 불러오기
+			//HttpSession session = request.getSession();
+			//Employee employee= (Employee)session.getAttribute("manager");
+			//String Mposition = employee.getPosition();
+			
+			//직원 정보 임시
+			String mPosition = "Manager";
+	
+			//오늘 날짜 불러오기
+			LocalDate nowDate = LocalDate.now();
+			
+			//모든메뉴 불러오기
+			List<Menu> BeverageMenus = ms.findAllMenusByMenuType('B');
+			List<Menu> CoffeeMenus = ms.findAllMenusByMenuType('C');
+			List<Menu> FoodMenus = ms.findAllMenusByMenuType('F');
+			
+			//직원정보, 오늘날짜, 모든메뉴 셋팅
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("mPosition",mPosition);
+			mav.addObject("nowDate",nowDate);
+			mav.addObject("BeverageMenus",BeverageMenus);
+			mav.addObject("CoffeeMenus",CoffeeMenus);
+			mav.addObject("FoodMenus",FoodMenus);
+			mav.setViewName("order/order");
+			
+			return mav;
+		}
 		
 		
 		

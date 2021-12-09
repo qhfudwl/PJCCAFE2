@@ -56,18 +56,19 @@ INSERT INTO Employee(eId,passwd,position) VALUES('manager','manager','M');
 
 -- 메뉴등록
 
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('B','자몽에이드',1000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('B','레몬에이드',1000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('B','자스민티',1000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','핫아메리카노',1500.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','아이스아메리카노',1500.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','핫카페라떼',2000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','아이스카페라떼',2000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','핫카페모카',2500.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','아이스카페모카',2500.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('F','햄치즈샌드위치',3000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('F','촉촉한초코칩쿠키',1000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('F','알록달록마카롱',1000.0,true);
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','자몽에이드',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','레몬에이드',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','자스민티',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫아메리카노',1500.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스아메리카노',1500.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫카페라떼',2000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스카페라떼',2000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫카페모카',2500.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스카페모카',2500.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('F','햄치즈샌드위치',3000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('F','촉촉한초코칩쿠키',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('F','알록달록마카롱',1000.0,true,'resources/img/IceAmericano.jpg');
+
 
 
 SELECT * FROM Customer;
