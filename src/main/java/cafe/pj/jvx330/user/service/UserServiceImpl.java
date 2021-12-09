@@ -2,6 +2,7 @@ package cafe.pj.jvx330.user.service;
 
 import java.util.List;
 
+import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.user.dao.UserDao;
 
@@ -23,10 +24,12 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> findUsersByPhone(String phone) {
-		users = dao.findUsersByPhone(phone);
+		//users = dao.findUsersByPhone(phone);
+		Customer customer = (Customer)user;
+		phone = customer.getPhone();
+		List<User> users = dao.findUsersByPhone(phone);
 		return users;
 	}
-
 	@Override
 	public List<User> findAllUsers() {
 		users = dao.findAllUsers();
@@ -34,15 +37,22 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User UpdateUserById(long id) {
+	public User updateUserById(long id) {
 		long id2 = user.getId();
 		user = dao.updateUserById(id2);
 		
 		return user;
 	}
+	public User updateUser(User user) {
+		Customer customer = (Customer)user;
+		String phone = customer.getPhone();
+		List<User> users = dao.findUsersByPhone(phone);
+		
+		dao.updateUser(users);
+	}
 
 	@Override
-	public void RemoveUserId(long id) {
+	public void removeUserId(long id) {
 		
 		
 	}

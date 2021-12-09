@@ -11,15 +11,14 @@ public class Employee extends User {
 		super();
 	}
 	
-	public Employee(char userType, String eid, String passwd, String position) {
-		super(userType);
+	public Employee(String eid, String passwd, String position) {
 		this.eid = eid;
 		this.passwd = passwd;
 		this.position = position;
 	}
 	
-	public Employee(long id, char userType, String eid, String passwd, String position, Date regDate) {
-		super(id, userType, regDate);
+	public Employee(long id, String eid, String passwd, String position, Date regDate) {
+		super(id, regDate);
 		this.eid = eid;
 		this.passwd = passwd;
 		this.position = position;

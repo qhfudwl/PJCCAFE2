@@ -12,15 +12,14 @@ public class Customer extends User {
 		super();
 	}
 	
-	public Customer(char userType, String customerName, String phone, String birth, double point) {
-		super(userType);
+	public Customer(String customerName, String phone, String birth, double point) {
 		this.customerName = customerName;
 		this.phone = phone;
 		this.point = point;
 	}
 	
-	public Customer(long id, char userType, String customerName, String phone, String birth, double point, Date regDate) {
-		super(id, userType, regDate);
+	public Customer(long id, String customerName, String phone, String birth, double point, Date regDate) {
+		super(id, regDate);
 		this.customerName = customerName;
 		this.phone = phone;
 		this.point = point;

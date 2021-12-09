@@ -9,12 +9,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import cafe.pj.jvx330.domain.Customer;
+import cafe.pj.jvx330.domain.Employee;
 import cafe.pj.jvx330.domain.User;
 
 
 public class UserDaoImpl implements UserDao {
 	private JdbcTemplate jdbcTemplate;
-	private Customer customer;
 	
 	public UserDaoImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
@@ -22,18 +22,20 @@ public class UserDaoImpl implements UserDao {
 	
 	/**
 	 * 커스터머에 테이블에 고객 추가
-	 * @author jos06
+	 * @author 정원식
 	 *
 	 */
 
 	@Override
-	public User addUser(User user) {
-		Customer customer = new Customer();
-		jdbcTemplate.update("INSERT INTO Customer(name, phone, birth, point) "
-				+ "VALUE( ?, ?, ?, 0.0)",customer.getCustomerName(), customer.getPhone(),
-				customer.getBirth(),customer.getPhone());
-		User user1 = (User)customer;
-		return user1;
+	public void addUser(User user) {
+		
+		if(user instanceof Customer) {
+			Customer customer = (Customer)user;
+			jdbcTemplate.update("INSERT INTO Customer(name, phone, birth) "
+					+ "VALUES( ?, ?, ?)",customer.getCustomerName(), customer.getPhone(),
+					customer.getBirth());
+				
+		}
 	}
 	
 	/**
@@ -64,15 +66,24 @@ public class UserDaoImpl implements UserDao {
 	 */
 
 	@Override
-	public User updateUserById(long id) {
-		String sql = "UPDATE Customer SET name,phone,birth,point "+
-					"=(?,?,?,?) WHERE id = ?";
-		User user = null;
+	public void updateUserById(long id) {
+		
+		String sql = "UPDATE Customer SET name = ?,phone = ?,birth = ?,point = ? WHERE id = ?"
+				+ "VALUES(?, ?, ?, ? ,?)";
+		User user;
+		Customer customer = (Customer)user;
 		jdbcTemplate.update(sql,customer.getCustomerName(), customer.getPhone(),
 				customer.getBirth(),customer.getPoint(),customer.getId());
-		user = customer;
 		
-		return user;
+		
+		
+	}
+	
+	
+	public void updateUser(User user) {
+		String sql = "UPDATE Customer SET nema = ?, phone = ?, birth = ?, point = ? "
+				+ "VALUES (?, ?, ?, ?)";
+		jdbcTemplate.query(sql, new UserRowMapper());
 	}
 	
 	/**
@@ -86,6 +97,7 @@ public class UserDaoImpl implements UserDao {
 		jdbcTemplate.update(sql, id);
 		
 	}
+
 
 	
 }
