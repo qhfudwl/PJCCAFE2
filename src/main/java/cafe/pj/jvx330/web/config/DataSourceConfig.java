@@ -5,12 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import cafe.pj.jvx330.menu.dao.MenuDao;
-import cafe.pj.jvx330.menu.dao.MenuDaoImpl;
-import cafe.pj.jvx330.menu.service.MenuService;
-import cafe.pj.jvx330.menu.service.MenuServiceImpl;
 
 /**
  * 
@@ -20,6 +16,7 @@ import cafe.pj.jvx330.menu.service.MenuServiceImpl;
 @Configuration
 @ComponentScan(basePackages = "cafe.pj.jvx330")
 @EnableTransactionManagement
+@EnableAsync
 public class DataSourceConfig {
 	
 	@Bean

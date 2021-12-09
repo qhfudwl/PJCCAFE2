@@ -29,7 +29,7 @@ public class MenuListController extends MenuController {
 		return mav;
 	}
 	
-	@GetMapping("menu/updateMenu")
+	@GetMapping("/menu/updateMenu")
 	public ModelAndView updateMenu(@ModelAttribute("menu") MenuCommand menuCommand) {
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
@@ -47,7 +47,7 @@ public class MenuListController extends MenuController {
 		return mav;
 	}
 	
-	@GetMapping("menu/addMenu")
+	@GetMapping("/menu/addMenu")
 	public ModelAndView addMenu(@ModelAttribute("menu") MenuCommand menuCommand) {
 		
 		Menu menu = new Menu(menuCommand.getMenuType(), menuCommand.getMenuName(),
