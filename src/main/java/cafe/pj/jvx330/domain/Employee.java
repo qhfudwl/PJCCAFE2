@@ -8,10 +8,13 @@ public class Employee extends User {
 	private String position;
 	
 	public Employee() {
-		super();
+		
 	}
 	
 	public Employee(String eid, String passwd, String position) {
+
+	}        
+	public Employee(char userType, String eid, String passwd, String position) {
 		this.eid = eid;
 		this.passwd = passwd;
 		this.position = position;

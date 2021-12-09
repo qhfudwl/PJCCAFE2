@@ -5,17 +5,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.Employee;
 import cafe.pj.jvx330.domain.User;
 
-
+@Component("userDao")
 public class UserDaoImpl implements UserDao {
 	private JdbcTemplate jdbcTemplate;
-	
+	@Autowired
 	public UserDaoImpl(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
@@ -38,6 +40,8 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 	
+	
+	
 	/**
 	 * 폰번호로 고객정보 찾기
 	 */
@@ -45,9 +49,9 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> findUsersByPhone(String phone) {
 		String sql = "SELECT id, name, phone, birth, point ,regDate"
-				+ "FROM Customer WHERE phone = ?";
+				+ " FROM Customer WHERE phone = ?";
 		
-		List<User> users = jdbcTemplate.query(sql, new UserRowMapper());
+		List<User> users = jdbcTemplate.query(sql, new UserRowMapper(),phone);
 		return users;
 	}
 	
@@ -57,7 +61,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> findAllUsers() {
 		
-		List<User> users = jdbcTemplate.query("SELECT id, name, phone, birth, point From Customer", new UserRowMapper());
+		List<User> users = jdbcTemplate.query("SELECT id, name, phone, birth, point, regDate From Customer", new UserRowMapper());
 		return users;
 	}
 	
@@ -66,14 +70,14 @@ public class UserDaoImpl implements UserDao {
 	 */
 
 	@Override
-	public void updateUserById(long id) {
+	public User updateUserById(User user) {
 		
-		String sql = "UPDATE Customer SET name = ?,phone = ?,birth = ?,point = ? WHERE id = ?"
-				+ "VALUES(?, ?, ?, ? ,?)";
-		User user;
-		Customer customer = (Customer)user;
-		jdbcTemplate.update(sql,customer.getCustomerName(), customer.getPhone(),
-				customer.getBirth(),customer.getPoint(),customer.getId());
+		String sql = "UPDATE Customer SET name = ?,phone = ?,birth = ?,point = ? WHERE id = ?";
+		
+		
+		jdbcTemplate.update(sql, ((Customer)user).getCustomerName(), ((Customer)user).getPhone(),
+				((Customer)user).getBirth(), ((Customer)user).getPoint(), user.getId());
+		return user;
 		
 		
 		
@@ -81,8 +85,7 @@ public class UserDaoImpl implements UserDao {
 	
 	
 	public void updateUser(User user) {
-		String sql = "UPDATE Customer SET nema = ?, phone = ?, birth = ?, point = ? "
-				+ "VALUES (?, ?, ?, ?)";
+		String sql = "UPDATE Customer SET nema = ?, phone = ?, birth = ?, point = ? ";
 		jdbcTemplate.query(sql, new UserRowMapper());
 	}
 	
@@ -96,6 +99,16 @@ public class UserDaoImpl implements UserDao {
 		
 		jdbcTemplate.update(sql, id);
 		
+	}
+	
+	/**
+	 * 고객 아이디로 검색하기
+	 */
+	@Override
+	public User findUserById(long id) {
+		String sql = "SELECT id, name, phone, birth, point, regDate FROM Customer WHERE id= ?";
+		
+		return jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
 	}
 
 

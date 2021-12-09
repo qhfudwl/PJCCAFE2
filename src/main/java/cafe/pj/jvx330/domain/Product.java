@@ -1,14 +1,16 @@
 package cafe.pj.jvx330.domain;
 
-public class Order {
+public class Product {
 	private Menu menu;
 	private int quantity;
 	
-	public Order() {
+	public Product() {
 		
 	}
-	
-	public Order(Menu menu, int quantity) {
+                                  
+	//erase this.
+
+	public Product(Menu menu, int quantity) {
 		this.menu = menu;
 		this.quantity = quantity;
 	}
@@ -31,6 +33,6 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return menu + "," + quantity + "/";
+		return menu.getId() + "," + quantity + "/";
 	}
 }

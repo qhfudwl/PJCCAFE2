@@ -12,17 +12,48 @@ public class Customer extends User {
 		super();
 	}
 	
-	public Customer(String customerName, String phone, String birth, double point) {
+	/**
+	 * 유저 정보
+	 * @param customerName
+	 * @param phone
+	 * @param birth
+	 * @param point
+	 */
+	public Customer(long id ,String customerName, String phone, String birth, double point) {
+		super(id);
 		this.customerName = customerName;
 		this.phone = phone;
+		this.birth = birth;
 		this.point = point;
 	}
 	
+	/**
+	 * 유저 정보 가져오기
+	 * @param id
+	 * @param customerName
+	 * @param phone
+	 * @param birth
+	 * @param point
+	 * @param regDate
+	 */
 	public Customer(long id, String customerName, String phone, String birth, double point, Date regDate) {
 		super(id, regDate);
 		this.customerName = customerName;
 		this.phone = phone;
+		this.birth = birth;
 		this.point = point;
+	}
+	
+	/**
+	 * 유저 회원 가입
+	 * @param customerName
+	 * @param phone
+	 * @param birth
+	 */
+	public Customer(String customerName, String phone, String birth) {
+		this.customerName = customerName;
+		this.phone = phone;
+		this.birth = birth;
 	}
 	
 	/**
@@ -75,6 +106,12 @@ public class Customer extends User {
 
 	public void setPoint(double point) {
 		this.point = point;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customerName=" + customerName + ", phone=" + phone + ", birth=" + birth + ", point=" + point
+				+ "]";
 	}
 	
 	
