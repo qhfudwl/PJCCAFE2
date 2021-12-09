@@ -1,3 +1,4 @@
+DROP TABLE OrderRecord;
 DROP TABLE Employee;
 DROP TABLE Customer;
 DROP TABLE Menu;
@@ -38,7 +39,6 @@ CREATE TABLE SalesRecord (
    id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
    customerId   	BIGINT        		NOT NULL,										-- 고객아이디
    orderNumber  	VARCHAR(30)     	NOT NULL,										-- 주문번호
-   orderList   		VARCHAR(80)         NOT NULL,										-- 주문내역
    amount      		DOUBLE         		NOT NULL,										-- 결제금액
    usePoint 		DOUBLE				NOT NULL,										-- 사용한 포인트
    place			CHAR(1)				NOT NULL   	DEFAULT 'I',						-- 매장 or 포장
@@ -47,6 +47,19 @@ CREATE TABLE SalesRecord (
    CONSTRAINT		SalesRecord_customerId_FK 	FOREIGN KEY(customerId) REFERENCES Customer(id),
    CONSTRAINT		SalesRecord_orderNumber_UK	UNIQUE(orderNumber)
 );
+
+CREATE TABLE OrderRecord (
+   id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+   orderNumber   	VARCHAR(30)        	NOT NULL,										-- 주문번호
+   menuId  			BIGINT     			NOT NULL,										-- 메뉴아이디
+   quantity      	INT         		NOT NULL,										-- 주문수량 
+   regDate 			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 결제날짜 
+   CONSTRAINT		Menu_menuId_FK 	FOREIGN KEY(menuId) REFERENCES Menu(id),
+   CONSTRAINT		SalesRecord_orderNumber_FK 	FOREIGN KEY(orderNumber) REFERENCES SalesRecord(orderNumber) ON DELETE CASCADE
+);
+
+
+
 
 -- 비회원등록
 INSERT INTO Customer(name,phone,birth,point) VALUES('null','010-0000-0000','00000000',0);
@@ -75,6 +88,7 @@ SELECT * FROM Customer;
 SELECT * FROM Employee;
 SELECT * FROM Menu;
 SELECT * FROM SalesRecord;
+SELECT * FROM ORDERRECORD;
 
 
 
