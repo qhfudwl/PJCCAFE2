@@ -27,7 +27,7 @@ public class UserServiceTest {
 				new AnnotationConfigApplicationContext(DataSourceConfig.class);
 		UserServiceTest test = context.getBean("userServiceTest",UserServiceTest.class);
 		
-		//test.serviceTestAdd();
+		test.serviceTestAdd();
 		//test.serviceTestFindAll();
 		//test.serviceTestFindPhone("12312341231");
 		//test.userByIdTest(101);

@@ -48,4 +48,4 @@ public class Employee extends User {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-}
+} 

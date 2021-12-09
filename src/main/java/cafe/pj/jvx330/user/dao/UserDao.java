@@ -5,7 +5,7 @@ import java.util.List;
 import cafe.pj.jvx330.domain.User;
 
 public interface UserDao {
-	 
+	
 	/**
 	 * 유저를 추가 한다.
 	 * @param user

@@ -32,5 +32,5 @@ public abstract class User {
 	}
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
-	}
+	} 
 }

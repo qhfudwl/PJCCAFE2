@@ -15,7 +15,6 @@ public class UserServiceImpl implements UserService{
 	public UserServiceImpl() {
 		
 	}
-	
 
 	@Override 
 	public User addUser(User user) {

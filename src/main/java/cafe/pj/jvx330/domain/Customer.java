@@ -120,7 +120,7 @@ public class Customer extends User {
 	public String toString() {
 		return "Customer [customerName=" + customerName + ", phone=" + phone + ", birth=" + birth + ", point=" + point
 				+ "]\n";
-	}
+	} 
 	
 	
 }
