@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 	
 	/**
 	 * 커스터머에 테이블에 고객 추가
-	 * @author 정원식
+	 * @author 정원식 
 	 *
 	 */
 

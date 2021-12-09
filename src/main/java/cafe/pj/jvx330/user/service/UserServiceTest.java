@@ -27,13 +27,12 @@ public class UserServiceTest {
 				new AnnotationConfigApplicationContext(DataSourceConfig.class);
 		UserServiceTest test = context.getBean("userServiceTest",UserServiceTest.class);
 		
-		/*test.serviceTestAdd();*/
-		//test.serviceTestUpdateById(new Customer("홍길동","01000001000","11111111"));
+		//test.serviceTestAdd();
 		//test.serviceTestFindAll();
 		//test.serviceTestFindPhone("12312341231");
 		//test.userByIdTest(101);
 		//test.userUpdate(new Customer(112,"정김식","01012341234","1234567",0.0));
-		//test.userRemove(102);
+		//test.userRemove(111);
 	}
 	public void serviceTestAdd() {
 		us.addUser(new Customer("정원식","12312341231","19910630"));
@@ -47,13 +46,6 @@ public class UserServiceTest {
 		return us.findAllUsers();
 		
 	}
-	/*public void serviceTestUpdateById(User user) {
-		Customer customer = (Customer)user;
-		customer.setPhone("12312341231");
-		us.updateUserById(user);
-		List<User> users = us.findUsersByPhone(customer.getPhone());
-		System.out.println(users);
-	}*/
 	public void serviceTestFindPhone(String phone) {
 		List<User> users =  us.findUsersByPhone(phone);
 		System.out.println(users);

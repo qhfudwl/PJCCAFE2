@@ -12,7 +12,7 @@ public interface UserService {
 	 */
 	User addUser(User user);
 	
-	/**
+	/** 
 	 * 회원을 휴대폰번호를 이용해 찾아준다
 	 * @param phone
 	 * @return

@@ -2,7 +2,7 @@ package cafe.pj.jvx330.domain;
 
 import java.util.Date;
 
-public class Employee extends User {
+public class Employee extends User { 
 	private String eid;
 	private String passwd;
 	private String position;

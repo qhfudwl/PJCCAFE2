@@ -111,7 +111,7 @@ public class Customer extends User {
 	@Override
 	public String toString() {
 		return "Customer [customerName=" + customerName + ", phone=" + phone + ", birth=" + birth + ", point=" + point
-				+ "]";
+				+ "]\n";
 	}
 	
 	
