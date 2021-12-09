@@ -1,14 +1,20 @@
 package cafe.pj.jvx330.sales.controller;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Order {
 	
-		
+		//처음예제
+		/*
 		@RequestMapping(value="/sayHello",method=RequestMethod.GET)
 		public ModelAndView sayHello() {
 
@@ -18,9 +24,40 @@ public class Order {
 		}
 		
 		
+		@RequestMapping(value="/sayHello",method=RequestMethod.POST)
+		@ResponseBody
+		public HashMap<String,Object> requestBody(@RequestBody HashMap<String,Object> map){
+			HashMap<String,Object> map2 = new HashMap<String, Object>();
+			System.out.println("hi");
+			System.out.println(map.get("id"));
+			//jsp에 값 전달하기
+			map2.put("name", "yoon");
+			return map2;
+		}
+		*/
+	
+	
+		/*
+		@RequestMapping(value="/sayHello",method=RequestMethod.POST)
+		public String requestBody(@RequestParam("test") String test){
+			
+			System.out.println(test);
+			return "order/orderList";
+		}
+		*/
+		
+		
+	
+	
+	
+		
+		
 		/**
-		 * GEt - 뿌려주는 화면
-		 * 
+		 * Get - 뿌려주는 화면
+		 *		- 직원 직책
+		 *		- 오늘 날짜
+		 *		- 모든 메뉴
+		 *		
 		 * 
 		 */
 		

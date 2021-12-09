@@ -11,7 +11,6 @@ public abstract class User {
 		
 	}
 	
-	
 	public User(long id, Date regDate) {
 		this.id = id;
 		this.regDate = regDate;
@@ -34,5 +33,4 @@ public abstract class User {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	//
 }

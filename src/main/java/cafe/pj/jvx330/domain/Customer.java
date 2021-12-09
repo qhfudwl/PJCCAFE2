@@ -13,7 +13,7 @@ public class Customer extends User {
 	}
 	
 	/**
-	 * 유저 정보
+	 * 유저 정보 변경
 	 * @param customerName
 	 * @param phone
 	 * @param birth
@@ -21,6 +21,14 @@ public class Customer extends User {
 	 */
 	public Customer(long id ,String customerName, String phone, String birth, double point) {
 		super(id);
+		this.customerName = customerName;
+		this.phone = phone;
+		this.birth = birth;
+		this.point = point;
+}
+	
+	
+	public Customer(String customerName, String phone, String birth, double point) {
 		this.customerName = customerName;
 		this.phone = phone;
 		this.birth = birth;
@@ -36,7 +44,7 @@ public class Customer extends User {
 	 * @param point
 	 * @param regDate
 	 */
-	public Customer(long id, String customerName, String phone, String birth, double point, Date regDate) {
+	public Customer(long id,  String customerName, String phone, String birth, double point, Date regDate) {
 		super(id, regDate);
 		this.customerName = customerName;
 		this.phone = phone;
