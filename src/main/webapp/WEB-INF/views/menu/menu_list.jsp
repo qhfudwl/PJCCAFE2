@@ -34,19 +34,22 @@
 			<input type="submit" name="updateMenu" value="수정" id="updateMenu" />
 			<input type="submit" name="updateMenu" value="삭제" id="removeMenu" />
 		<script>
-			$("#addMenu").click(function() {
+			function getContextPath() {
+				let hostIndex = location.href.indexOf(location.host) + location.host.length;
+				return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex+1));
+			}
+			$("#addMenu").click(function(e) {
 				e.preventDefault();
 				popupUpdateMenu();
 			})
-			$("#updateMenu").click(function() {
+			$("#updateMenu").click(function(e) {
 				e.preventDefault();
 				popupUpdateMenu();
 			})
 			
 			function popupUpdateMenu() {
-				console.log(111)
-				let popUpdateMenuUrl = "/menu/popupUpdateMenu";
-				let popUpdateMenuOption = "width=400px, height=300px, top=300px, left=300px";
+				let popUpdateMenuUrl = getContextPath() + "/menu/popUpdateMenu";
+				let popUpdateMenuOption = "width=500px, height=300px, top=300px, left=500px";
 				
 				window.open(popUpdateMenuUrl, "메뉴 업데이트", popUpdateMenuOption);
 			}

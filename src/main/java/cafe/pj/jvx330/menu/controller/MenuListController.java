@@ -1,36 +1,48 @@
 package cafe.pj.jvx330.menu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
-import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.web.command.MenuCommand;
 
-@Component("menu.controller.menuListController")
+@Controller("menu.controller.menuListController")
 public class MenuListController extends MenuController {
+	
 	/**
 	 * 메뉴 목록에서 메뉴 타입 선택 시 오는 화면
 	 * 해당 타입에 대한 메뉴 리스트를 뽑아서 화면에 뿌려준다.
 	 * @param menuType
 	 * @return
 	 */
-	@GetMapping("/menu/findMenus")
-	public ModelAndView findMenus(@RequestParam char menuType) {
-		List<Menu> menus = ms.findAllMenusByMenuType(menuType);
+	@GetMapping("/menu/viewMenuList")
+	public ModelAndView viewMenuList(@RequestParam("choiceMenu") char choiceMenu) {
+		List<Menu> menus = ms.findAllMenusByMenuType(choiceMenu);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menus", menus);
+		mav.addObject("choiceMenu", choiceMenu);
 		mav.setViewName("menu/menu_list");
 		return mav;
 	}
 	
-	@GetMapping("/menu/updateMenu")
-	public ModelAndView updateMenu(@ModelAttribute("menu") MenuCommand menuCommand) {
+	@PostMapping("/menu/updateMenu")
+	public ModelAndView updateMenu(MenuCommand menuCommand) {
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
@@ -47,25 +59,14 @@ public class MenuListController extends MenuController {
 		return mav;
 	}
 	
-	@GetMapping("/menu/addMenu")
-	public ModelAndView addMenu(@ModelAttribute("menu") MenuCommand menuCommand) {
+	@PostMapping("/menu/addMenu")
+	public ModelAndView addMenu(MenuCommand menuCommand) {
 		
-		Menu menu = new Menu(menuCommand.getMenuType(), menuCommand.getMenuName(),
-				menuCommand.getMenuPrice(), menuCommand.isStock(), menuCommand.getImgPath());
+		Menu menu = new Menu(menuCommand.getMenuType(),
+				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
+				menuCommand.getImgPath());
 		
-		menu = ms.addMenu(menu);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("menu", menu);
-		mav.setViewName("menu/menu_list");
-		
-		return mav;
-	}
-	
-	@GetMapping("menu/removeMenu")
-	public ModelAndView removeMenu(@ModelAttribute("menu") MenuCommand menuCommand) {
-		
-		ms.removeMenuById(menuCommand.getId());
+		ms.addMenu(menu);
 		
 		List<Menu> menus = ms.findAllMenusByMenuType(menuCommand.getMenuType());
 		
@@ -74,5 +75,26 @@ public class MenuListController extends MenuController {
 		mav.setViewName("menu/menu_list");
 		
 		return mav;
+	}
+	
+	@PostMapping("/menu/removeMenu")
+	public ModelAndView removeMenu(@RequestParam("choiceItem") String choiceItem) {
+		String[] arr = choiceItem.trim().split(choiceItem);
+		
+		ms.removeMenuById(Integer.parseInt(arr[0]));
+		
+		List<Menu> menus = ms.findAllMenusByMenuType(arr[1].charAt(0));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("menus", menus);
+		mav.setViewName("menu/menu_list");
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("/menu/popUpdateMenu")
+	public String popUpdateMenu() {
+		return "menu/menu_list_popup";
 	}
 }
