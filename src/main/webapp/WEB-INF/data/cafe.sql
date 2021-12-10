@@ -1,3 +1,4 @@
+DROP TABLE OrderRecord;
 DROP TABLE Employee;
 DROP TABLE Customer;
 DROP TABLE Menu;
@@ -38,7 +39,6 @@ CREATE TABLE SalesRecord (
    id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
    customerId   	BIGINT        		NOT NULL,										-- 고객아이디
    orderNumber  	VARCHAR(30)     	NOT NULL,										-- 주문번호
-   orderList   		VARCHAR(80)         NOT NULL,										-- 주문내역
    amount      		DOUBLE         		NOT NULL,										-- 결제금액
    usePoint 		DOUBLE				NOT NULL,										-- 사용한 포인트
    place			CHAR(1)				NOT NULL   	DEFAULT 'I',						-- 매장 or 포장
@@ -48,6 +48,19 @@ CREATE TABLE SalesRecord (
    CONSTRAINT		SalesRecord_orderNumber_UK	UNIQUE(orderNumber)
 );
 
+CREATE TABLE OrderRecord (
+   id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+   orderNumber   	VARCHAR(30)        	NOT NULL,										-- 주문번호
+   menuId  			BIGINT     			NOT NULL,										-- 메뉴아이디
+   quantity      	INT         		NOT NULL,										-- 주문수량 
+   regDate 			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 결제날짜 
+   CONSTRAINT		Menu_menuId_FK 	FOREIGN KEY(menuId) REFERENCES Menu(id),
+   CONSTRAINT		SalesRecord_orderNumber_FK 	FOREIGN KEY(orderNumber) REFERENCES SalesRecord(orderNumber) ON DELETE CASCADE
+);
+
+
+
+
 -- 비회원등록
 INSERT INTO Customer(name,phone,birth,point) VALUES('null','010-0000-0000','00000000',0);
 
@@ -56,24 +69,26 @@ INSERT INTO Employee(eId,passwd,position) VALUES('manager','manager','M');
 
 -- 메뉴등록
 
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('B','자몽에이드',1000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('B','레몬에이드',1000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('B','자스민티',1000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','핫아메리카노',1500.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','아이스아메리카노',1500.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','핫카페라떼',2000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','아이스카페라떼',2000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','핫카페모카',2500.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('C','아이스카페모카',2500.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('F','햄치즈샌드위치',3000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('F','촉촉한초코칩쿠키',1000.0,true);
-INSERT INTO Menu(menuType,menuName,menuPrice,stock) VALUES('F','알록달록마카롱',1000.0,true);
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','자몽에이드',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','레몬에이드',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','자스민티',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫아메리카노',1500.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스아메리카노',1500.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫카페라떼',2000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스카페라떼',2000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫카페모카',2500.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스카페모카',2500.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('F','햄치즈샌드위치',3000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('F','촉촉한초코칩쿠키',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('F','알록달록마카롱',1000.0,true,'resources/img/IceAmericano.jpg');
+
 
 
 SELECT * FROM Customer;
 SELECT * FROM Employee;
 SELECT * FROM Menu;
 SELECT * FROM SalesRecord;
+SELECT * FROM ORDERRECORD;
 
 
 

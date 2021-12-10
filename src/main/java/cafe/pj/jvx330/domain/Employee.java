@@ -2,23 +2,24 @@ package cafe.pj.jvx330.domain;
 
 import java.util.Date;
 
-public class Employee extends User {
+public class Employee extends User { 
 	private String eid;
 	private String passwd;
 	private String position;
 	
 	public Employee() {
-		super();
-	}        
-	public Employee(char userType, String eid, String passwd, String position) {
-		super(userType);
+		
+	}
+	     
+
+	public Employee( String eid, String passwd, String position) {
 		this.eid = eid;
 		this.passwd = passwd;
 		this.position = position;
 	}
 	
-	public Employee(long id, char userType, String eid, String passwd, String position, Date regDate) {
-		super(id, userType, regDate);
+	public Employee(long id, String eid, String passwd, String position, Date regDate) {
+		super(id, regDate);
 		this.eid = eid;
 		this.passwd = passwd;
 		this.position = position;
@@ -47,4 +48,4 @@ public class Employee extends User {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-}
+} 

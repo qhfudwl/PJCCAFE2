@@ -16,11 +16,8 @@ public interface SalesService {
 	List<Sales> findSalesByDate(char type, Date date1, Date date2);
 	
 	Sales findSalesByOrderNumber(String orderNumber);
-	
-	Sales updateSales(long sid);
-	
+
+	/*Sales updateSales(long sid);*/
 	void removeSales(String orderNumber); 
-	
-	
 	
 }

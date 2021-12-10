@@ -43,14 +43,22 @@ public class SalesServiceImpl implements SalesService{
 		return salesDao.findSalesByOrderNumber(orderNumber);
 	}
 
-	@Override
+	/*@Override
+
+	public Sales updateSales(long sid) {
+		
+		return null;
+
 	public Sales updateSales(long sid) {	
 		return salesDao.updateSales(sid);
-	}
+
+	}*/
 
 	@Override
 	public void removeSales(String orderNumber) {
+
 		salesDao.removeSales(orderNumber);
+
 	}
 
 	

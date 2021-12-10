@@ -14,7 +14,7 @@ public class Sales {
 	private List<Product> order;
 
 	private Date regDate;
-
+	
 	public Sales() {
 		
 	} 
