@@ -12,9 +12,12 @@
           <form class="" action="" method="">
             <li><a href="#">회원목록</a></li>
           </form>
-          <form class="" action="" method="">
-            <li><a href="#">메뉴목록</a></li>
-          </form>
+           <li>
+            <form action="${pageContext.request.contextPath}/menu/viewMenuList" method="get">
+            	<input class="hidden" type="text" value="C" name="choiceMenu" />
+            	<input type="submit" value="메뉴목록"/>
+            </form>
+           </li>
           <form class="" action="" method="">
             <li><a href="#">판매내역</a></li>
           </form>

@@ -73,7 +73,7 @@ public class MenuDaoImpl implements MenuDao {
 				+ " WHERE id=?";
 		
 		jt.update(sql, String.valueOf(menu.getMenuType()), menu.getMenuName(),
-				menu.getMenuPrice(), menu.isStock(), menu.getId(), menu.getImgPath());
+				menu.getMenuPrice(), menu.isStock(), menu.getImgPath(), menu.getId());
 	}
 
 	@Override
