@@ -29,31 +29,10 @@
 <section id="menuListContent">
 	<h2>메뉴 목록</h2>
 	<div id="menuListWrap">
-		<form action="removeMenu" method="post">
+		<form name="updateMenuForm" action="removeMenu" method="post">
 			<input type="submit" name="updateMenu" value="추가" id="addMenu" />
 			<input type="submit" name="updateMenu" value="수정" id="updateMenu" />
 			<input type="submit" name="updateMenu" value="삭제" id="removeMenu" />
-		<script>
-			function getContextPath() {
-				let hostIndex = location.href.indexOf(location.host) + location.host.length;
-				return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex+1));
-			}
-			$("#addMenu").click(function(e) {
-				e.preventDefault();
-				popupUpdateMenu();
-			})
-			$("#updateMenu").click(function(e) {
-				e.preventDefault();
-				popupUpdateMenu();
-			})
-			
-			function popupUpdateMenu() {
-				let popUpdateMenuUrl = getContextPath() + "/menu/popUpdateMenu";
-				let popUpdateMenuOption = "width=500px, height=300px, top=300px, left=500px";
-				
-				window.open(popUpdateMenuUrl, "메뉴 업데이트", popUpdateMenuOption);
-			}
-		</script>
 			<table>
 				<caption class="hidden">메뉴 목록</caption>
 				<colgroup>
@@ -77,11 +56,37 @@
 					<td headers="menuName">${m.menuName}</td>
 					<td headers="menuPrice">${m.menuPrice}</td>
 					<td headers="stock">${m.stock}</td>
-					<td headers="choice"><input type="radio" name="choiceItem" value="${m.id},${m.menuType}" /></td>
+					<td headers="choice"><input type="radio" name="choiceItem" value="${m.id}" /></td>
 					<td></td>
 				</tr>
 				</c:forEach>
 			</table>
+			<input class="hidden" value="${choiceMenu}" name="choiceMenu" type="text"/>
+		<script>
+			$("#addMenu").click(function(e) {
+				e.preventDefault();
+				popupUpdateMenu("popAddMenu");
+			})
+			$("#updateMenu").click(function(e) {
+				e.preventDefault();
+				popupUpdateMenu("popUpdateMenu");
+			})
+			
+			function popupUpdateMenu(goUrl) {
+				
+				let popUpdateMenuUrl = getContextPath() + "/menu/" + goUrl;
+				let popUpdateMenuOption = "width=500px, height=300px, top=300px, left=500px";
+				let popUpdateMenuTitle = "메뉴 업데이트";
+				
+				window.open(popUpdateMenuUrl, popUpdateMenuTitle, popUpdateMenuOption);
+				
+				let updateMenuForm = document.updateMenuForm;
+				updateMenuForm.target = popUpdateMenuTitle;
+				updateMenuForm.action = popUpdateMenuUrl;
+				
+				updateMenuForm.submit();
+			}
+		</script>
 		</form>
 	</div>
 </section>

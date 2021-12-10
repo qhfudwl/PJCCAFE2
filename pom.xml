@@ -38,7 +38,7 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
-		</dependency>	
+		</dependency>
 		
 		<!-- Logging -->
 		<dependency>
@@ -168,13 +168,14 @@
 		</dependency>
 		<!-- 여기까지 - JDBC를 사용하기 위해서 추가해야할 것 -->
 	
-		<!-- Test -->
+		<!-- Test (12/10 주석처리) -->  
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>     
+		 
 	</dependencies>
     <build>
         <plugins>

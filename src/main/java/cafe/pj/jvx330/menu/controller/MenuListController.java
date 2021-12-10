@@ -42,7 +42,7 @@ public class MenuListController extends MenuController {
 	}
 	
 	@PostMapping("/menu/updateMenu")
-	public ModelAndView updateMenu(MenuCommand menuCommand) {
+	public ModelAndView updateMenu(@ModelAttribute("menu") MenuCommand menuCommand) {
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
@@ -54,13 +54,14 @@ public class MenuListController extends MenuController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menus", menus);
+		mav.addObject("choiceMenu", menu.getMenuType());
 		mav.setViewName("menu/menu_list");
 		
 		return mav;
 	}
 	
 	@PostMapping("/menu/addMenu")
-	public ModelAndView addMenu(MenuCommand menuCommand) {
+	public ModelAndView addMenu(@ModelAttribute("menu") MenuCommand menuCommand) {
 		
 		Menu menu = new Menu(menuCommand.getMenuType(),
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
@@ -72,29 +73,24 @@ public class MenuListController extends MenuController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menus", menus);
+		mav.addObject("choiceMenu", menu.getMenuType());
 		mav.setViewName("menu/menu_list");
 		
 		return mav;
 	}
 	
 	@PostMapping("/menu/removeMenu")
-	public ModelAndView removeMenu(@RequestParam("choiceItem") String choiceItem) {
-		String[] arr = choiceItem.trim().split(choiceItem);
+	public ModelAndView removeMenu(@RequestParam("choiceItem") long choiceItem,
+			@RequestParam("choiceMenu") char choiceMenu) {
+		ms.removeMenuById(choiceItem);
 		
-		ms.removeMenuById(Integer.parseInt(arr[0]));
-		
-		List<Menu> menus = ms.findAllMenusByMenuType(arr[1].charAt(0));
+		List<Menu> menus = ms.findAllMenusByMenuType(choiceMenu);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menus", menus);
+		mav.addObject("choiceMenu", choiceMenu);
 		mav.setViewName("menu/menu_list");
 		
 		return mav;
-	}
-	
-	
-	@RequestMapping("/menu/popUpdateMenu")
-	public String popUpdateMenu() {
-		return "menu/menu_list_popup";
 	}
 }
