@@ -88,7 +88,7 @@ SELECT * FROM Customer;
 SELECT * FROM Employee;
 SELECT * FROM Menu;
 SELECT * FROM SalesRecord;
-SELECT * FROM ORDERRECORD;
+SELECT * FROM OrderRecord;
 
 
 
