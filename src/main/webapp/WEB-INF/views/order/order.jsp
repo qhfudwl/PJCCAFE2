@@ -1,22 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>\
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <%@ include file="/WEB-INF/views/incl/stylesheet_link.jsp"%>
-<script src="${pageContext.request.contextPath}/resources/css/order/order.css"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/order.css">
 <script src="${pageContext.request.contextPath}/resources/js/incl/jquery-3.6.0.min.js"></script>
-
-<title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/resources/js/order/order.js" defer></script>
+<title>주문하기</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/incl/header.jsp"></jsp:include>
 	<section id="mainContainer">
 		<div id="userInfoWrap">
-			<p class="employeeInfo userInfoCom">PJCCAFE / 대구 / Manager</p>
-			<p class="nowDate userInfoCom">2021-12-08</p>
+			<p class="employeeInfo userInfoCom">PJCCAFE / 대구 / ${mPosition }</p>
+			<p class="nowDate userInfoCom">${nowDate }</p>
 		</div>
 
 		<div id="allOrderWrap">
@@ -110,41 +112,93 @@
 					<div class="menuListWrap oneRow">
 						<h3 class="hidden">주요메뉴</h3>
 						<ul>
-							<li><a href="#" class="menuItemCom">인기메뉴</a></li>
-							<li><a href="#" class="menuItemCom">신메뉴</a></li>
-							<li><a href="#" class="menuItemCom">전체메뉴</a></li>
+							<li><a href="#" class="menuItemCom menuItemCaltCom calSelected">인기메뉴</a></li>
+							<li><a href="#" class="menuItemCom menuItemCaltCom">신메뉴</a></li>
+							<li><a href="#" class="menuItemCom menuItemCaltCom">전체메뉴</a></li>
 						</ul>
 					</div>
 					<div class="menuNameWrap">
 						<h3 class="hidden">메뉴종류</h3>
 						<div class="menuCategoryWrap oneRow">
 							<ul>
-								<li><a href="#" class="menuItemCom">커피</a></li>
-								<li><a href="#" class="menuItemCom">음료</a></li>
-								<li><a href="#" class="menuItemCom">푸드</a></li>
+								<li><a href="#" class="menuItemCom menuItemTypeCom">커피</a></li>
+								<li><a href="#" class="menuItemCom menuItemTypeCom">음료</a></li>
+								<li><a href="#" class="menuItemCom menuItemTypeCom">푸드</a></li>
 							</ul>
 						</div>
 
 						<div class="menuSubCategoryWrap oneRow">
 							<ul>
-								<li><a href="#" class="menuItemCom">뜨거운음료</a></li>
-								<li><a href="#" class="menuItemCom">차가운음료</a></li>
-								<li><a href="#" class="menuItemCom"></a></li>
+								<li><a href="#" class="menuItemCom menuItemSubTypeCom ">뜨거운음료</a></li>
+								<li><a href="#" class="menuItemCom menuItemSubTypeCom">차가운음료</a></li>
+								<li><a href="#" class="menuItemCom menuItemSubTypeCom"></a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="menuItemsWrap oneRow">
 						<h3 class="hidden">메뉴</h3>
-						<ul>
-							<li><a href="#">
-									<div class="menuImgWrap">
-										<img src="IceAmericano.jpg" alt="menuImg">
-										<div class="menuNamePriceWrap">
-											<p class="menuName">아메리카노</p>
-											<p class="menuPrice">3,000원</p>
+						<ul>					
+							<c:forEach var="beverages" items="${BeverageMenus }">
+								<input type="hidden" name="stock" value="${beverages.stock }"/>
+								
+								<c:choose>
+								<c:when test = "${fn:contains(beverages.menuName,'핫') }">
+									<li class="mBeverage mBeverageHot"><a href="#">
+								</c:when>
+								<c:when test = "${fn:contains(beverages.menuName,'아이스') }">
+									<li class="mBeverage mBeverageIce"><a href="#">
+								</c:when>
+								<c:otherwise>
+									<li class="mBeverage"><a href="#">
+								</c:otherwise>
+								</c:choose>
+										<div class="menuImgWrap">
+											<img src="${beverages.imgPath }" alt="menuImg">
+											<div class="menuNamePriceWrap">
+												<p class="menuName">${beverages.menuName }</p>
+												<p class="menuPrice"><fmt:formatNumber value="${beverages.menuPrice }" pattern=",###" type="currency" />원</p>
+											</div>
 										</div>
-									</div>
-							</a></li>
+								</a></li>
+							</c:forEach>
+							
+							<c:forEach var="coffees" items="${CoffeeMenus }">
+								<input type="hidden" name="stock" value="${coffees.stock }"/>
+								
+								<c:choose>
+								<c:when test = "${fn:contains(coffees.menuName,'핫') }">
+									<li class="mCoffee mCoffeeHot"><a href="#">
+								</c:when>
+								<c:when test = "${fn:contains(coffees.menuName,'아이스') }">
+									<li class="mCoffee mCoffeeIce"><a href="#">
+								</c:when>
+								<c:otherwise>
+									<li class="mCoffee"><a href="#">
+								</c:otherwise>
+								</c:choose>
+										<div class="menuImgWrap">
+											<img src="${coffees.imgPath }" alt="menuImg">
+											<div class="menuNamePriceWrap">
+												<p class="menuName">${coffees.menuName }</p>
+												<p class="menuPrice"><fmt:formatNumber value="${coffees.menuPrice }" pattern=",###" type="currency" />원</p>
+											</div>
+										</div>
+								</a></li>
+							</c:forEach>
+							
+							<c:forEach var="foods" items="${FoodMenus }">
+								<input type="hidden" name="stock" value="${foods.stock }"/>
+									<li class="mFood"><a href="#">
+										<div class="menuImgWrap">
+											<img src="${foods.imgPath }" alt="menuImg">
+											<div class="menuNamePriceWrap">
+												<p class="menuName">${foods.menuName }</p>
+												<p class="menuPrice"><fmt:formatNumber value="${foods.menuPrice }" pattern=",###" type="currency" />원</p>
+											</div>
+										</div>
+								</a></li>
+							</c:forEach>
+						
 						</ul>
 					</div>
 					<div class="funcButtonsWrap oneRow">

@@ -127,8 +127,13 @@ body{
 }
 .orderListBtn:hover{
   background: #9dc970;
-  box-shadow: inset 0px 2px 0px #999;
+
 }
+
+
+
+
+
 .orderListBtnFirst{
   display: flex;
   justify-content: space-between;
@@ -240,8 +245,13 @@ body{
   text-align: center;
   border-radius: 5px;
 }
+/*
 .menuItemCom:hover{
   background: #9dc970;
+}
+*/
+.calSelected, .typeSelected, .subTypeSelected, .menuItemHover{
+ 	background: #9dc970;
 }
 .oneRow{
   clear: both;
@@ -338,6 +348,10 @@ body{
 
 
 /* 기능 */
+.funcButtonsWrap{
+  position: absolute; bottom: 0; z-index:1;
+  width: 100%;
+}
 .funcButtonsWrap ul{
   display: flex;
   justify-content: space-between;
@@ -347,20 +361,25 @@ body{
   float: left;
   width: 24.5%;
 }
-.funcButtonsWrap ul li a{
+.funcButtonCom{
   height: 100px;
   line-height: 100px;
   padding: 0px 20px;
   background: #a0a09f;
 }
 
-.funcButtonsWrap{
-  position: absolute; bottom: 0;
-  width: 100%;
+.funcButtonHover{
+ 	background: #9dc970;
 }
 
+/*
+	js 연결 초기값
+	
+*/
 
-
+.mBeverage, .mCoffee, .mFood {
+	display: none;
+}
 
 
 
