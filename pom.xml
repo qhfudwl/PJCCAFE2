@@ -168,21 +168,16 @@
 		</dependency>
 		<!-- 여기까지 - JDBC를 사용하기 위해서 추가해야할 것 -->
 	
-<<<<<<< HEAD
+
 		<!-- Test (12/10 주석처리) -->  
-=======
-		<!-- Test -->
-		
->>>>>>> branch 'developer' of https://github.com/akapulin/PJCCAFE2.git
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-<<<<<<< HEAD
+
 		</dependency>     
-=======
-		</dependency>        
+     
 		<!--  12월10일추가분 -->
 		<!--
 		<dependency>
@@ -210,7 +205,6 @@
 		</dependency>  
 		-->
 		
->>>>>>> branch 'developer' of https://github.com/akapulin/PJCCAFE2.git
 		 
 	</dependencies>
     <build>
