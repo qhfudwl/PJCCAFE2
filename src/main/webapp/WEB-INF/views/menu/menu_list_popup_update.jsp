@@ -6,63 +6,75 @@
 <meta charset="UTF-8">
 <title>메뉴 수정</title>
 <%@ include file="../incl/link.jsp" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu/menu_popup_update.css" />
 </head>
 <body>
 	<div id="updateMenuPopUp">
-	<form method="post" name="updateMenuForm">
+	<form method="post" name="updateMenuForm" action="updateMenu" enctype="multipart/form-data">
 		<input class="hidden" type="text" name="id" value="${menu.id}" />
 		<input class="hidden" type="text" name="menuType" value="${menu.menuType}" />
+		<input type="text" class="hidden" name="close" value="${close}" /> 
 		<table>
 			<tr>
-				<td>이미지경로</td>
+				<th>이미지경로</th>
 				<td>
-					<input type="file" name="sendImgPathFile" />
+					<input type="file" id="updateImgFile" name="file" />
+					<label for="updateImgFile">업로드</label>
 					<input type="text" class="hidden" name="sendImgPathText" value="${menu.imgPath}" />
-					<input type="text" class="hidden" name="imgPath" />
+					<input type="text" name="imgPath" />
 				</td>
 			</tr>
 			<tr>
-				<td>이름</td>
+				<th>이름</th>
 				<td><input type="text" name="menuName" value="${menu.menuName}" /></td>
 			</tr>
 			<tr>
-				<td>가격</td>
+				<th>가격</th>
 				<td><input type="text" name="menuPrice" value="${menu.menuPrice}" /></td>
 			</tr>
 			<tr>
-				<td>현재재고유무</td>
-				<td><input type="checkbox" name="stock" value="${menu.stock}" checked /></td>
+				<th>재고유무</th>
+				<td>
+					<p class="hidden">${menu.stock}</p>
+					<input type="radio" id="updateStockTrue" name="stock" value="true" />
+					<label for="updateStockTrue">재고 있음</label>
+					<input type="radio" id="updateStockFalse" name="stock" value="false" />
+					<label for="updateStockFalse">재고 없음</label>
+				</td>
 			</tr>
 		</table>
 		<input type="submit"value="수정하기" />
 	</form>
 	</div>
 	<script>
-		$("input[type=submit]").mousedown(function(e) {
-			e.preventDefault();
-			let sendImgPathFile = $("input[name=sendImgPathFile]").val();
+		$("#updateMenuPopUp").mousemove(function() {
+			
+			let sendImgPathFile = $("input[name=file]").val();
+			let arrFile = sendImgPathFile.split("\\");
+			let fileImgName = arrFile[arrFile.length - 1];
+			
 			let sendImgPathText = $("input[name=sendImgPathText]").val();
+			let arrText = sendImgPathText.split("/");
+			let textImgName = arrText[arrText.length - 1];
+			
 			if(sendImgPathFile == ""){
-				$("input[name=imgPath]").val(sendImgPathText);
+				$("input[name=imgPath]").val(textImgName);
 			} else {
-				$("input[name=imgPath]").val(sendImgPathFile);
+				$("input[name=imgPath]").val(fileImgName);
 			}
 		})
-		$("input[type=submit]").click(function(e) {
-			e.preventDefault();
-			updateMenu();
-			self.close();
-		})
-		
-		function updateMenu() {
+		window.onload = function() {
+			let stock = $("#updateMenuPopUp p").text();
+			if (stock == "true"){
+				$("#updateStockTrue + label").trigger("click");
+			} else {
+				$("#updateStockFalse + label").trigger("click");
+			}
 			
-			let updateMenuUrl = getContextPath() + "/menu/updateMenu";
-			let updateMenuTitle = "메뉴 수정";
-			let updateMenuForm = document.updateMenuForm;
-			updateMenuForm.target = updateMenuTitle;
-			updateMenuForm.action = updateMenuUrl;
-			
-			updateMenuForm.submit();
+			if ($("input[name=close]").val() == "close"){
+				opener.parent.reloadPage();
+				self.close();
+			}
 		}
 	</script>
 </body>

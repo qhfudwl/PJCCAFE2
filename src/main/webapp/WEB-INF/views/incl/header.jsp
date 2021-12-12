@@ -14,7 +14,7 @@
             <li><a href="#">회원목록</a></li>
           </form>
            <li>
-            <form action="${pageContext.request.contextPath}/menu/viewMenuList" method="get">
+            <form name="viewMenuList" action="${pageContext.request.contextPath}/menu/viewMenuList" method="get">
             	<input class="hidden" type="text" value="C" name="choiceMenu" />
             	<input type="submit" value="메뉴목록"/>
             </form>
