@@ -30,7 +30,7 @@ public class OrderController {
 		
 	
 		//처음예제
-		/*
+		/* 
 		@RequestMapping(value="/sayHello",method=RequestMethod.GET)
 		public ModelAndView sayHello() {
 
