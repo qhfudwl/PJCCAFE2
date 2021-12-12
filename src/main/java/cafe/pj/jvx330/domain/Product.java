@@ -3,9 +3,9 @@ package cafe.pj.jvx330.domain;
 import java.util.Date;
 
 public class Product {
+	
 	private Menu menu;
 	private int quantity;
-	
 	private String orderNumber;
 	private Date regDate;
 	

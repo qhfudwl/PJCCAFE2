@@ -11,6 +11,8 @@ public interface SalesService {
 	
 	List<Sales> findSalesByDate(Date date1, Date date2);
 	
+	List<Sales> findSalesByDate(Date date);
+	
 	List<Sales> findSalesByMenuNameAndDate(String menuName, Date date1, Date date2);
 	
 	List<Sales> findSalesByDate(char type, Date date1, Date date2);

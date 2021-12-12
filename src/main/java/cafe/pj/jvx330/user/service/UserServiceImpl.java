@@ -10,8 +10,10 @@ import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.user.dao.UserDao;
 @Service("userService")
 public class UserServiceImpl implements UserService{
+	
 	@Autowired
 	private UserDao dao;
+	
 	public UserServiceImpl() {
 		
 	}
