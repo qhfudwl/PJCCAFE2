@@ -1,0 +1,36 @@
+@charset "UTF-8";
+#addMenuPopUp {
+	display: flex; flex-flow: row nowrap; justify-content: center; align-items: center;
+	height: 100%;
+}
+#addMenuPopUp th {
+	width: 100px; line-height: 30px; text-align: left; padding: 10px;
+	background-color: #596271; color: #fff; border-bottom: 1px solid #fff;
+}
+#addMenuPopUp td {
+	background-color: #f4f4f4; border-bottom: 1px solid #fff;
+	padding: 10px;
+}
+#addMenuPopUp input[type=file] {display: none;}
+#addMenuPopUp input[type=file] + label {
+	background-color: #9dc970; border-radius: 10px; padding: 5px 10px;
+	color: #fff; font-size: 13px; font-weight: bold;
+}
+#addMenuPopUp input[type=text] {
+	outline: none; border: 0; background-color: #f4f4f4;
+	width: 250px; height: 30px;
+}
+#addMenuPopUp input[type=text]:focus {
+	background-color: #fff;
+}
+#addMenuPopUp input[type=radio] {display: none;}
+#addMenuPopUp input[type=radio] + label {margin: 0 10px;}
+#addMenuPopUp input[type=radio]:checked + label {
+	border-bottom: 2px solid #9dc970;
+}
+#addMenuPopUp input[type=submit] {
+	outline: none; border: 0; background-color: #a0a0a0; padding: 5px 10px;
+	color: #fff; font-size: 15px; font-weight: bold; margin-top: 5px;
+	border-radius: 10px; float: right;
+}
+#addMenuPopUp input[type=submit]:hover {background-color: #9dc970;}

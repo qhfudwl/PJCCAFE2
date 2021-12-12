@@ -1,0 +1,36 @@
+@charset "UTF-8";
+#updateMenuPopUp {
+	display: flex; flex-flow: row nowrap; justify-content: center; align-items: center;
+	height: 100%;
+}
+#updateMenuPopUp th {
+	width: 100px; line-height: 30px; text-align: left; padding: 10px;
+	background-color: #596271; color: #fff; border-bottom: 1px solid #fff;
+}
+#updateMenuPopUp td {
+	background-color: #f4f4f4; border-bottom: 1px solid #fff;
+	padding: 10px;
+}
+#updateMenuPopUp input[type=file] {display: none;}
+#updateMenuPopUp input[type=file] + label {
+	background-color: #9dc970; border-radius: 10px; padding: 5px 10px;
+	color: #fff; font-size: 13px; font-weight: bold;
+}
+#updateMenuPopUp input[type=text] {
+	outline: none; border: 0; background-color: #f4f4f4;
+	width: 250px; height: 30px;
+}
+#updateMenuPopUp input[type=text]:focus {
+	background-color: #fff;
+}
+#updateMenuPopUp input[type=radio] {display: none;}
+#updateMenuPopUp input[type=radio] + label {margin: 0 10px;}
+#updateMenuPopUp input[type=radio]:checked + label {
+	border-bottom: 2px solid #9dc970;
+}
+#updateMenuPopUp input[type=submit] {
+	outline: none; border: 0; background-color: #a0a0a0; padding: 5px 10px;
+	color: #fff; font-size: 15px; font-weight: bold; margin-top: 5px;
+	border-radius: 10px; float: right;
+}
+#updateMenuPopUp input[type=submit]:hover {background-color: #9dc970;}
