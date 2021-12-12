@@ -13,12 +13,44 @@ import org.springframework.web.multipart.MultipartFile;
 @Component("auxiliaryFunction")
 public class AuxiliaryFunction {
 	
-	public void uploadImg(HttpServletRequest request, MultipartFile file)
+	private String makePath(char menuType, String menuName, String pathForm, HttpServletRequest request) {
+		String rootPath = "";
+		String attachPath = "";
+		String typePath = "";
+		String tempPath = "";
+		
+		if (pathForm.equals("\\")) {
+			rootPath = request.getSession().getServletContext().getRealPath("/");
+			attachPath = "resources\\img\\";
+		} else {
+			rootPath = request.getContextPath();
+			attachPath = "/resources/img/";
+		}
+		
+
+		if (menuType == 'C') {
+			typePath = "coffee" + pathForm;
+		} else if (menuType == 'B') {
+			typePath = "beverage" + pathForm;
+		} else if (menuType == 'F') {
+			typePath = "food" + pathForm;
+		}
+		
+		if (menuName.substring(0, 1).equals("아")) {
+			tempPath = "ice" + pathForm;
+		}else if (menuName.substring(0, 1).equals("핫")) {
+			tempPath = "hot" + pathForm;
+		}
+		
+		return rootPath + attachPath + typePath + tempPath;
+	}
+	
+	public void uploadImg(HttpServletRequest request, MultipartFile file,
+			char menuType, String menuName)
 			throws IllegalStateException, IOException {
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		String attachPath = "resources\\img\\";
+		
 		String fileName = file.getOriginalFilename();
-		String filePath = rootPath + attachPath + fileName;
+		String filePath = makePath(menuType, menuName, "\\", request) + fileName;
 		
 		if(!file.isEmpty()) {
 			file.transferTo(new File(filePath));
@@ -26,18 +58,15 @@ public class AuxiliaryFunction {
 	}
 	
 	public String getName(HttpServletRequest request, String imgFullPath, 
-			MultipartFile file) {
-
-		String rootPath = request.getContextPath();
-		String attachPath = "/resources/img/";
+			MultipartFile file, char menuType, String menuName) {
 		
 		if (!file.isEmpty()){
 			String[] strArr = imgFullPath.trim().split("\\\\");
-			String imgPath = rootPath + attachPath + strArr[strArr.length - 1];
+			String imgPath = makePath(menuType, menuName, "/", request) + strArr[strArr.length - 1];
 			return imgPath;
 		}
 		
-		String filePath = rootPath + attachPath + imgFullPath;
+		String filePath = makePath(menuType, menuName, "/", request) + imgFullPath;
 		
 		return filePath;
 	}

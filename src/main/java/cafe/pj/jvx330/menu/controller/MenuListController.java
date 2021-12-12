@@ -55,12 +55,15 @@ public class MenuListController extends MenuController {
 	public ModelAndView updateMenu(@ModelAttribute("menu") MenuCommand menuCommand,
 			@RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws IllegalStateException, IOException {
-
-		auxFunc.uploadImg(request, file);
+		
+		char menuType = menuCommand.getMenuType();
+		String menuName = menuCommand.getMenuName();
+		
+		auxFunc.uploadImg(request, file, menuType, menuName);
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
-				auxFunc.getName(request, menuCommand.getImgPath(), file));
+				auxFunc.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
 		
 		ms.updateMenuById(menu);
 		
@@ -85,11 +88,14 @@ public class MenuListController extends MenuController {
 			@RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws IllegalStateException, IOException {
 
-		auxFunc.uploadImg(request, file);
+		char menuType = menuCommand.getMenuType();
+		String menuName = menuCommand.getMenuName();
+		
+		auxFunc.uploadImg(request, file, menuType, menuName);
 		
 		Menu menu = new Menu(menuCommand.getMenuType(),
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
-				auxFunc.getName(request, menuCommand.getImgPath(), file));
+				auxFunc.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
 		
 		ms.addMenu(menu);
 		
