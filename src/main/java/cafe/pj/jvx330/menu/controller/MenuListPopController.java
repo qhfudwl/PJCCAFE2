@@ -22,11 +22,21 @@ import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.web.command.MenuCommand;
 
+/**
+ * 메뉴 팝업창 컨트롤러
+ * @author 김보령
+ *
+ */
 @Controller("menu.controller.menuListPopController")
 public class MenuListPopController extends MenuController {
 	
-	@RequestMapping("/menu/popUpdateMenu")
-	public ModelAndView popUpdateMenu(@RequestParam(value="choiceItem", required = true) long choiceItem) {
+	/**
+	 * 메뉴 id 를 받아 팝업창에 표시
+	 * @param choiceItem
+	 * @return
+	 */
+	@PostMapping("/menu/popUpdateMenu")
+	public ModelAndView popUpdateMenu(@RequestParam("choiceItem") long choiceItem) {
 		Menu menu = ms.findMenuById(choiceItem);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menu", menu);
@@ -35,7 +45,12 @@ public class MenuListPopController extends MenuController {
 		return mav;
 	}
 	
-	@RequestMapping("/menu/popAddMenu")
+	/**
+	 * 메뉴 타입을 팝업창에 적용
+	 * @param choiceMenu
+	 * @return
+	 */
+	@PostMapping("/menu/popAddMenu")
 	public ModelAndView popAddMenu(@RequestParam("choiceMenu") char choiceMenu) {
 		Menu menu = new Menu();
 		menu.setMenuType(choiceMenu);
