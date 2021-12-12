@@ -86,10 +86,138 @@ $('.menuItemSubTypeCom').on('click',function(e){
 
 
 
+/* 모든 메뉴 목록 화면에서 없애기 */
+function resetMenuList(){
+	$('.mCoffeeHot').hide();
+	$('.mCoffeeIce').hide();
+	$('.mCoffee').hide();
+	
+	$('.mBeverageHot').hide();
+	$('.mBeverageIce').hide();
+	$('.mBeverage').hide();
+	
+	$('.mFood').hide();	
+}
 
 
+/* 커피 누를 때  - 모든 커피 메뉴 보이게 하기 */
 
+$('.mItemCoffee').on('click',function(e){
+	e.preventDefault();
+	/* 다른 메뉴 목록 지우기 */
+	resetMenuList();
+	/* 서브 메뉴 지우기 */
+	$('.mCBSubType').show();
+	$('.mFSubType').hide();
+	/* 커피메뉴 보여주기 */
+	$('.mCoffee').show();
+	
+})
+/* 음료 누를 때  - 모든 음료 메뉴 보이게 하기 */
+$('.mItemBeverage').on('click',function(e){
+	e.preventDefault();
+	/* 다른 메뉴 목록 지우기 */
+	resetMenuList();
+	/* 서브 메뉴 지우기 */
+	$('.mCBSubType').show();
+	$('.mFSubType').hide();
+	/* 커피메뉴 보여주기 */
+	$('.mBeverage').show();
+	
+})
+/* 푸드 누를 때  - 모든 푸드 메뉴 보이게 하기 */
+$('.mItemFood').on('click',function(e){
+	e.preventDefault();
+	/* 다른 메뉴 목록 지우기 */
+	resetMenuList();
+	/* 서브 메뉴 지우기 */
+	$('.mCBSubType').hide()
+	$('.mFSubType').show();
+	/* 커피메뉴 보여주기 */
+	$('.mFood').show();
+	
+})
 
+/* 핫 눌렀을 때 */
+$('.mItemSubTypeHot').on('click',function(e){
+	e.preventDefault();
+	/* 다른 메뉴 목록 지우기 */
+	resetMenuList();
+	/* 커피메뉴면 */
+	if($('.mItemCoffee').hasClass('typeSelected')){
+		$('.mCoffeeHot').show();
+	}
+	/* 음료메뉴*/
+	else if($('.mItemBeverage').hasClass('typeSelected')){
+		$('.mBeverageHot').show();
+	}	
+})
+/* 아이스 눌렀을 때 */
+$('.mItemSubTypeIce').on('click',function(e){
+	e.preventDefault();
+	/* 다른 메뉴 목록 지우기 */
+	resetMenuList();
+	/* 커피메뉴면 */
+	if($('.mItemCoffee').hasClass('typeSelected')){
+		$('.mCoffeeIce').show();
+	}
+	/* 음료메뉴*/
+	else if($('.mItemBeverage').hasClass('typeSelected')){
+		$('.mBeverageIce').show();
+	}	
+})
+
+/* 메뉴아이템 선택 시 좌측 창에 메뉴 추가 */
+
+$('.mList').on('click',function(e){
+	e.preventDefault();
+	
+	let id = $(this).find($('.menuId')).val();
+	let menuName = $(this).find($('.menuName')).text();
+	let menuPrice = $(this).find($('.menuPrice')).text();
+	menuPrice = menuPrice.replace(",","");
+	menuPrice = menuPrice.replace("원","");
+	console.log(menuPrice);
+	let quantity =1;
+	
+	let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity}
+	
+	$.ajax({
+		url:"orderMenuList",
+		type:"post",
+		data: JSON.stringify(json),
+		contentType: "application/json; charset=UTF-8",
+		success: function(data){
+			//for (key in json) { console.log('key:' + key + ' / ' + 'value:' + json[key]); }
+
+			console.log(data)
+			//console.log(data["order"][0])
+			//alert('successs');
+			$('.addMenuList').remove();
+		   for(let i=0;i<data["order"].length;i++){
+				let totalMenuPrice = data["order"][i].quantity * data["order"][i].menu.menuPrice;
+				$('.orderListTable').append(
+					"<tr class='addMenuList'>"+
+								"<td>"+data["order"][i].menu.menuName+"</td>"+
+								"<td>"+data["order"][i].quantity+"</td>"+
+								"<td>"+data["order"][i].menu.menuPrice+"</td>"+
+								"<td>"+numberWithCommas(totalMenuPrice)+"원</td>"+
+							"</tr>"
+					
+				)
+			
+			}
+			
+		}
+		})
+	
+
+})
+
+/*숫자에 콤마 넣어 주는 정규*/
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 

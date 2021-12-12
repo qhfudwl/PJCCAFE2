@@ -2,6 +2,7 @@ package cafe.pj.jvx330.sales.controller;
 
 import java.net.http.HttpRequest;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cafe.pj.jvx330.domain.Employee;
 import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.menu.service.MenuService;
 
 @Controller
@@ -28,8 +31,16 @@ public class OrderController {
 		@Resource(name="menuService")
 		MenuService ms;
 		
+		
 	
 		//처음예제
+		/*
+		RequestBody
+		Json 형태로 받은 HTTP Body 데이터를 MessageConverter를 통해 변환시킴
+		값을 주입하지 않고 변환을 시키므로(엄밀히는 Reflection을 사용하여 할당), 변수들의 생성자나 Setter함수가 없어도 정상적으로 값이 할당됨
+
+		*/
+		
 		/* 
 		@RequestMapping(value="/sayHello",method=RequestMethod.GET)
 		public ModelAndView sayHello() {
@@ -63,7 +74,7 @@ public class OrderController {
 		*/
 		
 		
-	
+		List<Product> order = new ArrayList<>();
 	
 		
 		
@@ -108,10 +119,11 @@ public class OrderController {
 		}
 		
 		
-		
-		
-		
-		
+		/**
+		 * 메뉴 누를 때
+		 *		1 - 이미 받아온 결과 값을 보여준다.
+		 * 	(script에서 처리)	
+		 */
 		
 		
 		/**
@@ -122,6 +134,63 @@ public class OrderController {
 		 * 
 		 *
 		 */
+		
+		/* 1. 좌측에 상품명 / 수량 / 단가 / 금액 업데이트*/	
+		
+		@PostMapping("/orderMenuList")
+		@ResponseBody
+		public HashMap<String,Object> orderMenuList(@RequestBody HashMap<String,Object> menuList){
+		    HashMap<String,Object> addMenuList = new HashMap<String, Object>();
+			
+		    System.out.println("hi");
+		    
+			//메뉴 아이디받고
+		    
+			long id = Long.parseLong(menuList.get("id").toString());
+			//메뉴 이름 받고
+			String menuName = menuList.get("menuName").toString();
+			//메뉴 가격 받고
+			double menuPrice = Double.parseDouble(menuList.get("menuPrice").toString());
+			//수량 받고
+			int quantity = Integer.parseInt(menuList.get("quantity").toString());
+			//order에 있는지 검사하고 있으면 추가 x, 없으면 추가 하고 1개값 리턴
+			boolean duple=false;
+			for(Product product : order) {
+				if(id==product.getMenu().getId()) {
+					duple=true;
+					product.setQuantity(product.getQuantity()+1);
+					break;
+				}
+			}
+			
+			//장바구니에 담기
+			if(!duple) {
+				Menu menu = new Menu();
+				menu.setId(id);
+				menu.setMenuName(menuName);
+				menu.setMenuPrice(menuPrice);
+				order.add(new Product(menu,quantity));
+			}		
+			
+			//화면에 뿌려주기
+			/*
+			addMenuList.put("id", id);
+			addMenuList.put("menuName", menuName);
+			addMenuList.put("menuPrice", menuPrice);
+			addMenuList.put("quantity", quantity);
+		    */
+			
+			addMenuList.put("order",order);
+		    return addMenuList;
+			
+			
+		}
+		
+		
+		
+		
+		
+		
 		
 		
 		/**
@@ -158,11 +227,15 @@ public class OrderController {
 		 * 			2-1 카드 결제 금액 자동 입력
 		 */
 		
-		/**
-		 * 메뉴 누를 때
-		 *		1 - 이미 받아온 결과 값을 보여준다.
-		 * 		
-		 */
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		/**

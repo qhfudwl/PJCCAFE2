@@ -38,18 +38,14 @@
 								<th>단가</th>
 								<th>금액</th>
 							</tr>
-							<tr>
+							<!--  
+							<tr class="addMenuList">
 								<td>아메리카노</td>
 								<td>1</td>
 								<td>3,000</td>
 								<td>3,000원</td>
-							</tr>
-							<tr>
-								<td>아메리카노</td>
-								<td>1</td>
-								<td>3,000</td>
-								<td>3,000원</td>
-							</tr>
+							</tr> -->
+							
 						</table>
 					</div>
 					<div class="leftSideFuncWrap">
@@ -121,16 +117,23 @@
 						<h3 class="hidden">메뉴종류</h3>
 						<div class="menuCategoryWrap oneRow">
 							<ul>
-								<li><a href="#" class="menuItemCom menuItemTypeCom">커피</a></li>
-								<li><a href="#" class="menuItemCom menuItemTypeCom">음료</a></li>
-								<li><a href="#" class="menuItemCom menuItemTypeCom">푸드</a></li>
+								<li><a href="#" class="menuItemCom menuItemTypeCom mItemCoffee">커피</a></li>
+								<li><a href="#" class="menuItemCom menuItemTypeCom mItemBeverage">음료</a></li>
+								<li><a href="#" class="menuItemCom menuItemTypeCom mItemFood">푸드</a></li>
 							</ul>
 						</div>
 
-						<div class="menuSubCategoryWrap oneRow">
+						<div class="menuSubCategoryWrap oneRow mCBSubType">
 							<ul>
-								<li><a href="#" class="menuItemCom menuItemSubTypeCom ">뜨거운음료</a></li>
-								<li><a href="#" class="menuItemCom menuItemSubTypeCom">차가운음료</a></li>
+								<li><a href="#" class="menuItemCom menuItemSubTypeCom mItemSubTypeHot">뜨거운음료</a></li>
+								<li><a href="#" class="menuItemCom menuItemSubTypeCom mItemSubTypeIce">차가운음료</a></li>
+								<li><a href="#" class="menuItemCom menuItemSubTypeCom"></a></li>
+							</ul>
+						</div>
+						<div class="menuSubCategoryWrap oneRow mFSubType">
+							<ul>
+								<li><a href="#" class="menuItemCom menuItemSubTypeCom"></a></li>
+								<li><a href="#" class="menuItemCom menuItemSubTypeCom"></a></li>
 								<li><a href="#" class="menuItemCom menuItemSubTypeCom"></a></li>
 							</ul>
 						</div>
@@ -141,17 +144,19 @@
 							<c:forEach var="beverages" items="${BeverageMenus }">
 								<input type="hidden" name="stock" value="${beverages.stock }"/>
 								
+								
 								<c:choose>
 								<c:when test = "${fn:contains(beverages.menuName,'핫') }">
-									<li class="mBeverage mBeverageHot"><a href="#">
+									<li class="mList mBeverage mBeverageHot"><a href="#">
 								</c:when>
 								<c:when test = "${fn:contains(beverages.menuName,'아이스') }">
-									<li class="mBeverage mBeverageIce"><a href="#">
+									<li class="mList mBeverage mBeverageIce"><a href="#">
 								</c:when>
 								<c:otherwise>
-									<li class="mBeverage"><a href="#">
+									<li class="mList mBeverage"><a href="#">
 								</c:otherwise>
 								</c:choose>
+									<input type="hidden" name="menuId" class="menuId" value="${beverages.id }"/>
 										<div class="menuImgWrap">
 											<img src="${beverages.imgPath }" alt="menuImg">
 											<div class="menuNamePriceWrap">
@@ -167,15 +172,16 @@
 								
 								<c:choose>
 								<c:when test = "${fn:contains(coffees.menuName,'핫') }">
-									<li class="mCoffee mCoffeeHot"><a href="#">
+									<li class="mList mCoffee mCoffeeHot"><a href="#">
 								</c:when>
 								<c:when test = "${fn:contains(coffees.menuName,'아이스') }">
-									<li class="mCoffee mCoffeeIce"><a href="#">
+									<li class="mList mCoffee mCoffeeIce"><a href="#">
 								</c:when>
 								<c:otherwise>
-									<li class="mCoffee"><a href="#">
+									<li class="mList mCoffee"><a href="#">
 								</c:otherwise>
 								</c:choose>
+									<input type="hidden" name="menuId" class="menuId" value="${coffees.id }"/>
 										<div class="menuImgWrap">
 											<img src="${coffees.imgPath }" alt="menuImg">
 											<div class="menuNamePriceWrap">
@@ -188,7 +194,8 @@
 							
 							<c:forEach var="foods" items="${FoodMenus }">
 								<input type="hidden" name="stock" value="${foods.stock }"/>
-									<li class="mFood"><a href="#">
+									<li class="mList mFood"><a href="#">
+										<input type="hidden" name="menuId" class="menuId" value="${foods.id }"/>
 										<div class="menuImgWrap">
 											<img src="${foods.imgPath }" alt="menuImg">
 											<div class="menuNamePriceWrap">
