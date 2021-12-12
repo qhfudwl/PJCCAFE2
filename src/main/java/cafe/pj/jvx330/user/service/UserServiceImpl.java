@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService{
 		dao.addUser(user);
 		return user;
 	}
+	
 
 	@Override
 	public List<User> findUsersByPhone(String phone) {
@@ -50,6 +51,18 @@ public class UserServiceImpl implements UserService{
 	public User findUserById(long id) {
 		
 		return dao.findUserById(id);
+	}
+
+	@Override
+	public List<User> findUserByName(String name) {
+		
+		return dao.findUserByName(name);
+	}
+
+	@Override
+	public List<User> findUserByBirth(String birth) {
+		
+		return dao.findUserByBirth(birth);
 	}
 
 }

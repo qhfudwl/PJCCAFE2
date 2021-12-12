@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
+import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.domain.Product;
+import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.web.command.MenuCommand;
 
 @Controller("menu.controller.menuListController")
@@ -47,7 +49,6 @@ public class MenuListController extends MenuController {
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
 				menuCommand.getImgPath());
-		
 		ms.updateMenuById(menu);
 		
 		List<Menu> menus = ms.findAllMenusByMenuType(menuCommand.getMenuType());

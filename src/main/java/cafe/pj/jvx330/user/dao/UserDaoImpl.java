@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,11 +18,9 @@ import cafe.pj.jvx330.domain.User;
 
 @Component("userDao")
 public class UserDaoImpl implements UserDao {
+	@Resource(name = "jdbcTemplate")
 	private JdbcTemplate jdbcTemplate;
-	@Autowired
-	public UserDaoImpl(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+	
 	
 	/**
 	 * 커스터머에 테이블에 고객 추가
@@ -32,13 +32,16 @@ public class UserDaoImpl implements UserDao {
 	public void addUser(User user) {
 		
 		if(user instanceof Customer) {
+			String sql ="INSERT INTO Customer(name,phone,birth)"
+					+ "VALUES(? , ? , ?)";
 			Customer customer = (Customer)user;
-			jdbcTemplate.update("INSERT INTO Customer(name, phone, birth) "
-					+ "VALUES( ?, ?, ?)",customer.getCustomerName(), customer.getPhone(),
+			jdbcTemplate.update(sql,customer.getCustomerName(), customer.getPhone(),
 					customer.getBirth());
 				
 		}
 	}
+	
+	
 	
 	
 	
@@ -111,6 +114,26 @@ public class UserDaoImpl implements UserDao {
 		return jdbcTemplate.queryForObject(sql, new UserRowMapper(), id);
 	}
 
+	/**
+	 * 고객 이름으로 검색히가
+	 */
+	@Override
+	public List<User> findUserByName(String userName) {
+		String sql = "SELETE id, name, phone, birth, point, regDate FROM Customer WHERE name = ?";
+	
+	return jdbcTemplate.query(sql, new UserRowMapper(), userName);
+	}
 
+
+
+
+	/**
+	 * 고객 생일로 검색하기
+	 */
+	@Override
+	public List<User> findUserByBirth(String birth) {
+		String sql = "SELECTE id, name, phone, birth, point, regDate FROM Customer WHERE birth = ?";
+		return jdbcTemplate.query(sql, new UserRowMapper(), birth);
+	}
 	
 }
