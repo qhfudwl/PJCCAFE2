@@ -1,4 +1,4 @@
-package cafe.pj.jvx330.web.controller;
+package cafe.pj.jvx330.sales.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

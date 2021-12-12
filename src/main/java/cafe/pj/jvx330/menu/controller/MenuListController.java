@@ -59,11 +59,11 @@ public class MenuListController extends MenuController {
 		char menuType = menuCommand.getMenuType();
 		String menuName = menuCommand.getMenuName();
 		
-		auxFunc.uploadImg(request, file, menuType, menuName);
+		fileAux.uploadImg(request, file, menuType, menuName);
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
-				auxFunc.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
+				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
 		
 		ms.updateMenuById(menu);
 		
@@ -91,11 +91,11 @@ public class MenuListController extends MenuController {
 		char menuType = menuCommand.getMenuType();
 		String menuName = menuCommand.getMenuName();
 		
-		auxFunc.uploadImg(request, file, menuType, menuName);
+		fileAux.uploadImg(request, file, menuType, menuName);
 		
 		Menu menu = new Menu(menuCommand.getMenuType(),
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
-				auxFunc.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
+				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
 		
 		ms.addMenu(menu);
 		

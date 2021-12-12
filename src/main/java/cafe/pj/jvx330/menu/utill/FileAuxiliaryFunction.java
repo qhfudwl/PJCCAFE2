@@ -1,4 +1,4 @@
-package cafe.pj.jvx330.web.utill;
+package cafe.pj.jvx330.menu.utill;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,8 +10,8 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-@Component("auxiliaryFunction")
-public class AuxiliaryFunction {
+@Component("fileAuxiliaryFunction")
+public class FileAuxiliaryFunction {
 	
 	private String makePath(char menuType, String menuName, String pathForm, HttpServletRequest request) {
 		String rootPath = "";
