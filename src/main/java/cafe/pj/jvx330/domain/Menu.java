@@ -2,7 +2,6 @@ package cafe.pj.jvx330.domain;
 
 public class Menu {
 	private long id;
-	private String imagepath;
 	private char menuType;
 	private String menuName;
 	private double menuPrice;

@@ -2,6 +2,8 @@ package cafe.pj.jvx330.menu.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,17 +12,15 @@ import cafe.pj.jvx330.menu.dao.MenuDao;
 
 @Component("menuService")
 public class MenuServiceImpl implements MenuService {
-	private MenuDao md;
 	
-	@Autowired
-	public MenuServiceImpl(MenuDao menuDao) {
-		this.md = menuDao;
-	}
+	@Resource(name="menuDao")
+	private MenuDao md;
 
 	@Override
 	public Menu addMenu(Menu menu) {
 		md.addMenu(menu);
 		return md.findAllMenuByMenuName(menu.getMenuName()).get(0);
+		// 마지막거를 가져오면 더 빠르다.
 	}
 
 	@Override

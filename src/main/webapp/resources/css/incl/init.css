@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 body, html {height: 100%;}
-body, h1, h2, h3, h4, h5, h6, p, ul, dl, dd, figure, fieldset, input, th, td {margin: 0; padding: 0;}
+body, h1, h2, h3, h4, h5, h6, p, ul, dl, dd, figure, fieldset, input, th, td,img,div,p {margin: 0; padding: 0;}
 body, input, button {font-family: 'twayair';}
 input[type="text"] {text-indent: 5px;}
 input[type="submit"] {cursor: pointer;}

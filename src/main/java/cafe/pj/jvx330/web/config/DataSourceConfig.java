@@ -37,4 +37,6 @@ public class DataSourceConfig {
 	public JdbcTemplate jdbcTemplate() {
 		return new JdbcTemplate(dataSource());
 	}
+	
+	// 트랜잭션 넣을 것
 }
