@@ -1,8 +1,9 @@
 DROP TABLE OrderRecord;
+DROP TABLE SalesRecord;
 DROP TABLE Employee;
 DROP TABLE Customer;
 DROP TABLE Menu;
-DROP TABLE SalesRecord;
+
 
 CREATE TABLE Employee (
    id				BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,		 
@@ -69,9 +70,9 @@ INSERT INTO Employee(eId,passwd,position) VALUES('manager','manager','M');
 
 -- 메뉴등록
 
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','자몽에이드',1000.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','레몬에이드',1000.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','자스민티',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','아이스자몽에이드',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','아이스레몬에이드',1000.0,true,'resources/img/IceAmericano.jpg');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','핫자스민티',1000.0,true,'resources/img/IceAmericano.jpg');
 INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫아메리카노',1500.0,true,'resources/img/IceAmericano.jpg');
 INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스아메리카노',1500.0,true,'resources/img/IceAmericano.jpg');
 INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫카페라떼',2000.0,true,'resources/img/IceAmericano.jpg');
