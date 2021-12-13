@@ -186,9 +186,9 @@
       <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 	   <dependency>
 		    <groupId>org.springframework</groupId>
-		    <artifactId>spring</artifactId>
+		    <artifactId>spring-test</artifactId>
 		    <version>5.3.8</version>
-		    <type>pom</type>
+		    <scope>test</scope>
 		</dependency>
 		<dependency>
 		    <groupId>org.junit.jupiter</groupId>

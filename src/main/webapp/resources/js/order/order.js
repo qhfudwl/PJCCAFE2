@@ -168,7 +168,7 @@ $('.mItemSubTypeIce').on('click',function(e){
 })
 
 /* 메뉴아이템 선택 시 좌측 창에 메뉴 추가 */
-
+let quantity=0;
 $('.mList').on('click',function(e){
 	e.preventDefault();
 	
@@ -177,13 +177,21 @@ $('.mList').on('click',function(e){
 	let menuPrice = $(this).find($('.menuPrice')).text();
 	menuPrice = menuPrice.replace(",","");
 	menuPrice = menuPrice.replace("원","");
-	console.log(menuPrice);
-	let quantity =1;
-
+	quantity++;
+	let totalMenuPrice = Number(menuPrice)*quantity;
 	let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'up'}
 	
-	orderMenuListAjax(json);
-	
+	//orderMenuListAjax(json);
+	$('.orderListTable').append(
+					"<tr class='addMenuList'>"+
+								"<input type='hidden' class='mlMenuId' value='"+id+"'/>'"+
+								"<td class='mlMenuName'>"+menuName+"</td>"+
+								"<td class='mlMenuQuantity'>"+quantity+"</td>"+
+								"<td class='mlMenuPrice'>"+menuPrice+"</td>"+
+								"<td class='mlTotalPrice'>"+numberWithCommas(totalMenuPrice)+"원</td>"+
+							"</tr>"
+					
+				)
 	
 
 })
@@ -197,7 +205,6 @@ function orderMenuListAjax(json){
 		success: function(data){
 			//for (key in json) { console.log('key:' + key + ' / ' + 'value:' + json[key]); }
 
-			console.log(data)
 			//console.log(data["order"][0])
 			//alert('successs');
 			$('.addMenuList').remove();
@@ -253,7 +260,7 @@ $('.orderListDownBtn').on('click',function(){
 	//e.preventDefault();
 	//선택된 메뉴가 있다면 
 	if($('.addMenuList').hasClass('selectedMenuList')){
-
+		/*
 		id = $('.selectedMenuList').find($('.mlMenuId')).val();
 		let menuName = $('.selectedMenuList').find($('.mlMenuName')).text();
 		let menuPrice = $('.selectedMenuList').find($('.mlMenuPrice')).text();
@@ -264,14 +271,27 @@ $('.orderListDownBtn').on('click',function(){
 		let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'down'}
 		
 		orderMenuListAjax(json);
- 		for(let i =0; i<$('.addMenuList').length;i++){
+		*/
+		let quantity =Number($('.selectedMenuList').find($('.mlMenuQuantity')).text()) ;
+		if(quantity>0){
+			quantity--;
+		}
+		$('.selectedMenuList').find($('.mlMenuQuantity')).text(quantity);
+		/*for(let i =0; i<$('.addMenuList').length;i++){
 
 			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id){
 				console.log($('.addMenuList').eq(i))
 				$('.addMenuList').eq(i).addClass('selectedMenuList');
+				$('.selectedMenuList').eq(i).css({backgroundColor:"#9dc970"});
 				break;
 			}
 		}
+		*/
+		setTimeout(function(){
+			
+
+		},100)
+ 		
 	}
 	
 	
