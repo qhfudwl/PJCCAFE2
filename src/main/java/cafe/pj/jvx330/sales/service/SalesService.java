@@ -3,7 +3,9 @@ package cafe.pj.jvx330.sales.service;
 import java.util.Date;
 import java.util.List;
 
+import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
+import cafe.pj.jvx330.web.util.OrderStorage;
 
 public interface SalesService {
 	
@@ -21,5 +23,13 @@ public interface SalesService {
 
 	/*Sales updateSales(long sid);*/
 	void removeSales(String orderNumber); 
+	
+	/**
+	 * 
+	 * @param dateType
+	 * sd에서 받은 List<Product> 로 
+	 * 화면에 뿌리기 위해 필요한 List<OrderStorage> 반
+	 */
+	List<OrderStorage> findOrderRecordForMenu(char dateType);
 	
 }

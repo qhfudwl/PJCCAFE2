@@ -1,4 +1,4 @@
-package cafe.pj.jvx330.web.utill;
+package cafe.pj.jvx330.web.util;
 
 import org.springframework.stereotype.Component;
 

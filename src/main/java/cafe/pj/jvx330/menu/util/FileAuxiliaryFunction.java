@@ -1,4 +1,4 @@
-package cafe.pj.jvx330.menu.utill;
+package cafe.pj.jvx330.menu.util;
 
 import java.io.File;
 import java.io.IOException;
