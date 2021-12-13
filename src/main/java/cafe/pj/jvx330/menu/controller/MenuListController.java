@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.domain.Product;
+import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.web.command.MenuCommand;
 
 /**
@@ -63,7 +66,9 @@ public class MenuListController extends MenuController {
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
-				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
+
+				menuCommand.getImgPath());
+				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName);
 		
 		ms.updateMenuById(menu);
 		

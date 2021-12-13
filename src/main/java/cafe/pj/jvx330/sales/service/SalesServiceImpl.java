@@ -126,4 +126,13 @@ public class SalesServiceImpl implements SalesService{
 		
 		return osList;   
 	}
+	
+	public List<Product> sumOrder(List<Product> temp_order){
+		List<Product> order = null;
+		
+		return order;
+	}
+	
+	
+	
 }

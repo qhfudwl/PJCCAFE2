@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>	
+<!-- form action: viewOrderRecordByMenu -->
 	<header>
 		<h2>메뉴별 판매내역</h2>
 	</header>

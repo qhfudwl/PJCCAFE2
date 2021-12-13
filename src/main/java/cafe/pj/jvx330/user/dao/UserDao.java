@@ -21,12 +21,26 @@ public interface UserDao {
 	 */
 	List<User> findUsersByPhone(String phone);
 	
+	/**
+	 * 이름으로 유저정보를 검색한다 
+	 * @param userName
+	 * @return
+	 */
+	List<User> findUserByName(String userName);
+	
+	/**
+	 * 생일로 유저정보를 검색한다
+	 * @param birth
+	 * @return
+	 */
+	List<User> findUserByBirth(String birth);
 	
 	/**
 	 * 모든 회원을 조회한다.
 	 * @return
 	 */
 	List<User> findAllUsers();
+	
 	
 	
 	/**

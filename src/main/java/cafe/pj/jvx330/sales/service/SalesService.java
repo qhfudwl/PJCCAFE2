@@ -31,5 +31,7 @@ public interface SalesService {
 	 * 화면에 뿌리기 위해 필요한 List<OrderStorage> 반
 	 */
 	List<OrderStorage> findOrderRecordForMenu(char dateType);
+
+	List<Product> sumOrder(List<Product> temp_order);
 	
 }
