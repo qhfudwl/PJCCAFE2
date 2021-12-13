@@ -63,7 +63,8 @@ CREATE TABLE OrderRecord (
 
 
 -- 비회원등록
-INSERT INTO Customer(name,phone,birth,point) VALUES('null','010-0000-0000','00000000',0);
+INSERT INTO Customer(name,phone,birth,point) VALUES('김아루','010-0000-0000','00000000',0);
+INSERT INTO Customer(name,phone,birth,point) VALUES('최향기','010-0000-0000','00000000',0);
 
 -- 관리자등록
 INSERT INTO Employee(eId,passwd,position) VALUES('manager','manager','M');
@@ -92,5 +93,10 @@ SELECT * FROM SalesRecord;
 SELECT * FROM OrderRecord;
 
 
+
+
+DELETE FROM SalesRecord WHERE id=2;
+DELETE FROM SalesRecord WHERE id=3;
+DELETE FROM SalesRecord WHERE id=4;
 
 

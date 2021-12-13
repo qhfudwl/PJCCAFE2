@@ -1,35 +1,32 @@
-package cafe.pj.jvx330.domain;
+package cafe.pj.jvx330.web.command;
 
 import java.util.Date;
 
-public class Product {
-	
-	private Menu menu;
+import cafe.pj.jvx330.domain.Menu;
+/*
+ * 211212 임시 
+ * 사용안
+ * 
+ * 
+ */
+public class ProductCommand {
+	private MenuCommand menu;
 	private int quantity;
+		
+
 	private String orderNumber;
 	private Date regDate;
 	
-	public Product() {
+	public ProductCommand() {
 		
 	}
 
-	public Product(Menu menu, int quantity) {
-		this.menu = menu;
-		this.quantity = quantity;
-	}
-	
-	public Product(String orderNumber, Menu menu, int quantity, Date regDate) {
-		this.orderNumber = orderNumber;
-		this.menu = menu;
-		this.quantity = quantity;
-		this.regDate = regDate;
-	}
 
-	public Menu getMenu() {
+	public MenuCommand getMenu() {
 		return menu;
 	}
 
-	public void setMenu(Menu menu) {
+	public void setMenu(MenuCommand menu) {
 		this.menu = menu;
 	}
 
@@ -57,6 +54,7 @@ public class Product {
 		this.regDate = regDate;
 	}
 
+	
 	@Override
 	public String toString() {
 		return menu.getId() + "," + quantity + "/";

@@ -4,9 +4,11 @@
       <nav id="gnb">
        	<h2 class="hidden">주요메뉴</h2>
         <ul>
-          <form class="" action="" method="">
-            <li><a href="#">주문현황</a></li>
-          </form>
+           <li>
+            <form name="viewMenuList" action="${pageContext.request.contextPath}/indexView" method="get">
+            	<input type="submit" value="주문현황"/>
+            </form>
+           </li>
           <form class="" action="" method="">
             <li><a href="#">주문하기</a></li>
           </form>

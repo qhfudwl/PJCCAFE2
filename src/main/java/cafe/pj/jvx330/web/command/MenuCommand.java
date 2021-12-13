@@ -8,6 +8,12 @@ public class MenuCommand {
 	private boolean stock;
 	private String imgPath;
 	
+	public MenuCommand(long id, String menuName, double menuPrice) {
+		this.id = id;
+		this.menuName = menuName;
+		this.menuPrice = menuPrice;
+	}
+	
 	public long getId() {
 		return id;
 	}

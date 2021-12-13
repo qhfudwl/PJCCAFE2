@@ -9,6 +9,8 @@ body{
   height: 100vh;
   background: #fff;
   min-width: 1140px;
+  min-height: 100vh;
+  max-height: 100vh;
   
 }
 
@@ -63,13 +65,13 @@ body{
 
 /* 테이블 */
 .orderListTableWrap{
-  height: 430px;overflow-y: scroll;
+  overflow-y: scroll;
   margin-top: 2px;
+  height: calc(100% - 470px);
   width: 100%;
 }
 .orderListTable{
   width: 100%;
-  
   border: 1px solid #fff;
 }
 .orderListTable tr th,td{
@@ -81,13 +83,21 @@ body{
   background: #596271;
   color:#fff;
 }
+/*
 .orderListTable tr:nth-child(2n){
   background: #f4f4f4;
 }
 .orderListTable tr:nth-child(2n+1){
-    background: #eaeaea;
+  background: #eaeaea;
 }
+*/
 
+.addMenuList:nth-child(2n){
+  background: #f4f4f4;
+}
+.addMenuList:nth-child(2n+1){
+  background: #eaeaea;
+}
 .orderListTable tr th:nth-child(1){
   width: 40%;
 }
@@ -101,16 +111,16 @@ body{
   width: 30%;
 }
 
-.orderListTable tr td:nth-child(1){
-  text-align: left;
-}
 .orderListTable tr td:nth-child(2){
-  text-align: center;
+  text-align: left;
 }
 .orderListTable tr td:nth-child(3){
   text-align: center;
 }
 .orderListTable tr td:nth-child(4){
+  text-align: center;
+}
+.orderListTable tr td:nth-child(5){
   text-align: right;
 }
 
@@ -196,7 +206,7 @@ body{
   color:#fff;
 }
 .orderPriceTable tr, .orderPriceTable th,.orderPriceTable td{
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
 }
 .orderPriceTable th{
   width: 20%;
@@ -293,12 +303,16 @@ body{
 
 
 /* 메뉴 */
-
+.menuItemsWrap{
+  width: 563px;
+  height:calc(100% - 270px);
+  overflow-y: scroll;
+}
 .menuItemsWrap ul {
   /* display: flex;
   justify-content: space-between; */
-  width: 560px;height: 600px;
-  overflow-y: scroll;
+ /* width: 560px; */
+
 }
 .menuItemsWrap ul li{
   float: left;
@@ -330,8 +344,9 @@ body{
   /* text-align: center; */
 
 }
-.menuNamePriceWrap:hover{
-  background: #9dc970;
+.menuImgWrap:hover .menuNamePriceWrap{
+  background: #9dc970; 
+  /* border: 1px solid #9dc970; */
 }
 
 .menuName{
@@ -349,7 +364,7 @@ body{
 
 /* 기능 */
 .funcButtonsWrap{
-  position: absolute; bottom: 0; z-index:1;
+    position: absolute; bottom: 0; z-index:1; 
   width: 100%;
 }
 .funcButtonsWrap ul{
@@ -377,12 +392,22 @@ body{
 	
 */
 
-.mBeverage, .mCoffee, .mFood {
+.mCBSubType, .mBeverage, .mCoffee, .mFood, .mCoffeeHot, .mCoffeeIce, .mBeverageHot, .mBeverageIce {
 	display: none;
 }
+.addMenuList{
+	cursor: pointer;
+}
+.orderListTable tr:hover{
+	background: #9dc970;
+}
+.addMenuListHover{
+	background: #f00;
+}
 
-
-
+.selectedMenuList{
+	background: #9dc970;
+}
 
 
 

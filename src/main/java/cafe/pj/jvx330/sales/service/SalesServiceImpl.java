@@ -9,38 +9,43 @@ import org.springframework.stereotype.Component;
 import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.sales.dao.SalesDao;
 
-@Component("SalesService")
+@Component("salesService")
 public class SalesServiceImpl implements SalesService{
-	private SalesDao salesDao;
+	private SalesDao sd;
 	
 	@Autowired
 	public SalesServiceImpl(SalesDao salesDao) {
-		this.salesDao = salesDao;
+		this.sd = salesDao;
 	}
 
 	@Override
 	public void addSales(Sales sales) {
-		salesDao.addSales(sales);
+		sd.addSales(sales);
 	}
 
 	@Override
 	public List<Sales> findSalesByDate(Date date1, Date date2) {
-		return salesDao.findSalesByDate(date1, date2);
+		return sd.findSalesByDate(date1, date2);
+	}
+	
+	@Override
+	public List<Sales> findSalesByDate(Date date) {
+		return sd.findSalesByDate(date);
 	}
 
 	@Override
 	public List<Sales> findSalesByMenuNameAndDate(String menuName, Date date1, Date date2) {		
-		return salesDao.findSalesByMenuNameAndDate(menuName, date1, date2);
+		return sd.findSalesByMenuNameAndDate(menuName, date1, date2);
 	}
 	
 	@Override
 	public List<Sales> findSalesByDate(char type, Date date1, Date date2) {
-		return salesDao.findSalesByDate(date1, date2);
+		return sd.findSalesByDate(date1, date2);
 	}
 
 	@Override
 	public Sales findSalesByOrderNumber(String orderNumber) {
-		return salesDao.findSalesByOrderNumber(orderNumber);
+		return sd.findSalesByOrderNumber(orderNumber);
 	}
 
 	/*@Override
@@ -57,7 +62,7 @@ public class SalesServiceImpl implements SalesService{
 	@Override
 	public void removeSales(String orderNumber) {
 
-		salesDao.removeSales(orderNumber);
+		sd.removeSales(orderNumber);
 
 	}
 

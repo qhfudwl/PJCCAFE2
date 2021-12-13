@@ -9,8 +9,8 @@ public class Sales {
 	private User user;
 	private String orderNumber;
 	private char place;
-	private double pays;
-	private double userPoint;
+	private double amount;
+	private double usePoint;
 	private List<Product> order;
 
 	private Date regDate;
@@ -20,29 +20,26 @@ public class Sales {
 	} 
 	
 
-	public Sales(User user, String orderNumber, char place, double pays, double userPoint, String productList) {
+	public Sales(User user, String orderNumber, char place, double amount, double userPoint, List<Product> order) {
 		this.user = user;
 		this.orderNumber = orderNumber;
 		this.place = place;
-		this.pays = pays;
-		this.userPoint = userPoint;
-
-		this.order = makeOrder(productList);
+		this.amount = amount;
+		this.usePoint = userPoint;
+		this.order = order;
 
 	}
 	
-	public Sales(long id, User user, String orderNumber, char place, double pays,
-			double userPoint, String productList, Date regDate) {
+	public Sales(long id, User user, String orderNumber, char place, double amount,
+			double userPoint, List<Product> order, Date regDate) {
 
 		this.id = id;
 		this.user = user;
 		this.orderNumber = orderNumber;
 		this.place = place;
-		this.pays = pays;
-		this.userPoint = userPoint;
-
-		this.order = makeOrder(productList);
-
+		this.amount = amount;
+		this.usePoint = userPoint;
+		this.order = order;
 		this.regDate = regDate;
 	}
 	
@@ -85,6 +82,21 @@ public class Sales {
 		return order;
 	}
 	
+	/**
+	 * 한 영수증의 총 가격 반환
+	 * @return
+	 * @author 김보령
+	 */
+	public double getTotalPrice() {
+		
+		double totalPrice = 0;
+		for (Product p : this.order) {
+			totalPrice += (p.getMenu().getMenuPrice() * p.getQuantity()); 
+		}
+		
+		return totalPrice;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -109,23 +121,23 @@ public class Sales {
 	public void setPlace(char place) {
 		this.place = place;
 	}
-	public double getPays() {
-		return pays;
+	public double getAmount() {
+		return amount;
 	}
-	public void setPays(double pays) {
-		this.pays = pays;
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
-	public double getUserPoint() {
-		return userPoint;
+	public double getUsePoint() {
+		return usePoint;
 	}
-	public void setUserPoint(double userPoint) {
-		this.userPoint = userPoint;
+	public void setUsePoint(double userPoint) {
+		this.usePoint = userPoint;
 	}
-	public List<Product> getOrders() {
+	public List<Product> getOrder() {
 		return order;
 	}
 
-	public void setOrders(List<Product> order) {
+	public void setOrder(List<Product> order) {
 		this.order = order;
 
 	}

@@ -18,21 +18,17 @@ public class SalesRowMapper implements RowMapper<Sales>{
 	public Sales mapRow(ResultSet rs, int rowNum) throws SQLException {
 		User user = new Customer();
 		user.setId(rs.getLong("customerId"));
-		 
-//		String[] temp = orderListString.split("/");
-//		String[] temp2;
-//		
-//		for(String temp1 : temp) {
-//			temp2 = temp1.split(",");
-//		}
 		
+		Sales sales = new Sales();
+		sales.setId(rs.getLong("id"));
+		sales.setUser(user);
+		sales.setOrderNumber(rs.getString("orderNumber"));
+		sales.setAmount(rs.getDouble("amount"));
+		sales.setUsePoint(rs.getDouble("usePoint"));
+		sales.setPlace(rs.getString("place").charAt(0));
+		sales.setRegDate(rs.getDate("regDate"));
 		
-		
-		Sales sales = new Sales(rs.getLong("id"), user, rs.getString("orderNumber"), rs.getString("place").charAt(0), 
-				rs.getDouble("amount"), rs.getDouble("usePoint"), rs.getString("orderList"), rs.getDate("regDate"));
-		
-		
-		return null;
+		return sales;
 	}
 
 }

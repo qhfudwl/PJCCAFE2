@@ -10,8 +10,14 @@ import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.user.dao.UserDao;
 @Service("userService")
 public class UserServiceImpl implements UserService{
+	
 	@Autowired
+<<<<<<< HEAD
 	private UserDao ud;
+=======
+	private UserDao dao;
+	
+>>>>>>> branch 'developer' of https://github.com/akapulin/PJCCAFE2.git
 	public UserServiceImpl() {
 		
 	}

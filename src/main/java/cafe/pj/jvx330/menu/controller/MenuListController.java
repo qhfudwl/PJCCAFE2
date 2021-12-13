@@ -58,14 +58,22 @@ public class MenuListController extends MenuController {
 	public ModelAndView updateMenu(@ModelAttribute("menu") MenuCommand menuCommand,
 			@RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws IllegalStateException, IOException {
-
-		auxFunc.uploadImg(request, file);
+		
+		char menuType = menuCommand.getMenuType();
+		String menuName = menuCommand.getMenuName();
+		
+		fileAux.uploadImg(request, file, menuType, menuName);
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
+<<<<<<< HEAD
 
 				menuCommand.getImgPath());
 				auxFunc.getName(request, menuCommand.getImgPath(), file);
+=======
+				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
+		
+>>>>>>> branch 'developer' of https://github.com/akapulin/PJCCAFE2.git
 		ms.updateMenuById(menu);
 		
 		ModelAndView mav = new ModelAndView();
@@ -89,11 +97,14 @@ public class MenuListController extends MenuController {
 			@RequestParam("file") MultipartFile file,
 			HttpServletRequest request) throws IllegalStateException, IOException {
 
-		auxFunc.uploadImg(request, file);
+		char menuType = menuCommand.getMenuType();
+		String menuName = menuCommand.getMenuName();
+		
+		fileAux.uploadImg(request, file, menuType, menuName);
 		
 		Menu menu = new Menu(menuCommand.getMenuType(),
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
-				auxFunc.getName(request, menuCommand.getImgPath(), file));
+				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
 		
 		ms.addMenu(menu);
 		
