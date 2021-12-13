@@ -168,7 +168,7 @@ $('.mItemSubTypeIce').on('click',function(e){
 })
 
 /* 메뉴아이템 선택 시 좌측 창에 메뉴 추가 */
-let quantity=0;
+let checktuple = true;
 $('.mList').on('click',function(e){
 	e.preventDefault();
 	
@@ -177,27 +177,46 @@ $('.mList').on('click',function(e){
 	let menuPrice = $(this).find($('.menuPrice')).text();
 	menuPrice = menuPrice.replace(",","");
 	menuPrice = menuPrice.replace("원","");
-	quantity++;
+	let quantity=1;
 	let totalMenuPrice = Number(menuPrice)*quantity;
+	
 	let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'up'}
+	console.log('checktuple is '+checktuple)
 	for(let i =0; i<$('.addMenuList').length;i++){
 
-			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id){
-				$('.addMenuList').eq(i).text();
+			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id ){
+				console.log('hi tuple')
+				checktuple = false;
+				let tempNum = Number($('.addMenuList').eq(i).find($('.mlMenuQuantity')).text());
+				tempNum++;
+				$('.addMenuList').eq(i).find($('.mlMenuQuantity')).text(tempNum);
+				totalMenuPrice = tempNum*menuPrice;
+				$('.addMenuList').eq(i).find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원');
 				break;
 			}
+			else{
+				checktuple = true;
+			}
+			
 		}
+	if(checktuple==true){
+		console.log('hi new')
+		$('.orderListTable').append(
+				"<tr class='addMenuList'>"+
+							"<input type='hidden' class='mlMenuId' value='"+id+"'/>'"+
+							"<td class='mlMenuName'>"+menuName+"</td>"+
+							"<td class='mlMenuQuantity'>"+quantity+"</td>"+
+							"<td class='mlMenuPrice'>"+numberWithCommas(menuPrice)+"</td>"+
+							"<td class='mlTotalPrice'>"+numberWithCommas(totalMenuPrice)+"원</td>"+
+						"</tr>"
+				
+			)
+		checktuple = false;
+	}
+	
+				
 	//orderMenuListAjax(json);
-	$('.orderListTable').append(
-					"<tr class='addMenuList'>"+
-								"<input type='hidden' class='mlMenuId' value='"+id+"'/>'"+
-								"<td class='mlMenuName'>"+menuName+"</td>"+
-								"<td class='mlMenuQuantity'>"+quantity+"</td>"+
-								"<td class='mlMenuPrice'>"+menuPrice+"</td>"+
-								"<td class='mlTotalPrice'>"+numberWithCommas(totalMenuPrice)+"원</td>"+
-							"</tr>"
-					
-				)
+	
 	
 
 })
@@ -278,11 +297,6 @@ $('.orderListDownBtn').on('click',function(){
 		
 		orderMenuListAjax(json);
 		*/
-		let quantity =Number($('.selectedMenuList').find($('.mlMenuQuantity')).text()) ;
-		if(quantity>0){
-			quantity--;
-		}
-		$('.selectedMenuList').find($('.mlMenuQuantity')).text(quantity);
 		/*for(let i =0; i<$('.addMenuList').length;i++){
 
 			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id){
@@ -293,25 +307,61 @@ $('.orderListDownBtn').on('click',function(){
 			}
 		}
 		*/
-		setTimeout(function(){
-			
+		let quantity =Number($('.selectedMenuList').find($('.mlMenuQuantity')).text()) ;
+		if(quantity>1){
+			quantity--;
+		}
+		
+		let menuPrice = $('.selectedMenuList').find($('.mlMenuPrice')).text();
+		menuPrice = menuPrice.replace(",","");
+		menuPrice = Number(menuPrice);
+		totalMenuPrice = quantity*menuPrice;
+		
+		$('.selectedMenuList').find($('.mlMenuQuantity')).text(quantity);
+		$('.selectedMenuList').find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원');
 
-		},100)
- 		
 	}
-	
-	
+
 })
 
 
 /* 수량 업 */
 $('.orderListUpBtn').on('click',function(e){
 	e.preventDefault();
-	
-	
+	if($('.addMenuList').hasClass('selectedMenuList')){
+	let quantity =Number($('.selectedMenuList').find($('.mlMenuQuantity')).text()) ;
+		if(quantity<50){
+			quantity++;
+		}
+		let menuPrice = $('.selectedMenuList').find($('.mlMenuPrice')).text();
+		menuPrice = menuPrice.replace(",","");
+		menuPrice = Number(menuPrice);
+		totalMenuPrice = quantity*menuPrice;
+		$('.selectedMenuList').find($('.mlMenuQuantity')).text(quantity);
+		$('.selectedMenuList').find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원'); 		
+	}
 })
 
+/* 총 수량 계산하기 */
+function calcTotalNum(){
+	for(let i =0; i<$('.addMenuList').length;i++){
 
+			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id ){
+				console.log('hi tuple')
+				checktuple = false;
+				let tempNum = Number($('.addMenuList').eq(i).find($('.mlMenuQuantity')).text());
+				tempNum++;
+				$('.addMenuList').eq(i).find($('.mlMenuQuantity')).text(tempNum);
+				totalMenuPrice = tempNum*menuPrice;
+				$('.addMenuList').eq(i).find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원');
+				break;
+			}
+			else{
+				checktuple = true;
+			}
+	}
+	
+}
 
 
 

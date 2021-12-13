@@ -38,14 +38,6 @@
 								<th>단가</th>
 								<th>금액</th>
 							</tr>
-							 
-							<tr class="addMenuList">
-								<td>아메리카노</td>
-								<td>1</td>
-								<td>3,000</td>
-								<td>3,000원</td>
-							</tr> 
-							
 						</table>
 					</div>
 					<div class="leftSideFuncWrap">
