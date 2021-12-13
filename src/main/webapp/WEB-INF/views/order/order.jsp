@@ -38,21 +38,21 @@
 								<th>단가</th>
 								<th>금액</th>
 							</tr>
-							<!--  
+							 
 							<tr class="addMenuList">
 								<td>아메리카노</td>
 								<td>1</td>
 								<td>3,000</td>
 								<td>3,000원</td>
-							</tr> -->
+							</tr> 
 							
 						</table>
 					</div>
 					<div class="leftSideFuncWrap">
 						<div class="orderListBtnWrap">
 							<div class="orderListBtnFirst">
-								<button type="button" class="orderListBtnCom orderListBtn">↓</button>
-								<button type="button" class="orderListBtnCom orderListBtn">↑</button>
+								<button type="button" class="orderListBtnCom orderListBtn orderListDownBtn">↓</button>
+								<button type="button" class="orderListBtnCom orderListBtn orderListUpBtn">↑</button>
 								<button type="button" class="orderListBtnCom">수량:5</button>
 								<button type="button" class="orderListBtnCom">9,000원</button>
 							</div>

@@ -2,7 +2,7 @@
 	공통
 	카테고리 / 메뉴타입 hover시
  */
-$('.menuItemCaltCom , .menuItemTypeCom').hover(function(){
+$('.menuItemCaltCom , .menuItemTypeCom, .addMenuList').hover(function(){
 	$(this).addClass('menuItemHover');
 },function(){
 	$(this).removeClass('menuItemHover');
@@ -179,9 +179,16 @@ $('.mList').on('click',function(e){
 	menuPrice = menuPrice.replace("원","");
 	console.log(menuPrice);
 	let quantity =1;
+
+	let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'up'}
 	
-	let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity}
+	orderMenuListAjax(json);
 	
+	
+
+})
+
+function orderMenuListAjax(json){
 	$.ajax({
 		url:"orderMenuList",
 		type:"post",
@@ -198,10 +205,11 @@ $('.mList').on('click',function(e){
 				let totalMenuPrice = data["order"][i].quantity * data["order"][i].menu.menuPrice;
 				$('.orderListTable').append(
 					"<tr class='addMenuList'>"+
-								"<td>"+data["order"][i].menu.menuName+"</td>"+
-								"<td>"+data["order"][i].quantity+"</td>"+
-								"<td>"+data["order"][i].menu.menuPrice+"</td>"+
-								"<td>"+numberWithCommas(totalMenuPrice)+"원</td>"+
+								"<input type='hidden' class='mlMenuId' value='"+data["order"][i].menu.id+"'/>'"+
+								"<td class='mlMenuName'>"+data["order"][i].menu.menuName+"</td>"+
+								"<td class='mlMenuQuantity'>"+data["order"][i].quantity+"</td>"+
+								"<td class='mlMenuPrice'>"+data["order"][i].menu.menuPrice+"</td>"+
+								"<td class='mlTotalPrice'>"+numberWithCommas(totalMenuPrice)+"원</td>"+
 							"</tr>"
 					
 				)
@@ -210,14 +218,88 @@ $('.mList').on('click',function(e){
 			
 		}
 		})
-	
+}
 
-})
 
-/*숫자에 콤마 넣어 주는 정규*/
+
+
+
+
+/*숫자에 콤마 넣어 주는 정규식*/
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+
+/* 장바구니 목록 누르기*/
+$(document).on("click",".addMenuList",function(){
+	console.log(this);
+	//기존에 선택되어있던거 색 되돌려주기
+	$('.addMenuList').even().css({backgroundColor:"#f4f4f4"});
+	$('.addMenuList').odd().css({backgroundColor:"#eaeaea"});
+	//선택된거 색바꾸기
+	$(this).css({backgroundColor:"#9dc970"});
+	//기존 선택된 거 해제하기
+	$('.addMenuList').removeClass('selectedMenuList')
+	//클래스 추가하기
+	$(this).addClass('selectedMenuList');
+})
+
+/* 수량 업다운 만들기 */
+/* 수량 다운 */
+let id;
+$('.orderListDownBtn').on('click',function(){
+//$(document).on("click",".orderListDownBtn",function(){
+	//e.preventDefault();
+	//선택된 메뉴가 있다면 
+	if($('.addMenuList').hasClass('selectedMenuList')){
+
+		id = $('.selectedMenuList').find($('.mlMenuId')).val();
+		let menuName = $('.selectedMenuList').find($('.mlMenuName')).text();
+		let menuPrice = $('.selectedMenuList').find($('.mlMenuPrice')).text();
+		menuPrice = menuPrice.replace(",","");
+		menuPrice = menuPrice.replace("원","");
+		let quantity =Number($('.selectedMenuList').find($('.mlMenuQuantity')).text()) ;
+
+		let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'down'}
+		
+		orderMenuListAjax(json);
+ 		
+	}
+	
+	
+},function(){
+	callbackAddmenu(id)
+})
+function callbackAddmenu(id){
+	for(let i =0; i<$('.addMenuList').length;i++){
+
+			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id){
+				console.log($('.addMenuList').eq(i))
+				$('.addMenuList').eq(i).addClass('selectedMenuList');
+				break;
+			}
+		}
+}
+
+/* 수량 업 */
+$('.orderListUpBtn').on('click',function(e){
+	e.preventDefault();
+	
+	
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -142,7 +142,6 @@ public class OrderController {
 		public HashMap<String,Object> orderMenuList(@RequestBody HashMap<String,Object> menuList){
 		    HashMap<String,Object> addMenuList = new HashMap<String, Object>();
 			
-		    System.out.println("hi");
 		    
 			//메뉴 아이디받고
 		    
@@ -153,12 +152,25 @@ public class OrderController {
 			double menuPrice = Double.parseDouble(menuList.get("menuPrice").toString());
 			//수량 받고
 			int quantity = Integer.parseInt(menuList.get("quantity").toString());
+			//수량 더하기 인지 빼기 인지 판별
+			String checkQuantity = menuList.get("checkQuantity").toString();
+			
 			//order에 있는지 검사하고 있으면 추가 x, 없으면 추가 하고 1개값 리턴
 			boolean duple=false;
+			
 			for(Product product : order) {
 				if(id==product.getMenu().getId()) {
 					duple=true;
-					product.setQuantity(product.getQuantity()+1);
+					if(checkQuantity.equals("up")) {
+						product.setQuantity(product.getQuantity()+1);
+					}
+					else {
+						if(product.getQuantity()>1) {
+							product.setQuantity(product.getQuantity()-1);
+						}
+						
+					}
+					
 					break;
 				}
 			}
