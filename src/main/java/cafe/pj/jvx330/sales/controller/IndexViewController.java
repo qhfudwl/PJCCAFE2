@@ -1,6 +1,6 @@
 package cafe.pj.jvx330.sales.controller;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +29,7 @@ public class IndexViewController extends SalesController {
 		Map<String, List<Product>> order = checkOrderInSession(session);
 		
 		// 여기서부터는 나중에 삭제해야한다.---------------------------------------
-		Date today = java.sql.Timestamp.valueOf(LocalDateTime.now());
+		Date today = convertLocalDateToDate(LocalDate.now());
 		User user1 = us.findUserById(1);
 		User user2 = us.findUserById(2);
 		
@@ -102,7 +102,6 @@ public class IndexViewController extends SalesController {
 		
 		// session 내 order 길이가 1 이상일 때(원소가 하나라도 있을 때)
 		// compSales를 만들어주고, mav에 넣어준다.
-		
 		if (order.size() > 0){
 			List<Sales> compSales = ss.findSalesByDate(today);
 			for (Sales s : compSales) {
@@ -129,7 +128,7 @@ public class IndexViewController extends SalesController {
 		ss.addSales(sales);
 		
 		// 오늘 날짜
-		Date today = java.sql.Timestamp.valueOf(LocalDateTime.now());
+		Date today = convertLocalDateToDate(LocalDate.now());
 		
 		// session에 order 가 있는지 확인하고 있으면 그걸 반환 / 없으면 새로 만들어서 넣은 후 그걸 다시 받아서 반환
 		Map<String, List<Product>> order = checkOrderInSession(session);
@@ -147,7 +146,8 @@ public class IndexViewController extends SalesController {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("compSales", compSales);
-		mav.setViewName("index");
+		// controller의 경로를 적어서 그 쪽으로 보낸다. 새로 고침 시 또 추가되는 현상을 막을 수 있다.
+		mav.setViewName("redirect:/indexView");
 		
 		return mav;
 	}
