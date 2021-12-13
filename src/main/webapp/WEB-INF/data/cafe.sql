@@ -143,9 +143,6 @@ SELECT * FROM SalesRecord;
 SELECT * FROM OrderRecord;
 
 DELETE FROM Menu WHERE id=179;
-DELETE FROM SalesRecord WHERE orderNumber='A01';
-DELETE FROM SalesRecord WHERE orderNumber='A02';
-DELETE FROM SalesRecord WHERE orderNumber='A03';
-DELETE FROM SalesRecord WHERE orderNumber='A04';
+DELETE FROM SalesRecord;
 
 

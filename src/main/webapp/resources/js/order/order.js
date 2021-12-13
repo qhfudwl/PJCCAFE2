@@ -180,12 +180,12 @@ $('.mList').on('click',function(e){
 	let quantity=1;
 	let totalMenuPrice = Number(menuPrice)*quantity;
 	
-	let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'up'}
-	console.log('checktuple is '+checktuple)
-	for(let i =0; i<$('.addMenuList').length;i++){
+	//중복메뉴이면 
+		if($('.addMenuList').length==0) { checktuple = true; }
+		for(let i =0; i<$('.addMenuList').length;i++){
 
 			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id ){
-				console.log('hi tuple')
+			
 				checktuple = false;
 				let tempNum = Number($('.addMenuList').eq(i).find($('.mlMenuQuantity')).text());
 				tempNum++;
@@ -199,8 +199,10 @@ $('.mList').on('click',function(e){
 			}
 			
 		}
+	
+	//중복이 아니면 
 	if(checktuple==true){
-		console.log('hi new')
+
 		$('.orderListTable').append(
 				"<tr class='addMenuList'>"+
 							"<input type='hidden' class='mlMenuId' value='"+id+"'/>'"+
@@ -214,7 +216,10 @@ $('.mList').on('click',function(e){
 		checktuple = false;
 	}
 	
-				
+	calcTotalNum();	
+	calcTotalPrice();	
+	
+	//let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'up'}
 	//orderMenuListAjax(json);
 	
 	
@@ -266,15 +271,25 @@ function numberWithCommas(x) {
 /* 장바구니 목록 누르기*/
 $(document).on("click",".addMenuList",function(){
 	console.log(this);
-	//기존에 선택되어있던거 색 되돌려주기
-	$('.addMenuList').even().css({backgroundColor:"#f4f4f4"});
-	$('.addMenuList').odd().css({backgroundColor:"#eaeaea"});
-	//선택된거 색바꾸기
-	$(this).css({backgroundColor:"#9dc970"});
-	//기존 선택된 거 해제하기
-	$('.addMenuList').removeClass('selectedMenuList')
-	//클래스 추가하기
-	$(this).addClass('selectedMenuList');
+	if($(this).hasClass('selectedMenuList')){
+		//선택해제하기
+		$('.addMenuList').removeClass('selectedMenuList')
+		//기존에 선택되어있던거 색 되돌려주기
+		$('.addMenuList').even().css({backgroundColor:"#f4f4f4"});
+		$('.addMenuList').odd().css({backgroundColor:"#eaeaea"});
+		
+	}else{
+		//기존에 선택되어있던거 색 되돌려주기
+		$('.addMenuList').even().css({backgroundColor:"#f4f4f4"});
+		$('.addMenuList').odd().css({backgroundColor:"#eaeaea"});
+		//선택된거 색바꾸기
+		$(this).css({backgroundColor:"#9dc970"});
+		//기존 선택된 거 해제하기
+		$('.addMenuList').removeClass('selectedMenuList')
+		//클래스 추가하기
+		$(this).addClass('selectedMenuList');
+	}
+	
 })
 
 /* 수량 업다운 만들기 */
@@ -319,7 +334,8 @@ $('.orderListDownBtn').on('click',function(){
 		
 		$('.selectedMenuList').find($('.mlMenuQuantity')).text(quantity);
 		$('.selectedMenuList').find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원');
-
+		calcTotalNum();
+		calcTotalPrice();	
 	}
 
 })
@@ -339,39 +355,83 @@ $('.orderListUpBtn').on('click',function(e){
 		totalMenuPrice = quantity*menuPrice;
 		$('.selectedMenuList').find($('.mlMenuQuantity')).text(quantity);
 		$('.selectedMenuList').find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원'); 		
+		calcTotalNum();	
+		calcTotalPrice();
 	}
+	
 })
 
 /* 총 수량 계산하기 */
 function calcTotalNum(){
+	let num=0;
 	for(let i =0; i<$('.addMenuList').length;i++){
-
-			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id ){
-				console.log('hi tuple')
-				checktuple = false;
-				let tempNum = Number($('.addMenuList').eq(i).find($('.mlMenuQuantity')).text());
-				tempNum++;
-				$('.addMenuList').eq(i).find($('.mlMenuQuantity')).text(tempNum);
-				totalMenuPrice = tempNum*menuPrice;
-				$('.addMenuList').eq(i).find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원');
-				break;
-			}
-			else{
-				checktuple = true;
-			}
+		num += Number($('.addMenuList').eq(i).find($('.mlMenuQuantity')).text());	
 	}
+	$('.orderListTotalNum').text('수량:'+num);
 	
+}
+/* 총 가격 계산하기 */
+function calcTotalPrice(){
+	let price=0;
+	for(let j =0; j<$('.addMenuList').length;j++){
+		let menuPrice = $('.addMenuList').eq(j).find($('.mlTotalPrice')).text();
+		console.log(menuPrice);
+		menuPrice = menuPrice.replace(",","");
+		menuPrice = menuPrice.replace("원","");
+		price += Number(menuPrice);	
+	}
+	//테이블 안에 가격 총합
+	$('.orderListTotalPrice').text(numberWithCommas(price)+'원');
+	
+	//하단 테이블 안에 가격 총합
+	$('.totalPriceBeforePoint').text(numberWithCommas(price)+'원');
 }
 
 
+/* 취소 버튼 누르면 */
+$('.orderListCancelBtn').on('click',function(){
+	if($('.addMenuList').hasClass('selectedMenuList')){
+		$('.selectedMenuList').remove();
+		calcTotalNum();
+		calcTotalPrice();
+	}
+})
+
+/* 전체 취소 누르면 */
+$('.funcAllCancelBtn').on('click',function(e){
+	e.preventDefault();
+	$('.addMenuList').remove();
+	calcTotalNum();
+	calcTotalPrice();
+})
 
 
+/* 포장 누르기 */
+$('.orderListInOutBtn').on('click',function(e){
+	e.preventDefault();
+	if($(this).hasClass('selectedMenuList')){
+		$(this).removeClass('selectedMenuList');
+	}else{
+		$(this).addClass('selectedMenuList');
+	}
+	
+})
 
+/* 고객 선택 누르기 */
+$('.funcCustomerSelectBtn').on('click',function(e){
+	e.preventDefault();
+	let popupWidth = 500;
+	let popupHeight = 500;
+	
+	let popupX = (window.screen.width / 2) - (popupWidth / 2);
+	// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+	
+	let popupY= (window.screen.height / 2) - (popupHeight / 2);
+	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
 
-
-
-
-
+	window.open("orderMembership", "title", "width=500, height = 500, top="+ popupX + ", left="+ popupY + ""); //선언과 초기화 동시에 해도 됨
+	
+})
 
 
 

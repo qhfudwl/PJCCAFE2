@@ -3,9 +3,9 @@ package cafe.pj.jvx330.sales.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +27,6 @@ public class IndexViewController extends SalesController {
 	@GetMapping("/indexView")
 	public ModelAndView indexView(HttpSession session) {
 		Map<String, List<Product>> order = checkOrderInSession(session);
-		System.out.println(order);
 		
 		// 여기서부터는 나중에 삭제해야한다.---------------------------------------
 		Date today = java.sql.Timestamp.valueOf(LocalDateTime.now());
@@ -64,11 +63,37 @@ public class IndexViewController extends SalesController {
 		sales3.setRegDate(today);
 		sales4.setRegDate(today);
 		
-		Map<String, Sales> sales = new HashMap<>();
+		Sales sales5 = new Sales(user1, "A05", 'I', 7000, 1000, order1);
+		Sales sales6 = new Sales(user1, "A06", 'O', 7000, 1000, order2);
+		Sales sales7 = new Sales(user2, "A07", 'I', 7000, 1000, order1);
+		Sales sales8 = new Sales(user2, "A08", 'O', 7000, 1000, order2);
+		sales5.setRegDate(today);
+		sales6.setRegDate(today);
+		sales7.setRegDate(today);
+		sales8.setRegDate(today);
+		
+		Sales sales9 = new Sales(user1, "A09", 'I', 7000, 1000, order1);
+		Sales sales10 = new Sales(user1, "A10", 'O', 7000, 1000, order2);
+		Sales sales11 = new Sales(user2, "A11", 'I', 7000, 1000, order1);
+		Sales sales12 = new Sales(user2, "A12", 'O', 7000, 1000, order2);
+		sales9.setRegDate(today);
+		sales10.setRegDate(today);
+		sales11.setRegDate(today);
+		sales12.setRegDate(today);
+		
+		Map<String, Sales> sales = new TreeMap<>();
 		sales.put(sales1.getOrderNumber(), sales1);
 		sales.put(sales2.getOrderNumber(), sales2);
 		sales.put(sales3.getOrderNumber(), sales3);
 		sales.put(sales4.getOrderNumber(), sales4);
+		sales.put(sales5.getOrderNumber(), sales5);
+		sales.put(sales6.getOrderNumber(), sales6);
+		sales.put(sales7.getOrderNumber(), sales7);
+		sales.put(sales8.getOrderNumber(), sales8);
+		sales.put(sales9.getOrderNumber(), sales9);
+		sales.put(sales10.getOrderNumber(), sales10);
+		sales.put(sales11.getOrderNumber(), sales11);
+		sales.put(sales12.getOrderNumber(), sales12);
 		
 		session.setAttribute("sales", sales);
 		// 여기까지 나중에 삭제해야한다.---------------------------------------
@@ -94,7 +119,6 @@ public class IndexViewController extends SalesController {
 	@PostMapping("/addSales")
 	public ModelAndView addSales(@ModelAttribute SalesCommand salesCommand, 
 			HttpSession session) {
-		System.out.println(session.getAttribute("order"));
 		// 현재 session 에 저장되어있는 Sales 들
 		Map<String, Sales> salesList = (Map<String, Sales>) session.getAttribute("sales");
 		

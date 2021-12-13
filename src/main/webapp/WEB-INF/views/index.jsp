@@ -20,21 +20,32 @@
 			<div id="salesItemWrap">
 				<c:forEach var="salesOrder" items="${sales}">
 					<ul class="salesItem">
-						<li>
+						<li class="salesNumber">
 							주문번호 : ${salesOrder.key}
 							<input type="radio" name="orderNumber" id="salesOrder${salesOrder.key}" value="${salesOrder.key}" />
 							<label for="salesOrder${salesOrder.key}"></label>
 						</li>
+						<li class="salesMenu">주문메뉴 : </li>
 						<c:forEach var="product" items="${salesOrder.value.order}">
 							<li>${product.menu.menuName} ${product.quantity}</li>
 						</c:forEach>
-						<li>
+						<li class="in_out">
+							<c:choose>
+								<c:when test="${salesOrder.value.place eq 'I'.charAt(0)}">
+									매장
+								</c:when>
+								<c:otherwise>
+									테이크 아웃
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<li class="salesDate">
 							<fmt:formatDate value="${salesOrder.value.regDate}" pattern="yy년 MM월 dd일 HH시 mm분"/>
 						</li>
 					</ul>
 				</c:forEach>
 			</div>
-			<input type="submit" value="완료"/>
+			<input class="hidden" type="submit" value="완료"/>
 		</form>
 		<script>
 			$("input[name=orderNumber]").click(function() {
@@ -43,6 +54,7 @@
 		</script>
 	</div>
 	<section id="orderCompletedContent">
+	<form>
 		<h3 class="hidden">주문 완료 목록</h3>
 		<ul>
 		<c:if test="${not empty compSales}">
@@ -57,11 +69,14 @@
 					</p>
 					<p class="totalP"> / ${compSalesItem.getTotalPrice()}원</p>
 					<p class="regD"> / ${compSalesItem.regDate}</p>
+					<input class="hidden" id="compSales${compSalesItem.orderNumber}" type="radio" value="${compSalesItem.orderNumber}" />
+					<label for="compSales${compSalesItem.orderNumber}"></label>
 				</li>
 			</c:forEach>
 		</c:if>
 		</ul>
 		<input type="submit" value="정산하기"/>
+	</form>
 	</section>
 </section>
 </body>
