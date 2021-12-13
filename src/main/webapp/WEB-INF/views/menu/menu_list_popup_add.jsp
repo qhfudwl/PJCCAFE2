@@ -5,13 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>메뉴 추가</title>
-<%@ include file="../incl/link.jsp" %>
+<%@ include file="/WEB-INF/views//incl/link.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu/menu_popup_add.css" />
 </head>
 <body>
 	<div id="addMenuPopUp">
 	<form method="post" action="addMenu" name="addMenuForm" enctype="multipart/form-data">
 		<input class="hidden" type="text" name="menuType" value="${menu.menuType}" />
+		<input class="hidden" type="text" name="id" value="0" />
 		<input type="text" class="hidden" name="close" value="${close}" /> 
 		<table>
 			<tr>

@@ -1,5 +1,7 @@
 package cafe.pj.jvx330.web.command;
 
+import java.util.List;
+
 public class SalesCommand {
 	private long id;
 	private long userId;
@@ -7,6 +9,7 @@ public class SalesCommand {
 	private double amount;
 	private double usePoint;
 	private char place;
+	private List<ProductCommand> order;
 	
 	public long getId() {
 		return id;
@@ -44,6 +47,12 @@ public class SalesCommand {
 	}
 	public void setUsePoint(double usePoint) {
 		this.usePoint = usePoint;
+	}
+	public List<ProductCommand> getOrder() {
+		return order;
+	}
+	public void setOrder(List<ProductCommand> order) {
+		this.order = order;
 	}
 	
 }

@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import cafe.pj.jvx330.domain.Menu;
-@Component("menuDao")
+
+@Repository("menuDao")
 public class MenuDaoImpl implements MenuDao {
 	
 	@Resource(name="jdbcTemplate")

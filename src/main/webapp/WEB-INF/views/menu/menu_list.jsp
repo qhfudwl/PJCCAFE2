@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>메뉴 목록</title>
-<%@ include file="../incl/link.jsp" %>
+<%@ include file="/WEB-INF/views/incl/link.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu/menu_view.css" />
 </head>
 <body>
-<%@ include file="../incl/header.jsp" %>
+<%@ include file="/WEB-INF/views/incl/header.jsp" %>
 <nav id="menuSnb">
 <h2 class="hidden">메뉴 타입 선택</h2>
 	<p>PJC <span>Cafe</span> / 대구 / Manager</p>

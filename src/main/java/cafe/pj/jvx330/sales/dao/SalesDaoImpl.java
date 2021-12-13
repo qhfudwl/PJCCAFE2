@@ -1,17 +1,14 @@
 package cafe.pj.jvx330.sales.dao;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
 
 @Component("SalesDao")
@@ -70,7 +67,10 @@ public class SalesDaoImpl implements SalesDao {
 		
 		
 	}
-
-		
 	
+	public List<Product> findOrderRecordForMenu(String sDate1, String sDate2){
+		String sql = "SELECT Date(regDate), menuID, quantity FROM OrderRecord WHERE Date(regDate) Between ? AND ?";
+		List<Product> order = jt.query(sql, new ProductRowMapper(), java.sql.Date.valueOf(sDate1), java.sql.Date.valueOf(sDate2));
+		return order;
+	}	
 }

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/views/incl/stylesheet_link.jsp"%>
+<%@ include file="/WEB-INF/views/incl/link.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/order.css">
 <script src="${pageContext.request.contextPath}/resources/js/incl/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/order.js" defer></script>
@@ -38,14 +38,6 @@
 								<th>단가</th>
 								<th>금액</th>
 							</tr>
-							 
-							<tr class="addMenuList">
-								<td>아메리카노</td>
-								<td>1</td>
-								<td>3,000</td>
-								<td>3,000원</td>
-							</tr> 
-							
 						</table>
 					</div>
 					<div class="leftSideFuncWrap">
@@ -53,13 +45,13 @@
 							<div class="orderListBtnFirst">
 								<button type="button" class="orderListBtnCom orderListBtn orderListDownBtn">↓</button>
 								<button type="button" class="orderListBtnCom orderListBtn orderListUpBtn">↑</button>
-								<button type="button" class="orderListBtnCom">수량:5</button>
-								<button type="button" class="orderListBtnCom">9,000원</button>
+								<button type="button" class="orderListBtnCom orderListTotalNum">수량:5</button>
+								<button type="button" class="orderListBtnCom orderListTotalPrice"></button>
 							</div>
 							<div class="orderListBtnSecond">
-								<button type="button" class="orderListBtnCom orderListBtn">포장</button>
-								<button type="button" class="orderListBtnCom orderListBtn">포인트</button>
-								<button type="button" class="orderListBtnCom orderListBtn">취소</button>
+								<button type="button" class="orderListBtnCom orderListBtn orderListInOutBtn">포장</button>
+								<button type="button" class="orderListBtnCom orderListBtn orderListPointBtn">포인트</button>
+								<button type="button" class="orderListBtnCom orderListBtn orderListCancelBtn">취소</button>
 							</div>
 						</div>
 						<div class="customerInfoWrap">
@@ -82,7 +74,7 @@
 							<table class="orderPriceTable">
 								<tr>
 									<th>실판매금액</th>
-									<td class="totalPriceBeforePoint">9,000원</td>
+									<td class="totalPriceBeforePoint"></td>
 								</tr>
 								<tr>
 									<th>포인트금액</th>
@@ -211,9 +203,9 @@
 					<div class="funcButtonsWrap oneRow">
 						<h3 class="hidden">기능</h3>
 						<ul>
-							<li><a href="#" class="menuItemCom funcButtonCom">전체취소</a></li>
+							<li><a href="#" class="menuItemCom funcButtonCom funcAllCancelBtn">전체취소</a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom"></a></li>
-							<li><a href="#" class="menuItemCom funcButtonCom">고객선택</a></li>
+							<li><a href="#" class="menuItemCom funcButtonCom funcCustomerSelectBtn">고객선택</a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom">주문하기</a></li>
 						</ul>
 					</div>

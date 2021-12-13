@@ -7,36 +7,45 @@
 <head>
 <meta charset="UTF-8">
 <title>PJC Cafe</title>
-<%@ include file="incl/link.jsp" %>
+<%@ include file="/WEB-INF/views/incl/link.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/incl/index.css" />
 </head>
 <body>
-<%@ include file="incl/header.jsp" %>
+<%@ include file="/WEB-INF/views/incl/header.jsp" %>
 <section id="indexContent">
-	<div id="order">
-		<h2>주문 현황</h2>
+	<div id="orders">
+		<h2 class="hidden">주문 현황</h2>
 		<form action="addSales" method="post">
 		<input class="hidden" type="submit" value="완료" />
-			<c:forEach var="salesOrder" items="${sales}">
-				<ul>
-					<li>
-						주문번호 : ${salesOrder.key}
-						<input type="radio" name="orderNumber" id="salesOrder${salesOrder.key}" value="${salesOrder.key}" />
-						<label for="salesOrder${salesOrder.key}"></label>
-					</li>
-					<c:forEach var="product" items="${salesOrder.value.order}">
-						<li>${product.menu.menuName} ${product.quantity}</li>
-					</c:forEach>
-					<li>
-						<fmt:formatDate value="${salesOrder.value.regDate}" pattern="yy년 MM월 dd일 HH시 mm분"/>
-						<input class="hidden" name="userId" type="text" value="${salesOrder.value.user.id}" />
-						<input class="hidden" name="amount" type="text" value="${salesOrder.value.amount}" />
-						<input class="hidden" name="usePoint" type="text" value="${salesOrder.value.usePoint}" />
-						<input class="hidden" name="place" type="text" value="${salesOrder.value.place}" />
-					</li>
-				</ul>
-			</c:forEach>
-			<input type="submit" value="완료"/>
+			<div id="salesItemWrap">
+				<c:forEach var="salesOrder" items="${sales}">
+					<ul class="salesItem">
+						<li class="salesNumber">
+							주문번호 : ${salesOrder.key}
+							<input type="radio" name="orderNumber" id="salesOrder${salesOrder.key}" value="${salesOrder.key}" />
+							<label for="salesOrder${salesOrder.key}"></label>
+						</li>
+						<li class="salesMenu">주문메뉴 : </li>
+						<c:forEach var="product" items="${salesOrder.value.order}">
+							<li>${product.menu.menuName} ${product.quantity}</li>
+						</c:forEach>
+						<li class="in_out">
+							<c:choose>
+								<c:when test="${salesOrder.value.place eq 'I'.charAt(0)}">
+									매장
+								</c:when>
+								<c:otherwise>
+									테이크 아웃
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<li class="salesDate">
+							<fmt:formatDate value="${salesOrder.value.regDate}" pattern="yy년 MM월 dd일 HH시 mm분"/>
+						</li>
+					</ul>
+				</c:forEach>
+			</div>
+			<input class="hidden" type="submit" value="완료"/>
 		</form>
 		<script>
 			$("input[name=orderNumber]").click(function() {
@@ -45,21 +54,29 @@
 		</script>
 	</div>
 	<section id="orderCompletedContent">
-		<h3>주문 완료 목록</h3>
+	<form>
+		<h3 class="hidden">주문 완료 목록</h3>
 		<ul>
+		<c:if test="${not empty compSales}">
 			<c:forEach var="compSalesItem" items="${compSales}">
 				<li>
-					${compSalesItem.orderNumber} : 
-					<c:forEach var="compProduct" items="${order[compSalesItem.orderNumber]}" varStatus="status">
-						${compProduct.menu.menuName} ${compProduct.quantity}
-						<c:if test="${not status.last}">, </c:if>
-					</c:forEach>
-					<%-- / ${compSalesItem.getTotalPrice()}원 --%>
-					 / ${compSalesItem.regDate}
+					<p class="orderN">${compSalesItem.orderNumber} : </p>
+					<p class="shortening">
+						<c:forEach var="compProduct" items="${order[compSalesItem.orderNumber]}" varStatus="status">
+							${compProduct.menu.menuName} ${compProduct.quantity}
+							<c:if test="${not status.last}">, </c:if>
+						</c:forEach>
+					</p>
+					<p class="totalP"> / ${compSalesItem.getTotalPrice()}원</p>
+					<p class="regD"> / ${compSalesItem.regDate}</p>
+					<input class="hidden" id="compSales${compSalesItem.orderNumber}" type="radio" value="${compSalesItem.orderNumber}" />
+					<label for="compSales${compSalesItem.orderNumber}"></label>
 				</li>
 			</c:forEach>
+		</c:if>
 		</ul>
 		<input type="submit" value="정산하기"/>
+	</form>
 	</section>
 </section>
 </body>

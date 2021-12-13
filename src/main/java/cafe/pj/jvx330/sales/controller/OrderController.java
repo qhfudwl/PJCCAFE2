@@ -144,7 +144,7 @@ public class OrderController {
 			
 		    
 			//메뉴 아이디받고
-		    
+		 
 			long id = Long.parseLong(menuList.get("id").toString());
 			//메뉴 이름 받고
 			String menuName = menuList.get("menuName").toString();
@@ -215,6 +215,19 @@ public class OrderController {
 		 * 		
 		 * 
 		 */
+		
+		@GetMapping("orderMembership")
+		public String orderMembership() {
+			
+			return "order/usePointUser";
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 		/**
 		 * 포인트 누르면

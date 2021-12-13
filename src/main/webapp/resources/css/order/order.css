@@ -205,8 +205,14 @@ body{
   background: #596271;
   color:#fff;
 }
-.orderPriceTable tr, .orderPriceTable th,.orderPriceTable td{
-  /* border: 1px solid #fff; */
+.orderPriceTable  tr{
+	border: 1px solid #fff;
+}
+.orderPriceTable  th{
+	border: 1px solid #fff;
+}
+.orderPriceTable  td{
+   border: 1px solid #fff; 
 }
 .orderPriceTable th{
   width: 20%;
