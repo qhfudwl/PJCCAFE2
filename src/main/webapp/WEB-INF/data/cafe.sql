@@ -95,8 +95,10 @@ SELECT * FROM OrderRecord;
 
 
 
-DELETE FROM SalesRecord WHERE id=2;
-DELETE FROM SalesRecord WHERE id=3;
-DELETE FROM SalesRecord WHERE id=4;
+DELETE FROM Menu WHERE id=179;
+DELETE FROM SalesRecord WHERE orderNumber='A01';
+DELETE FROM SalesRecord WHERE orderNumber='A02';
+DELETE FROM SalesRecord WHERE orderNumber='A03';
+DELETE FROM SalesRecord WHERE orderNumber='A04';
 
 

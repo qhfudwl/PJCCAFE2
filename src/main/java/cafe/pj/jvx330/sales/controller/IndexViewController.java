@@ -7,34 +7,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.domain.User;
-import cafe.pj.jvx330.menu.service.MenuService;
-import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.web.command.SalesCommand;
 
 @Controller("web.controller.indexViewController")
 public class IndexViewController extends SalesController {
-	@Autowired
-	private MenuService ms;
-	@Autowired
-	private UserService us;
 	@GetMapping("/indexView")
-	public ModelAndView indexView(HttpServletRequest request) {
-
+	public ModelAndView indexView(HttpSession session) {
+		Map<String, List<Product>> order = checkOrderInSession(session);
+		System.out.println(order);
+		
+		// 여기서부터는 나중에 삭제해야한다.---------------------------------------
 		Date today = java.sql.Timestamp.valueOf(LocalDateTime.now());
 		User user1 = us.findUserById(1);
 		User user2 = us.findUserById(2);
@@ -60,7 +54,6 @@ public class IndexViewController extends SalesController {
 		order2.add(p6);
 		
 		
-		HttpSession session = request.getSession();
 		Sales sales1 = new Sales(user1, "A01", 'I', 7000, 1000, order1);
 		Sales sales2 = new Sales(user1, "A02", 'O', 7000, 1000, order2);
 		Sales sales3 = new Sales(user2, "A03", 'I', 7000, 1000, order1);
@@ -76,41 +69,55 @@ public class IndexViewController extends SalesController {
 		sales.put(sales3.getOrderNumber(), sales3);
 		sales.put(sales4.getOrderNumber(), sales4);
 		
-		Map<String, List<Product>> order = new HashMap<>();
-		order.put(sales1.getOrderNumber(), order1);
-		order.put(sales2.getOrderNumber(), order2);
-		order.put(sales3.getOrderNumber(), order1);
-		order.put(sales4.getOrderNumber(), order2);
-		
 		session.setAttribute("sales", sales);
-		session.setAttribute("order", order);
-		
-		List<Sales> compSales = ss.findSalesByDate(today);
-		
+		// 여기까지 나중에 삭제해야한다.---------------------------------------
+
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("compSales", compSales);
+		// session 내 order 길이가 1 이상일 때(원소가 하나라도 있을 때)
+		// compSales를 만들어주고, mav에 넣어준다.
+		
+		if (order.size() > 0){
+			List<Sales> compSales = ss.findSalesByDate(today);
+			for (Sales s : compSales) {
+				s.setOrder(order.get(s.getOrderNumber()));
+			}
+			mav.addObject("compSales", compSales);
+		}
+		
 		mav.setViewName("index");
 		
 		return mav;
 	}
 	
 	@PostMapping("/addSales")
-	public ModelAndView addSales(@ModelAttribute SalesCommand salesCommand) {
+	public ModelAndView addSales(@ModelAttribute SalesCommand salesCommand, 
+			HttpSession session) {
+		System.out.println(session.getAttribute("order"));
+		// 현재 session 에 저장되어있는 Sales 들
+		Map<String, Sales> salesList = (Map<String, Sales>) session.getAttribute("sales");
 		
-		Sales sales = new Sales();
-		User user = us.findUserById(salesCommand.getUserId());
-		sales.setOrderNumber(salesCommand.getOrderNumber());
-		sales.setUser(user);
-		sales.setAmount(salesCommand.getAmount());
-		sales.setUsePoint(salesCommand.getUsePoint());
-		sales.setPlace(salesCommand.getPlace());
+		// session 내 salesList 의 해당 주문번호의 sales 반환
+		Sales sales = salesList.get(salesCommand.getOrderNumber());
 		
+		// SalesRecord 에 추가
 		ss.addSales(sales);
 		
+		// 오늘 날짜
 		Date today = java.sql.Timestamp.valueOf(LocalDateTime.now());
 		
+		// session에 order 가 있는지 확인하고 있으면 그걸 반환 / 없으면 새로 만들어서 넣은 후 그걸 다시 받아서 반환
+		Map<String, List<Product>> order = checkOrderInSession(session);
+		order.put(sales.getOrderNumber(), sales.getOrder());
+		
+		// session 내 order에 추가 후 해당 orderNumber sales 삭제
+		salesList.remove(sales.getOrderNumber());
+		
+		// 오늘 날짜에 대한 모든 SalesRecord 찾기
 		List<Sales> compSales = ss.findSalesByDate(today);
+		for (Sales s : compSales) {
+			s.setOrder(order.get(s.getOrderNumber()));
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		

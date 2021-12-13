@@ -1,1 +1,19 @@
 @charset "UTF-8";
+#indexContent {
+	display: flex; flex-flow: row nowrap; justify-content: space-between; 
+	padding: 20px;
+}
+#salesItemWrap {
+	display : grid; grid-template-columns : auto auto auto auto; gap : 30px;
+}
+#salesItemWrap .salesItem {
+	background-color: #dfe1dc; padding: 20px;
+}
+#orderCompletedContent { background-color : #dfe1dc; }
+#orderCompletedContent p { float: left; line-height: 30px; padding: 0 10px; }
+#orderCompletedContent .shortening {
+	width: 150px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+#orderCompletedContent li {
+	border: 1px solid #000; line-height: 30px; height: 30px;
+}

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>메뉴 수정</title>
-<%@ include file="../incl/link.jsp" %>
+<%@ include file="/WEB-INF/views//incl/link.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu/menu_popup_update.css" />
 </head>
 <body>
