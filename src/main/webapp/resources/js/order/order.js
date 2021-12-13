@@ -423,13 +423,13 @@ $('.funcCustomerSelectBtn').on('click',function(e){
 	let popupWidth = 500;
 	let popupHeight = 500;
 	
-	let popupX = (window.screen.width / 2) - (popupWidth / 2);
+	let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
 	// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
 	
-	let popupY= (window.screen.height / 2) - (popupHeight / 2);
+	let popupY= (document.body.offsetHeight / 2) - (popupHeight / 2);
 	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
 
-	window.open("orderMembership", "title", "width=500, height = 500, top="+ popupX + ", left="+ popupY + ""); //선언과 초기화 동시에 해도 됨
+	window.open("orderMembership", "title", "width=500, height = 500, top="+ popupY + ", left="+ popupX + ""); //선언과 초기화 동시에 해도 됨
 	
 })
 

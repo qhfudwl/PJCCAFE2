@@ -45,8 +45,8 @@
 							<div class="orderListBtnFirst">
 								<button type="button" class="orderListBtnCom orderListBtn orderListDownBtn">↓</button>
 								<button type="button" class="orderListBtnCom orderListBtn orderListUpBtn">↑</button>
-								<button type="button" class="orderListBtnCom orderListTotalNum">수량:5</button>
-								<button type="button" class="orderListBtnCom orderListTotalPrice"></button>
+								<button type="button" class="orderListBtnCom orderListTotalNum">수량:0</button>
+								<button type="button" class="orderListBtnCom orderListTotalPrice">0원</button>
 							</div>
 							<div class="orderListBtnSecond">
 								<button type="button" class="orderListBtnCom orderListBtn orderListInOutBtn">포장</button>
@@ -74,7 +74,7 @@
 							<table class="orderPriceTable">
 								<tr>
 									<th>실판매금액</th>
-									<td class="totalPriceBeforePoint"></td>
+									<td class="totalPriceBeforePoint">0원</td>
 								</tr>
 								<tr>
 									<th>포인트금액</th>
@@ -82,7 +82,7 @@
 								</tr>
 								<tr>
 									<th>받을 금액</th>
-									<td><span class="totalPrice">9,000원</span></td>
+									<td><span class="totalPrice">0원</span></td>
 								</tr>
 
 							</table>
