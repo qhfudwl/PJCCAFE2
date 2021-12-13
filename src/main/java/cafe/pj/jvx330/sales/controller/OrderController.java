@@ -216,6 +216,19 @@ public class OrderController {
 		 * 
 		 */
 		
+		@GetMapping("orderMembership")
+		public String orderMembership() {
+			
+			return "order/usePointUser";
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		/**
 		 * 포인트 누르면
 		 * 		1 - 주문최소금액 5,000원 이상이면 포인트 사용 팝업창
