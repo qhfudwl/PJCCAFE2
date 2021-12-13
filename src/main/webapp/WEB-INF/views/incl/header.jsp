@@ -10,8 +10,8 @@
           <form class="" action="" method="">
             <li><a href="#">주문하기</a></li>
           </form>
-          <form class="" action="" method="">
-            <li><a href="#">회원목록</a></li>
+          <form name="viewUserMain" action="${pageContext.request.contextPath}/user/viewUserMain" method="get">
+            <li><input type="submit" value="회원목록"/></li>
           </form>
            <li>
             <form name="viewMenuList" action="${pageContext.request.contextPath}/menu/viewMenuList" method="get">
