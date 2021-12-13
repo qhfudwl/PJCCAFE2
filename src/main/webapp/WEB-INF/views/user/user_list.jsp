@@ -14,10 +14,10 @@
         <section id="userWrap">
             <h2>회원목록</h2>
             <div id="userFormWrap">
-                <form action="viewUserMain" method = "get" name ="viewUserMain">
-                	<input type="submit" value="추가" id="addbtn" onclick="addPopup()">
-                	<input type="submit" value="수정" id="revisebtn" onclick="revisePopup()">
-                	<input type="submit" value="삭제" id="removebtn" formaction="removeUser">
+                <form name="updateForm"  method = "get">
+                	<input type="submit" value="추가" id="addbtn">
+                	<input type="submit" value="수정" id="revisebtn" name="revisebtn" >
+                	<input type="submit" value="삭제" id="removebtn">
                 	<div>
                         <select name="column" id="column">
                         	<option value="name">이름</option>
@@ -26,7 +26,6 @@
                         </select>
                         <input type="text" name="keyword" id="keyword" placeholder="검색어 입력">
                     	<input type="submit" id="searchbtn" value="검색하기" formaction="userSearch">
-                    	 <a href="#none" target="_blank">팝업</a>
                     </div>
                 	<table>
                        	<tr><th>회원등록번호</th><th>이름</th><th>폰번호</th><th>생년월일</th><th>포인트</th><th>가입일자</th></tr>
@@ -45,105 +44,49 @@
                 
                     
                     <script>
-                    function addPopup(){
-                        window.open( getContextPath() + "/user/addUserbtn","유저 회원가입","width=400, height=300, top=10, left=10");
+                    $("#addbtn").click(function(e) {
+                    	e.preventDefault();
+                    	popupUpdate("addUserbtn");
+                    })
+                    $("#revisebtn").click(function(e){
+                    	e.preventDefault();
+                    	popupUpdate("updateUserbtn");
+                    })
+                    $("#removebtn").click(function(e){
+                    	e.preventDefault();
+                    	popupUpdate("removeUser");
+                    })
+                    function popupUpdate(Url){
+                    	let windowWidth = window.screen.width;
+                    	let windowHeight = window.screen.height;
+                    	
+                    	let popupX = (windowWidth/2) - 200;
+                    	let popupY = (windowHeight/2) -250;
+                    	
+                    	let popUpdateUrl = getContextPath() + "/user/" + Url;
+                    	let popUpdateOption = "width=400px, height=500px, top=" + popupY + "px, left=" + popupX + "px";
+                    	let popUpdateTitle = "유저 갱신"
+                    	
+                    	if(Url == "addUserbtn" || Url == "updateUserbtn") {
+                    		window.open(popUpdateUrl, popUpdateTitle, popUpdateOption);
+                    	}
+                    	let updateForm = document.updateForm;
+                    	updateForm.target = popUpdateTitle;
+                    	updateForm.action = popUpdateUrl;
+                    	updateForm.method ="get";
+                    	
+                    	updateForm.submit();
                     }
-                    function revisePopup(){
-                    	window.open( getContextPath() + "/user/updateUserbtn","유저 업데이트","width=400, height=300, top=10, left=10");
+                    function reloadPage() {
+                    	location.reload();
                     }
+                    //function addPopup(){
+                    //   window.open( getContextPath() + "/user/addUserbtn","유저 회원가입","width=400, height=300, top=10, left=10");
+                    //}
+                    
                     </script>
             </div>
         </section>
     </main>
-    <!-- 
-    <header></header>
-    <main>
-        <section id="userWrap">
-            <h2>회원목록</h2>
-            <div id="userFormWrap">
-                <form action="addUserbtn" method = "get">
-                	<input type="submit" value="전체" id ="allbtn">
-                	<input type="submit" value="추가" id="addbtn">
-                    <input type="submit" value="수정" id="revisebtn">
-                    <input type="submit" value="삭제" id="removebtn">
-                    <!--<div id="searcheWrap">
-                        <form action="userSearch" method="post">
-                        	<div>
-                            	<select name="column" id="column">
-                                	<option value="name" name="name">이름</option>
-                                	<option value="phone" name="phone">전화번호</option>
-                                	<option value="birth" name="birth">생일</option>
-                            	</select>
-                            	<input type="text" name="searche" placeholder="검색어 입력">
-                            	<input type="submit" value="검색하기">
-                            </div>
-                        </form>
-                    </div>
-                    <div id="userlist">
-                    	<table>
-                            	<tr><th>회원등록번호</th><th>이름</th><th>폰번호</th><th>생년월일</th><th>포인트</th><th>가입일자</th></tr>
-                        		<c:forEach var="user" items="${users}">
-                            			<tr>
-                                			<td><label path="userid"></label><input type="radio" name="userid" value ="${user.id}"/></td>
-                                			<td>${user.customerName}</td>
-                                			<td>${user.phone}</td>
-                                			<td>${user.birth}</td>
-                                			<td>${user.point}</td>
-                                			<td>${user.regDate}</td>
-                            			</tr>
-                        		</c:forEach>
-                        	</table>
-                    </div>
-                </form>
-                
-                    
-                    <script>
-                    $("#allbtn").click(function(e) {
-                        e.preventDefault();
-                        popupUser();
-                    })
-                    $("#addbtn").click(function(e) {
-                    	e.preventDefault();
-                    	popupUser();
-                    })
-                    $("#revisebtn").click(function(e) {
-                    	e.preventDefault();
-                    	popupUser();
-                    })
-                    $("#removebtn").click(function(e) {
-                    	e.preventDefault();
-                        popupUser();
-                    })
-                    </script>
-                    function popupUser(goUrl) {
-                        let windowWidth = window.screen.width;
-                        let windowHeight = window.screen.height;
-
-                        let popupX = (windowWidth/2) - 300;
-                        let popupY = (windowHeight/2) -200;
-
-                        let popupUserdataUrl = getContextPath() + "/user/" + goUrl;
-                        let popupUserdataOption = "width = 600px, height = 400px, top =" + popupY + "px, left=" + popupX + "px";
-                        let popupUserdataTitle = "유저 업데이트";
-
-                        if(goUrl == "popAddmenu" || goUrl == "popUpdateMenu") {
-                            window.open(popupUserdataUrl, popupUserdataTitle, popupUserdataOption);
-                        }
-
-                        let updateMenuForm = document.updateUserForm;
-                        updateUserForm.target = popupUserdataTitle;
-                        updateUserForm.action = popupUserdataUrl;
-                        updateUserForm.method = "post";
-
-                        updateUserForm.submit();
-                    }
-                    function reloadPage() {
-                        location.reload();
-                    }
-                     
-                    
-            </div>
-        </section>
-    </main> -->
 </body>
 </html>

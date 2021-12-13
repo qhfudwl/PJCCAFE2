@@ -38,7 +38,7 @@ public class UserListController extends UserController{
 	public ModelAndView addUserbtn(CustomerCommand customerCommand) {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("user/add_user");
+		mav.setViewName("user/popup_add_user");
 		return mav;
 	}
 	
@@ -54,11 +54,11 @@ public class UserListController extends UserController{
 					customerCommand.getBirth());
 		
 		us.addUser(user);
-		List<User> users = us.findAllUsers();
+		//List<User> users = us.findAllUsers();
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("users",users);
+		mav.addObject("close","close");
 		
-		mav.setViewName("user/user_list");
+		mav.setViewName("user/popup_add_user");
 		
 		return mav;
 	}
@@ -71,9 +71,11 @@ public class UserListController extends UserController{
 	public ModelAndView updateUserbtn(@RequestParam("usersId") long usersId) {
 		User user = us.findUserById(usersId);
 		
+		System.out.println(user.getId());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("user" ,user);
-		mav.setViewName("user/revise_user");
+		mav.setViewName("user/popup_revise_user");
 		
 		return mav;
 	}
@@ -91,11 +93,12 @@ public class UserListController extends UserController{
 				customerCommand.getPhone(),customerCommand.getBirth(),customerCommand.getPoint(),
 				customerCommand.getRegDate());
 		us.updateUserById(user);
-		List<User> users =us.findAllUsers();
+		System.out.println(user);
+		//List<User> users =us.findAllUsers();
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("users" ,users);
-		mav.setViewName("user/user_list");
+		mav.addObject("close" ,"close");
+		mav.setViewName("user/popup_revise_user");
 		
 		return mav;
 		
@@ -134,6 +137,13 @@ public class UserListController extends UserController{
 			@RequestParam("column") String column) {
 		
 		if(column.equals("birth")) {
+			if(keyword == ""|| keyword == null) {
+				List<User> users = us.findAllUsers();
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("users", users);
+				mav.setViewName("user/user_list");
+				return mav;
+			}
 			List<User> users = us.findUserByBirth(keyword);
 		
 			ModelAndView mav = new ModelAndView();
@@ -142,6 +152,13 @@ public class UserListController extends UserController{
 			return mav;
 			
 		}else if(column.equals("phone")) {
+			if(keyword == ""|| keyword == null) {
+				List<User> users = us.findAllUsers();
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("users", users);
+				mav.setViewName("user/user_list");
+				return mav;
+			}
 			List<User> users = us.findUsersByPhone(keyword);
 			
 			ModelAndView mav = new ModelAndView();
@@ -150,6 +167,13 @@ public class UserListController extends UserController{
 			return mav;
 			
 		}else if(column.equals("name")) {
+			if(keyword == ""|| keyword == null) {
+				List<User> users = us.findAllUsers();
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("users", users);
+				mav.setViewName("user/user_list");
+				return mav;
+			}
 			List<User> users = us.findUserByName(keyword);
 			
 			ModelAndView mav = new ModelAndView();

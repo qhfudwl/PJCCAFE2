@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ include file="/WEB-INF/views/incl/link.jsp" %>
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,6 +15,7 @@
             <h2>회원 가입</h2>
             <div id="addUserFormWrap">
                 <form action="addUser" method="post">
+                <input type="hidden" class="hidden" name="close" value="${close}"/>
                     <table id="addUserForm">
                         <tr>
                             <th class="title">이름</th>
@@ -38,12 +40,15 @@
                     <div id="buttonWrap">
                         <p>생년월일을 입력하시면 확인 후 혜택이 증가합니다.</p>
                         <input type="submit" value="가입하기" id="joinbtn">
-                        <input type="button" value="취소하기" id="canclebtn" onclick="goclose()">
                     </div>
                 </form>
                 <script>
-                function goclose() {
-                    window.close();
+                
+                window.onload = function() {
+                	if ($("input[name=close]").val() == "close"){
+                		opener.parent.reloadPage();
+                		self.close();
+                	}
                 }
                 
                 

@@ -66,14 +66,10 @@ public class MenuListController extends MenuController {
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
-<<<<<<< HEAD
 
 				menuCommand.getImgPath());
-				auxFunc.getName(request, menuCommand.getImgPath(), file);
-=======
-				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
+				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName);
 		
->>>>>>> branch 'developer' of https://github.com/akapulin/PJCCAFE2.git
 		ms.updateMenuById(menu);
 		
 		ModelAndView mav = new ModelAndView();

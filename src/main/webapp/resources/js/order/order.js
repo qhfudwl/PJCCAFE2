@@ -264,15 +264,7 @@ $('.orderListDownBtn').on('click',function(){
 		let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'down'}
 		
 		orderMenuListAjax(json);
- 		
-	}
-	
-	
-},function(){
-	callbackAddmenu(id)
-})
-function callbackAddmenu(id){
-	for(let i =0; i<$('.addMenuList').length;i++){
+ 		for(let i =0; i<$('.addMenuList').length;i++){
 
 			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id){
 				console.log($('.addMenuList').eq(i))
@@ -280,7 +272,11 @@ function callbackAddmenu(id){
 				break;
 			}
 		}
-}
+	}
+	
+	
+})
+
 
 /* 수량 업 */
 $('.orderListUpBtn').on('click',function(e){
