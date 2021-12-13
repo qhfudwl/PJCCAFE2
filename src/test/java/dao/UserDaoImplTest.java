@@ -16,9 +16,6 @@ import cafe.pj.jvx330.domain.User;
 
 
 @Component("userDao")
-@SpringJUnitConfig(classes = {
-		cafe.pj.jvx330.web.config.DataSourceConfig.class
-})
 public class UserDaoImplTest implements UserDaoTest {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired

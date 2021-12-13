@@ -180,7 +180,13 @@ $('.mList').on('click',function(e){
 	quantity++;
 	let totalMenuPrice = Number(menuPrice)*quantity;
 	let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'up'}
-	
+	for(let i =0; i<$('.addMenuList').length;i++){
+
+			if($('.addMenuList').eq(i).find($('.mlMenuId')).val()==id){
+				$('.addMenuList').eq(i).text();
+				break;
+			}
+		}
 	//orderMenuListAjax(json);
 	$('.orderListTable').append(
 					"<tr class='addMenuList'>"+
