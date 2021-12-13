@@ -19,6 +19,7 @@ import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.web.command.ProductCommand;
 import cafe.pj.jvx330.web.command.SalesCommand;
 
 @Controller("web.controller.indexViewController")
@@ -124,6 +125,23 @@ public class IndexViewController extends SalesController {
 		mav.addObject("compSales", compSales);
 		mav.setViewName("index");
 		
+		return mav;
+	}
+	
+	@GetMapping("/sumOrder")
+	public ModelAndView sumOrder(@ModelAttribute ProductCommand productCommand, HttpSession httpsession) {
+		Map<String, List<Product>> order = (Map<String, List<Product>>) httpsession.getAttribute("order");
+		List<Product> finalOrder = null;
+		List<Product> temp_order = new ArrayList<Product>();		
+		
+		order.forEach((key, productList) -> {
+			temp_order.addAll(productList);	
+		});
+		
+		finalOrder = ss.sumOrder(temp_order);
+		
+		
+		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
 }
