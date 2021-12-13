@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%@ include file="/WEB-INF/views/incl/stylesheet_link.jsp"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/order.css">
+<%@ include file="/WEB-INF/views/incl/link.jsp"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/order_popup.css">
 <script src="${pageContext.request.contextPath}/resources/js/incl/jquery-3.6.0.min.js"></script>
 <title>고객선택</title>
 </head>
 <body>
-<div>
+<div class="popUpContainer">
 	<div class="popUpTitleWrap">
 		<h1>고객포인트추가</h1>
 	</div>
