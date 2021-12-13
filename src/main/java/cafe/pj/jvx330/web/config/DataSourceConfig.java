@@ -39,7 +39,6 @@ public class DataSourceConfig {
 		return new JdbcTemplate(dataSource());
 	}
 	
-	// 트랜잭션 넣을 것
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		DataSourceTransactionManager txManager = new DataSourceTransactionManager();
