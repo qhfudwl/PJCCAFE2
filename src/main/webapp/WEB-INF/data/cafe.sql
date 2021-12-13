@@ -136,6 +136,8 @@ insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',1,1
 insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,1, '2021-09-11 00:02:11');
 insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,1, '2021-09-11 00:02:11');
 
+
+
 SELECT * FROM Customer;
 SELECT * FROM Employee;
 SELECT * FROM Menu;

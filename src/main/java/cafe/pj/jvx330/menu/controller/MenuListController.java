@@ -65,10 +65,8 @@ public class MenuListController extends MenuController {
 		fileAux.uploadImg(request, file, menuType, menuName);
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
-				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
-
-				menuCommand.getImgPath());
-				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName);
+				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
+				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
 		
 		ms.updateMenuById(menu);
 		

@@ -62,13 +62,13 @@
 				<li>
 					<p class="orderN">${compSalesItem.orderNumber} : </p>
 					<p class="shortening">
-						<c:forEach var="compProduct" items="${order[compSalesItem.orderNumber]}" varStatus="status">
+						<c:forEach var="compProduct" items="${compSalesItem.order}" varStatus="status">
 							${compProduct.menu.menuName} ${compProduct.quantity}
 							<c:if test="${not status.last}">, </c:if>
 						</c:forEach>
 					</p>
-					<p class="totalP"> / ${compSalesItem.getTotalPrice()}원</p>
-					<p class="regD"> / ${compSalesItem.regDate}</p>
+					<p class="totalP"> / <fmt:formatNumber value="${compSalesItem.getTotalPrice()}" pattern=",###" type="currency" currencySymbol="" /> 원</p>
+					<p class="regD">/ ${compSalesItem.regDate}</p>
 					<input class="hidden" id="compSales${compSalesItem.orderNumber}" type="radio" value="${compSalesItem.orderNumber}" />
 					<label for="compSales${compSalesItem.orderNumber}"></label>
 				</li>
@@ -78,6 +78,24 @@
 		<input type="submit" value="정산하기"/>
 	</form>
 	</section>
+	<script>
+	$("#orderCompletedContent input[type=radio] + label").click(function() {
+		popupSalesView();
+	})
+	function popupSalesView() {
+		let windowWidth = window.screen.width;
+		let windowHeight = window.screen.height;
+		
+		let popupX = (windowWidth/2) - 200;
+		let popupY = (windowHeight/2) - 250;
+		
+		let popUpdateMenuUrl = getContextPath() + "/menu/popSalesView";
+		let popUpdateMenuOption = "width=400px, height=500px, top=" + popupY + "px, left=" + popupX + "px";
+		let popUpdateMenuTitle = "영수증 보기";
+		
+		window.open(popUpdateMenuUrl, popUpdateMenuTitle, popUpdateMenuOption);
+	}
+	</script>
 </section>
 </body>
 </html>

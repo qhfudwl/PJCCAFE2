@@ -36,7 +36,7 @@ body, html {height: 100%;}
 #orderCompletedContent .shortening {
 	width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 }
-#orderCompletedContent ul {}
+#orderCompletedContent ul {padding-top: 60px;}
 #orderCompletedContent li {
 	line-height: 30px; height: 30px; margin-bottom: 5px;
 	transition-duration: 0.2s; position: relative; border-radius: 10px;
@@ -45,9 +45,7 @@ body, html {height: 100%;}
 	position: absolute; left: 0; top: 0; width: 100%; height: 100%;
 	cursor: pointer;
 }
-#orderCompletedContent li:first-child {margin-top: 60px;}
-#orderCompletedContent li:last-child {margin: 0;}
-#orderCompletedContent li:hover {
+#orderCompletedContent ul li:hover {
 	background-color: #596271; color: #bbda9c;
 }
 input[value="정산하기"] {

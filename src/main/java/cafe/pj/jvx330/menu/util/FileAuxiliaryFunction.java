@@ -5,15 +5,29 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import cafe.pj.jvx330.domain.Menu;
+
+/**
+ * 이미지 파일 보조 기능
+ * @author 김보령
+ *
+ */
 @Component("fileAuxiliaryFunction")
 public class FileAuxiliaryFunction {
 	
-	private String makePath(char menuType, String menuName, String pathForm, HttpServletRequest request) {
+	/**
+	 * 이미지 파일의 경로를 새로 지정
+	 * rootContext/resources/img/... 으로
+	 * @param menuType
+	 * @param menuName
+	 * @param pathForm
+	 * @param request
+	 * @return
+	 */
+	public String makePath(char menuType, String menuName, String pathForm, HttpServletRequest request) {
 		String rootPath = "";
 		String attachPath = "";
 		String typePath = "";
@@ -45,18 +59,35 @@ public class FileAuxiliaryFunction {
 		return rootPath + attachPath + typePath + tempPath;
 	}
 	
+	/**
+	 * 기본 폴더의 파일을 복사해서 resource/img 폴더 내 업로드
+	 * @param request
+	 * @param file
+	 * @param menuType
+	 * @param menuName
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
 	public void uploadImg(HttpServletRequest request, MultipartFile file,
 			char menuType, String menuName)
 			throws IllegalStateException, IOException {
 		
 		String fileName = file.getOriginalFilename();
 		String filePath = makePath(menuType, menuName, "\\", request) + fileName;
-		
 		if(!file.isEmpty()) {
 			file.transferTo(new File(filePath));
 		}
 	}
 	
+	/**
+	 * 파일 이름(확장자가 붙어있는 곳) 반환
+	 * @param request
+	 * @param imgFullPath
+	 * @param file
+	 * @param menuType
+	 * @param menuName
+	 * @return
+	 */
 	public String getName(HttpServletRequest request, String imgFullPath, 
 			MultipartFile file, char menuType, String menuName) {
 		
