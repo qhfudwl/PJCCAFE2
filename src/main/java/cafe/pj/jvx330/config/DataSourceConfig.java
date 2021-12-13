@@ -1,4 +1,4 @@
-package cafe.pj.jvx330.web.config;
+package cafe.pj.jvx330.config;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;

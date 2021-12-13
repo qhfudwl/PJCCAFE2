@@ -7,8 +7,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.stereotype.Component;
 
+import cafe.pj.jvx330.config.DataSourceConfig;
 import cafe.pj.jvx330.domain.Menu;
-import cafe.pj.jvx330.web.config.DataSourceConfig;
 
 @Component("menuServiceTest")
 public class MenuServiceTest {
