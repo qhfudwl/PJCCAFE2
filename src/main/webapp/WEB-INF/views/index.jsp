@@ -75,7 +75,7 @@
 			</c:forEach>
 		</c:if>
 		</ul>
-		<input type="submit" value="정산하기"/>
+		<input type="submit" name="settlement" value="정산하기"/>
 	</form>
 	</section>
 	<script>

@@ -19,8 +19,7 @@ import cafe.pj.jvx330.domain.Menu;
 public class FileAuxiliaryFunction {
 	
 	/**
-	 * 이미지 파일의 경로를 새로 지정
-	 * rootContext/resources/img/... 으로
+	 * 이미지 파일의 절대 / 상대 경로 지정
 	 * @param menuType
 	 * @param menuName
 	 * @param pathForm
@@ -33,10 +32,10 @@ public class FileAuxiliaryFunction {
 		String typePath = "";
 		String tempPath = "";
 		
-		if (pathForm.equals("\\")) {
+		if (pathForm.equals("\\")) { // 절대 경로
 			rootPath = request.getSession().getServletContext().getRealPath("/");
 			attachPath = "resources\\img\\";
-		} else {
+		} else { // 상대 경로
 			rootPath = request.getContextPath();
 			attachPath = "/resources/img/";
 		}
@@ -59,6 +58,11 @@ public class FileAuxiliaryFunction {
 		return rootPath + attachPath + typePath + tempPath;
 	}
 	
+	public String getImgName(String imgPath) {
+		String[] arr = imgPath.trim().split("/");
+		return arr[arr.length-1];
+	}
+	
 	/**
 	 * 기본 폴더의 파일을 복사해서 resource/img 폴더 내 업로드
 	 * @param request
@@ -68,37 +72,62 @@ public class FileAuxiliaryFunction {
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
-	public void uploadImg(HttpServletRequest request, MultipartFile file,
-			char menuType, String menuName)
+	public boolean uploadImgFile(HttpServletRequest request, MultipartFile file, Menu menu)
 			throws IllegalStateException, IOException {
 		
 		String fileName = file.getOriginalFilename();
-		String filePath = makePath(menuType, menuName, "\\", request) + fileName;
+		String filePath = getAbsolutePath(request, menu.getMenuType(), menu.getMenuName()) + fileName;
+		
 		if(!file.isEmpty()) {
 			file.transferTo(new File(filePath));
+			System.out.println("파일 업로드 완료");
+			return true;
 		}
+		System.out.println("이미 존재하는 파일입니다.");
+		return false;
 	}
 	
 	/**
-	 * 파일 이름(확장자가 붙어있는 곳) 반환
+	 * 파일 삭제
 	 * @param request
-	 * @param imgFullPath
-	 * @param file
 	 * @param menuType
-	 * @param menuName
+	 * @param removeImgName
 	 * @return
 	 */
-	public String getName(HttpServletRequest request, String imgFullPath, 
-			MultipartFile file, char menuType, String menuName) {
+	public boolean removeImgFile(HttpServletRequest request, Menu menu
+			, String removeImgName) {
 		
-		if (!file.isEmpty()){
-			String[] strArr = imgFullPath.trim().split("\\\\");
-			String imgPath = makePath(menuType, menuName, "/", request) + strArr[strArr.length - 1];
-			return imgPath;
+		String filePath = getAbsolutePath(request, menu.getMenuType(), menu.getMenuName()) + removeImgName;
+		File file = new File(filePath);
+		
+		if(file.exists()) { // 파일이 있다면 삭제
+			file.delete();
+			System.out.println("파일 삭제 완료");
+			return true;
 		}
-		
-		String filePath = makePath(menuType, menuName, "/", request) + imgFullPath;
-		
-		return filePath;
+		System.out.println("파일이 없습니다.");
+		return false;
+	}
+	
+	/**
+	 * 해당 메뉴의 절대 경로 반환 (확장자 전까지만)
+	 * @param request
+	 * @param imgName
+	 * @param menu
+	 * @return
+	 */
+	public String getAbsolutePath(HttpServletRequest request, char menuType, String menuName) {
+		return makePath(menuType, menuName, "\\", request);
+	}
+	
+	/**
+	 * 확장자를 포함한 해당 메뉴의 논리 경로 반환
+	 * @param request
+	 * @param imgName
+	 * @param menu
+	 * @return
+	 */
+	public String getRelativePath(HttpServletRequest request, char menuType, String menuName, String imgName) {
+		return makePath(menuType, menuName, "/", request) + imgName;
 	}
 }

@@ -2,6 +2,13 @@
 <% String contentName = (String)session.getAttribute("contentName"); %>
     <header>
       <h1 class="hidden">PJCCAFE</h1>
+      <div id="login">
+	      <form action="login" method="post">
+		      <label>ID</label><input type="text" name="eid" />
+		      <label>PW</label><input type="password" name="passwd" />
+		      <input type="submit" value="로그인" />
+	      </form>
+      </div>
       <nav id="gnb">
        	<h2 class="hidden">주요메뉴</h2>
         <ul>

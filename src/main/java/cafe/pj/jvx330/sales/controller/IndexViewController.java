@@ -1,6 +1,5 @@
 package cafe.pj.jvx330.sales.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -139,15 +138,8 @@ public class IndexViewController extends SalesController {
 		// session 내 order에 추가 후 해당 orderNumber sales 삭제
 		salesList.remove(sales.getOrderNumber());
 		
-		// 오늘 날짜에 대한 모든 SalesRecord 찾기
-		List<Sales> compSales = ss.findSalesByDate(today);
-		for (Sales s : compSales) {
-			s.setOrder(order.get(s.getOrderNumber()));
-		}
-		
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("compSales", compSales);
 		// controller의 경로를 적어서 그 쪽으로 보낸다. 새로 고침 시 또 추가되는 현상을 막을 수 있다.
 		mav.setViewName("redirect:/indexView");
 		
