@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +37,10 @@ public class MenuListController extends MenuController {
 	 * @return
 	 */
 	@GetMapping("/menu/viewMenuList")
-	public ModelAndView viewMenuList(@RequestParam("choiceMenu") char choiceMenu) {
+	public ModelAndView viewMenuList(@RequestParam("choiceMenu") char choiceMenu,
+			HttpSession session) {
 		List<Menu> menus = ms.findAllMenusByMenuType(choiceMenu);
+		session.setAttribute("contentName", "메뉴목록");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menus", menus);
 		mav.addObject("choiceMenu", choiceMenu);

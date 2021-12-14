@@ -73,28 +73,28 @@
 			}
 			$("#addMenu").click(function(e) {
 				e.preventDefault();
-				popupUpdateMenu("popAddMenu");
+				popupUpdateMenu("popAddMenu", 500, 300);
 			})
 			$("#updateMenu").click(function(e) {
 				e.preventDefault();
-				popupUpdateMenu("popUpdateMenu");
+				popupUpdateMenu("popUpdateMenu", 500, 300);
 			})
 			$("#removeMenu").click(function(e) {
 				e.preventDefault();
-				popupUpdateMenu("removeMenu");
+				popupUpdateMenu("removeMenu", 0, 0);
 			})
-			function popupUpdateMenu(goUrl) {
+			function popupUpdateMenu(goUrl, popWidth, popHeight) {
 				let windowWidth = window.screen.width;
 				let windowHeight = window.screen.height;
 				
-				let popupX = (windowWidth/2) - 250;
-				let popupY = (windowHeight/2) - 150;
+				let popupX = (windowWidth/2) - popWidth/2;
+				let popupY = (windowHeight/2) - popHeight/2;
 				
 				let popUpdateMenuUrl = getContextPath() + "/menu/" + goUrl;
-				let popUpdateMenuOption = "width=500px, height=300px, top=" + popupY + "px, left=" + popupX + "px";
+				let popUpdateMenuOption = "width=" + popWidth + "px, height=" + popHeight + "px, top=" + popupY + "px, left=" + popupX + "px";
 				let popUpdateMenuTitle = "메뉴 업데이트";
 				
-				if (goUrl == "popAddMenu" || goUrl == "popUpdateMenu") {
+				if (goUrl == "popAddMenu" || goUrl == "popUpdateMenu" || goUrl == "pupUploadImg") {
 					window.open(popUpdateMenuUrl, popUpdateMenuTitle, popUpdateMenuOption);
 				}
 				

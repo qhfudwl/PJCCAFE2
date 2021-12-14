@@ -72,7 +72,7 @@ public abstract class CafeController {
 		return ORDER_NUMBER;
 	}
 	
-	public Date convertLocalDateToDate(LocalDate ld) {
-		return java.sql.Date.valueOf(ld);
+	public Date getNowDate() {
+		return java.sql.Date.valueOf(LocalDate.now());
 	}
 }

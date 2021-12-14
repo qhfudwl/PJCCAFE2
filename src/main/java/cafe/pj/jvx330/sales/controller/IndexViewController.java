@@ -27,9 +27,9 @@ public class IndexViewController extends SalesController {
 	@GetMapping("/indexView")
 	public ModelAndView indexView(HttpSession session) {
 		Map<String, List<Product>> order = checkOrderInSession(session);
+		Date today = getNowDate();
 		
 		// 여기서부터는 나중에 삭제해야한다.---------------------------------------
-		Date today = convertLocalDateToDate(LocalDate.now());
 		User user1 = us.findUserById(1);
 		User user2 = us.findUserById(2);
 		
@@ -97,6 +97,8 @@ public class IndexViewController extends SalesController {
 		
 		session.setAttribute("sales", sales);
 		// 여기까지 나중에 삭제해야한다.---------------------------------------
+		
+		session.setAttribute("contentName", "주문현황");
 
 		ModelAndView mav = new ModelAndView();
 		
@@ -128,7 +130,7 @@ public class IndexViewController extends SalesController {
 		ss.addSales(sales);
 		
 		// 오늘 날짜
-		Date today = convertLocalDateToDate(LocalDate.now());
+		Date today = getNowDate();
 		
 		// session에 order 가 있는지 확인하고 있으면 그걸 반환 / 없으면 새로 만들어서 넣은 후 그걸 다시 받아서 반환
 		Map<String, List<Product>> order = checkOrderInSession(session);

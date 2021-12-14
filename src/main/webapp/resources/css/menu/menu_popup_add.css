@@ -1,7 +1,12 @@
 @charset "UTF-8";
+#addContent {height: 100%; border: 5px solid #9dc970; box-sizing: border-box;}
+#addContent h3 {
+	line-height: 70px; font-size: 25px; font-weight: bold; width: 90%;
+	border-bottom: 2px solid #596271; text-indent: 10px; margin: 0 auto; text-align: center;
+}
 #addMenuPopUp {
 	display: flex; flex-flow: row nowrap; justify-content: center; align-items: center;
-	height: 100%;
+	height: calc(100% - 72px);
 }
 #addMenuPopUp th {
 	width: 100px; line-height: 30px; text-align: left; padding: 10px;
@@ -24,7 +29,7 @@
 	background-color: #fff;
 }
 #addMenuPopUp input[type=radio] {display: none;}
-#addMenuPopUp input[type=radio] + label {margin: 0 10px;}
+#addMenuPopUp input[type=radio] + label {margin: 0 10px; font-size: 14px;}
 #addMenuPopUp input[type=radio]:checked + label {
 	border-bottom: 2px solid #9dc970;
 }

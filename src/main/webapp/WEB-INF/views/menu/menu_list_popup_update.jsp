@@ -5,10 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>메뉴 수정</title>
-<%@ include file="/WEB-INF/views//incl/link.jsp" %>
+<%@ include file="/WEB-INF/views/incl/link.jsp" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu/menu_popup_update.css" />
 </head>
 <body>
+<section id="uploadContent">
+<h3>메뉴 정보 수정</h3>
 	<div id="updateMenuPopUp">
 	<form method="post" name="updateMenuForm" action="updateMenu" enctype="multipart/form-data">
 		<input class="hidden" type="text" name="id" value="${menu.id}" />
@@ -46,6 +48,7 @@
 		<input type="submit"value="수정하기" />
 	</form>
 	</div>
+</section>
 	<script>
 		$("#updateMenuPopUp").mousemove(function() {
 			

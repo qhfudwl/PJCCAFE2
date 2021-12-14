@@ -14,7 +14,7 @@
 <%@ include file="/WEB-INF/views/incl/header.jsp" %>
 <section id="indexContent">
 	<div id="orders">
-		<h2 class="hidden">주문 현황</h2>
+		<h2 class="headerMent">주문 현황</h2>
 		<form action="addSales" method="post">
 		<input class="hidden" type="submit" value="완료" />
 			<div id="salesItemWrap">
@@ -55,7 +55,7 @@
 	</div>
 	<section id="orderCompletedContent">
 	<form>
-		<h3 class="hidden">주문 완료 목록</h3>
+		<h3 class="headerMent">픽업 완료 목록</h3>
 		<ul>
 		<c:if test="${not empty compSales}">
 			<c:forEach var="compSalesItem" items="${compSales}">
@@ -86,11 +86,11 @@
 		let windowWidth = window.screen.width;
 		let windowHeight = window.screen.height;
 		
-		let popupX = (windowWidth/2) - 200;
+		let popupX = (windowWidth/2) - 250;
 		let popupY = (windowHeight/2) - 250;
 		
 		let popUpdateMenuUrl = getContextPath() + "/menu/popSalesView";
-		let popUpdateMenuOption = "width=400px, height=500px, top=" + popupY + "px, left=" + popupX + "px";
+		let popUpdateMenuOption = "width=500px, height=500px, top=" + popupY + "px, left=" + popupX + "px";
 		let popUpdateMenuTitle = "영수증 보기";
 		
 		window.open(popUpdateMenuUrl, popUpdateMenuTitle, popUpdateMenuOption);

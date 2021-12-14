@@ -4,6 +4,10 @@ body, html {height: 100%;}
 	display: flex; flex-flow: row nowrap; justify-content: center;
 	width: 100%; min-width: 1320px; height: calc(100% - 150px);
 }
+#indexContent .headerMent {
+	font-size: 18px; width: 95%; border-bottom: 2px solid #596271; margin: 0 auto;
+	line-height: 60px; font-weight: normal;
+}
 #salesItemWrap {
 	display : grid; grid-template-columns : auto auto auto auto; gap : 20px;
 	flex-basis: 50%; padding: 20px;
@@ -30,13 +34,13 @@ body, html {height: 100%;}
 #salesItemWrap .salesDate { padding-top: 10px; color: #596271; font-size: 12px;}
 #orderCompletedContent {
 	background-color : #dfe1dc; width: 500px; position: relative;
-	padding: 10px; box-sizing: border-box;
+	padding: 0 10px 10px 10px; box-sizing: border-box;
 }
 #orderCompletedContent p { float: left; line-height: 30px; padding: 0 5px; }
 #orderCompletedContent .shortening {
-	width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+	width: 220px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 }
-#orderCompletedContent ul {padding-top: 60px;}
+#orderCompletedContent ul {padding-top: 20px;}
 #orderCompletedContent li {
 	line-height: 30px; height: 30px; margin-bottom: 5px;
 	transition-duration: 0.2s; position: relative; border-radius: 10px;
@@ -49,7 +53,7 @@ body, html {height: 100%;}
 	background-color: #596271; color: #bbda9c;
 }
 input[value="정산하기"] {
-	position: absolute; right: 20px; top: 20px; transition-duration: 0.3s;
+	position: absolute; right: 20px; top: 10px; transition-duration: 0.3s;
 	outline: none; padding: 10px 15px; border: 0; border-radius: 10px;
 	background-color: #596271; font-size: 16px; color: #fff; font-weight: bold;
 }
