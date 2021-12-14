@@ -51,8 +51,12 @@
 	width: 60%; background-color: #dfe1dc; height: 100%; box-sizing: border-box;
 	padding: 20px; display: flex; flex-flow: column nowrap; justify-content: center;
 }
+#itemWrap .menuPrice {padding-bottom: 5px;}
 #itemWrap .menuName {
-	font-weight: bold; font-size: 16px; margin-bottom: 10px;
+	font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #72a53f;
+}
+#itemWrap .regDate {
+	padding-top: 5px; font-size: 14px; color: #596271; text-align: right;
 }
 #itemWrap .menuId input[type=radio] {display: none;}
 #itemWrap .menuId label {

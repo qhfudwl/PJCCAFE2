@@ -52,6 +52,7 @@
 								<c:otherwise>재고 없음</c:otherwise>
 							</c:choose>
 						</li>
+						<li class="regDate"><fmt:formatDate value="${m.regDate}" pattern="yyyy년 MM월 dd일"/></li>
 						<li class="menuId">
 							<input type="radio" name="choiceItem" id="menuId${m.id}" value="${m.id}" />
 							<label for="menuId${m.id}"></label>

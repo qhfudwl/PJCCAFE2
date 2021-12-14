@@ -1,5 +1,7 @@
 package cafe.pj.jvx330.domain;
 
+import java.util.Date;
+
 public class Menu {
 	private long id;
 	private char menuType;
@@ -7,6 +9,7 @@ public class Menu {
 	private double menuPrice;
 	private boolean stock;
 	private String imgPath;
+	private Date regDate;
 	
 	public Menu() {
 		
@@ -85,6 +88,14 @@ public class Menu {
 	public String toString() {
 		return "Menu [id=" + id + ", menuType=" + menuType + ", menuName=" + menuName + ", menuPrice=" + menuPrice
 				+ ", stock=" + stock + ", imgPath=" + imgPath + "]";
+	}
+
+	public Date getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 	
 }

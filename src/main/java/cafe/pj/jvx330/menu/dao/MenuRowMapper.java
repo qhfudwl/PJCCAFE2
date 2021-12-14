@@ -20,6 +20,8 @@ public class MenuRowMapper implements RowMapper<Menu> {
 				rs.getString("menuName"), rs.getDouble("menuPrice"), 
 				rs.getBoolean("stock"), rs.getString("imgPath"));
 		
+		menu.setRegDate(rs.getDate("regDate"));
+		
 		return menu;
 	}
 	
