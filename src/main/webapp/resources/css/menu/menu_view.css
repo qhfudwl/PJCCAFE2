@@ -41,11 +41,15 @@
 }
 #itemWrap .item {
 	display: flex; flex-flow: row nowrap; justify-content : space-between; align-items : center;
-	position: relative; border: 1px solid #dfe1dc;
+	position: relative; border: 1px solid #dfe1dc; height: 150px;
 }
+#itemWrap .item .imgWrap {
+	width: 40%;
+}
+#itemWrap .item .imgWrap img { display: block; margin: 0 auto; }
 #itemWrap .item ul {
 	width: 60%; background-color: #dfe1dc; height: 100%; box-sizing: border-box;
-	padding: 20px;
+	padding: 20px; display: flex; flex-flow: column nowrap; justify-content: center;
 }
 #itemWrap .menuName {
 	font-weight: bold; font-size: 16px; margin-bottom: 10px;

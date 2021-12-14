@@ -2,14 +2,19 @@ package cafe.pj.jvx330.web.controller;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.web.servlet.ModelAndView;
+
+import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.web.util.Validator;
 
 public abstract class CafeController {
 	
-	public static String ORDER_NUMBER = "";
+	public static String order_number = "";
 	
 	@Resource(name="validator")
 	protected Validator validator;
@@ -22,13 +27,13 @@ public abstract class CafeController {
 	private String returnOrderNumber() {
 		
 		// 만일 서버 내 첫 주문이라면 a-001 반환
-		if (validator.isEmpty(ORDER_NUMBER)) {
-			ORDER_NUMBER = "A-001";
-			return ORDER_NUMBER;
+		if (validator.isEmpty(order_number)) {
+			order_number = "A-001";
+			return order_number;
 		}
 
 		// 모든 문자열을 분리해서 배열에 저장
-		String[] arr = ORDER_NUMBER.trim().split("");
+		String[] arr = order_number.trim().split("");
 		
 		// 첫번째 글자는 알파벳 (ascii > 65 - 90)
 		char alphabet = arr[0].charAt(0);
@@ -66,12 +71,13 @@ public abstract class CafeController {
 		String strT = String.valueOf(ten);
 		String strO = String.valueOf(one);
 		
-		ORDER_NUMBER = strA + "-" + strH + strT + strO;
+		order_number = strA + "-" + strH + strT + strO;
 		
-		return ORDER_NUMBER;
+		return order_number;
 	}
 	
 	public Date getNowDate() {
 		return java.sql.Date.valueOf(LocalDate.now());
 	}
+	
 }

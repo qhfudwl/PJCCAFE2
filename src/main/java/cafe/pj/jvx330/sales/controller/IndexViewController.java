@@ -103,6 +103,7 @@ public class IndexViewController extends SalesController {
 		
 		// session 내 order 길이가 1 이상일 때(원소가 하나라도 있을 때)
 		// compSales를 만들어주고, mav에 넣어준다.
+		
 		if (order.size() > 0){
 			List<Sales> compSales = ss.findSalesByDate(today);
 			for (Sales s : compSales) {

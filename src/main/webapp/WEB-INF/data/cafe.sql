@@ -30,6 +30,7 @@ CREATE TABLE Menu (
    menuName   		VARCHAR(30)     	NOT NULL,										-- 메뉴이름
    menuPrice   		DOUBLE         		NOT NULL,										-- 메뉴가격
    stock      		BOOLEAN         	NOT NULL   DEFAULT true,						-- 재고유무 ( true : 재고있음 )
+   regDate			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 등록날짜(읽기 전용)
    
    CONSTRAINT		Menu_menuName_UK	UNIQUE(menuName)
 );

@@ -40,7 +40,9 @@
 		<div id="itemWrap">
 			<c:forEach var="m" items="${menus}">
 				<div class="item">
-					<img width="100px" src="${m.imgPath}"/>
+					<div class="imgWrap">
+						<img height="145px" src="${m.imgPath}"/>
+					</div>
 					<ul>
 						<li class="menuName">${m.menuName}</li>
 						<li class="menuPrice"><fmt:formatNumber value="${m.menuPrice}" pattern=",###" type="currency" currencySymbol="" /> 원</li>
