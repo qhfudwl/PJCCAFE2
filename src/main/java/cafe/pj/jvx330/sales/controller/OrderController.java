@@ -10,8 +10,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.Employee;
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.domain.Product;
+import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.menu.service.MenuService;
+import cafe.pj.jvx330.user.service.UserService;
+import cafe.pj.jvx330.user.service.UserServiceImpl;
 
 @Controller
 public class OrderController {
@@ -93,6 +99,8 @@ public class OrderController {
 			//HttpSession session = request.getSession();
 			//Employee employee= (Employee)session.getAttribute("manager");
 			//String Mposition = employee.getPosition();
+			HttpSession session = request.getSession();
+			session.setAttribute("contentName", "주문목록");
 			
 			//직원 정보 임시
 			String mPosition = "Manager";
@@ -200,8 +208,8 @@ public class OrderController {
 		
 		
 		
-		
-		
+		@Autowired
+		private UserService us ;
 		
 		
 		/**
@@ -216,29 +224,63 @@ public class OrderController {
 		 */
 		
 		//고객 찾기 팝업창
-		@GetMapping("findUserForPoint")
-		public String findUserForPoint() {
-			
+		@GetMapping("findUserForPointForm")
+		public String findUserForPointForm() {
 			return "order/findUserForPoint";
 		}
 		
-		//고객 선택 팝업창
-		@GetMapping("findUserResultForPoint")
-		public String findUserResultForPoint() {
+		//폰 번호 받아오기 		
+		@PostMapping("findUserForPoint")
+		public ModelAndView findUserForPoint(@RequestParam String popUpPhoneValue) {
+			List<User> user = us.findUsersByPhone(popUpPhoneValue);
+			List<Customer> cust = new ArrayList<Customer>();
+			for(User user1 :user) {
+				cust.add((Customer)user1);
+			}
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("cust",cust);
+			mav.setViewName("order/findUserResultForPoint");
 			
-			return "order/findUserResultForPoint";
+			return mav;
+		}
+		
+		//고객 선택 팝업창(안씀)
+		@PostMapping("findUserResultForPoint")
+		@ResponseBody
+		public String findUserResultForPointForm(@RequestBody HashMap<String,Object> map) {
+			System.out.println("findUserResultForPointForm in");
+			
+			ModelAndView mav = new ModelAndView();
+			Customer customer = new Customer();
+			customer.setCustomerName(map.get("custName").toString());
+			//customer.setCustomerName(map.get("custName").toString());
+			//customer.setCustomerName(map.get("custName").toString());
+			//customer.setCustomerName(map.get("custName").toString());
+			mav.addObject(customer);
+			mav.setViewName("redirect:/order");
+			
+			return "hi";
 		}
 		
 		//회원가입 팝업창
-		@GetMapping("joinUserForPoint")
-		public String joinUserForPoint() {
+		@PostMapping("joinUserForPoint")
+		public String joinUserForPointForm() {
 			
 			return "order/joinUserForPoint";
 		}
 			
-				
 		
-		
+		//회원가입 후 결과창
+		@PostMapping("joinUserResultForPoint")
+		@ResponseBody
+		public void joinUserResultForPointForm(@RequestBody HashMap<String,Object> map) {
+			String name = map.get("userName").toString();
+			String phone = map.get("userPhone").toString();;
+			String birth = map.get("userBirth").toString();;
+			User user = new Customer(name,phone,birth,0);
+			System.out.println(name+phone+birth);
+			us.addUser(user);
+		}
 		
 		
 		

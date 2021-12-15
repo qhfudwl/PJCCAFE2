@@ -58,15 +58,15 @@
 							<table class="customerInfoTable">
 								<tr>
 									<th>고객명</th>
-									<td>홍길동</td>
+									<td class="orderCustName" id="orderCustName"></td>
 									<th>전화번호</th>
-									<td>010-1234-7891</td>
+									<td class="orderCustPhone"></td>
 								</tr>
 								<tr>
-									<th>포인트</th>
-									<td>2,000점</td>
 									<th>생년월일</th>
-									<td>1990년1월1일</td>
+									<td class="orderCustBirth"></td>
+									<th>포인트</th>
+									<td class="orderCustPoint"></td>
 								</tr>
 							</table>
 						</div>

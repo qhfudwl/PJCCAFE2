@@ -256,6 +256,19 @@ function orderMenuListAjax(json){
 		}
 		})
 }
+function oneValueAjax(value,goPage){
+	$.ajax({
+		url:goPage,
+		type:"post",
+		data:{data:value},
+		async:false,
+		dataType: 'TEXT',
+		success:function(data){
+	
+		}
+		
+	})
+}
 
 
 
@@ -429,9 +442,152 @@ $('.funcCustomerSelectBtn').on('click',function(e){
 	let popupY= (document.body.offsetHeight / 2) - (popupHeight / 2);
 	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
 
-	window.open("orderMembership", "title", "width=500, height = 500, top="+ popupY + ", left="+ popupX + ""); //선언과 초기화 동시에 해도 됨
+	window.open("findUserForPointForm", "title", "width=500, height = 500, top="+ popupY + ", left="+ popupX + ""); //선언과 초기화 동시에 해도 됨
 	
 })
+
+
+/*
+
+		팝업창 제어
+
+*/
+
+/*	회원검색하기 버튼 누르면	*/
+
+
+/*	회원가입 버튼 누르면	 */
+
+
+/*	가입하기 버튼 누르면 */
+
+
+/*	취소 버튼 누르면 */
+$('.cancelBtn').on('click',function(e){
+	e.preventDefault();
+	close();
+})
+
+
+
+
+/*	고객선택하면*/
+$('.userList').on('click',function(){
+//$(document).on("click",".userList",function(){
+	if($('.userList').find($('.custName'))!=' '){
+		$('.userList').not($(this)).removeClass('selectedCustomer');
+		$(this).addClass('selectedCustomer');
+	}
+	
+	
+	
+})
+
+/* 고객선택하고 확인 누르면 */
+
+$('#popupSubmitBtn').on('click',function(){
+	//for(let i=0; i<$('.userList').length;i++){
+		if($('.userList').hasClass('selectedCustomer')){
+			
+		
+		let custName = $('.selectedCustomer').find($('.custName')).text();
+		let custPhone = $('.selectedCustomer').find($('.custPhone')).text();
+		let custBirth = $('.selectedCustomer').find($('.custBirth')).text();
+		let custPoint = $('.selectedCustomer').find($('.custPoint')).text();
+	
+		//부모화면에 뿌려주기
+		/*
+		$('.orderCustName').text(custName);
+		$('.orderCustPhone').text(custPhone);
+		$('.orderCustBirth').text(custBirth);
+		$('.orderCustPoint').text(custPoint);
+		*/
+		//console.log('thisi')	
+		//let json={"custName":custName,"custPhone":custPhone,"custBirth":custBirth,"custPoint":custPoint}
+		
+		opener.parent.setCustomerInfo(custName,custPhone,custBirth,custPoint);
+		
+		/*
+		$.ajax({
+		url:"findUserResultForPoint",
+		type:"post",
+		data: JSON.stringify(json),
+		contentType: "application/json; charset=UTF-8"	,
+		//async:false	,
+		success:function(){
+			console.log('success')
+			console.log($(opener.document))
+			$(opener.parent).find($('#orderCustName')).text('dd');
+			
+			},
+		error:function(){
+			
+			console.log($(opener.document))
+		}
+		})
+		*/
+		//break;
+	}
+	//}
+	close();
+})
+
+/* 유저 정보 셋팅 해주기 */
+function setCustomerInfo(custName,custPhone,custBirth,custPoint){
+	$('.orderCustName').text(custName);
+	$('.orderCustPhone').text(custPhone);
+	$('.orderCustBirth').text(custBirth);
+	$('.orderCustPoint').text(custPoint);
+}
+
+
+
+/*	검색시 값이 없을 때 유효성 처리하고 전송 */
+function searchSubmit(){
+	if($('.popUpInputPhoneArea').val()!=''){
+		$('#searchUser').attr('action','findUserForPoint');
+		$('#searchUser').attr('method','post');
+		$('#searchUser').submit();
+	}
+	else{
+		alert('검색할 값이 없습니다');
+		return false;
+	}
+	
+}
+/*	회원가입이 값이 없을 때 유효성 처리하고 전송 */
+function joinSubmit(){
+	console.log('joinmethod');
+	let userName = $('.joinNameArea').val();
+	let userPhone = $('.joinPhoneArea').val();
+	let userBirth = $('.joinBirthArea').val();
+	if(userName!='' && userPhone!='' && userBirth!=''){
+		//ajax호출로 신규회원 가입해주기 
+		let json={"userName":userName,"userPhone":userPhone,"userBirth":userBirth}
+		$.ajax({
+		url:"joinUserResultForPoint",
+		type:"post",
+		data: JSON.stringify(json),
+		contentType: "application/json; charset=UTF-8"	,
+		//async:false	,
+		success:function(){
+			
+			}
+		})
+
+		//부모화면에 뿌려주기
+		opener.parent.setCustomerInfo(userName,userPhone,userBirth,'0')
+		close();
+	}
+	else{
+		alert('값을 입력 해주세요');
+		return false;
+	}
+}
+
+
+
+
 
 
 

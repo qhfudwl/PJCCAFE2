@@ -160,6 +160,9 @@ body{
   margin-bottom: 10px;
 }
 
+.selectedCustomer{
+	background: #9dc970 !important;
+}
 
 
 
