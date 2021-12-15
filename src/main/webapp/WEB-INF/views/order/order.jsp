@@ -55,6 +55,7 @@
 							</div>
 						</div>
 						<div class="customerInfoWrap">
+							<input type="hidden" class="orderCustId"/>
 							<table class="customerInfoTable">
 								<tr>
 									<th>고객명</th>
@@ -206,7 +207,7 @@
 							<li><a href="#" class="menuItemCom funcButtonCom funcAllCancelBtn">전체취소</a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom"></a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom funcCustomerSelectBtn">고객선택</a></li>
-							<li><a href="#" class="menuItemCom funcButtonCom">주문하기</a></li>
+							<li><a href="#" class="menuItemCom funcButtonCom funcOrderBtn">주문하기</a></li>
 						</ul>
 					</div>
 

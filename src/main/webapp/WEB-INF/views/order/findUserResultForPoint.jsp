@@ -29,6 +29,7 @@
   								<th>보유포인트</th>
   							</tr>
   				<c:forEach var="customer" items="${cust }">
+  					<input type="hidden" class="custId" value="${customer.id }"/>
   					<tr class="userList">
   								<td class="custName">${customer.customerName }</td>
   								<td class="custPhone">${customer.phone }</td>

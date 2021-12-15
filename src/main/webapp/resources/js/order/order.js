@@ -508,7 +508,7 @@ $('#popupSubmitBtn').on('click',function(){
 	//for(let i=0; i<$('.userList').length;i++){
 		if($('.userList').hasClass('selectedCustomer')){
 			
-		
+		let custId = $('.selectedCustomer').find($('.custId')).text();
 		let custName = $('.selectedCustomer').find($('.custName')).text();
 		let custPhone = $('.selectedCustomer').find($('.custPhone')).text();
 		let custBirth = $('.selectedCustomer').find($('.custBirth')).text();
@@ -524,8 +524,8 @@ $('#popupSubmitBtn').on('click',function(){
 		//console.log('thisi')	
 		//let json={"custName":custName,"custPhone":custPhone,"custBirth":custBirth,"custPoint":custPoint}
 		
-		opener.parent.setCustomerInfo(custName,custPhone,custBirth,custPoint);
-		opener.parent.sendUserInfo(custName,custPhone,custBirth,custPoint);
+		opener.parent.setCustomerInfo(custId,custName,custPhone,custBirth,custPoint);
+		opener.parent.sendUserInfo(custId,custName,custPhone,custBirth,custPoint);
 		/*
 		$.ajax({
 		url:"findUserResultForPoint",
@@ -552,17 +552,19 @@ $('#popupSubmitBtn').on('click',function(){
 })
 
 /* 유저 정보 셋팅 해주기 */
-function setCustomerInfo(custName,custPhone,custBirth,custPoint){
+function setCustomerInfo(custId, custName,custPhone,custBirth,custPoint){
+	$('.orderCustId').val(custId);
 	$('.orderCustName').text(custName);
 	$('.orderCustPhone').text(custPhone);
 	$('.orderCustBirth').text(custBirth);
 	$('.orderCustPoint').text(custPoint);
 	
 }
-function sendUserInfo(custName,custPhone,custBirth,custPoint){
+function sendUserInfo(custId, custName,custPhone,custBirth,custPoint){
 		let point = custPoint;
 		point = point.replace(",","");
-		let json={"userName":custName,"userPhone":custPhone,"userBirth":custBirth,"userPoint":point}
+		let json={"userId":custId, "userName":custName,"userPhone":custPhone,"userBirth":custBirth,"userPoint":point}
+		
 		$.ajax({
 		url:"saveUserPoint",
 		type:"post",
@@ -604,13 +606,13 @@ function joinSubmit(){
 		data: JSON.stringify(json),
 		contentType: "application/json; charset=UTF-8"	,
 		//async:false	,
-		success:function(){
+		success:function(data){
 			
 			}
 		})
 
 		//부모화면에 뿌려주기
-		opener.parent.setCustomerInfo(userName,userPhone,userBirth,'0')
+		//id값 없어서 안됨
 		close();
 	}
 	else{
@@ -709,6 +711,32 @@ $('.totalMenuItem').on('click',function(){
 	$('.mCoffee').show();
 })
 
+/*
+
+	주문하기
+	
+*/
+
+$('.funcOrderBtn').on('click',function(){
+	
+	//고객 아이디
+	let id =$('.orderCustId').val();		
+	let customerName = $('.orderCustName').text();
+	let phone = $('.orderCustPhone').text();
+	let birth = $('.orderCustBirth').text();
+	let point = $('.orderCustPoint').text();
+	
+	//사용할 포인트
+	let usePoint = $('.usePoint').text(); 
+	usePoint = usePoint.replace(",","");
+	usePoint = usePoint.replace("원","");
+	usePoint = Number(usePoint);
+	
+	//메뉴아이디, 메뉴수량
+	let data={"":,}
+
+	
+})
 
 
 

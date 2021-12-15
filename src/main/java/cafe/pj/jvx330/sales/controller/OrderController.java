@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,7 @@ import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.menu.service.MenuService;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.user.service.UserServiceImpl;
+import cafe.pj.jvx330.web.command.OrderCommand;
 
 @Controller
 public class OrderController {
@@ -248,7 +250,8 @@ public class OrderController {
 		@PostMapping("saveUserPoint")
 		@ResponseBody
 		public void saveUserPoint(@RequestBody HashMap<String,Object> map) {
-			System.out.println("saveUserPoint");			
+			System.out.println("saveUserPoint");	
+			customer.setId(Long.parseLong(map.get("userId").toString()));
 			customer.setCustomerName(map.get("userName").toString());
 			customer.setPhone(map.get("userPhone").toString());
 			customer.setBirth(map.get("userBirth").toString());
@@ -328,7 +331,15 @@ public class OrderController {
 		
 		
 		
-		
+		@PostMapping("compOrder")
+		public ModelAndView complete_order(@ModelAttribute OrderCommand order) {
+			
+			
+			
+			
+			ModelAndView mav = new ModelAndView();
+			return mav;
+		}
 		
 		
 		
