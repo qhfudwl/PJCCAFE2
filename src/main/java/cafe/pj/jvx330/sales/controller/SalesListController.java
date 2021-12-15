@@ -18,9 +18,8 @@ import cafe.pj.jvx330.web.util.OrderStorage;
 public class SalesListController extends SalesController{
 	
 	@GetMapping("/order/viewOrderRecordByMenu")
-	public ModelAndView viewOrderRecordByMenu(@RequestParam("menuType") char type, @RequestParam("periodType") char period) {
-		List<OrderStorage> osList = ss.findOrderRecordForMenu(period);
-		// menuType 파트까지 완성 해야 함
+	public ModelAndView viewOrderRecordByMenu(@RequestParam("periodType") char period, @RequestParam("menuType") char type) {
+		List<OrderStorage> osList = ss.findOrderRecordForMenu(period, type);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("osList", osList);

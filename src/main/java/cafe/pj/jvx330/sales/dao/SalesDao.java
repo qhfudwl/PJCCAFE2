@@ -31,5 +31,7 @@ public interface SalesDao {
 	 * OrderRecord Table에서 파라미터 범위에 해당하는 List<Product> 출력
 	 */
 	List<Product> findOrderRecordForMenu(String date1, String date2);
+	
+	int[] addOrderRecord(List<Product> order);
 
 }

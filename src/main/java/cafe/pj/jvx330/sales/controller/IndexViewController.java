@@ -152,20 +152,23 @@ public class IndexViewController extends SalesController {
 		return mav;
 	}
 	
-	@GetMapping("/sumOrder")
-	public ModelAndView sumOrder(@ModelAttribute ProductCommand productCommand, HttpSession httpsession) {
-		Map<String, List<Product>> order = (Map<String, List<Product>>) httpsession.getAttribute("order");
+	@GetMapping("/addOrderRecordByBatch")
+	public ModelAndView addOrderRecordByBatch(HttpSession session) {
+		Map<String, List<Product>> order = checkOrderInSession(session);
 		List<Product> finalOrder = null;
-		List<Product> temp_order = new ArrayList<Product>();		
+		List<Product> temp_order = new ArrayList<Product>();
 		
 		order.forEach((key, productList) -> {
-			temp_order.addAll(productList);	
+			temp_order.addAll(productList);
 		});
 		
-		finalOrder = ss.sumOrder(temp_order);
+		finalOrder = ss.sumOrder(temp_order); // quantity 더하기
 		
+		ss.addOrderRecord(finalOrder);
 		
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("index");
+		
 		return mav;
 	}
 }

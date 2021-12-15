@@ -54,7 +54,7 @@
 		</script>
 	</div>
 	<section id="orderCompletedContent">
-	<form>
+	<form action="addOrderRecordByBatch" method="GET">
 		<h3 class="hidden">주문 완료 목록</h3>
 		<ul>
 		<c:if test="${not empty compSales}">

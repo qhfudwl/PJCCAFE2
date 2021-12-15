@@ -28,7 +28,7 @@ public class Setter_Date {
 		} else if(dateType == 'W') { //-7days ( -1 week)
 			cal.add(Calendar.DAY_OF_MONTH, -6);
 			if(cal.get(Calendar.YEAR) != now.get(Calendar.YEAR)) { // 2021년을 벗어나면 2021-01-01로 세팅
-				cal.set(Calendar.YEAR, cal.get(Calendar.YEAR));
+				cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
 				cal.set(Calendar.MONTH, 0);
 				cal.set(Calendar.DAY_OF_MONTH, 1);
 			}

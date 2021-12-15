@@ -30,8 +30,10 @@ public interface SalesService {
 	 * sd에서 받은 List<Product> 로 
 	 * 화면에 뿌리기 위해 필요한 List<OrderStorage> 반
 	 */
-	List<OrderStorage> findOrderRecordForMenu(char dateType);
+	List<OrderStorage> findOrderRecordForMenu(char dateType, char menuType);
 
 	List<Product> sumOrder(List<Product> temp_order);
+	
+	void addOrderRecord(List<Product> order);
 	
 }

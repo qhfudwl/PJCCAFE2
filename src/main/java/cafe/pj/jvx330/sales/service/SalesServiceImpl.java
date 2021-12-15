@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -69,7 +71,7 @@ public class SalesServiceImpl implements SalesService{
 		sd.removeSales(orderNumber);
 	}
 	
-	public List<OrderStorage> findOrderRecordForMenu(char dateType){
+	public List<OrderStorage> findOrderRecordForMenu(char dateType, char menuType){
 		Menu menu = null;
 		Calendar now = Calendar.getInstance(); // 오늘 날짜 
 		Calendar cal = Calendar.getInstance(); // 다음 범위 지정을 위해 범위 시작 날짜를 기억하는 용도
@@ -79,10 +81,10 @@ public class SalesServiceImpl implements SalesService{
 		if(dateType == 'M') {// 기간 Type 별로 반복 횟수 지정
 			nof = now.get(Calendar.MONTH)+1;
 		} else if(dateType == 'D') {
-			if(now.get(Calendar.DAY_OF_YEAR) <= 31) {
+			if(now.get(Calendar.DAY_OF_YEAR) <= 30) {
 				nof = now.get(Calendar.DAY_OF_YEAR);
 			} else { // 1월 31보다 클 경우
-				nof = now.get(Calendar.DAY_OF_MONTH);
+				nof = 30;
 			}
 
 		} else { // dateType == 'W'
@@ -105,16 +107,23 @@ public class SalesServiceImpl implements SalesService{
 			for(int j = iNum; j<order.size();j++) { // osList 세팅
 				OrderStorage os = new OrderStorage();
 				menu = ms.findMenuById(order.get(j).getMenu().getId());
-				order.get(j).setMenu(menu);
+				System.out.println(menu.getMenuType());
+				if(menuType == 'T' || menuType == menu.getMenuType()) { 
+					// menuType 에 따라 세팅.
+					order.get(j).setMenu(menu);
+					
+					os.setMenuName(order.get(j).getMenu().getMenuName());
+					os.setWeekDate(sDateList.get(0)+" ~ "+sDateList.get(1));
+					os.setQuantity(order.get(j).getQuantity());
+					os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(i).getQuantity());
 				
-				os.setMenuName(order.get(j).getMenu().getMenuName());
-				os.setWeekDate(sDateList.get(0)+" ~ "+sDateList.get(1));
-				os.setQuantity(order.get(j).getQuantity());
-				os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(i).getQuantity());
-			
-				iNum++;
+					iNum++;
+					
+					osList.add(os);
+				} else {
+					
+				}
 				
-				osList.add(os);
 			}
 			try { // String to Calendar
 				Date date = format.parse(sDateList.get(0)); 
@@ -128,11 +137,42 @@ public class SalesServiceImpl implements SalesService{
 	}
 	
 	public List<Product> sumOrder(List<Product> temp_order){
-		List<Product> order = null;
+		List<Product> order = new ArrayList<Product>();
+		Product product = new Product();
+		Menu menu = new Menu();
+		int temp = 0;
+		List<Long> preventRep = new ArrayList<>();
+		preventRep.add((long) 0);
 		
+		for(int i = 0; i<temp_order.size(); i++) {
+			for(long pr : preventRep) {
+				if(pr == temp_order.get(i).getMenu().getId()) {
+					// 이미 더한 menuId 차례일 때 넘어감
+				} else {
+					preventRep.add(temp_order.get(i).getMenu().getId());
+					for(int j=i; j<temp_order.size(); j++) {
+						if(temp_order.get(i).getMenu().getId() 
+							== temp_order.get(j).getMenu().getId()) {
+							temp = temp_order.get(i).getQuantity() 
+									+ temp_order.get(j).getQuantity();
+//							product // product 세팅 하고 list에 add.
+							menu.setId(temp_order.get(i).getMenu().getId());
+							product.setMenu(menu);
+							product.setQuantity(temp); // Sum of Quantity setting
+							order.add(product);
+						}
+					}
+				}
+			}
+		}
 		return order;
 	}
 	
-	
+	//batch.
+	public void addOrderRecord(List<Product> order) {
+		int batchSize = 0;
+
+		batchSize = sd.addOrderRecord(order).length;
+	}
 	
 }

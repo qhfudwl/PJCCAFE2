@@ -24,7 +24,7 @@
           <form class="" action="" method="">
             <li><a href="#">판매내역</a></li>
           </form>
-          <form class="" action="" method="">
+          <form name="orderRecordByMenu" action="${pageContext.request.contextPath}/sales/viewOrderRecordByMenu" method="get">
             <li><a href="#">메뉴별 판매내역</a></li>
           </form>
         </ul>
