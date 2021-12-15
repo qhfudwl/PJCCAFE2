@@ -12,7 +12,6 @@ public interface UserDao {
 	 */
 	void addUser(User user);
 	
-	
 	/**
 	 * 휴대폰번호를 이용한 고객찾기
 	 * 포인트 적립이나 사용이 잘못 되었을 떄 조회하기 편하다
@@ -41,8 +40,6 @@ public interface UserDao {
 	 */
 	List<User> findAllUsers();
 	
-	
-	
 	/**
 	 * 회원을 중복값이 없는 아이디로 조회를 해
 	 * 유저정보를 갱신 해준다.
@@ -67,4 +64,18 @@ public interface UserDao {
 	 */
 	User findUserById(long id);
 	
+	/**
+	 * 테이블 내 임플로이 찾아오기
+	 * @param eid
+	 * @return
+	 * @author 김보령
+	 */
+	User findEmployeeByEid(String eid);
+
+	/**
+	 * 모든 직원 정보 가져오기
+	 * @return
+	 * @author 김보령
+	 */
+	List<User> findAllEmployee();
 }

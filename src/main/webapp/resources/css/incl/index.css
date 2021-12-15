@@ -2,7 +2,7 @@
 body, html {height: 100%;}
 #indexContent {
 	display: flex; flex-flow: row nowrap; justify-content: center;
-	width: 100%; min-width: 1320px; height: calc(100% - 150px);
+	width: 100%; min-width: 1320px; height: calc(100% - 170px);
 }
 #indexContent .headerMent {
 	font-size: 18px; width: 95%; border-bottom: 2px solid #596271; margin: 0 auto;
@@ -35,6 +35,7 @@ body, html {height: 100%;}
 #orderCompletedContent {
 	background-color : #dfe1dc; width: 500px; position: relative;
 	padding: 0 10px 10px 10px; box-sizing: border-box;
+	border-radius: 0 0 20px 20px;
 }
 #orderCompletedContent p { float: left; line-height: 30px; padding: 0 5px; }
 #orderCompletedContent .shortening {
@@ -53,8 +54,8 @@ body, html {height: 100%;}
 	background-color: #596271; color: #bbda9c;
 }
 input[value="정산하기"] {
-	position: absolute; right: 20px; top: 10px; transition-duration: 0.3s;
-	outline: none; padding: 10px 15px; border: 0; border-radius: 10px;
-	background-color: #596271; font-size: 16px; color: #fff; font-weight: bold;
+	position: absolute; right: 20px; top: 11px; transition-duration: 0.3s;
+	outline: none; padding: 10px 30px; border: 0; border-radius: 5px;
+	background-color: #596271; font-size: 14px; color: #fff; font-weight: bold;
 }
 input[value="정산하기"]:hover {background-color: #9dca6f;}

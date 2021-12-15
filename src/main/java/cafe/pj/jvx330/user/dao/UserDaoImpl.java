@@ -126,5 +126,19 @@ public class UserDaoImpl implements UserDao {
 		String sql = "SELECT id, name, phone, birth, point, regDate From Customer WHERE birth = ? ORDER BY id ASC";
 		return jt.query(sql, new UserRowMapper(), birth);
 	}
+
+
+	@Override
+	public User findEmployeeByEid(String eid) {
+		String sql = "SELECT id, eid, passwd, position, regDate From Employee WHERE eid=?";
+		return jt.queryForObject(sql, new EmployeeRowMapper(), eid);
+	}
+
+
+	@Override
+	public List<User> findAllEmployee() {
+		String sql = "SELECT id, eid, passwd, position, regDate From Employee";
+		return jt.query(sql, new EmployeeRowMapper());
+	}
 	
 }

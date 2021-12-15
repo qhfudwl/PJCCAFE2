@@ -1,7 +1,8 @@
 @charset "UTF-8";
 #menuSnb {
 	display: flex; flex-flow: row wrap; justify-content: space-between; align-items: center;
-	height: 60px; padding: 0 20px; border-bottom: 2px solid #596271; margin-bottom: 10px;
+	height: 60px; padding: 0 20px; border-bottom: 2px solid #596271;
+	width: 95%; margin: 0 auto 10px; min-width: 700px;
 }
 #menuSnb p span {text-transform: uppercase;}
 #menuSnb li {float: left;}
@@ -23,13 +24,14 @@
 #menuSnb button:hover::before { width: 50%; }
 #menuSnb button.on::after { width: 50%; }
 #menuSnb button.on::before { width: 50%; }
+#menuListContent {min-width: 1200px; width: 95%; margin: 0 auto;}
 #updateMenuWrap {
 	display: flex; flex-flow: row wrap; justify-content: flex-end; align-items: center;
 	padding: 0 20px 10px;
 }
 #updateMenuWrap input[type=submit] {
-	outline: none; background-color: #a0a0a0; border: 0; border-radius: 5px; cursor: pointer;
-	padding: 5px 20px; margin-left: 10px; transition-duration: 0.3s; font-weight: bold;
+	outline: none; background-color: #dfe2dc; border: 0; border-radius: 5px; cursor: pointer;
+	padding: 5px 30px; margin-left: 10px; transition-duration: 0.3s; font-weight: bold;
 	font-size: 16px;
 }
 #updateMenuWrap input[type=submit]:hover {
@@ -37,7 +39,10 @@
 }
 #itemWrap {
 	display: grid; gap: 10px; grid-template-columns : auto auto auto;
-	padding: 5px 20px;
+	padding: 5px 20px; transition-duration: 0.3s;
+}
+@media all and (min-width: 1700px) {
+	#itemWrap {grid-template-columns : auto auto auto auto;}
 }
 #itemWrap .item {
 	display: flex; flex-flow: row nowrap; justify-content : space-between; align-items : center;

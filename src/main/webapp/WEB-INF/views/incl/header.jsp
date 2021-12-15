@@ -2,6 +2,9 @@
 <% String contentName = (String)session.getAttribute("contentName"); %>
     <header>
       <h1 class="hidden">PJCCAFE</h1>
+      <form action="${pageContext.request.contextPath}/user/logout" method="get">
+      	<input id="logout" type="submit" value="로그아웃" />
+      </form>
       <nav id="gnb">
        	<h2 class="hidden">주요메뉴</h2>
         <ul>

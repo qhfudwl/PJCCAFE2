@@ -62,4 +62,18 @@ public interface UserService {
 	 */
 	User findUserById(long id);
 	
+	/**
+	 * 테이블 내 임플로이 찾아오기
+	 * @param eid
+	 * @return
+	 * @author 김보령
+	 */
+	User findEmployeeByEid(String eid);
+	
+	/**
+	 * 모든 직원 정보 가져오기
+	 * @return
+	 * @author 김보령
+	 */
+	List<User> findAllEmployee();
 }

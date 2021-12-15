@@ -69,4 +69,14 @@ public class UserServiceImpl implements UserService{
 		return ud.findUserByBirth(birth);
 	}
 
+	@Override
+	public User findEmployeeByEid(String eid) {
+		return ud.findEmployeeByEid(eid);
+	}
+
+	@Override
+	public List<User> findAllEmployee() {
+		return ud.findAllEmployee();
+	}
+
 }

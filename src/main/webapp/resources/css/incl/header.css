@@ -3,6 +3,12 @@ header{
   height: 150px;
   background: #596271;
 }
+#logout {
+	outline: none; border: 0; background-color: #596271;
+	color: #fff; font-size: 13px; font-weight: bold; cursor: pointer;
+	float: right; padding: 10px 20px;
+}
+#logout:hover {text-decoration: underline;}
 #gnb{
   width: 80%; height: 150px; margin: 0 auto;
 }

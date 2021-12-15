@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,23 +9,28 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user/login.css" />
 </head>
 <body>
-<section>
-	<h2>로그인</h2>
+<section><h2 id="loginLogo">PJC Cafe</h2></section>
+<section id="loginContent">
+	<h2>관리자 로그인</h2>
      <div id="login">
-		<form action="login" method="post">
+		<form action="checkAdmin" method="post">
 		<table>
 			<tr>
-				<td><label>ID</label></td>
-				<td><input type="text" name="eid" /></td>
+				<th><label for="inputId">ID</label></th>
+				<td>
+					<input id="inputId" type="text" name="eid" placeholder="아이디 입력" />
+					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("idErr")}</p></c:if>
+				</td>
 			</tr>
 			<tr>
-				<td><label>PW</label></td>
-				<td><input type="password" name="passwd" /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="로그인" /></td>
+				<th><label for="inputPw">PW</label></th>
+				<td>
+					<input id="inputPw" type="password" name="passwd" placeholder="비밀번호 입력" />
+					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("pwErr")}</p></c:if>
+				</td>
 			</tr>
 		</table>
+		<input type="submit" value="로그인" />
 		</form>
 	</div>
 </section>
