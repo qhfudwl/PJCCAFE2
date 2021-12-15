@@ -331,12 +331,22 @@ public class OrderController {
 		
 		
 		
-		@PostMapping("compOrder")
+		@PostMapping("saveOrder")
 		@ResponseBody
-		public ModelAndView complete_order(@ModelAttribute OrderCommand order) {
+		public HashMap<String,Object> save_order(@ModelAttribute("order") OrderCommand order) {
 			
-			//System.out.println("usePoint"+order.getUsePoint());
-			System.out.println(order);
+			
+			System.out.println(order.getUsePoint());
+			
+			//ModelAndView mav = new ModelAndView();
+			//mav.setViewName("order/completeOrder");
+			HashMap<String,Object> map = new HashMap<String, Object>();
+			
+			return map;
+		}
+		
+		@PostMapping("compOrder")
+		public ModelAndView complete_order() {
 			
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("order/completeOrder");

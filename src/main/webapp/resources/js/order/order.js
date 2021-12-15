@@ -717,8 +717,8 @@ $('.totalMenuItem').on('click',function(){
 	
 */
 
-$('.funcOrderBtn').on('click',function(){
-	
+$('.funcOrderBtn').on('click',function(e){
+	e.preventDefault();
 	//고객 아이디
 	let id =$('.orderCustId').val();		
 	let customerName = $('.orderCustName').text();
@@ -743,8 +743,10 @@ $('.funcOrderBtn').on('click',function(){
 		"customer.phone":phone,
 		"customer.birth":birth,
 		"customer.point":point,
+		
 
 	}
+	
 	let json2;
 	for(let i=0;i<$('.addMenuList').length;i++){
 		let str1 = "nowOrder["+i+"].quantity";
@@ -760,23 +762,35 @@ $('.funcOrderBtn').on('click',function(){
 
 
 	console.log(json1);
-
+	
 	$.ajax({
-		url:"compOrder",
+		url:"saveOrder",
 		type:"post",
 		data: json1,
 		//data: JSON.stringify(json),
 		//data: $('#json').serialize(),
 		dataType: 'json',
 		//contentType: "application/json; charset=UTF-8"	,
-		success:function(){
-			close()
+		success:function(data){
+			console.log('hi')
+			callCompOrder()
 			}
 		})
 	
+	/*
+	$('.order').val(json1);
+	$('#goCompOrder').submit();
+	*/
+	
+	/* document.form.order.value = json1;
+	document.form.submit();*/
 })
 
+//이건 야매야...
 
+function callCompOrder(){
+	$('#goCompOrder').submit();
+}
 
 
 
