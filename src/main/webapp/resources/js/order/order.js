@@ -217,7 +217,8 @@ $('.mList').on('click',function(e){
 	}
 	
 	calcTotalNum();	
-	calcTotalPrice();	
+	calcTotalPrice();
+	setTotalPrice();	
 	
 	//let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'up'}
 	//orderMenuListAjax(json);
@@ -348,7 +349,8 @@ $('.orderListDownBtn').on('click',function(){
 		$('.selectedMenuList').find($('.mlMenuQuantity')).text(quantity);
 		$('.selectedMenuList').find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원');
 		calcTotalNum();
-		calcTotalPrice();	
+		calcTotalPrice();
+		setTotalPrice();	
 	}
 
 })
@@ -370,6 +372,7 @@ $('.orderListUpBtn').on('click',function(e){
 		$('.selectedMenuList').find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원'); 		
 		calcTotalNum();	
 		calcTotalPrice();
+		setTotalPrice();
 	}
 	
 })
@@ -407,6 +410,7 @@ $('.orderListCancelBtn').on('click',function(){
 		$('.selectedMenuList').remove();
 		calcTotalNum();
 		calcTotalPrice();
+		setTotalPrice();
 	}
 })
 
@@ -416,7 +420,18 @@ $('.funcAllCancelBtn').on('click',function(e){
 	$('.addMenuList').remove();
 	calcTotalNum();
 	calcTotalPrice();
+	$('.usePoint').text('0원');
+	setTotalPrice();
+	resetUserInfo();
+	resetInout(); 
 })
+
+function resetUserInfo(){
+	$('.orderCustName').text('');
+	$('.orderCustPhone').text('');
+	$('.orderCustBirth').text('');
+	$('.orderCustPoint').text('');
+}
 
 
 /* 포장 누르기 */
@@ -429,7 +444,11 @@ $('.orderListInOutBtn').on('click',function(e){
 	}
 	
 })
-
+function resetInout(){
+	if($('.orderListInOutBtn').hasClass('selectedMenuList')){
+		$('.orderListInOutBtn').removeClass('selectedMenuList');
+	}
+}
 /* 고객 선택 누르기 */
 $('.funcCustomerSelectBtn').on('click',function(e){
 	e.preventDefault();
@@ -506,7 +525,7 @@ $('#popupSubmitBtn').on('click',function(){
 		//let json={"custName":custName,"custPhone":custPhone,"custBirth":custBirth,"custPoint":custPoint}
 		
 		opener.parent.setCustomerInfo(custName,custPhone,custBirth,custPoint);
-		
+		opener.parent.sendUserInfo(custName,custPhone,custBirth,custPoint);
 		/*
 		$.ajax({
 		url:"findUserResultForPoint",
@@ -538,8 +557,23 @@ function setCustomerInfo(custName,custPhone,custBirth,custPoint){
 	$('.orderCustPhone').text(custPhone);
 	$('.orderCustBirth').text(custBirth);
 	$('.orderCustPoint').text(custPoint);
+	
 }
-
+function sendUserInfo(custName,custPhone,custBirth,custPoint){
+		let point = custPoint;
+		point = point.replace(",","");
+		let json={"userName":custName,"userPhone":custPhone,"userBirth":custBirth,"userPoint":point}
+		$.ajax({
+		url:"saveUserPoint",
+		type:"post",
+		data: JSON.stringify(json),
+		contentType: "application/json; charset=UTF-8"	,
+		//async:false	,
+		success:function(){
+			
+			}
+		})
+}
 
 
 /*	검색시 값이 없을 때 유효성 처리하고 전송 */
@@ -585,9 +619,95 @@ function joinSubmit(){
 	}
 }
 
+//포인트 사용 팝업창 열기
+$('.orderListPointBtn').on('click',function(){
+ 
+	//고객명에 이름이 있으면 팝업창 띄우기
+	if($('.orderCustName').text()!=''){
+		let popupWidth = 500;
+	let popupHeight = 500;
+	
+	let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+	// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+	
+	let popupY= (document.body.offsetHeight / 2) - (popupHeight / 2);
+	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
+	
+	
+	window.open("usePointPopup", "title", "width=500, height = 500, top="+ popupY + ", left="+ popupX + ""); //선언과 초기화 동시에 해도 됨
+	}
+	
+})
 
 
+$('.usePointBtn').on('click',function(e){
+	e.preventDefault();
+	//opener.parent.usePoint();
+	console.log('hi');
+	let canUserPoint = $('.canUsePoint').text();
+	canUserPoint = canUserPoint.replace(",","");
+	canUserPoint = Number(canUserPoint);
+	let usePoint = Number($('.popUpInputUserPointArea').val());
+	if(canUserPoint>=usePoint && canUserPoint>=5000 && usePoint>=1000 && (usePoint%100==0)){
+		console.log('in?');
+		opener.parent.usePoint(usePoint);
+	}
+	else{
+		alert('5,000포인트 이상 보유시, 1,000포인트 이상 100포인트 단위로 사용가능')
+	}
+	
+	close();
+})
 
+function usePoint(point){
+	let beforePoint = $('.totalPriceBeforePoint').text();
+	beforePoint = beforePoint.replace(",","");
+	beforePoint = beforePoint.replace("원","");
+	beforePoint = Number(beforePoint);
+	
+	if(beforePoint>0){
+		$('.usePoint').text(numberWithCommas(point)+'원');
+	}
+	else{
+		$('.usePoint').text('0원');
+	}
+	
+	//$('.usePoint').text(1000);
+	setTotalPrice();
+	
+}
+
+function setTotalPrice(){
+	let beforePoint = $('.totalPriceBeforePoint').text();
+	let userPoint = $('.usePoint').text();
+	
+	beforePoint = beforePoint.replace(",","");
+	beforePoint = beforePoint.replace("원","");
+	beforePoint = Number(beforePoint);
+	
+	userPoint = userPoint.replace(",","");
+	userPoint = userPoint.replace("원","");
+	userPonit = Number(userPoint);
+	
+	let totalPrice = beforePoint - userPoint;
+	if(totalPrice>=0){
+		totalPrice = numberWithCommas(totalPrice)+'원';
+	}else{
+		totalPrice = '0원';
+	}
+
+	$('.totalPrice').text(totalPrice);
+	
+	
+			
+}
+
+$('.totalMenuItem').on('click',function(){
+	resetMenuList();
+	$('.mFood').show();
+	$('.mBeverage').show();
+	$('.mCoffee').show();
+})
 
 
 

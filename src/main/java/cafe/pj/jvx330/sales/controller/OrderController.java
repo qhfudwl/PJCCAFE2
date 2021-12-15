@@ -243,23 +243,17 @@ public class OrderController {
 			
 			return mav;
 		}
-		
-		//고객 선택 팝업창(안씀)
-		@PostMapping("findUserResultForPoint")
+		Customer customer = new Customer();
+		//고객 정보 보관하기
+		@PostMapping("saveUserPoint")
 		@ResponseBody
-		public String findUserResultForPointForm(@RequestBody HashMap<String,Object> map) {
-			System.out.println("findUserResultForPointForm in");
-			
-			ModelAndView mav = new ModelAndView();
-			Customer customer = new Customer();
-			customer.setCustomerName(map.get("custName").toString());
-			//customer.setCustomerName(map.get("custName").toString());
-			//customer.setCustomerName(map.get("custName").toString());
-			//customer.setCustomerName(map.get("custName").toString());
-			mav.addObject(customer);
-			mav.setViewName("redirect:/order");
-			
-			return "hi";
+		public void saveUserPoint(@RequestBody HashMap<String,Object> map) {
+			System.out.println("saveUserPoint");			
+			customer.setCustomerName(map.get("userName").toString());
+			customer.setPhone(map.get("userPhone").toString());
+			customer.setBirth(map.get("userBirth").toString());
+			customer.setPoint(Double.parseDouble(map.get("userPoint").toString()));
+			return;
 		}
 		
 		//회원가입 팝업창
@@ -280,6 +274,7 @@ public class OrderController {
 			User user = new Customer(name,phone,birth,0);
 			System.out.println(name+phone+birth);
 			us.addUser(user);
+			return;
 		}
 		
 		
@@ -296,6 +291,27 @@ public class OrderController {
 		 *			1-3 포인트 사용취소
 		 * 		2 - 주문최스금액 5,000원 이하면 경고창
 		 */
+		
+		//포인트 사용 팝업창 띄우기
+		@GetMapping("usePointPopup")
+		public ModelAndView usePointPopupForm() {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("userPoint", customer.getPoint());
+			mav.setViewName("order/usePoint");
+			return mav;
+		}
+		
+		
+		//포인트 사용하기
+		@PostMapping("usePoint")
+		public void usePointPopup() {
+			
+			
+		}
+		
+		
+		
+		
 		
 		/**
 		 * 전체취소 누르면
