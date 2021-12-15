@@ -28,6 +28,7 @@
       (좌) 주문내역
       
       -->
+      
 				<div class="leftSideWrap halfSideWrap">
 					<h2 class="hidden">주문내역</h2>
 					<div class="orderListTableWrap">
@@ -203,12 +204,14 @@
 					</div>
 					<div class="funcButtonsWrap oneRow">
 						<h3 class="hidden">기능</h3>
+						
 						<ul>
 							<li><a href="#" class="menuItemCom funcButtonCom funcAllCancelBtn">전체취소</a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom"></a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom funcCustomerSelectBtn">고객선택</a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom funcOrderBtn">주문하기</a></li>
 						</ul>
+						
 					</div>
 
 				</div>

@@ -332,12 +332,14 @@ public class OrderController {
 		
 		
 		@PostMapping("compOrder")
+		@ResponseBody
 		public ModelAndView complete_order(@ModelAttribute OrderCommand order) {
 			
-			
-			
+			//System.out.println("usePoint"+order.getUsePoint());
+			System.out.println(order);
 			
 			ModelAndView mav = new ModelAndView();
+			mav.setViewName("order/completeOrder");
 			return mav;
 		}
 		

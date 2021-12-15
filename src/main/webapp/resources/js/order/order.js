@@ -508,7 +508,7 @@ $('#popupSubmitBtn').on('click',function(){
 	//for(let i=0; i<$('.userList').length;i++){
 		if($('.userList').hasClass('selectedCustomer')){
 			
-		let custId = $('.selectedCustomer').find($('.custId')).text();
+		let custId = $('.selectedCustomer').find($('.custId')).val();
 		let custName = $('.selectedCustomer').find($('.custName')).text();
 		let custPhone = $('.selectedCustomer').find($('.custPhone')).text();
 		let custBirth = $('.selectedCustomer').find($('.custBirth')).text();
@@ -725,6 +725,9 @@ $('.funcOrderBtn').on('click',function(){
 	let phone = $('.orderCustPhone').text();
 	let birth = $('.orderCustBirth').text();
 	let point = $('.orderCustPoint').text();
+	point = point.replace(",","");
+	point = point.replace("원","");
+	point = Number(point);
 	
 	//사용할 포인트
 	let usePoint = $('.usePoint').text(); 
@@ -733,8 +736,43 @@ $('.funcOrderBtn').on('click',function(){
 	usePoint = Number(usePoint);
 	
 	//메뉴아이디, 메뉴수량
-	let data={"":,}
+	let json1={
+		"usePoint":usePoint,
+		"customer.id":id,
+		"customer.customerName":customerName,
+		"customer.phone":phone,
+		"customer.birth":birth,
+		"customer.point":point,
 
+	}
+	let json2;
+	for(let i=0;i<$('.addMenuList').length;i++){
+		let str1 = "nowOrder["+i+"].quantity";
+		let str2 = $('.addMenuList').eq(i).find($('.mlMenuQuantity')).text();
+		
+		let str3 = "nowOrder["+i+"].menu.id";
+		let str4 = $('.addMenuList').eq(i).find($('.mlMenuId')).val();
+		
+		json2={[str1]:str2,[str3]:str4}
+		Object.assign(json1, json2);
+		
+	}
+
+
+	console.log(json1);
+
+	$.ajax({
+		url:"compOrder",
+		type:"post",
+		data: json1,
+		//data: JSON.stringify(json),
+		//data: $('#json').serialize(),
+		dataType: 'json',
+		//contentType: "application/json; charset=UTF-8"	,
+		success:function(){
+			close()
+			}
+		})
 	
 })
 
