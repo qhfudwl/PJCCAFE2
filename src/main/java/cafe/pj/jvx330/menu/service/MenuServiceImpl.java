@@ -6,11 +6,12 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.dao.MenuDao;
 
-@Component("menuService")
+@Service("menuService")
 public class MenuServiceImpl implements MenuService {
 	
 	@Resource(name="menuDao")
@@ -19,7 +20,7 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public Menu addMenu(Menu menu) {
 		md.addMenu(menu);
-		return md.findAllMenuByMenuName(menu.getMenuName()).get(0);
+		return findLastMenuByMenuType(menu.getMenuType());
 		// 마지막거를 가져오면 더 빠르다.
 	}
 
@@ -52,6 +53,11 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public void removeMenuById(long id) {
 		md.removeMenuById(id);
+	}
+
+	@Override
+	public Menu findLastMenuByMenuType(char menuType) {
+		return md.findLastMenuByMenuType(menuType);
 	}
 	
 	

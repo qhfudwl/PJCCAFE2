@@ -1,12 +1,15 @@
 package cafe.pj.jvx330.menu.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,9 +62,11 @@ public class MenuListController extends MenuController {
 	public ModelAndView updateMenu(@ModelAttribute("menu") MenuCommand menuCommand,
 			@RequestParam("file") MultipartFile file, HttpServletRequest request,
 			@RequestParam("sendImgPathText") String removeImgName) throws IllegalStateException, IOException {
+
+		ModelAndView mav = new ModelAndView();
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
-				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
+				menuCommand.getMenuName(), Double.parseDouble(menuCommand.getMenuPrice()), menuCommand.isStock(),
 				fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), menuCommand.getImgPath()));
 		
 		fileAux.removeImgFile(request, menu, fileAux.getImgName(removeImgName));
@@ -69,7 +74,6 @@ public class MenuListController extends MenuController {
 		
 		ms.updateMenuById(menu);
 		
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("close", "close");
 		mav.setViewName("menu/menu_list_popup_update");
 		
@@ -86,18 +90,35 @@ public class MenuListController extends MenuController {
 	 * @throws IOException
 	 */
 	@PostMapping("/menu/addMenu")
-	public ModelAndView addMenu(@ModelAttribute("menu") MenuCommand menuCommand, 
+	public ModelAndView addMenu(@ModelAttribute MenuCommand menuCommand, Model model ,
 			@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
 
+		ModelAndView mav = new ModelAndView();
+		
+		Map<String, String> errMsg = new HashMap<>();
+		
+		if (validator.isEmpty(menuCommand.getMenuName())) { // 이름 미입력
+			errMsg.put("menuNameErr", "메뉴 이름을 입력해주세요.");
+			mav.addObject("errMsg", errMsg);
+			mav.addObject("menu", menuCommand);
+			mav.setViewName("menu/menu_list_popup_add");
+			return mav;
+		} else if (validator.isEmpty(menuCommand.getMenuPrice())) { // 가격 미입력
+			errMsg.put("menuPriceErr", "메뉴 가격을 입력해주세요.");
+			mav.addObject("errMsg", errMsg);
+			mav.addObject("menu", menuCommand);
+			mav.setViewName("menu/menu_list_popup_add");
+			return mav;
+		}
+		
 		Menu menu = new Menu(menuCommand.getMenuType(),
-				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
+				menuCommand.getMenuName(), Double.parseDouble(menuCommand.getMenuPrice()), menuCommand.isStock(),
 				fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), menuCommand.getImgPath()));
 
 		fileAux.uploadImgFile(request, file, menu);
 		
 		ms.addMenu(menu);
 		
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("close", "close");
 		mav.setViewName("menu/menu_list_popup_add");
 		

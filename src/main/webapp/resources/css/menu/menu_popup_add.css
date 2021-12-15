@@ -14,7 +14,11 @@
 }
 #addMenuPopUp td {
 	background-color: #f4f4f4; border-bottom: 1px solid #fff;
-	padding: 10px;
+	padding: 10px; position: relative;
+}
+#addMenuPopUp td span {font-size: 12px;}
+#addMenuPopUp .errMsg {
+	position: absolute; right: 5px; bottom: 5px; color: #f00; font-size: 10px;
 }
 #addMenuPopUp input[type=file] {display: none;}
 #addMenuPopUp input[type=file] + label {

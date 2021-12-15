@@ -16,14 +16,12 @@ public class MenuDaoImpl implements MenuDao {
 	private JdbcTemplate jt;
 
 	@Override
-	public Menu addMenu(Menu menu) {
+	public void addMenu(Menu menu) {
 		String sql = "INSERT INTO Menu(menuType, menuName, menuPrice, stock, imgPath)"
 				+ " VALUES (?, ?, ?, ?, ?)";
 		
 		jt.update(sql, String.valueOf(menu.getMenuType()), menu.getMenuName(),
 				menu.getMenuPrice(), menu.isStock(), menu.getImgPath());
-		
-		return null;
 	}
 
 	@Override
@@ -81,6 +79,12 @@ public class MenuDaoImpl implements MenuDao {
 		String sql = "DELETE FROM Menu WHERE id=?";
 		
 		jt.update(sql, id);
+	}
+
+	@Override
+	public Menu findLastMenuByMenuType(char menuType) {
+		String sql = "SELECT * FROM Menu WHERE id=(SELECT MAX(id) FROM Menu WHERE menuType=?)";
+		return jt.queryForObject(sql, new MenuRowMapper(), String.valueOf(menuType));
 	}
 
 }

@@ -17,6 +17,13 @@ public interface MenuService {
 	Menu addMenu(Menu menu);
 	
 	/**
+	 * 해당 타입의 가장 마지막 id 인 레코드 가져오기
+	 * @return
+	 * @author 김보령
+	 */
+	Menu findLastMenuByMenuType(char menuType);
+	
+	/**
 	 * id를 이용해서 메뉴 객체 찾기
 	 * @param id
 	 * @return

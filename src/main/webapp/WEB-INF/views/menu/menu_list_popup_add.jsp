@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,16 +23,22 @@
 				<td>
 					<input id="addImgFile" type="file" name="file" />
 					<label for="addImgFile">업로드</label>
-					<input type="text" name="imgPath"  />
+					<input type="text" name="imgPath" />
 				</td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="menuName" placeholder="메뉴 이름 입력"/></td>
+				<td>
+					<input type="text" name="menuName" placeholder="메뉴 이름 입력"/>
+					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("menuNameErr")}</p></c:if>
+				</td>
 			</tr>
 			<tr>
 				<th>가격</th>
-				<td><input type="text" name="menuPrice" placeholder="메뉴 가격 입력"/> 원</td>
+				<td>
+					<input type="text" name="menuPrice" placeholder="메뉴 가격 입력"/> <span>원</span>
+					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("menuPriceErr")}</p></c:if>
+				</td>
 			</tr>
 			<tr>
 				<th>재고유무</th>

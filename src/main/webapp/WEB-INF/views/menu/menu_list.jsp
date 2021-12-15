@@ -45,7 +45,7 @@
 					</div>
 					<ul>
 						<li class="menuName">${m.menuName}</li>
-						<li class="menuPrice"><fmt:formatNumber value="${m.menuPrice}" pattern=",###" type="currency" currencySymbol="" /> 원</li>
+						<li class="menuPrice"><fmt:formatNumber value="${m.menuPrice}" pattern=",###" type="currency" /> 원</li>
 						<li class="stock">
 							<c:choose>
 								<c:when test="${m.stock eq 'true'}">재고 있음</c:when>

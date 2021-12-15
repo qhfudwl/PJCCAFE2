@@ -12,4 +12,18 @@ public class Validator {
 		return false;
 	}
 	
+	public boolean isEmpty(double d) {
+		if(d == 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isEmpty(long l) {
+		if(l == 0) {
+			return true;
+		}
+		return false;
+	}
+	
 }
