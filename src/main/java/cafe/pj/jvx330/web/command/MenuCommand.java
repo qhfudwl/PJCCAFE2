@@ -19,6 +19,10 @@ public class MenuCommand {
 	private boolean stock;
 	private String imgPath;
 	
+	public MenuCommand() {
+		
+	}
+	
 	public MenuCommand(long id, String menuName, String menuPrice) {
 		this.id = id;
 		this.menuName = menuName;

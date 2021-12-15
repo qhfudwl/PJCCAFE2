@@ -145,7 +145,8 @@ SELECT * FROM Menu;
 SELECT * FROM SalesRecord;
 SELECT * FROM OrderRecord;
 
-DELETE FROM Menu WHERE id=179;
+DELETE FROM Menu WHERE id=102;
+DELETE FROM Menu WHERE id=106;
 DELETE FROM SalesRecord;
 
 INSERT INTO Customer(name,phone,birth,point) VALUES('홍길동','01012345678','19900101',0);

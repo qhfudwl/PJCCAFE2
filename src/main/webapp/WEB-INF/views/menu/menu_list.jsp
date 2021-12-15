@@ -80,11 +80,11 @@
 			})
 			$("#updateMenu").click(function(e) {
 				e.preventDefault();
-				popupUpdateMenu("popUpdateMenu", 500, 300);
+				popupUpdateMenu("popUpdateMenu", 600, 300);
 			})
 			$("#removeMenu").click(function(e) {
 				e.preventDefault();
-				popupUpdateMenu("removeMenu", 0, 0);
+				removeSubmit("removeMenu");
 			})
 			function popupUpdateMenu(goUrl, popWidth, popHeight) {
 				let windowWidth = window.screen.width;
@@ -97,12 +97,21 @@
 				let popUpdateMenuOption = "width=" + popWidth + "px, height=" + popHeight + "px, top=" + popupY + "px, left=" + popupX + "px";
 				let popUpdateMenuTitle = "메뉴 업데이트";
 				
-				if (goUrl == "popAddMenu" || goUrl == "popUpdateMenu" || goUrl == "pupUploadImg") {
-					window.open(popUpdateMenuUrl, popUpdateMenuTitle, popUpdateMenuOption);
-				}
+				window.open(popUpdateMenuUrl, popUpdateMenuTitle, popUpdateMenuOption);
 				
 				let updateMenuForm = document.updateMenuForm;
+				updateMenuForm.action = popUpdateMenuUrl;
 				updateMenuForm.target = popUpdateMenuTitle;
+				updateMenuForm.method = "post";
+				
+				updateMenuForm.submit();
+				
+			}
+			function removeSubmit(goUrl) {
+				
+				let popUpdateMenuUrl = getContextPath() + "/menu/" + goUrl;
+				let updateMenuForm = document.updateMenuForm;
+				
 				updateMenuForm.action = popUpdateMenuUrl;
 				updateMenuForm.method = "post";
 				

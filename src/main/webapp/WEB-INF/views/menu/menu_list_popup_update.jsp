@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +13,9 @@
 <section id="uploadContent">
 <h3>메뉴 정보 수정</h3>
 	<div id="updateMenuPopUp">
-	<form method="post" name="updateMenuForm" action="updateMenu" enctype="multipart/form-data">
-		<input class="hidden" type="text" name="id" value="${menu.id}" />
-		<input class="hidden" type="text" name="menuType" value="${menu.menuType}" />
+	<form:form method="post" modelAttribute="menuCommand" path="updateMenuForm" action="updateMenu" enctype="multipart/form-data">
+		<form:input class="hidden" path="id" />
+		<form:input class="hidden" path="menuType" />
 		<input type="text" class="hidden" name="close" value="${close}" /> 
 		<table>
 			<tr>
@@ -22,22 +23,21 @@
 				<td>
 					<input type="file" id="updateImgFile" name="file" />
 					<label for="updateImgFile">업로드</label>
-					<input type="text" class="hidden" name="sendImgPathText" value="${menu.imgPath}" />
-					<input type="text" name="imgPath" />
+					<form:input path="imgPath" />
 				</td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="menuName" value="${menu.menuName}" /></td>
+				<td><form:input path="menuName" /></td>
 			</tr>
 			<tr>
 				<th>가격</th>
-				<td><input type="text" name="menuPrice" value="${menu.menuPrice}" /></td>
+				<td><form:input path="menuPrice" /></td>
 			</tr>
 			<tr>
 				<th>재고유무</th>
 				<td>
-					<p class="hidden">${menu.stock}</p>
+					<p class="hidden">${menuCommand.stock}</p>
 					<input type="radio" id="updateStockTrue" name="stock" value="true" />
 					<label for="updateStockTrue">재고 있음</label>
 					<input type="radio" id="updateStockFalse" name="stock" value="false" />
@@ -46,26 +46,10 @@
 			</tr>
 		</table>
 		<input type="submit"value="수정하기" />
-	</form>
+	</form:form>
 	</div>
 </section>
 	<script>
-		$("#updateMenuPopUp").mousemove(function() {
-			
-			let sendImgPathFile = $("input[name=file]").val();
-			let arrFile = sendImgPathFile.split("\\");
-			let fileImgName = arrFile[arrFile.length - 1];
-			
-			let sendImgPathText = $("input[name=sendImgPathText]").val();
-			let arrText = sendImgPathText.split("/");
-			let textImgName = arrText[arrText.length - 1];
-			
-			if(sendImgPathFile == ""){
-				$("input[name=imgPath]").val(textImgName);
-			} else {
-				$("input[name=imgPath]").val(fileImgName);
-			}
-		})
 		window.onload = function() {
 			let stock = $("#updateMenuPopUp p").text();
 			if (stock == "true"){

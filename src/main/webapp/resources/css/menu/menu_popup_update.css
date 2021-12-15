@@ -1,5 +1,5 @@
 @charset "UTF-8";
-#uploadContent {height: 100%; border: 5px solid #9dc970; box-sizing: border-box;}
+#uploadContent {height: 100%; width: 100%; border: 5px solid #9dc970; box-sizing: border-box;}
 #uploadContent h3 {
 	line-height: 70px; font-size: 25px; font-weight: bold; width: 90%;
 	border-bottom: 2px solid #596271; text-indent: 10px; margin: 0 auto; text-align: center;
@@ -23,7 +23,7 @@
 }
 #updateMenuPopUp input[type=text] {
 	outline: none; border: 0; background-color: #f4f4f4;
-	width: 250px; height: 30px;
+	width: 350px; height: 30px;
 }
 #updateMenuPopUp input[type=text]:focus {
 	background-color: #fff;

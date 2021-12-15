@@ -59,18 +59,22 @@ public class MenuListController extends MenuController {
 	 * @throws IOException
 	 */
 	@PostMapping("/menu/updateMenu")
-	public ModelAndView updateMenu(@ModelAttribute("menu") MenuCommand menuCommand,
-			@RequestParam("file") MultipartFile file, HttpServletRequest request,
-			@RequestParam("sendImgPathText") String removeImgName) throws IllegalStateException, IOException {
-
+	public ModelAndView updateMenu(@ModelAttribute("menuCommand") MenuCommand menuCommand,
+			@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
+		
 		ModelAndView mav = new ModelAndView();
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
-				menuCommand.getMenuName(), Double.parseDouble(menuCommand.getMenuPrice()), menuCommand.isStock(),
-				fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), menuCommand.getImgPath()));
+				menuCommand.getMenuName(), Double.parseDouble(menuCommand.getMenuPrice()), menuCommand.isStock(),"");
 		
-		fileAux.removeImgFile(request, menu, fileAux.getImgName(removeImgName));
-		fileAux.uploadImgFile(request, file, menu);
+		if (!validator.isEmpty(file.getOriginalFilename())) {
+			fileAux.removeImgFile(request, menu, fileAux.getImgName(menuCommand.getImgPath()));
+			menu.setImgPath(fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), file.getOriginalFilename()));
+			fileAux.uploadImgFile(request, file, menu);
+		} else {
+			String imgPath = fileAux.getImgName(menuCommand.getImgPath());
+			menu.setImgPath(fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), imgPath));	
+		}
 		
 		ms.updateMenuById(menu);
 		
@@ -90,7 +94,7 @@ public class MenuListController extends MenuController {
 	 * @throws IOException
 	 */
 	@PostMapping("/menu/addMenu")
-	public ModelAndView addMenu(@ModelAttribute MenuCommand menuCommand, Model model ,
+	public ModelAndView addMenu(@ModelAttribute MenuCommand menuCommand, 
 			@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
 
 		ModelAndView mav = new ModelAndView();
@@ -100,13 +104,13 @@ public class MenuListController extends MenuController {
 		if (validator.isEmpty(menuCommand.getMenuName())) { // 이름 미입력
 			errMsg.put("menuNameErr", "메뉴 이름을 입력해주세요.");
 			mav.addObject("errMsg", errMsg);
-			mav.addObject("menu", menuCommand);
+			mav.addObject("menuCommand", menuCommand);
 			mav.setViewName("menu/menu_list_popup_add");
 			return mav;
 		} else if (validator.isEmpty(menuCommand.getMenuPrice())) { // 가격 미입력
 			errMsg.put("menuPriceErr", "메뉴 가격을 입력해주세요.");
 			mav.addObject("errMsg", errMsg);
-			mav.addObject("menu", menuCommand);
+			mav.addObject("menuCommand", menuCommand);
 			mav.setViewName("menu/menu_list_popup_add");
 			return mav;
 		}
@@ -114,7 +118,7 @@ public class MenuListController extends MenuController {
 		Menu menu = new Menu(menuCommand.getMenuType(),
 				menuCommand.getMenuName(), Double.parseDouble(menuCommand.getMenuPrice()), menuCommand.isStock(),
 				fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), menuCommand.getImgPath()));
-
+		
 		fileAux.uploadImgFile(request, file, menu);
 		
 		ms.addMenu(menu);
@@ -140,12 +144,9 @@ public class MenuListController extends MenuController {
 		fileAux.removeImgFile(request, menu, fileAux.getImgName(menu.getImgPath()));
 		ms.removeMenuById(menu.getId());
 		
-		List<Menu> menus = ms.findAllMenusByMenuType(choiceMenu);
-		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("menus", menus);
-		mav.addObject("choiceMenu", choiceMenu);
-		mav.setViewName("menu/menu_list");
+		// 리다이렉트 시 메뉴 타입을 get으로 넘겨준다
+		mav.setViewName("redirect:/menu/viewMenuList?choiceMenu=" + choiceMenu);
 		
 		return mav;
 	}
