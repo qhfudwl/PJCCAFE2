@@ -29,23 +29,9 @@ public class MenuListPopController extends MenuController {
 	@PostMapping("/menu/popUpdateMenu")
 	public ModelAndView popUpdateMenu(@RequestParam("choiceItem") long choiceItem) {
 		ModelAndView mav = new ModelAndView();
-		Map<String, String> errMsg = new HashMap<>();
-		
-		if (validator.isEmpty(choiceItem)) {
-			errMsg.put("choiceErr", "메뉴를 선택해주세요.");
-			mav.addObject("errMsg", errMsg);
-			mav.setViewName("menu/menu_list_popup_update");
-			return mav;
-		}
 
 		Menu menu = ms.findMenuById(choiceItem);
-		MenuCommand menuCommand = new MenuCommand();
-		menuCommand.setId(menu.getId());
-		menuCommand.setImgPath(menu.getImgPath());
-		menuCommand.setMenuName(menu.getMenuName());
-		menuCommand.setMenuPrice(String.valueOf(menu.getMenuPrice()));
-		menuCommand.setMenuType(menu.getMenuType());
-		menuCommand.setStock(menu.isStock());
+		MenuCommand menuCommand = convertMenuToMenuCommand(menu);
 		
 		mav.addObject("menuCommand", menuCommand);
 		mav.setViewName("menu/menu_list_popup_update");
@@ -61,8 +47,10 @@ public class MenuListPopController extends MenuController {
 	@PostMapping("/menu/popAddMenu")
 	public ModelAndView popAddMenu(@RequestParam("choiceMenu") char choiceMenu) {
 		ModelAndView mav = new ModelAndView();
+		// jsp에서 command 로 받기 때문에 command 로 던져줘야한다.
 		MenuCommand menuCommand = new MenuCommand();
 		menuCommand.setMenuType(choiceMenu);
+		
 		mav.addObject("menuCommand", menuCommand);
 		mav.setViewName("menu/menu_list_popup_add");
 		

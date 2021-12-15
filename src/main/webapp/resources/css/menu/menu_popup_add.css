@@ -33,7 +33,7 @@
 	background-color: #fff;
 }
 #addMenuPopUp input[type=radio] {display: none;}
-#addMenuPopUp input[type=radio] + label {margin: 0 10px; font-size: 14px;}
+#addMenuPopUp input[type=radio] + label {margin: 0 10px; font-size: 14px; cursor: pointer;}
 #addMenuPopUp input[type=radio]:checked + label {
 	border-bottom: 2px solid #9dc970;
 }

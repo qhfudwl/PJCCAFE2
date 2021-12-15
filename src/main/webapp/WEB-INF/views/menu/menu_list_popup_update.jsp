@@ -28,16 +28,22 @@
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><form:input path="menuName" /></td>
+				<td>
+					<form:input path="menuName" />
+					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("menuNameErr")}</p></c:if>
+				</td>
 			</tr>
 			<tr>
 				<th>가격</th>
-				<td><form:input path="menuPrice" /></td>
+				<td>
+					<form:input path="menuPrice" /> <span>원</span>
+					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("menuPriceErr")}</p></c:if>
+				</td>
 			</tr>
 			<tr>
 				<th>재고유무</th>
 				<td>
-					<p class="hidden">${menuCommand.stock}</p>
+					<p class="hidden" id="checkStock">${menuCommand.stock}</p>
 					<input type="radio" id="updateStockTrue" name="stock" value="true" />
 					<label for="updateStockTrue">재고 있음</label>
 					<input type="radio" id="updateStockFalse" name="stock" value="false" />
@@ -51,7 +57,7 @@
 </section>
 	<script>
 		window.onload = function() {
-			let stock = $("#updateMenuPopUp p").text();
+			let stock = $("#checkStock").text();
 			if (stock == "true"){
 				$("#updateStockTrue + label").trigger("click");
 			} else {

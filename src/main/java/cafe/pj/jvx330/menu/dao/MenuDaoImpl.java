@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.web.util.Validator;
 
 @Repository("menuDao")
 public class MenuDaoImpl implements MenuDao {
@@ -83,8 +85,16 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public Menu findLastMenuByMenuType(char menuType) {
-		String sql = "SELECT * FROM Menu WHERE id=(SELECT MAX(id) FROM Menu WHERE menuType=?)";
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath, regDate"
+				+ " FROM Menu WHERE id=(SELECT MAX(id) FROM Menu WHERE menuType=?)";
 		return jt.queryForObject(sql, new MenuRowMapper(), String.valueOf(menuType));
+	}
+
+	@Override
+	public Menu findMenuByMenuName(String menuName) {
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath, regDate"
+				+ " FROM Menu WHERE menuName=?";
+		return jt.queryForObject(sql, new MenuRowMapper(), menuName);
 	}
 
 }

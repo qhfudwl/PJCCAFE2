@@ -28,6 +28,16 @@ public class MenuCommand {
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
 	}
+
+	public MenuCommand(long id, char menuType, String menuName, String menuPrice, boolean stock, String imgPath) {
+		super();
+		this.id = id;
+		this.menuType = menuType;
+		this.menuName = menuName;
+		this.menuPrice = menuPrice;
+		this.stock = stock;
+		this.imgPath = imgPath;
+	}
 	
 	public long getId() {
 		return id;

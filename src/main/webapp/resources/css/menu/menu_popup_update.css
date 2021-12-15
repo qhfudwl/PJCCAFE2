@@ -14,7 +14,11 @@
 }
 #updateMenuPopUp td {
 	background-color: #f4f4f4; border-bottom: 1px solid #fff;
-	padding: 10px;
+	padding: 10px; position: relative;
+}
+#updateMenuPopUp td span {font-size: 12px;}
+#updateMenuPopUp .errMsg {
+	position: absolute; right: 5px; bottom: 5px; color: #f00; font-size: 10px;
 }
 #updateMenuPopUp input[type=file] {display: none;}
 #updateMenuPopUp input[type=file] + label {
@@ -29,7 +33,7 @@
 	background-color: #fff;
 }
 #updateMenuPopUp input[type=radio] {display: none;}
-#updateMenuPopUp input[type=radio] + label {margin: 0 10px; font-size: 14px;}
+#updateMenuPopUp input[type=radio] + label {margin: 0 10px; font-size: 14px; cursor: pointer;}
 #updateMenuPopUp input[type=radio]:checked + label {
 	border-bottom: 2px solid #9dc970;
 }

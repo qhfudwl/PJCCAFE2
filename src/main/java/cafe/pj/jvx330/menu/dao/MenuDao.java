@@ -41,6 +41,13 @@ public interface MenuDao {
 	 * @author 김보령
 	 */
 	List<Menu> findAllMenuByMenuName(String menuName);
+
+	/**
+	 * 해당 이름의 메뉴가 있는지 확인
+	 * @param menuName
+	 * @return
+	 */
+	Menu findMenuByMenuName(String menuName);
 	
 	/**
 	 * 모든 메뉴 리스트 뽑기

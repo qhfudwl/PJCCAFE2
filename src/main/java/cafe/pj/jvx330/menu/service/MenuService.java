@@ -38,6 +38,14 @@ public interface MenuService {
 	 * @author 김보령
 	 */
 	List<Menu> findAllMenuByMenuName(String menuName);
+
+	/**
+	 * 해당 이름의 메뉴가 있는지 확인
+	 * 있으면 참 / 없으면 거짓
+	 * @param menuName
+	 * @return
+	 */
+	boolean isMenuName(String menuName);
 	
 	/**
 	 * 모든 메뉴 리스트 뽑기

@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.dao.MenuDao;
+import cafe.pj.jvx330.web.util.Validator;
 
 @Service("menuService")
 public class MenuServiceImpl implements MenuService {
 	
 	@Resource(name="menuDao")
 	private MenuDao md;
+	
+	@Autowired
+	private Validator validator;
 
 	@Override
 	public Menu addMenu(Menu menu) {
@@ -58,6 +62,15 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public Menu findLastMenuByMenuType(char menuType) {
 		return md.findLastMenuByMenuType(menuType);
+	}
+
+	@Override
+	public boolean isMenuName(String menuName) {
+		Menu menu = md.findMenuByMenuName(menuName);
+		if (validator.isEmpty(menu)) {
+			return false;
+		}
+		return true;
 	}
 	
 	

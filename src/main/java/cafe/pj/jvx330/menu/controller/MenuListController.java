@@ -39,11 +39,15 @@ public class MenuListController extends MenuController {
 	public ModelAndView viewMenuList(@RequestParam("choiceMenu") char choiceMenu,
 			HttpSession session, HttpServletRequest request) {
 		List<Menu> menus = ms.findAllMenusByMenuType(choiceMenu);
+		
+		// 네비게이션 표시용
 		session.setAttribute("contentName", "메뉴목록");
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menus", menus);
 		mav.addObject("choiceMenu", choiceMenu);
 		mav.setViewName("menu/menu_list");
+		
 		return mav;
 	}
 	
@@ -63,18 +67,55 @@ public class MenuListController extends MenuController {
 			@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		ModelAndView mav = new ModelAndView();
+		Map<String, String> errMsg = new HashMap<>();
 		
+		// 유효성 검사
+		if(validator.isEmpty(menuCommand.getMenuName())) { // 이름이 없을 경우
+			errMsg.put("menuNameErr", "메뉴 이름을 입력해주세요.");
+			mav.addObject("errMsg", errMsg);
+			mav.addObject("menuCommand", menuCommand);
+			mav.setViewName("menu/menu_list_popup_update");
+			return mav;
+		} else if (validator.isEmpty(menuCommand.getMenuPrice())) { // 가격이 없는 경우
+			errMsg.put("menuPriceErr", "메뉴 가격을 입력해주세요.");
+			mav.addObject("errMsg", errMsg);
+			mav.addObject("menuCommand", menuCommand);
+			mav.setViewName("menu/menu_list_popup_update");
+			return mav;
+		} else if (!validator.isImgName(menuCommand.getMenuName())) { // 이름에 핫 / 아이스가 없는 경우
+			errMsg.put("menuNameErr", "메뉴 이름 앞에 아이스 혹은 핫을 붙혀주세요.");
+			mav.addObject("errMsg", errMsg);
+			mav.addObject("menuCommand", menuCommand);
+			mav.setViewName("menu/menu_list_popup_update");
+			return mav;
+		} else if (!validator.isNumber(menuCommand.getMenuPrice())) { // 가격이 숫자가 아닌 경우
+			errMsg.put("menuPriceErr", "메뉴 가격은 숫자로 입력해주세요.");
+			mav.addObject("errMsg", errMsg);
+			mav.addObject("menuCommand", menuCommand);
+			mav.setViewName("menu/menu_list_popup_update");
+			return mav;
+		} 
+		
+		// 메뉴 이미지 경로가 어떻게 될 지 모르기때문에 일단 빈 문자열을 적용
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
 				menuCommand.getMenuName(), Double.parseDouble(menuCommand.getMenuPrice()), menuCommand.isStock(),"");
 		
+		String imgPath = null; // 이미지 경로
+		
+		// 만일 파일을 골랐다면
 		if (!validator.isEmpty(file.getOriginalFilename())) {
-			fileAux.removeImgFile(request, menu, fileAux.getImgName(menuCommand.getImgPath()));
-			menu.setImgPath(fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), file.getOriginalFilename()));
+			// 이 전 이미지 경로에 placeholdImg 가 포함되어있을 경우 해당 파일은 지우면 안된다.
+			// 그냥 새로운 파일만 업로드 및 적용해야한다.
+			if (!menuCommand.getImgPath().contains("placeholdImg")) {
+				fileAux.removeImgFile(request, menu, fileAux.getImgName(menuCommand.getImgPath()));
+			}
+			imgPath = file.getOriginalFilename();
 			fileAux.uploadImgFile(request, file, menu);
-		} else {
-			String imgPath = fileAux.getImgName(menuCommand.getImgPath());
-			menu.setImgPath(fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), imgPath));	
+		} else { // 파일을 고르지 않았다면 이 전 이미지는 삭제하면 안된다.
+			imgPath = fileAux.getImgName(menuCommand.getImgPath());	
 		}
+		// 이미지 경로를 받아서 처리
+		menu.setImgPath(fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), imgPath));
 		
 		ms.updateMenuById(menu);
 		
@@ -101,14 +142,33 @@ public class MenuListController extends MenuController {
 		
 		Map<String, String> errMsg = new HashMap<>();
 		
-		if (validator.isEmpty(menuCommand.getMenuName())) { // 이름 미입력
+		// 유효성 검사
+		if(validator.isEmpty(menuCommand.getMenuName())) { // 이름이 없을 경우
 			errMsg.put("menuNameErr", "메뉴 이름을 입력해주세요.");
 			mav.addObject("errMsg", errMsg);
 			mav.addObject("menuCommand", menuCommand);
 			mav.setViewName("menu/menu_list_popup_add");
 			return mav;
-		} else if (validator.isEmpty(menuCommand.getMenuPrice())) { // 가격 미입력
+		} else if (validator.isEmpty(menuCommand.getMenuPrice())) { // 가격이 없는 경우
 			errMsg.put("menuPriceErr", "메뉴 가격을 입력해주세요.");
+			mav.addObject("errMsg", errMsg);
+			mav.addObject("menuCommand", menuCommand);
+			mav.setViewName("menu/menu_list_popup_add");
+			return mav;
+		} else if (!validator.isImgName(menuCommand.getMenuName())) { // 이름에 핫 / 아이스가 없는 경우
+			errMsg.put("menuNameErr", "메뉴 이름 앞에 아이스 혹은 핫을 붙혀주세요.");
+			mav.addObject("errMsg", errMsg);
+			mav.addObject("menuCommand", menuCommand);
+			mav.setViewName("menu/menu_list_popup_add");
+			return mav;
+		} else if (!validator.isNumber(menuCommand.getMenuPrice())) { // 가격이 숫자가 아닌 경우
+			errMsg.put("menuPriceErr", "메뉴 가격은 숫자로 입력해주세요.");
+			mav.addObject("errMsg", errMsg);
+			mav.addObject("menuCommand", menuCommand);
+			mav.setViewName("menu/menu_list_popup_add");
+			return mav;
+		} else if (ms.isMenuName(menuCommand.getMenuName())) { // 해당 이름이 있는지 확인
+			errMsg.put("menuNameErr", "이미 존재하는 이름입니다.");
 			mav.addObject("errMsg", errMsg);
 			mav.addObject("menuCommand", menuCommand);
 			mav.setViewName("menu/menu_list_popup_add");

@@ -80,11 +80,19 @@
 			})
 			$("#updateMenu").click(function(e) {
 				e.preventDefault();
-				popupUpdateMenu("popUpdateMenu", 600, 300);
+				if ($("input[name=choiceItem]:checked").val() == null) {
+					alert("먼저 메뉴를 선택해주세요!");
+				} else {
+					popupUpdateMenu("popUpdateMenu", 600, 300);
+				}
 			})
 			$("#removeMenu").click(function(e) {
 				e.preventDefault();
-				removeSubmit("removeMenu");
+				if ($("input[name=choiceItem]:checked").val() == null) {
+					alert("먼저 메뉴를 선택해주세요!");
+				} else {
+					removeSubmit("removeMenu");
+				}
 			})
 			function popupUpdateMenu(goUrl, popWidth, popHeight) {
 				let windowWidth = window.screen.width;
