@@ -11,17 +11,17 @@ import cafe.pj.jvx330.config.DataSourceConfig;
 public class SalesServiceTest {
 	
 	private SalesService ss;
-	
 	@Autowired
 	public SalesServiceTest(SalesService salesService) {
 		this.ss = salesService;
 	}
 	
+	
 	public static void main(String[] args) {
 		GenericApplicationContext context = 
 				new AnnotationConfigApplicationContext(DataSourceConfig.class);
 		SalesServiceTest sst = context.getBean("salesServiceTest", SalesServiceTest.class);
-				
+		
 	}
 	
 }
