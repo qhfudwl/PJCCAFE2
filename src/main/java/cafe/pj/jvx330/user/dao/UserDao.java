@@ -48,6 +48,12 @@ public interface UserDao {
 	 */
 	User updateUserById(User user);
 	
+	/**
+	 * id로 해당 회원의 포인트 업데이트
+	 * @param user
+	 * @return
+	 */
+	void updatePointById(User user);
 	
 	/**
 	 * 유저의 정보를 삭제 해준다.

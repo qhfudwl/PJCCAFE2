@@ -2,7 +2,9 @@ package cafe.pj.jvx330.web.command;
 
 import java.util.Date;
 
+
 public class CustomerCommand {
+
 	private long id;
 	private String customerName;
 	private String phone;
@@ -58,4 +60,11 @@ public class CustomerCommand {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	} 
+	
+	@Override
+	public String toString() {
+		return "CustomerCommand [id=" + id + ", customerName=" + customerName + ", phone=" + phone + ", birth=" + birth
+				+ ", point=" + point + ", regDate=" + regDate + "]";
+	}
+
 }

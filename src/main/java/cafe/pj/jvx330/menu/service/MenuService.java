@@ -17,6 +17,13 @@ public interface MenuService {
 	Menu addMenu(Menu menu);
 	
 	/**
+	 * 해당 타입의 가장 마지막 id 인 레코드 가져오기
+	 * @return
+	 * @author 김보령
+	 */
+	Menu findLastMenuByMenuType(char menuType);
+	
+	/**
 	 * id를 이용해서 메뉴 객체 찾기
 	 * @param id
 	 * @return
@@ -31,6 +38,14 @@ public interface MenuService {
 	 * @author 김보령
 	 */
 	List<Menu> findAllMenuByMenuName(String menuName);
+
+	/**
+	 * 해당 이름의 메뉴가 있는지 확인
+	 * 있으면 참 / 없으면 거짓
+	 * @param menuName
+	 * @return
+	 */
+	boolean isMenuName(String menuName);
 	
 	/**
 	 * 모든 메뉴 리스트 뽑기

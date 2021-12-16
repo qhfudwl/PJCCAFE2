@@ -21,7 +21,7 @@ import cafe.pj.jvx330.web.command.CustomerCommand;
 public class UserListController extends UserController{
 	
 	/**
-	 * 헤더에서 유저목록 기본화면으로 들어가기
+	 * 헤더네비게이션에서 유저목록 의 첫 기본화면으로 들어가기
 	 */
 	@GetMapping("/user/viewUserMain")
 	public ModelAndView viewUserMain(HttpSession session) {
@@ -34,7 +34,7 @@ public class UserListController extends UserController{
 	}
 	
 	/**
-	 * 유저 목록메인에서 유저 추가 팝법창으로 보내주기
+	 * 유저 목록메인에서 새로운 유저 추가 팝법창으로 보내주기
 	 * @param customerCommand
 	 * @return
 	 */
@@ -47,7 +47,7 @@ public class UserListController extends UserController{
 	}
 	
 	/**
-	 * 유저 추가 팝업창에서 유저 목록으로 보내주기
+	 * 유저 추가 팝업창에서 유저 목록으로 보내주기!!!!!!
 	 * @param customerCommand
 	 * @return
 	 */
@@ -67,7 +67,7 @@ public class UserListController extends UserController{
 		return mav;
 	}
 	/**
-	 * 유저 목록 메인에서 수정 팝업창으로 보내주기
+	 * 유저 목록 메인에서 유저를 클릭하면 그 유저의 수정 팝업창으로 보내주기
 	 * @param customerCommand
 	 * @return
 	 */
@@ -85,7 +85,7 @@ public class UserListController extends UserController{
 	}
 	
 	/**
-	 * 유저 수정 팝업창에서 수정 완료 후 유저 리스트 메인으로
+	 * 유저 수정 팝업창에서 수정 완료 후 유저 리스트 메인으로 넘어가기!!!
 	 * @param customerCommand
 	 * @return
 	 */
@@ -109,7 +109,7 @@ public class UserListController extends UserController{
 	}
 	
 	/**
-	 * 유저 아이디를 누르면 유저 삭제하기
+	 * 유저 아이디를 누르면 유저 삭제하기!!!
 	 * @param userid
 	 * @return
 	 */
@@ -128,7 +128,11 @@ public class UserListController extends UserController{
 		return mav;
 	}
 	
-	
+	/**
+	 * 유저의 아이디로 유저의 거래내역 뽑아오기!!!
+	 * @param usersId
+	 * @return
+	 */
 	
 	@GetMapping("/user/userSaleslist")
 	public ModelAndView userSaleslist(@RequestParam("usersId") long usersId) {

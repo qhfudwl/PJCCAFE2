@@ -17,7 +17,14 @@ public interface MenuDao {
 	 * @return
 	 * @author 김보령
 	 */
-	Menu addMenu(Menu menu);
+	void addMenu(Menu menu);
+	
+	/**
+	 * 해당 타입의 가장 마지막 id 인 레코드 가져오기
+	 * @return
+	 * @author 김보령
+	 */
+	Menu findLastMenuByMenuType(char menuType);
 	
 	/**
 	 * id를 이용해서 메뉴 객체 찾기
@@ -34,6 +41,13 @@ public interface MenuDao {
 	 * @author 김보령
 	 */
 	List<Menu> findAllMenuByMenuName(String menuName);
+
+	/**
+	 * 해당 이름의 메뉴가 있는지 확인
+	 * @param menuName
+	 * @return
+	 */
+	Menu findMenuByMenuName(String menuName);
 	
 	/**
 	 * 모든 메뉴 리스트 뽑기

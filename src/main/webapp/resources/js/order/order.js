@@ -217,7 +217,8 @@ $('.mList').on('click',function(e){
 	}
 	
 	calcTotalNum();	
-	calcTotalPrice();	
+	calcTotalPrice();
+	setTotalPrice();	
 	
 	//let json={"id":id,"menuName":menuName,"menuPrice":menuPrice,"quantity":quantity,"checkQuantity":'up'}
 	//orderMenuListAjax(json);
@@ -234,7 +235,7 @@ function orderMenuListAjax(json){
 		contentType: "application/json; charset=UTF-8",
 		success: function(data){
 			//for (key in json) { console.log('key:' + key + ' / ' + 'value:' + json[key]); }
-
+			//$.each(data,fuction(key,value){...})
 			//console.log(data["order"][0])
 			//alert('successs');
 			$('.addMenuList').remove();
@@ -348,7 +349,8 @@ $('.orderListDownBtn').on('click',function(){
 		$('.selectedMenuList').find($('.mlMenuQuantity')).text(quantity);
 		$('.selectedMenuList').find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원');
 		calcTotalNum();
-		calcTotalPrice();	
+		calcTotalPrice();
+		setTotalPrice();	
 	}
 
 })
@@ -370,6 +372,7 @@ $('.orderListUpBtn').on('click',function(e){
 		$('.selectedMenuList').find($('.mlTotalPrice')).text(numberWithCommas(totalMenuPrice)+'원'); 		
 		calcTotalNum();	
 		calcTotalPrice();
+		setTotalPrice();
 	}
 	
 })
@@ -407,6 +410,7 @@ $('.orderListCancelBtn').on('click',function(){
 		$('.selectedMenuList').remove();
 		calcTotalNum();
 		calcTotalPrice();
+		setTotalPrice();
 	}
 })
 
@@ -416,7 +420,18 @@ $('.funcAllCancelBtn').on('click',function(e){
 	$('.addMenuList').remove();
 	calcTotalNum();
 	calcTotalPrice();
+	$('.usePoint').text('0원');
+	setTotalPrice();
+	resetUserInfo();
+	resetInout(); 
 })
+
+function resetUserInfo(){
+	$('.orderCustName').text('');
+	$('.orderCustPhone').text('');
+	$('.orderCustBirth').text('');
+	$('.orderCustPoint').text('');
+}
 
 
 /* 포장 누르기 */
@@ -429,7 +444,11 @@ $('.orderListInOutBtn').on('click',function(e){
 	}
 	
 })
-
+function resetInout(){
+	if($('.orderListInOutBtn').hasClass('selectedMenuList')){
+		$('.orderListInOutBtn').removeClass('selectedMenuList');
+	}
+}
 /* 고객 선택 누르기 */
 $('.funcCustomerSelectBtn').on('click',function(e){
 	e.preventDefault();
@@ -489,7 +508,7 @@ $('#popupSubmitBtn').on('click',function(){
 	//for(let i=0; i<$('.userList').length;i++){
 		if($('.userList').hasClass('selectedCustomer')){
 			
-		
+		let custId = $('.selectedCustomer').find($('.custId')).val();
 		let custName = $('.selectedCustomer').find($('.custName')).text();
 		let custPhone = $('.selectedCustomer').find($('.custPhone')).text();
 		let custBirth = $('.selectedCustomer').find($('.custBirth')).text();
@@ -505,8 +524,8 @@ $('#popupSubmitBtn').on('click',function(){
 		//console.log('thisi')	
 		//let json={"custName":custName,"custPhone":custPhone,"custBirth":custBirth,"custPoint":custPoint}
 		
-		opener.parent.setCustomerInfo(custName,custPhone,custBirth,custPoint);
-		
+		opener.parent.setCustomerInfo(custId,custName,custPhone,custBirth,custPoint);
+		opener.parent.sendUserInfo(custId,custName,custPhone,custBirth,custPoint);
 		/*
 		$.ajax({
 		url:"findUserResultForPoint",
@@ -533,13 +552,30 @@ $('#popupSubmitBtn').on('click',function(){
 })
 
 /* 유저 정보 셋팅 해주기 */
-function setCustomerInfo(custName,custPhone,custBirth,custPoint){
+function setCustomerInfo(custId, custName,custPhone,custBirth,custPoint){
+	$('.orderCustId').val(custId);
 	$('.orderCustName').text(custName);
 	$('.orderCustPhone').text(custPhone);
 	$('.orderCustBirth').text(custBirth);
 	$('.orderCustPoint').text(custPoint);
+	
 }
-
+function sendUserInfo(custId, custName,custPhone,custBirth,custPoint){
+		let point = custPoint;
+		point = point.replace(",","");
+		let json={"userId":custId, "userName":custName,"userPhone":custPhone,"userBirth":custBirth,"userPoint":point}
+		
+		$.ajax({
+		url:"saveUserPoint",
+		type:"post",
+		data: JSON.stringify(json),
+		contentType: "application/json; charset=UTF-8"	,
+		//async:false	,
+		success:function(){
+			
+			}
+		})
+}
 
 
 /*	검색시 값이 없을 때 유효성 처리하고 전송 */
@@ -570,13 +606,13 @@ function joinSubmit(){
 		data: JSON.stringify(json),
 		contentType: "application/json; charset=UTF-8"	,
 		//async:false	,
-		success:function(){
+		success:function(data){
 			
 			}
 		})
 
 		//부모화면에 뿌려주기
-		opener.parent.setCustomerInfo(userName,userPhone,userBirth,'0')
+		//id값 없어서 안됨
 		close();
 	}
 	else{
@@ -585,12 +621,186 @@ function joinSubmit(){
 	}
 }
 
+//포인트 사용 팝업창 열기
+$('.orderListPointBtn').on('click',function(){
+ 
+	//고객명에 이름이 있으면 팝업창 띄우기
+	if($('.orderCustName').text()!=''){
+		let popupWidth = 500;
+	let popupHeight = 500;
+	
+	let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+	// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+	
+	let popupY= (document.body.offsetHeight / 2) - (popupHeight / 2);
+	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
+	
+	
+	window.open("usePointPopup", "title", "width=500, height = 500, top="+ popupY + ", left="+ popupX + ""); //선언과 초기화 동시에 해도 됨
+	}
+	
+})
 
 
+$('.usePointBtn').on('click',function(e){
+	e.preventDefault();
+	//opener.parent.usePoint();
+	console.log('hi');
+	let canUserPoint = $('.canUsePoint').text();
+	canUserPoint = canUserPoint.replace(",","");
+	canUserPoint = Number(canUserPoint);
+	let usePoint = Number($('.popUpInputUserPointArea').val());
+	if(canUserPoint>=usePoint && canUserPoint>=5000 && usePoint>=1000 && (usePoint%100==0)){
+		console.log('in?');
+		opener.parent.usePoint(usePoint);
+	}
+	else{
+		alert('5,000포인트 이상 보유시, 1,000포인트 이상 100포인트 단위로 사용가능')
+	}
+	
+	close();
+})
+
+function usePoint(point){
+	let beforePoint = $('.totalPriceBeforePoint').text();
+	beforePoint = beforePoint.replace(",","");
+	beforePoint = beforePoint.replace("원","");
+	beforePoint = Number(beforePoint);
+	
+	if(beforePoint>0){
+		$('.usePoint').text(numberWithCommas(point)+'원');
+	}
+	else{
+		$('.usePoint').text('0원');
+	}
+	
+	//$('.usePoint').text(1000);
+	setTotalPrice();
+	
+}
+
+function setTotalPrice(){
+	let beforePoint = $('.totalPriceBeforePoint').text();
+	let userPoint = $('.usePoint').text();
+	
+	beforePoint = beforePoint.replace(",","");
+	beforePoint = beforePoint.replace("원","");
+	beforePoint = Number(beforePoint);
+	
+	userPoint = userPoint.replace(",","");
+	userPoint = userPoint.replace("원","");
+	userPonit = Number(userPoint);
+	
+	let totalPrice = beforePoint - userPoint;
+	if(totalPrice>=0){
+		totalPrice = numberWithCommas(totalPrice)+'원';
+	}else{
+		totalPrice = '0원';
+	}
+
+	$('.totalPrice').text(totalPrice);
+	
+	
+			
+}
+
+$('.totalMenuItem').on('click',function(){
+	resetMenuList();
+	$('.mFood').show();
+	$('.mBeverage').show();
+	$('.mCoffee').show();
+})
+
+/*
+
+	주문하기
+	
+*/
+
+$('.funcOrderBtn').on('click',function(e){
+	e.preventDefault();
+	//고객 아이디
+	let id =$('.orderCustId').val();		
+	let customerName = $('.orderCustName').text();
+	let phone = $('.orderCustPhone').text();
+	let birth = $('.orderCustBirth').text();
+	let point = $('.orderCustPoint').text();
+	point = point.replace(",","");
+	point = point.replace("원","");
+	point = Number(point);
+	
+	if(customerName==''){
+		id =1;
+		customerName=' ';
+		phone = ' ';
+		birth = ' ';
+		
+	}
+	
+	
+	//사용할 포인트
+	let usePoint = $('.usePoint').text(); 
+	usePoint = usePoint.replace(",","");
+	usePoint = usePoint.replace("원","");
+	usePoint = Number(usePoint);
+	
+	let place = "I";
+	//매장이냐 포장이냐
+	if($('.orderListInOutBtn').hasClass('selectedMenuList')){
+		place = "O";
+	}
+	
+	
+	//메뉴아이디, 메뉴수량
+	let json1={
+		"usePoint":usePoint,
+		"customer.id":id,
+		"customer.customerName":customerName,
+		"customer.phone":phone,
+		"customer.birth":birth,
+		"customer.point":point,
+		"place":place,
+
+	}
+	console.log('before for');
+	let json2;
+	for(let i=0;i<$('.addMenuList').length;i++){
+		let str1 = "nowOrder["+i+"].quantity";
+		let str2 = Number($('.addMenuList').eq(i).find($('.mlMenuQuantity')).text());
+		
+		let str3 = "nowOrder["+i+"].menuId";
+		let str4 = Number($('.addMenuList').eq(i).find($('.mlMenuId')).val());
+		console.log('menuid'+$('.mlMenuId').val());
+		json2={[str1]:str2,[str3]:str4}
+		Object.assign(json1, json2);
+		
+	}
 
 
+	console.log(json1);
+	
+	$.ajax({
+		url:"saveOrder",
+		type:"post",
+		data: json1,
+		//data: JSON.stringify(json),
+		//data: $('#json').serialize(),
+		dataType: 'json',
+		//contentType: "application/json; charset=UTF-8"	,
+		success:function(data){
+			console.log('hi')
+			callCompOrder()
+			}
+		})
+	
 
+})
 
+//이건 야매야...
+
+function callCompOrder(){
+	$('#goCompOrder').submit();
+}
 
 
 

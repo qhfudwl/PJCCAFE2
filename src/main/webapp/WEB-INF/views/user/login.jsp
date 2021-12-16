@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,25 +14,25 @@
 <section id="loginContent">
 	<h2>관리자 로그인</h2>
      <div id="login">
-		<form action="checkAdmin" method="post">
+		<form:form modelAttribute="employeeCommand" action="checkAdmin" method="post">
 		<table>
 			<tr>
-				<th><label for="inputId">ID</label></th>
+				<th><label for="eid">ID</label></th>
 				<td>
-					<input id="inputId" type="text" name="eid" placeholder="아이디 입력" />
+					<form:input path="eid" placeholder="아이디 입력" />
 					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("idErr")}</p></c:if>
 				</td>
 			</tr>
 			<tr>
-				<th><label for="inputPw">PW</label></th>
+				<th><label for="passwd">PW</label></th>
 				<td>
-					<input id="inputPw" type="password" name="passwd" placeholder="비밀번호 입력" />
+					<form:password path="passwd" placeholder="비밀번호 입력" />
 					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("pwErr")}</p></c:if>
 				</td>
 			</tr>
 		</table>
 		<input type="submit" value="로그인" />
-		</form>
+		</form:form>
 	</div>
 </section>
 </body>

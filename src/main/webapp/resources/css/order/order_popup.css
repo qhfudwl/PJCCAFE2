@@ -38,12 +38,12 @@ body{
   font-weight: 400;
   font-size: 1em;
 }
-.popUpSearchWrap{
+.popUpSearchWrap {
   margin-top:90px;
 }
 
 /* 검색창 - input text */
-.popUpInputPhoneArea, .joinAreaCom{
+.popUpInputPhoneArea, .joinAreaCom, .popUpInputUserPointArea{
   width: 400px;
 	height: 50px;
 	border: 1px solid #eee;
@@ -92,7 +92,7 @@ body{
   background: none;
   border: 1px solid #9dc970;
 }
-.joinBtn, .joinSubmitBtn, .submitBtn {
+.joinBtn, .joinSubmitBtn, .submitBtn, .usePointBtn {
   float:left;
 }
 .cancelBtn{
@@ -140,11 +140,11 @@ body{
 
 /* 회원가입 */
 
-.popUpJoinWrap{
+.popUpJoinWrap, .popUpUserPointWrap{
   text-align: left;
   width: 400px; margin:25px auto 10px;
 }
-.popUpJoinWrap p {
+.popUpJoinWrap p , .popUpUserPointWrap p{
   font-weight: 400;
   font-size: 1em;
 }
@@ -162,6 +162,15 @@ body{
 
 .selectedCustomer{
 	background: #9dc970 !important;
+}
+
+
+
+/* 사용할 포인트 팝업창 */
+
+
+.popUpUserPointWrap{
+	margin-top: 90px;
 }
 
 

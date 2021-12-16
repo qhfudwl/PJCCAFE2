@@ -38,7 +38,7 @@ public class SalesListController extends SalesController{
 	 */
 	@GetMapping("/sales/viewSalesMain")
 	public ModelAndView viewSalesMain(HttpSession session) {
-		List<SalesStorage> sList = ss.method2('D');
+		List<SalesStorage> sList = ss.findSaleRecord('D');
 		ModelAndView mav = new ModelAndView();
 		session.setAttribute("contentName", "판매내역");
 		mav.addObject("sList",sList);
@@ -49,7 +49,7 @@ public class SalesListController extends SalesController{
 	
 	@GetMapping("/sales/viewSalesType")
 	public ModelAndView viewSalesType(@RequestParam("datePicker") char type) {
-		List<SalesStorage> sList = ss.method2(type);
+		List<SalesStorage> sList = ss.findSaleRecord(type);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("sList",sList);
 		//System.out.println(sList);

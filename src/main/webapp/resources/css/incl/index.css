@@ -2,15 +2,24 @@
 body, html {height: 100%;}
 #indexContent {
 	display: flex; flex-flow: row nowrap; justify-content: center;
-	width: 100%; min-width: 1320px; height: calc(100% - 170px);
+	width: 100%; min-width: 1100px; height: calc(100% - 170px);
 }
 #indexContent .headerMent {
 	font-size: 18px; width: 95%; border-bottom: 2px solid #596271; margin: 0 auto;
 	line-height: 60px; font-weight: normal;
 }
+#orders {
+	width: 60%;
+}
 #salesItemWrap {
-	display : grid; grid-template-columns : auto auto auto auto; gap : 20px;
+	display : grid; grid-template-columns : 22% 22% 22% 22%; gap : 3%;
 	flex-basis: 50%; padding: 20px;
+}
+@media all and (max-width: 1430px) {
+	#salesItemWrap {grid-template-columns : 31% 31% 31%;}
+}
+#noOrder {
+	text-align: center; font-weight: bold; color: #9dc970;
 }
 #salesItemWrap input[name=orderNumber] {
 	display: none;
@@ -33,17 +42,17 @@ body, html {height: 100%;}
 #salesItemWrap .salesMenu { padding: 10px 0 5px; font-weight: bold; color: #596271; }
 #salesItemWrap .salesDate { padding-top: 10px; color: #596271; font-size: 12px;}
 #orderCompletedContent {
-	background-color : #dfe1dc; width: 500px; position: relative;
+	background-color : #dfe1dc; min-width: 400px; position: relative;
 	padding: 0 10px 10px 10px; box-sizing: border-box;
 	border-radius: 0 0 20px 20px;
 }
 #orderCompletedContent p { float: left; line-height: 30px; padding: 0 5px; }
 #orderCompletedContent .shortening {
-	width: 220px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+	width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 }
 #orderCompletedContent ul {padding-top: 20px;}
 #orderCompletedContent li {
-	line-height: 30px; height: 30px; margin-bottom: 5px;
+	line-height: 30px; height: 30px; margin-bottom: 5px; font-size: 13px;
 	transition-duration: 0.2s; position: relative; border-radius: 10px;
 }
 #orderCompletedContent input[type=radio] + label {

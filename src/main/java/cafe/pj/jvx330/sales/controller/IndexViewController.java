@@ -21,13 +21,24 @@ import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.web.command.ProductCommand;
 import cafe.pj.jvx330.web.command.SalesCommand;
 
+/**
+ * 주문현황
+ * @author 김보령
+ *
+ */
 @Controller("web.controller.indexViewController")
 public class IndexViewController extends SalesController {
+	
+	/**
+	 * 
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/indexView")
 	public ModelAndView indexView(HttpSession session) {
 		Map<String, List<Product>> order = checkOrderInSession(session);
 		Date today = getNowDate();
-		
+		/*
 		// 여기서부터는 나중에 삭제해야한다.---------------------------------------
 		User user1 = us.findUserById(1);
 		User user2 = us.findUserById(5);
@@ -95,21 +106,21 @@ public class IndexViewController extends SalesController {
 		sales.put(sales12.getOrderNumber(), sales12);
 		
 		session.setAttribute("sales", sales);
+		*/
 		// 여기까지 나중에 삭제해야한다.---------------------------------------
-		
 		session.setAttribute("contentName", "주문현황");
 
 		ModelAndView mav = new ModelAndView();
 		
 		// session 내 order 길이가 1 이상일 때(원소가 하나라도 있을 때)
 		// compSales를 만들어주고, mav에 넣어준다.
-		
 		if (order.size() > 0){
 			List<Sales> compSales = ss.findSalesByDate(today);
 			for (Sales s : compSales) {
 				s.setOrder(order.get(s.getOrderNumber()));
 			}
-			mav.addObject("compSales", compSales);
+//			mav.addObject("compSales", compSales);
+			session.setAttribute("compSales", compSales);
 		}
 		
 		mav.setViewName("index");
@@ -134,8 +145,10 @@ public class IndexViewController extends SalesController {
 		
 		// session에 order 가 있는지 확인하고 있으면 그걸 반환 / 없으면 새로 만들어서 넣은 후 그걸 다시 받아서 반환
 		Map<String, List<Product>> order = checkOrderInSession(session);
-		order.put(sales.getOrderNumber(), sales.getOrder());
-		
+		order.put(sales.getOrderNumber(), sales.getOrder()); // order 에 주문 완료된 내역 추가
+		//order.forEach((strKey, strValue) ->{
+		//	System.out.println(strKey + " : " + strValue);
+		//});
 		// session 내 order에 추가 후 해당 orderNumber sales 삭제
 		salesList.remove(sales.getOrderNumber());
 		

@@ -40,7 +40,7 @@
                                             <input id="label${users.id}" class="ordernumin" type="radio" name="usersId" value ="${users.id}"/>
                                         </td>
                                         <td class="phone">${users.phone}</td>
-                                        <td class="birth"><fmt:formatDate value="${user.birth}" pattern="yyyy-MM-dd"/></td>
+                                        <td class="birth">${users.birth}</td>
                                         <td class="point"><fmt:formatNumber value="${users.point}" pattern=",###" type="currency" currencySymbol="" /> P</td>
                                         <td class="regDate">${users.regDate}</td>
                                     </tr>

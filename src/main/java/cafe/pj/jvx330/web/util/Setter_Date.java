@@ -6,6 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component("setterDate")
 public class Setter_Date {
 	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	

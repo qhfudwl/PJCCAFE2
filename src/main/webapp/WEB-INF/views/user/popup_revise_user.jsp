@@ -14,7 +14,7 @@
         	<h1>PJCCAFE</h1>
             <h3>회원 수정</h3>
             <div id="updateUserFormWrap">
-            	<form action="updateUser" method="post">
+            	<form action="updateUser" method="post" name="updateUser" onsubmit="return checkValue()">
             		<input type="hidden"  name="close" value="${close}"/>
             		<table id="updateUsertable">
             			<tr>
@@ -62,6 +62,28 @@
     			self.close();
     		}
     	}
+    	function checkValue() 
+        {
+        	var form = document.updateUser;
+        	
+        	let nameExp = /^[가-힣a-zA-Z]+$/gm;
+			if(form.customerName.value.match(nameExp) == null){
+				alert("올바른 이름 형식이 아닙니다.");
+				return false;
+			}
+		
+			let birthExp = /^[0-9][0-9][0-9][0-9](0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|[3][0-1])$/gm;
+    		if(form.birth.value.match(birthExp) == null){
+    			alert("올바른 주민등록번호 형식이 아닙니다.");
+        	    return false;
+    		}
+    	
+    		let phoneExp = /^(01[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])$/gm;
+    		if(form.phone.value.match(phoneExp) == null){
+        	    alert("올바른 휴대전화 번호 공식이 아닙니다.");
+        	    return false;
+        	}
+        }
     </script>
     <footer></footer>
 </body>

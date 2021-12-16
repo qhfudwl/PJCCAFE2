@@ -6,20 +6,27 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.dao.MenuDao;
+import cafe.pj.jvx330.web.util.Validator;
 
-@Component("menuService")
+@Service("menuService")
 public class MenuServiceImpl implements MenuService {
 	
 	@Resource(name="menuDao")
 	private MenuDao md;
+	
+	@Autowired
+	private Validator validator;
 
+	@Transactional
 	@Override
 	public Menu addMenu(Menu menu) {
 		md.addMenu(menu);
-		return md.findAllMenuByMenuName(menu.getMenuName()).get(0);
+		return findLastMenuByMenuType(menu.getMenuType());
 		// 마지막거를 가져오면 더 빠르다.
 	}
 
@@ -52,6 +59,21 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public void removeMenuById(long id) {
 		md.removeMenuById(id);
+	}
+
+	@Override
+	public Menu findLastMenuByMenuType(char menuType) {
+		return md.findLastMenuByMenuType(menuType);
+	}
+
+	@Transactional
+	@Override
+	public boolean isMenuName(String menuName) {
+		Menu menu = md.findMenuByMenuName(menuName);
+		if (validator.isEmpty(menu)) {
+			return false;
+		}
+		return true;
 	}
 	
 	

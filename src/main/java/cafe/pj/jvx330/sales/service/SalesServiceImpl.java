@@ -7,10 +7,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import cafe.pj.jvx330.config.DataSourceConfig;
 import cafe.pj.jvx330.domain.Menu;
@@ -19,28 +22,37 @@ import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.menu.service.MenuService;
 import cafe.pj.jvx330.sales.dao.SalesDao;
 import cafe.pj.jvx330.sales.util.SalesStorage;
+import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.web.util.OrderStorage;
 import cafe.pj.jvx330.web.util.Setter_Date;
 
 @Component("salesService")
 public class SalesServiceImpl implements SalesService{
+	
+	@Autowired
 	private SalesDao sd;
 	
-	private Setter_Date sed = new Setter_Date();
-	private List<Product> order = new ArrayList<Product>();
-	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	@Resource(name="userService")
+	private UserService us;
 	
 	@Autowired
 	private MenuService ms;
 	
-	@Autowired
+	@Resource(name="setterDate")
+	private Setter_Date sed;
+	
+	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	
+	
 	public SalesServiceImpl(SalesDao salesDao) {
 		this.sd = salesDao;
 	}
 
+	@Transactional
 	@Override
 	public void addSales(Sales sales) {
 		sd.addSales(sales);
+		us.updatePointById(sales.getUser());
 	}
 
 	@Override
@@ -67,7 +79,8 @@ public class SalesServiceImpl implements SalesService{
 	public Sales findSalesByOrderNumber(String orderNumber) {
 		return sd.findSalesByOrderNumber(orderNumber);
 	}
-
+	
+	@Transactional
 	@Override
 	public void removeSales(String orderNumber) {
 		sd.removeSales(orderNumber);
@@ -78,6 +91,7 @@ public class SalesServiceImpl implements SalesService{
 		Calendar now = Calendar.getInstance(); // 오늘 날짜 
 		Calendar cal = Calendar.getInstance(); // 다음 범위 지정을 위해 범위 시작 날짜를 기억하는 용도
 		List<OrderStorage> osList = new ArrayList<OrderStorage>();
+		List<Product> order = new ArrayList<Product>();
 		
 		int nof = 0;
 		if(dateType == 'M') {// 기간 Type 별로 반복 횟수 지정
@@ -139,9 +153,11 @@ public class SalesServiceImpl implements SalesService{
 		
 		return order;
 	}
-
+	/**
+	 * 현재날짜 기준으로 날짜 뽑아서 일, 주, 월 별로 계산해서 출력하기!!!!!
+	 */
 	@Override
-	public List<SalesStorage> method2(char dateType) {
+	public List<SalesStorage> findSaleRecord(char dateType) {
 		List<Sales> sList = new ArrayList<Sales>();
 		Calendar now = Calendar.getInstance();
 		Calendar cal = Calendar.getInstance();
@@ -233,7 +249,7 @@ public class SalesServiceImpl implements SalesService{
 		GenericApplicationContext context = 
 				new AnnotationConfigApplicationContext(DataSourceConfig.class);
 		SalesService test = context.getBean("salesService", SalesService.class);
-		test.method2('W');
+		test.findSaleRecord('W');
 		
 		
 		

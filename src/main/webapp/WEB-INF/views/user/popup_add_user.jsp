@@ -61,8 +61,8 @@
     					return false;
     				}
     			
-    				let ssnExp = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|[3][0-1])$/gm;
-            		if(form.birth.value.match(ssnExp) == null){
+    				let birthExp = /^[0-9][0-9][0-9][0-9](0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|[3][0-1])$/gm;
+            		if(form.birth.value.match(birthExp) == null){
             			alert("올바른 주민등록번호 형식이 아닙니다.");
                 	    return false;
             		}

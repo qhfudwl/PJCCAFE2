@@ -35,7 +35,7 @@ public interface SalesService {
 
 	List<Product> sumOrder(List<Product> temp_order);
 	
-	List<SalesStorage> method2(char dateType);
+	List<SalesStorage> findSaleRecord(char dateType);
 	
 	List<Sales> findSalesByCustomerId(long customerId);
 }
