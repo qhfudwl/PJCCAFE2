@@ -49,10 +49,8 @@ public class OrderViewController extends SalesController {
          for (Sales s : compSales) {
             s.setOrder(order.get(s.getOrderNumber()));
          }
-//         mav.addObject("compSales", compSales);
-         session.setAttribute("compSales", compSales);
+         mav.addObject("compSales", compSales);
       }
-      
       mav.setViewName("index");
       
       return mav;
