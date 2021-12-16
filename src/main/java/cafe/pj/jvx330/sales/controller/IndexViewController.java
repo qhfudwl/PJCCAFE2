@@ -30,7 +30,7 @@ public class IndexViewController extends SalesController {
 		
 		// 여기서부터는 나중에 삭제해야한다.---------------------------------------
 		User user1 = us.findUserById(1);
-		User user2 = us.findUserById(2);
+		User user2 = us.findUserById(5);
 		
 		Menu menu1 = ms.findMenuById(1);
 		Menu menu2 = ms.findMenuById(2);

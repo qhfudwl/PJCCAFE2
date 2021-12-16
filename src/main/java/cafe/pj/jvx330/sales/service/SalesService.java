@@ -5,6 +5,7 @@ import java.util.List;
 
 import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
+import cafe.pj.jvx330.sales.util.SalesStorage;
 import cafe.pj.jvx330.web.util.OrderStorage;
 
 public interface SalesService {
@@ -34,4 +35,7 @@ public interface SalesService {
 
 	List<Product> sumOrder(List<Product> temp_order);
 	
+	List<SalesStorage> method2(char dateType);
+	
+	List<Sales> findSalesByCustomerId(long customerId);
 }

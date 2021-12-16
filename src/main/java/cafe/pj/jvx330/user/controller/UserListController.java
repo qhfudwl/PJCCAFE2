@@ -2,15 +2,18 @@ package cafe.pj.jvx330.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionAttributeListener;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import cafe.pj.jvx330.domain.Customer;
+import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.web.command.CustomerCommand;
 
@@ -21,9 +24,10 @@ public class UserListController extends UserController{
 	 * 헤더에서 유저목록 기본화면으로 들어가기
 	 */
 	@GetMapping("/user/viewUserMain")
-	public ModelAndView viewUserMain() {
+	public ModelAndView viewUserMain(HttpSession session) {
 		List<User> users = us.findAllUsers();
 		ModelAndView mav = new ModelAndView();
+		session.setAttribute("contentName", "회원목록");
 		mav.addObject("users", users);
 		mav.setViewName("user/user_list");
 		return mav;
@@ -125,6 +129,18 @@ public class UserListController extends UserController{
 	}
 	
 	
+	
+	@GetMapping("/user/userSaleslist")
+	public ModelAndView userSaleslist(@RequestParam("usersId") long usersId) {
+		List<Sales> slist = ss.findSalesByCustomerId(usersId);
+		User user = us.findUserById(usersId);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("slist", slist);
+		mav.addObject("user", user);
+		mav.setViewName("user/user_sales_list");
+		return mav;
+	}
+	
 	/**
 	 * 검색어로 검색해서 유저목록 보여주기!
 	 * 이름, 폰번호, 생일
@@ -183,5 +199,6 @@ public class UserListController extends UserController{
 		}else
 			return null;
 	}
+	
 	
 }

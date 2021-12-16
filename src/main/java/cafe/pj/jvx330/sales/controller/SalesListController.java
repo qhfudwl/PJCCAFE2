@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
+import cafe.pj.jvx330.sales.util.SalesStorage;
 import cafe.pj.jvx330.web.util.OrderStorage;
 
 @Controller("sales.controller.SalesListController")
@@ -26,6 +29,32 @@ public class SalesListController extends SalesController{
 		mav.addObject("osList", osList);
 		mav.setViewName("order/orderRecordByMenu");
 	
+		return mav;
+	}
+	/**
+	 * nav로 접근하기
+	 * @param session
+	 * @return
+	 */
+	@GetMapping("/sales/viewSalesMain")
+	public ModelAndView viewSalesMain(HttpSession session) {
+		List<SalesStorage> sList = ss.method2('D');
+		ModelAndView mav = new ModelAndView();
+		session.setAttribute("contentName", "판매내역");
+		mav.addObject("sList",sList);
+		mav.setViewName("Sales/sales_view_main");
+		
+		return mav;
+	}
+	
+	@GetMapping("/sales/viewSalesType")
+	public ModelAndView viewSalesType(@RequestParam("datePicker") char type) {
+		List<SalesStorage> sList = ss.method2(type);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("sList",sList);
+		//System.out.println(sList);
+		mav.setViewName("Sales/sales_view_main");
+		
 		return mav;
 	}
 	

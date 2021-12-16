@@ -67,6 +67,7 @@ CREATE TABLE OrderRecord (
 INSERT INTO Customer(name,phone,birth,point) VALUES('김아루','010-0000-0000','00000000',0);
 INSERT INTO Customer(name,phone,birth,point) VALUES('최향기','010-0000-0000','00000000',0);
 
+
 -- 관리자등록
 INSERT INTO Employee(eId,passwd,position) VALUES('manager','manager','M');
 
@@ -92,6 +93,16 @@ insert into SalesRecord(customerId,orderNumber, amount, usePoint) values(1, '300
 insert into SalesRecord(customerId,orderNumber, amount, usePoint) values(1, '400', 1000, 0);
 insert into SalesRecord(customerId,orderNumber, amount, usePoint) values(1, '500', 1000, 0);
 insert into SalesRecord(customerId,orderNumber, amount, usePoint) values(1, '600', 1000, 0);
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '700', 1000, 500,'2021-10-04 00:02:11');
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '101', 1000, 500,'2021-07-04 00:02:11');
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '702', 1000, 500,'2021-11-04 00:02:11');
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '703', 1000, 500,'2021-12-04 00:02:11');
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '704', 1000, 500,'2021-06-04 00:02:11');
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '701', 1000, 500,'2021-03-04 00:02:11');
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '705', 1000, 500,'2021-01-04 00:02:11');
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '706', 1000, 500,'2021-02-04 00:02:11');
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '707', 1000, 500,'2021-12-06 00:02:11');
+insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '708', 1000, 500,'2021-12-14 00:02:11');
 
 -- orderRecord 추가
 insert into OrderRecord(orderNumber, menuId, quantity) values('100',1,1);

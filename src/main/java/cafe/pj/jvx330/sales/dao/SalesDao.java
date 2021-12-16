@@ -13,14 +13,15 @@ public interface SalesDao {
 	List<Sales> findSalesByDate(Date date);
 	
 	List<Sales> findSalesByMenuNameAndDate(String menuName, Date date1, Date date2);
-	 
+	
 	
 	Sales findSalesByOrderNumber(String orderNumber);
 
 	Sales updateSales(long sid);
-
+	
 
 	void removeSales(String orderNumber);
+	
 	
 	
 	/**
@@ -31,5 +32,7 @@ public interface SalesDao {
 	 * OrderRecord Table에서 파라미터 범위에 해당하는 List<Product> 출력
 	 */
 	List<Product> findOrderRecordForMenu(String date1, String date2);
+	
+	List<Sales> findSalesByCustomerId(long customerId);
 
 }

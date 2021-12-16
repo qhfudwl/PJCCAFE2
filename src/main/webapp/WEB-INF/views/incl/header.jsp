@@ -30,7 +30,7 @@
             </form>
            </li>
            <li<% if("판매내역".equals(contentName)) {%> class="on"<%} %>>
-            <form>
+            <form name="viewSaleslist" action ="${pageContext.request.contextPath}/sales/viewSalesMain">
             	<input type="submit" value="판매내역"/>
             </form>
            </li>

@@ -31,7 +31,6 @@ public class SalesDaoImpl implements SalesDao {
 		String sql = "SELECT id, customerId, orderNumber, amount, usePoint, place, regDate"
 				+ " FROM SalesRecord WHERE DATE(regDate) BETWEEN ? AND ?";
 		List<Sales> sales = jt.query(sql, new SalesRowMapper(), date1, date2); 
-	
 		return sales;
 	}
 
@@ -72,5 +71,18 @@ public class SalesDaoImpl implements SalesDao {
 		String sql = "SELECT Date(regDate), menuID, quantity FROM OrderRecord WHERE Date(regDate) Between ? AND ?";
 		List<Product> order = jt.query(sql, new ProductRowMapper(), java.sql.Date.valueOf(sDate1), java.sql.Date.valueOf(sDate2));
 		return order;
-	}	
+	}
+
+	/**
+	 * 고객 주문 찾기용
+	 */
+@Override
+	public List<Sales> findSalesByCustomerId(long customerId) {
+		String sql = "SELECT id, customerId, orderNumber, amount, usePoint, place, regDate"
+				+ " FROM SalesRecord WHERE customerId = ? ORDER BY regDate DESC";
+		List<Sales> sList = jt.query(sql, new SalesRowMapper(), customerId);
+		
+		return sList;
+	}
+
 }
