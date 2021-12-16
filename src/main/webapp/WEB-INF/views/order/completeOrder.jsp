@@ -10,7 +10,6 @@
 <%@ include file="/WEB-INF/views/incl/link.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/order/comporder.css">
 <script src="${pageContext.request.contextPath}/resources/js/incl/jquery-3.6.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/order/comporder.js" defer></script>
 <title>영수증</title>
 </head>
 <body>

@@ -45,7 +45,7 @@ import cafe.pj.jvx330.web.controller.CafeController;
  * 
  * @author 윤효
  *
- */
+ */ 
 @Controller
 public class OrderController extends SalesController{
 		@Resource(name="menuService")
@@ -93,6 +93,8 @@ public class OrderController extends SalesController{
 			mav.addObject("CoffeeMenus",CoffeeMenus);
 			mav.addObject("FoodMenus",FoodMenus);
 			mav.setViewName("order/order");
+			
+			System.out.println("hi");
 			
 			return mav;
 		}
@@ -236,7 +238,6 @@ public class OrderController extends SalesController{
 			String phone = map.get("userPhone").toString();;
 			String birth = map.get("userBirth").toString();;
 			User user = new Customer(name,phone,birth,0);
-			System.out.println(name+phone+birth);
 			us.addUser(user);
 			return;
 		}
@@ -311,7 +312,7 @@ public class OrderController extends SalesController{
 				Menu menu = ms.findMenuById(oic.getMenuId());
 				int quantity = oic.getQuantity();
 				menuItems.add(new Product(orderNumber,menu,quantity,new Date()));
-			
+				System.out.println(menu.getMenuPrice());
 			}
 
 			//사용한 포인트
@@ -324,8 +325,6 @@ public class OrderController extends SalesController{
 				amount += product.getMenu().getMenuPrice()*product.getQuantity();
 			}
 			
-			//실판매 금액
-			double totalPrice = amount;
 			
 			//받을 금액
 			amount -= usePoint;
@@ -398,7 +397,6 @@ public class OrderController extends SalesController{
 		public String cancelOrder(HttpServletRequest request, @RequestParam("leastOrderNumber") String leastorderNumber) {
 			HttpSession session = request.getSession();
 			TreeMap<String,Sales> map = (TreeMap<String, Sales>) session.getAttribute("sales");
-			System.out.println(leastorderNumber);
 			map.remove(leastorderNumber);
 			return "redirect:/order";
 		}
