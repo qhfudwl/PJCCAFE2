@@ -2,7 +2,11 @@
 body, html {height: 100%;}
 #indexContent {
 	display: flex; flex-flow: row nowrap; justify-content: center;
-	width: 100%; min-width: 1320px; height: calc(100% - 150px);
+	width: 100%; min-width: 1320px; height: calc(100% - 170px);
+}
+#indexContent .headerMent {
+	font-size: 18px; width: 95%; border-bottom: 2px solid #596271; margin: 0 auto;
+	line-height: 60px; font-weight: normal;
 }
 #salesItemWrap {
 	display : grid; grid-template-columns : auto auto auto auto; gap : 20px;
@@ -30,13 +34,14 @@ body, html {height: 100%;}
 #salesItemWrap .salesDate { padding-top: 10px; color: #596271; font-size: 12px;}
 #orderCompletedContent {
 	background-color : #dfe1dc; width: 500px; position: relative;
-	padding: 10px; box-sizing: border-box;
+	padding: 0 10px 10px 10px; box-sizing: border-box;
+	border-radius: 0 0 20px 20px;
 }
 #orderCompletedContent p { float: left; line-height: 30px; padding: 0 5px; }
 #orderCompletedContent .shortening {
-	width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+	width: 220px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 }
-#orderCompletedContent ul {}
+#orderCompletedContent ul {padding-top: 20px;}
 #orderCompletedContent li {
 	line-height: 30px; height: 30px; margin-bottom: 5px;
 	transition-duration: 0.2s; position: relative; border-radius: 10px;
@@ -45,14 +50,12 @@ body, html {height: 100%;}
 	position: absolute; left: 0; top: 0; width: 100%; height: 100%;
 	cursor: pointer;
 }
-#orderCompletedContent li:first-child {margin-top: 60px;}
-#orderCompletedContent li:last-child {margin: 0;}
-#orderCompletedContent li:hover {
+#orderCompletedContent ul li:hover {
 	background-color: #596271; color: #bbda9c;
 }
 input[value="정산하기"] {
-	position: absolute; right: 20px; top: 20px; transition-duration: 0.3s;
-	outline: none; padding: 10px 15px; border: 0; border-radius: 10px;
-	background-color: #596271; font-size: 16px; color: #fff; font-weight: bold;
+	position: absolute; right: 20px; top: 11px; transition-duration: 0.3s;
+	outline: none; padding: 10px 30px; border: 0; border-radius: 5px;
+	background-color: #596271; font-size: 14px; color: #fff; font-weight: bold;
 }
 input[value="정산하기"]:hover {background-color: #9dca6f;}

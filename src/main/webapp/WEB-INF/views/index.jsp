@@ -14,7 +14,7 @@
 <%@ include file="/WEB-INF/views/incl/header.jsp" %>
 <section id="indexContent">
 	<div id="orders">
-		<h2 class="hidden">주문 현황</h2>
+		<h2 class="headerMent">주문 현황</h2>
 		<form action="addSales" method="post">
 		<input class="hidden" type="submit" value="완료" />
 			<div id="salesItemWrap">
@@ -55,29 +55,48 @@
 	</div>
 	<section id="orderCompletedContent">
 	<form action="addOrderRecordByBatch" method="GET">
-		<h3 class="hidden">주문 완료 목록</h3>
+		<h3 class="headerMent">픽업 완료 목록</h3>
 		<ul>
 		<c:if test="${not empty compSales}">
 			<c:forEach var="compSalesItem" items="${compSales}">
 				<li>
 					<p class="orderN">${compSalesItem.orderNumber} : </p>
 					<p class="shortening">
-						<c:forEach var="compProduct" items="${order[compSalesItem.orderNumber]}" varStatus="status">
+						<c:forEach var="compProduct" items="${compSalesItem.order}" varStatus="status">
 							${compProduct.menu.menuName} ${compProduct.quantity}
 							<c:if test="${not status.last}">, </c:if>
 						</c:forEach>
 					</p>
-					<p class="totalP"> / ${compSalesItem.getTotalPrice()}원</p>
-					<p class="regD"> / ${compSalesItem.regDate}</p>
+					<p class="totalP"> / <fmt:formatNumber value="${compSalesItem.getTotalPrice()}" pattern=",###" type="currency" currencySymbol="" /> 원</p>
+					<p class="regD">/ ${compSalesItem.regDate}</p>
 					<input class="hidden" id="compSales${compSalesItem.orderNumber}" type="radio" value="${compSalesItem.orderNumber}" />
 					<label for="compSales${compSalesItem.orderNumber}"></label>
 				</li>
 			</c:forEach>
 		</c:if>
 		</ul>
-		<input type="submit" value="정산하기"/>
+		<input type="submit" name="settlement" value="정산하기"/>
 	</form>
 	</section>
+	<script>
+	$("#orderCompletedContent input[type=radio] + label").click(function() {
+		popupSalesView();
+	})
+	
+	function popupSalesView() {
+		let windowWidth = window.screen.width;
+		let windowHeight = window.screen.height;
+		
+		let popupX = (windowWidth/2) - 250;
+		let popupY = (windowHeight/2) - 250;
+		
+		let popUpdateMenuUrl = getContextPath() + "/menu/popSalesView";
+		let popUpdateMenuOption = "width=500px, height=500px, top=" + popupY + "px, left=" + popupX + "px";
+		let popUpdateMenuTitle = "영수증 보기";
+		
+		window.open(popUpdateMenuUrl, popUpdateMenuTitle, popUpdateMenuOption);
+	}
+	</script>
 </section>
 </body>
 </html>

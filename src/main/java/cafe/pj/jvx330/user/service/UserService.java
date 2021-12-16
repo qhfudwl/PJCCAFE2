@@ -19,6 +19,19 @@ public interface UserService {
 	 */
 	List<User> findUsersByPhone(String phone);
 	
+	/**
+	 * 회원 이름으로 유저를 찾아준다.
+	 * @param name
+	 * @return
+	 */
+	List<User> findUserByName(String name);
+	
+	/**
+	 * 회원 생일로 유저를 찾아준다.
+	 * @param birth
+	 * @return
+	 */
+	List<User> findUserByBirth(String birth);
 	
 	/**
 	 * 모든회원을 검색한다.
@@ -48,4 +61,19 @@ public interface UserService {
 	 * @return
 	 */
 	User findUserById(long id);
+	
+	/**
+	 * 테이블 내 임플로이 찾아오기
+	 * @param eid
+	 * @return
+	 * @author 김보령
+	 */
+	User findEmployeeByEid(String eid);
+	
+	/**
+	 * 모든 직원 정보 가져오기
+	 * @return
+	 * @author 김보령
+	 */
+	List<User> findAllEmployee();
 }

@@ -48,4 +48,11 @@ public class Employee extends User {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Employee [eid=" + eid + ", passwd=" + passwd + ", position=" + position + "]";
+	}
+	
 } 

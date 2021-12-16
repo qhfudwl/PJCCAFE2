@@ -30,6 +30,7 @@ CREATE TABLE Menu (
    menuName   		VARCHAR(30)     	NOT NULL,										-- 메뉴이름
    menuPrice   		DOUBLE         		NOT NULL,										-- 메뉴가격
    stock      		BOOLEAN         	NOT NULL   DEFAULT true,						-- 재고유무 ( true : 재고있음 )
+   regDate			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 등록날짜(읽기 전용)
    
    CONSTRAINT		Menu_menuName_UK	UNIQUE(menuName)
 );
@@ -50,18 +51,13 @@ CREATE TABLE SalesRecord (
 );
 
 CREATE TABLE OrderRecord (
-   id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-   orderNumber   	VARCHAR(30)        	NOT NULL,										-- 주문번호
+   id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,								-- 주문번호
    menuId  			BIGINT     			NOT NULL,										-- 메뉴아이디
    quantity      	INT         		NOT NULL,										-- 주문수량 
    regDate 			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 결제날짜 
    CONSTRAINT		Menu_menuId_FK 	FOREIGN KEY(menuId) REFERENCES Menu(id),
    CONSTRAINT		SalesRecord_orderNumber_FK 	FOREIGN KEY(orderNumber) REFERENCES SalesRecord(orderNumber) ON DELETE CASCADE
 );
-ALTER table OrderRecord drop column orderNumber;
-
-
-
 
 -- 비회원등록
 INSERT INTO Customer(name,phone,birth,point) VALUES('김아루','010-0000-0000','00000000',0);
@@ -137,11 +133,14 @@ insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-09-09 00:02
 insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-09-11 00:02:11');
 insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-09-11 00:02:11');
 
+
+
 SELECT * FROM Customer;
 SELECT * FROM Employee;
 SELECT * FROM Menu;
 SELECT * FROM SalesRecord;
 SELECT * FROM OrderRecord;
+SELECT menuID, SUM(quantity) as quantity FROM OrderRecord WHERE Date(regDate) Between '2021-12-15 00:00:00' AND '2021-12-15 23:59:59' GROUP BY menuId;
 
 DELETE FROM Menu WHERE id=179;
 DELETE FROM SalesRecord;

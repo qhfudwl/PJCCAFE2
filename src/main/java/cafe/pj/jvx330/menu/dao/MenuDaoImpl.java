@@ -28,7 +28,7 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public Menu findMenuById(long id) {
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath, regDate"
 				+ " FROM Menu WHERE id=?";
 		
 		return jt.queryForObject(sql, new MenuRowMapper(), id);
@@ -37,7 +37,7 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public List<Menu> findAllMenuByMenuName(String menuName) {
 		
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath, regDate"
 				+ " FROM Menu WHERE menuName=?";
 		
 		return jt.query(sql, new MenuRowMapper(), menuName);
@@ -46,7 +46,7 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public List<Menu> findAllMenus() {
 		
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath, regDate"
 				+ " FROM Menu";
 		
 		List<Menu> menus = jt.query(sql, new MenuRowMapper());
@@ -57,7 +57,7 @@ public class MenuDaoImpl implements MenuDao {
 	@Override
 	public List<Menu> findAllMenusByMenuType(char menuType) {
 
-		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath"
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath, regDate"
 				+ " FROM Menu WHERE menuType=?";
 		
 		List<Menu> menus = jt.query(sql, new MenuRowMapper(), String.valueOf(menuType));

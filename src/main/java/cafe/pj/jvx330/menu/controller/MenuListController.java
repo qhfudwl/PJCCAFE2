@@ -1,10 +1,10 @@
 package cafe.pj.jvx330.menu.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +33,10 @@ public class MenuListController extends MenuController {
 	 * @return
 	 */
 	@GetMapping("/menu/viewMenuList")
-	public ModelAndView viewMenuList(@RequestParam("choiceMenu") char choiceMenu) {
+	public ModelAndView viewMenuList(@RequestParam("choiceMenu") char choiceMenu,
+			HttpSession session, HttpServletRequest request) {
 		List<Menu> menus = ms.findAllMenusByMenuType(choiceMenu);
+		session.setAttribute("contentName", "메뉴목록");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menus", menus);
 		mav.addObject("choiceMenu", choiceMenu);
@@ -43,27 +45,27 @@ public class MenuListController extends MenuController {
 	}
 	
 	/**
-	 * 기존의 메뉴 업데이트 후 다시 팝업창으로 가기
+	 * 기존의 이미지 파일을 삭제하고 새로운 이미지 파일을 업로드
+	 * 새로운 메뉴는 추가
 	 * @param menuCommand
 	 * @param file
 	 * @param request
+	 * @param removeImgName
 	 * @return
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
 	@PostMapping("/menu/updateMenu")
 	public ModelAndView updateMenu(@ModelAttribute("menu") MenuCommand menuCommand,
-			@RequestParam("file") MultipartFile file,
-			HttpServletRequest request) throws IllegalStateException, IOException {
-		
-		char menuType = menuCommand.getMenuType();
-		String menuName = menuCommand.getMenuName();
-		
-		fileAux.uploadImg(request, file, menuType, menuName);
+			@RequestParam("file") MultipartFile file, HttpServletRequest request,
+			@RequestParam("sendImgPathText") String removeImgName) throws IllegalStateException, IOException {
 		
 		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
-				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(), 
-				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
+				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
+				fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), menuCommand.getImgPath()));
+		
+		fileAux.removeImgFile(request, menu, fileAux.getImgName(removeImgName));
+		fileAux.uploadImgFile(request, file, menu);
 		
 		ms.updateMenuById(menu);
 		
@@ -85,17 +87,13 @@ public class MenuListController extends MenuController {
 	 */
 	@PostMapping("/menu/addMenu")
 	public ModelAndView addMenu(@ModelAttribute("menu") MenuCommand menuCommand, 
-			@RequestParam("file") MultipartFile file,
-			HttpServletRequest request) throws IllegalStateException, IOException {
+			@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IllegalStateException, IOException {
 
-		char menuType = menuCommand.getMenuType();
-		String menuName = menuCommand.getMenuName();
-		
-		fileAux.uploadImg(request, file, menuType, menuName);
-		
 		Menu menu = new Menu(menuCommand.getMenuType(),
 				menuCommand.getMenuName(), menuCommand.getMenuPrice(), menuCommand.isStock(),
-				fileAux.getName(request, menuCommand.getImgPath(), file, menuType, menuName));
+				fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), menuCommand.getImgPath()));
+
+		fileAux.uploadImgFile(request, file, menu);
 		
 		ms.addMenu(menu);
 		
@@ -107,15 +105,19 @@ public class MenuListController extends MenuController {
 	}
 	
 	/**
-	 * 선택한 메뉴 삭제
+	 * 해당 메뉴의 이미지 삭제 후 메뉴 삭제
 	 * @param choiceItem
+	 * @param request
 	 * @param choiceMenu
 	 * @return
 	 */
 	@RequestMapping("/menu/removeMenu")
-	public ModelAndView removeMenu(@RequestParam("choiceItem") long choiceItem,
+	public ModelAndView removeMenu(@RequestParam("choiceItem") long choiceItem, HttpServletRequest request,
 			@RequestParam("choiceMenu") char choiceMenu) {
-		ms.removeMenuById(choiceItem);
+		
+		Menu menu = ms.findMenuById(choiceItem);
+		fileAux.removeImgFile(request, menu, fileAux.getImgName(menu.getImgPath()));
+		ms.removeMenuById(menu.getId());
 		
 		List<Menu> menus = ms.findAllMenusByMenuType(choiceMenu);
 		

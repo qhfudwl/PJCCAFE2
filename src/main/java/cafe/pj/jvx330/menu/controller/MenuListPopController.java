@@ -30,6 +30,11 @@ import cafe.pj.jvx330.web.command.MenuCommand;
 @Controller("menu.controller.menuListPopController")
 public class MenuListPopController extends MenuController {
 	
+	@PostMapping("/menu/pupUploadImg")
+	public String popUploadImg() {
+		return "menu/menu_img_popup_upload";
+	}
+	
 	/**
 	 * 메뉴 id 를 받아 팝업창에 표시
 	 * @param choiceItem

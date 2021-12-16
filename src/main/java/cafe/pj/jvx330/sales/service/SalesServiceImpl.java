@@ -7,7 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,8 +26,8 @@ public class SalesServiceImpl implements SalesService{
 	private SalesDao sd;
 	
 	private Setter_Date sed = new Setter_Date();
-	private List<Product> order = new ArrayList<Product>();
 	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	
 	
 	@Autowired
 	private MenuService ms;
@@ -73,6 +74,7 @@ public class SalesServiceImpl implements SalesService{
 	
 	public List<OrderStorage> findOrderRecordForMenu(char dateType, char menuType){
 		Menu menu = null;
+		List<Product> order = new ArrayList<Product>();
 		Calendar now = Calendar.getInstance(); // 오늘 날짜 
 		Calendar cal = Calendar.getInstance(); // 다음 범위 지정을 위해 범위 시작 날짜를 기억하는 용도
 		List<OrderStorage> osList = new ArrayList<OrderStorage>();
@@ -115,7 +117,7 @@ public class SalesServiceImpl implements SalesService{
 					os.setMenuName(order.get(j).getMenu().getMenuName());
 					os.setWeekDate(sDateList.get(0)+" ~ "+sDateList.get(1));
 					os.setQuantity(order.get(j).getQuantity());
-					os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(i).getQuantity());
+					os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(j).getQuantity());
 				
 					iNum++;
 					
@@ -123,7 +125,6 @@ public class SalesServiceImpl implements SalesService{
 				} else {
 					
 				}
-				
 			}
 			try { // String to Calendar
 				Date date = format.parse(sDateList.get(0)); 
@@ -136,38 +137,82 @@ public class SalesServiceImpl implements SalesService{
 		return osList;   
 	}
 	
+//	public List<Product> sumOrder(List<Product> temp_order){
+//		List<Product> order = new ArrayList<Product>();
+//		Product product = new Product();
+//		Menu menu = new Menu();
+//		int temp = 0;
+//		List<Long> preventRep = new ArrayList<>();
+//		preventRep.add((long) 0);
+//		boolean po = false;
+//		
+//		System.out.println("prRep size : " + preventRep.size());
+//		for(int i = 0; i<temp_order.size(); i++) {
+//			System.out.println("size : " + preventRep.size());
+//			for(long pr : preventRep) {
+//				System.out.println("pr is "+pr);
+//				if(pr == temp_order.get(i).getMenu().getId()) {
+//					// 이미 더한 menuId 차례일 때 넘어감
+//				} else {
+//					if(po==false) {
+//						po=true;
+//					}
+//					
+////					preventRep.add(temp_order.get(i).getMenu().getId());
+//					menu.setId(temp_order.get(i).getMenu().getId());
+//					product.setMenu(menu);
+//					product.setQuantity(temp_order.get(i).getQuantity());
+//					for(int j=i+1; j<temp_order.size(); j++) {
+//						if(temp_order.get(i).getMenu().getId() 
+//							== temp_order.get(j).getMenu().getId()) {
+//							product.setQuantity(product.getQuantity()+temp_order.get(j).getQuantity());		
+//							
+////							 order.add(product);
+//							System.out.println("for문 안의 product's quantity : " + product.getQuantity());
+//						}
+//					}
+//					System.out.println("2");
+//					order.add(product);
+////					break;
+//				}
+//				
+//			}
+//			
+//			if(po==true) {
+//				preventRep.add(temp_order.get(i).getMenu().getId());
+//				for(long dr : preventRep) {
+//					System.out.println("true / "+dr);
+//				}
+//				po=false;
+//
+//			}
+//			if(preventRep.get(0) == 0) {
+//				preventRep.remove(0);
+//			}
+//			
+//		}
+//		return order;
+//	}
+	
 	public List<Product> sumOrder(List<Product> temp_order){
-		List<Product> order = new ArrayList<Product>();
+		Map<Long, Integer> map = new HashMap<Long, Integer>();
+		map = temp_order.stream().collect(Collectors.toMap(e -> e.getMenu().getId(), e -> e.getQuantity(), Integer::sum));
 		Product product = new Product();
-		Menu menu = new Menu();
-		int temp = 0;
-		List<Long> preventRep = new ArrayList<>();
-		preventRep.add((long) 0);
 		
-		for(int i = 0; i<temp_order.size(); i++) {
-			for(long pr : preventRep) {
-				if(pr == temp_order.get(i).getMenu().getId()) {
-					// 이미 더한 menuId 차례일 때 넘어감
-				} else {
-					preventRep.add(temp_order.get(i).getMenu().getId());
-					for(int j=i; j<temp_order.size(); j++) {
-						if(temp_order.get(i).getMenu().getId() 
-							== temp_order.get(j).getMenu().getId()) {
-							temp = temp_order.get(i).getQuantity() 
-									+ temp_order.get(j).getQuantity();
-//							product // product 세팅 하고 list에 add.
-							menu.setId(temp_order.get(i).getMenu().getId());
-							product.setMenu(menu);
-							product.setQuantity(temp); // Sum of Quantity setting
-							order.add(product);
-						}
-					}
-				}
-			}
+		
+		List<Long> keyList = new ArrayList<Long>(map.keySet());
+		List<Integer> valueList = new ArrayList<Integer>(map.values());
+		
+		List<Product> order = new ArrayList<Product>();
+		
+		for(int i=0;i<keyList.size();i++) {			
+			order.add(new Product(new Menu(keyList.get(i)),valueList.get(i)));
 		}
+		
 		return order;
 	}
 	
+
 	//batch.
 	public void addOrderRecord(List<Product> order) {
 		int batchSize = 0;

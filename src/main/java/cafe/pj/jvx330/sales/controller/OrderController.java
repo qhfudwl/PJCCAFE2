@@ -144,7 +144,6 @@ public class OrderController {
 			
 		    
 			//메뉴 아이디받고
-		 
 			long id = Long.parseLong(menuList.get("id").toString());
 			//메뉴 이름 받고
 			String menuName = menuList.get("menuName").toString();
@@ -216,11 +215,28 @@ public class OrderController {
 		 * 
 		 */
 		
-		@GetMapping("orderMembership")
-		public String orderMembership() {
+		//고객 찾기 팝업창
+		@GetMapping("findUserForPoint")
+		public String findUserForPoint() {
 			
-			return "order/usePointUser";
+			return "order/findUserForPoint";
 		}
+		
+		//고객 선택 팝업창
+		@GetMapping("findUserResultForPoint")
+		public String findUserResultForPoint() {
+			
+			return "order/findUserResultForPoint";
+		}
+		
+		//회원가입 팝업창
+		@GetMapping("joinUserForPoint")
+		public String joinUserForPoint() {
+			
+			return "order/joinUserForPoint";
+		}
+			
+				
 		
 		
 		
