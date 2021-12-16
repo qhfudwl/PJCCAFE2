@@ -310,7 +310,7 @@ public class OrderController extends SalesController{
 			for(OrderItemsCommand oic:order.getNowOrder()) {
 				Menu menu = ms.findMenuById(oic.getMenuId());
 				int quantity = oic.getQuantity();
-				menuItems.add(new Product(menu,quantity,new Date()));
+				menuItems.add(new Product(orderNumber,menu,quantity,new Date()));
 			
 			}
 
