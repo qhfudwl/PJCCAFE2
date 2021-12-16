@@ -729,11 +729,27 @@ $('.funcOrderBtn').on('click',function(e){
 	point = point.replace("원","");
 	point = Number(point);
 	
+	if(customerName==''){
+		id =1;
+		customerName=' ';
+		phone = ' ';
+		birth = ' ';
+		
+	}
+	
+	
 	//사용할 포인트
 	let usePoint = $('.usePoint').text(); 
 	usePoint = usePoint.replace(",","");
 	usePoint = usePoint.replace("원","");
 	usePoint = Number(usePoint);
+	
+	let place = "I";
+	//매장이냐 포장이냐
+	if($('.orderListInOutBtn').hasClass('selectedMenuList')){
+		place = "O";
+	}
+	
 	
 	//메뉴아이디, 메뉴수량
 	let json1={
@@ -743,18 +759,18 @@ $('.funcOrderBtn').on('click',function(e){
 		"customer.phone":phone,
 		"customer.birth":birth,
 		"customer.point":point,
-		
+		"place":place,
 
 	}
-	
+	console.log('before for');
 	let json2;
 	for(let i=0;i<$('.addMenuList').length;i++){
 		let str1 = "nowOrder["+i+"].quantity";
-		let str2 = $('.addMenuList').eq(i).find($('.mlMenuQuantity')).text();
+		let str2 = Number($('.addMenuList').eq(i).find($('.mlMenuQuantity')).text());
 		
-		let str3 = "nowOrder["+i+"].menu.id";
-		let str4 = $('.addMenuList').eq(i).find($('.mlMenuId')).val();
-		
+		let str3 = "nowOrder["+i+"].menuId";
+		let str4 = Number($('.addMenuList').eq(i).find($('.mlMenuId')).val());
+		console.log('menuid'+$('.mlMenuId').val());
 		json2={[str1]:str2,[str3]:str4}
 		Object.assign(json1, json2);
 		
@@ -777,13 +793,7 @@ $('.funcOrderBtn').on('click',function(e){
 			}
 		})
 	
-	/*
-	$('.order').val(json1);
-	$('#goCompOrder').submit();
-	*/
-	
-	/* document.form.order.value = json1;
-	document.form.submit();*/
+
 })
 
 //이건 야매야...

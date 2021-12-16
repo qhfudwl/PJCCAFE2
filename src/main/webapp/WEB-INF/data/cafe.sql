@@ -46,13 +46,11 @@ CREATE TABLE SalesRecord (
    place			CHAR(1)				NOT NULL   	DEFAULT 'I',						-- 매장 or 포장
    regDate			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 등록날짜(읽기 전용)
    
-   CONSTRAINT		SalesRecord_customerId_FK 	FOREIGN KEY(customerId) REFERENCES Customer(id),
-   CONSTRAINT		SalesRecord_orderNumber_UK	UNIQUE(orderNumber)
+   CONSTRAINT		SalesRecord_customerId_FK 	FOREIGN KEY(customerId) REFERENCES Customer(id)
 );
 
 CREATE TABLE OrderRecord (
    id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-   orderNumber   	VARCHAR(30)        	NOT NULL,										-- 주문번호
    menuId  			BIGINT     			NOT NULL,										-- 메뉴아이디
    quantity      	INT         		NOT NULL,										-- 주문수량 
    regDate 			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 결제날짜 

@@ -10,8 +10,12 @@ import lombok.ToString;
 @Setter
 @ToString
 public class OrderCommand {
-	public String usePoint;
+	private String usePoint;
 	private CustomerCommand customer;
 	private List<OrderItemsCommand> nowOrder;
-
+	private char place;
+	
+	public OrderCommand() {
+		
+	}
 }

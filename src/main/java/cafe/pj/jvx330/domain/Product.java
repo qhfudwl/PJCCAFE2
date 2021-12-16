@@ -24,6 +24,12 @@ public class Product {
 		this.quantity = quantity;
 		this.regDate = regDate;
 	}
+	
+	public Product(Menu menu, int quantity, Date regDate) {
+		this.menu = menu;
+		this.quantity = quantity;
+		this.regDate = regDate;
+	}
 
 	public Menu getMenu() {
 		return menu;

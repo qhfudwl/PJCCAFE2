@@ -1,8 +1,11 @@
 package cafe.pj.jvx330.sales.controller;
 
 import java.net.http.HttpRequest;
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,17 +31,23 @@ import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.Employee;
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.domain.Product;
+import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.menu.service.MenuService;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.user.service.UserServiceImpl;
+import cafe.pj.jvx330.web.command.CustomerCommand;
 import cafe.pj.jvx330.web.command.OrderCommand;
+import cafe.pj.jvx330.web.command.OrderItemsCommand;
+import cafe.pj.jvx330.web.controller.CafeController;
 
 @Controller
-public class OrderController {
+public class OrderController extends SalesController{
 		@Resource(name="menuService")
 		MenuService ms;
 		
+		@Resource(name="userService")
+		UserService cs;
 		
 	
 		//처음예제
@@ -329,30 +338,97 @@ public class OrderController {
 		 * 			2-1 카드 결제 금액 자동 입력
 		 */
 		
+		ModelAndView mav = new ModelAndView();
 		
 		
 		@PostMapping("saveOrder")
 		@ResponseBody
-		public HashMap<String,Object> save_order(@ModelAttribute("order") OrderCommand order) {
+		public HashMap<String,Object> save_order(@ModelAttribute("order") OrderCommand order, HttpServletRequest request) {
+			System.out.println(order.getNowOrder().get(0).getMenuId());
 			
 			
-			System.out.println(order.getUsePoint());
+			//주문번호 구하기
+			String orderNumber = returnOrderNumber();
 			
-			//ModelAndView mav = new ModelAndView();
-			//mav.setViewName("order/completeOrder");
-			HashMap<String,Object> map = new HashMap<String, Object>();
+			//매장or포장 구하기
+			char place = order.getPlace();
 			
-			return map;
+			//주문한 메뉴 추가하기
+			List<Product> menuItems = new ArrayList<Product>();
+			for(OrderItemsCommand oic:order.getNowOrder()) {
+				Menu menu = new Menu();
+				System.out.println("menuId"+oic.getMenuId());
+				menu = ms.findMenuById(oic.getMenuId());
+				int quantity = oic.getQuantity();
+				menuItems.add(new Product(menu,quantity,new Date()));
+			
+			}
+
+			//사용한 포인트
+			double usePoint = Double.parseDouble(order.getUsePoint());
+			
+			
+			//총합산(amount) 구하기
+			double amount=0;
+			for(Product product : menuItems) {
+				amount += product.getMenu().getMenuPrice()*product.getQuantity();
+			}
+			
+			//실판매 금액
+			double totalPrice = amount;
+			
+			//받을 금액
+			amount -= usePoint;
+				
+			//포인트 계산하기
+			double savePoint = amount * 0.1;
+			
+			//고객 구하기
+			User user;
+			//회원일 경우 회원 정보 저장
+			if(order.getCustomer().getId()!=1) {
+				user = cs.findUserById(order.getCustomer().getId());
+				Customer customer = (Customer)user;
+				customer.setPoint(savePoint);
+				user = customer;
+			}
+			//비회원일 경우 id값은 1
+			else {
+				user = new Customer();
+				user.setId(order.getCustomer().getId());
+			}
+			 
+			Sales sales = new Sales();
+			sales.setUser(user);
+			sales.setOrderNumber(orderNumber);
+			sales.setPlace(place);
+			sales.setAmount(amount);
+			sales.setUsePoint(usePoint);
+			sales.setOrder(menuItems);
+			
+			//세션에 자료 보내기 
+			
+			HashMap<String,Sales> salesMap = new HashMap<String, Sales>();
+			salesMap.put(orderNumber, sales);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("sales", salesMap);
+			mav.addObject("sales", sales);
+			
+			HashMap<String,Object> fakeMap = new HashMap<String, Object>();
+			return fakeMap;
 		}
 		
 		@PostMapping("compOrder")
-		public ModelAndView complete_order() {
+		public ModelAndView complete_order(HttpServletRequest request) {
 			
-			ModelAndView mav = new ModelAndView();
+
+			
 			mav.setViewName("order/completeOrder");
 			return mav;
 		}
 		
+
 		
 		
 		
