@@ -23,7 +23,7 @@
 				<td>
 					<input type="file" id="updateImgFile" name="file" />
 					<label for="updateImgFile">업로드</label>
-					<input id="viewImg" type="text" />
+					<input readonly id="viewImg" type="text" />
 					<form:input class="hidden" path="imgPath" />
 				</td>
 			</tr>
@@ -31,6 +31,7 @@
 				<th>이름</th>
 				<td>
 					<form:input path="menuName" />
+					<input type="text" class="hidden" name="beforeName" value="${menuCommand.menuName}" />
 					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("menuNameErr")}</p></c:if>
 				</td>
 			</tr>

@@ -45,39 +45,29 @@ public class UserLogController extends UserController {
 		ModelAndView mav = new ModelAndView();
 		Map<String, String> errMsg = new HashMap<>();
 		
-		if (validator.isEmpty(employeeCommand.getEid())) {
-			errMsg.put("idErr", "아이디를 입력해주세요.");
-			mav.addObject("errMsg", errMsg);
-			mav.addObject(employeeCommand);
-			mav.setViewName("user/login");
-			return mav;
-		}
-		if (!us.isEmployee(employeeCommand.getEid())) {
-			errMsg.put("idErr", "아이디가 존재하지 않습니다.");
-			mav.addObject("errMsg", errMsg);
-			mav.addObject(employeeCommand);
-			mav.setViewName("user/login");
-			return mav;
-		}
-		if (validator.isEmpty(employeeCommand.getPasswd())) {
-			errMsg.put("pwErr", "비밀번호를 입력해주세요.");
-			mav.addObject("errMsg", errMsg);
-			mav.addObject(employeeCommand);
-			mav.setViewName("user/login");
-			return mav;
-		}
-		
 		User user = us.findEmployeeByEid(employeeCommand.getEid());
 		Employee inputEp = convertEmployeeCommandToEmployee(employeeCommand);
-		
 		Employee admin = (Employee)user;
 		
+		// 유효성 검사
+		if (validator.isEmpty(employeeCommand.getEid())) { // 아이디 미입력
+			errMsg.put("idErr", "아이디를 입력해주세요.");
+		} else {
+			if (!us.isEmployee(employeeCommand.getEid())) {
+				errMsg.put("idErr", "아이디가 존재하지 않습니다.");
+			}
+		}
 		
-		if (!inputEp.getPasswd().equals(admin.getPasswd())) {
-			errMsg.put("pwErr", "비밀번호 불일치");
-			mav.addObject("errMsg", errMsg);
-			mav.addObject(employeeCommand);
-			mav.setViewName("user/login");
+		if (validator.isEmpty(employeeCommand.getPasswd())) { // 비밀번호 미입력
+			errMsg.put("pwErr", "비밀번호를 입력해주세요.");
+		} else {
+			if (!inputEp.getPasswd().equals(admin.getPasswd())) {
+				errMsg.put("pwErr", "비밀번호 불일치");
+			}
+		}
+
+		if (!errMsg.isEmpty()) {
+			setModelAndViewE(mav, errMsg, employeeCommand, "user/login");
 			return mav;
 		}
 		

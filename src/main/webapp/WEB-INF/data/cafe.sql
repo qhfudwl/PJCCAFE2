@@ -54,8 +54,7 @@ CREATE TABLE OrderRecord (
    menuId  			BIGINT     			NOT NULL,										-- 메뉴아이디
    quantity      	INT         		NOT NULL,										-- 주문수량 
    regDate 			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 결제날짜 
-   CONSTRAINT		Menu_menuId_FK 	FOREIGN KEY(menuId) REFERENCES Menu(id),
-   CONSTRAINT		SalesRecord_orderNumber_FK 	FOREIGN KEY(orderNumber) REFERENCES SalesRecord(orderNumber) ON DELETE CASCADE
+   CONSTRAINT		Menu_menuId_FK 	FOREIGN KEY(menuId) REFERENCES Menu(id)
 );
 
 

@@ -2,7 +2,7 @@
 body, html {height: 100%;}
 #indexContent {
 	display: flex; flex-flow: row nowrap; justify-content: center;
-	width: 100%; min-width: 1320px; height: calc(100% - 170px);
+	width: 100%; min-width: 1100px; height: calc(100% - 170px);
 }
 #indexContent .headerMent {
 	font-size: 18px; width: 95%; border-bottom: 2px solid #596271; margin: 0 auto;
@@ -14,6 +14,9 @@ body, html {height: 100%;}
 #salesItemWrap {
 	display : grid; grid-template-columns : 22% 22% 22% 22%; gap : 3%;
 	flex-basis: 50%; padding: 20px;
+}
+@media all and (max-width: 1430px) {
+	#salesItemWrap {grid-template-columns : 31% 31% 31%;}
 }
 #noOrder {
 	text-align: center; font-weight: bold; color: #9dc970;
@@ -45,11 +48,11 @@ body, html {height: 100%;}
 }
 #orderCompletedContent p { float: left; line-height: 30px; padding: 0 5px; }
 #orderCompletedContent .shortening {
-	width: 220px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+	width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 }
 #orderCompletedContent ul {padding-top: 20px;}
 #orderCompletedContent li {
-	line-height: 30px; height: 30px; margin-bottom: 5px;
+	line-height: 30px; height: 30px; margin-bottom: 5px; font-size: 13px;
 	transition-duration: 0.2s; position: relative; border-radius: 10px;
 }
 #orderCompletedContent input[type=radio] + label {

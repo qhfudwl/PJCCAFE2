@@ -1,8 +1,11 @@
 package cafe.pj.jvx330.user.controller;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.Resource;
+
+import org.springframework.web.servlet.ModelAndView;
 
 import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.Employee;
@@ -10,6 +13,7 @@ import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.web.command.CustomerCommand;
 import cafe.pj.jvx330.web.command.EmployeeCommand;
+import cafe.pj.jvx330.web.command.MenuCommand;
 import cafe.pj.jvx330.web.controller.CafeController;
 
 public class UserController extends CafeController {
@@ -129,5 +133,23 @@ public class UserController extends CafeController {
 		}
 		
 		return c;
+	}
+
+	protected ModelAndView setModelAndViewE(ModelAndView mav, Map<String, String> errMsg, EmployeeCommand ec, String path) {
+		
+		mav.addObject("errMsg", errMsg);
+		mav.addObject("employeeCommand", ec);
+		mav.setViewName(path);
+		
+		return mav;
+	}
+
+	protected ModelAndView setModelAndViewC(ModelAndView mav, Map<String, String> errMsg, CustomerCommand cc, String path) {
+		
+		mav.addObject("errMsg", errMsg);
+		mav.addObject("customerCommand", cc);
+		mav.setViewName(path);
+		
+		return mav;
 	}
 }

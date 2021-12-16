@@ -23,7 +23,7 @@
 				<td>
 					<input id="addImgFile" type="file" name="file" />
 					<label for="addImgFile">업로드</label>
-					<form:input path="imgPath" />
+					<form:input path="imgPath" readonly="true" />
 				</td>
 			</tr>
 			<tr>

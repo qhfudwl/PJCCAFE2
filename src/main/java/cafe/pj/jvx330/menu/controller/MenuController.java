@@ -1,8 +1,11 @@
 package cafe.pj.jvx330.menu.controller;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.servlet.ModelAndView;
 
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.service.MenuService;
@@ -52,6 +55,13 @@ public class MenuController extends CafeController {
 		return menuCommand;
 	}
 	
+	/**
+	 * menuCommand를 menu 객체로
+	 * @param request
+	 * @param menuCommand
+	 * @param imgPath
+	 * @return
+	 */
 	protected Menu convertMenuCommandToMenu(HttpServletRequest request, MenuCommand menuCommand, String imgPath) {
 		Menu menu = new Menu();
 		
@@ -80,5 +90,22 @@ public class MenuController extends CafeController {
 		menu.setImgPath(fileAux.getRelativePath(request, menuType, menuName, imgPath));
 		
 		return menu;
+	}
+	
+	/**
+	 * 유효성 검사 중 model and view 세팅해주기
+	 * @param mav
+	 * @param errMsg
+	 * @param mc
+	 * @param path
+	 * @return
+	 */
+	protected ModelAndView setModelAndViewM(ModelAndView mav, Map<String, String> errMsg, MenuCommand mc, String path) {
+		
+		mav.addObject("errMsg", errMsg);
+		mav.addObject("menuCommand", mc);
+		mav.setViewName(path);
+		
+		return mav;
 	}
 }
