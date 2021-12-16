@@ -408,17 +408,20 @@ public class OrderController extends SalesController{
 			sales.setRegDate(new Date());
 			
 			//세션에 자료 보내기 
-			
-			HashMap<String,Sales> salesMap = new HashMap<String, Sales>();
-			salesMap.put(orderNumber, sales);
-			
 			HttpSession session = request.getSession();
+			HashMap<String,Sales> salesMap = (HashMap<String, Sales>) session.getAttribute("sales");
+			if(validator.isEmpty(salesMap)) {
+				salesMap = new HashMap<String, Sales>();
+			}
+			salesMap.put(orderNumber, sales);
 			session.setAttribute("sales", salesMap);
 			
-			
+			System.out.println("mapsize"+salesMap.size());
 			mav.addObject("sales", sales);
 			HashMap<String,Object> fakeMap = new HashMap<String, Object>();
 			return fakeMap;
+			
+			
 		
 		}
 		
