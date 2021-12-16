@@ -405,6 +405,7 @@ public class OrderController extends SalesController{
 			sales.setAmount(amount);
 			sales.setUsePoint(usePoint);
 			sales.setOrder(menuItems);
+			sales.setRegDate(new Date());
 			
 			//세션에 자료 보내기 
 			
@@ -413,14 +414,16 @@ public class OrderController extends SalesController{
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("sales", salesMap);
-			mav.addObject("sales", sales);
 			
+			
+			mav.addObject("sales", sales);
 			HashMap<String,Object> fakeMap = new HashMap<String, Object>();
 			return fakeMap;
+		
 		}
 		
 		@PostMapping("compOrder")
-		public ModelAndView complete_order(HttpServletRequest request) {
+		public ModelAndView complete_order() {
 			
 
 			

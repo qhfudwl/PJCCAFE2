@@ -9,6 +9,6 @@
 </head>
 <body>
 
-${sales.orderNumber } 
+
 </body>
 </html>
