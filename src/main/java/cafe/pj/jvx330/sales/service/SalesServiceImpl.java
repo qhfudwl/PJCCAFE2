@@ -10,36 +10,48 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.menu.service.MenuService;
 import cafe.pj.jvx330.sales.dao.SalesDao;
+import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.web.util.OrderStorage;
-import cafe.pj.jvx330.web.util.Setter_Date;
+import cafe.pj.jvx330.web.util.SetterDate;
 
 @Component("salesService")
 public class SalesServiceImpl implements SalesService{
+	
+	@Autowired
 	private SalesDao sd;
 	
-	private Setter_Date sed = new Setter_Date();
-	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-	
+	@Resource(name="userService")
+	private UserService us;
 	
 	@Autowired
 	private MenuService ms;
 	
-	@Autowired
+	@Resource(name="setterDate")
+	private SetterDate sed;
+	
+	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	
+	
 	public SalesServiceImpl(SalesDao salesDao) {
 		this.sd = salesDao;
 	}
 
+	@Transactional
 	@Override
 	public void addSales(Sales sales) {
 		sd.addSales(sales);
+		us.updatePointById(sales.getUser());
 	}
 
 	@Override
@@ -66,7 +78,8 @@ public class SalesServiceImpl implements SalesService{
 	public Sales findSalesByOrderNumber(String orderNumber) {
 		return sd.findSalesByOrderNumber(orderNumber);
 	}
-
+	
+	@Transactional
 	@Override
 	public void removeSales(String orderNumber) {
 		sd.removeSales(orderNumber);
@@ -109,7 +122,6 @@ public class SalesServiceImpl implements SalesService{
 			for(int j = iNum; j<order.size();j++) { // osList 세팅
 				OrderStorage os = new OrderStorage();
 				menu = ms.findMenuById(order.get(j).getMenu().getId());
-				System.out.println(menu.getMenuType());
 				if(menuType == 'T' || menuType == menu.getMenuType()) { 
 					// menuType 에 따라 세팅.
 					order.get(j).setMenu(menu);
@@ -136,63 +148,6 @@ public class SalesServiceImpl implements SalesService{
 		
 		return osList;   
 	}
-	
-//	public List<Product> sumOrder(List<Product> temp_order){
-//		List<Product> order = new ArrayList<Product>();
-//		Product product = new Product();
-//		Menu menu = new Menu();
-//		int temp = 0;
-//		List<Long> preventRep = new ArrayList<>();
-//		preventRep.add((long) 0);
-//		boolean po = false;
-//		
-//		System.out.println("prRep size : " + preventRep.size());
-//		for(int i = 0; i<temp_order.size(); i++) {
-//			System.out.println("size : " + preventRep.size());
-//			for(long pr : preventRep) {
-//				System.out.println("pr is "+pr);
-//				if(pr == temp_order.get(i).getMenu().getId()) {
-//					// 이미 더한 menuId 차례일 때 넘어감
-//				} else {
-//					if(po==false) {
-//						po=true;
-//					}
-//					
-////					preventRep.add(temp_order.get(i).getMenu().getId());
-//					menu.setId(temp_order.get(i).getMenu().getId());
-//					product.setMenu(menu);
-//					product.setQuantity(temp_order.get(i).getQuantity());
-//					for(int j=i+1; j<temp_order.size(); j++) {
-//						if(temp_order.get(i).getMenu().getId() 
-//							== temp_order.get(j).getMenu().getId()) {
-//							product.setQuantity(product.getQuantity()+temp_order.get(j).getQuantity());		
-//							
-////							 order.add(product);
-//							System.out.println("for문 안의 product's quantity : " + product.getQuantity());
-//						}
-//					}
-//					System.out.println("2");
-//					order.add(product);
-////					break;
-//				}
-//				
-//			}
-//			
-//			if(po==true) {
-//				preventRep.add(temp_order.get(i).getMenu().getId());
-//				for(long dr : preventRep) {
-//					System.out.println("true / "+dr);
-//				}
-//				po=false;
-//
-//			}
-//			if(preventRep.get(0) == 0) {
-//				preventRep.remove(0);
-//			}
-//			
-//		}
-//		return order;
-//	}
 	
 	public List<Product> sumOrder(List<Product> temp_order){
 		Map<Long, Integer> map = new HashMap<Long, Integer>();

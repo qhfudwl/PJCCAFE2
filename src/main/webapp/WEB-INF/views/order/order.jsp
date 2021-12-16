@@ -28,6 +28,7 @@
       (좌) 주문내역
       
       -->
+      
 				<div class="leftSideWrap halfSideWrap">
 					<h2 class="hidden">주문내역</h2>
 					<div class="orderListTableWrap">
@@ -55,18 +56,19 @@
 							</div>
 						</div>
 						<div class="customerInfoWrap">
+							<input type="hidden" class="orderCustId"/>
 							<table class="customerInfoTable">
 								<tr>
 									<th>고객명</th>
-									<td>홍길동</td>
+									<td class="orderCustName" id="orderCustName"></td>
 									<th>전화번호</th>
-									<td>010-1234-7891</td>
+									<td class="orderCustPhone"></td>
 								</tr>
 								<tr>
-									<th>포인트</th>
-									<td>2,000점</td>
 									<th>생년월일</th>
-									<td>1990년1월1일</td>
+									<td class="orderCustBirth"></td>
+									<th>포인트</th>
+									<td class="orderCustPoint"></td>
 								</tr>
 							</table>
 						</div>
@@ -102,7 +104,7 @@
 						<ul>
 							<li><a href="#" class="menuItemCom menuItemCaltCom calSelected">인기메뉴</a></li>
 							<li><a href="#" class="menuItemCom menuItemCaltCom">신메뉴</a></li>
-							<li><a href="#" class="menuItemCom menuItemCaltCom">전체메뉴</a></li>
+							<li><a href="#" class="menuItemCom menuItemCaltCom totalMenuItem">전체메뉴</a></li>
 						</ul>
 					</div>
 					<div class="menuNameWrap">
@@ -202,12 +204,15 @@
 					</div>
 					<div class="funcButtonsWrap oneRow">
 						<h3 class="hidden">기능</h3>
+						<form id="goCompOrder" action="compOrder" method="post"></form>
 						<ul>
 							<li><a href="#" class="menuItemCom funcButtonCom funcAllCancelBtn">전체취소</a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom"></a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom funcCustomerSelectBtn">고객선택</a></li>
-							<li><a href="#" class="menuItemCom funcButtonCom">주문하기</a></li>
+							<li><a href="#" class="menuItemCom funcButtonCom funcOrderBtn">주문하기</a></li>
 						</ul>
+						
+						
 					</div>
 
 				</div>

@@ -46,17 +46,15 @@ CREATE TABLE SalesRecord (
    place			CHAR(1)				NOT NULL   	DEFAULT 'I',						-- 매장 or 포장
    regDate			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 등록날짜(읽기 전용)
    
-   CONSTRAINT		SalesRecord_customerId_FK 	FOREIGN KEY(customerId) REFERENCES Customer(id),
-   CONSTRAINT		SalesRecord_orderNumber_UK	UNIQUE(orderNumber)
+   CONSTRAINT		SalesRecord_customerId_FK 	FOREIGN KEY(customerId) REFERENCES Customer(id)
 );
 
 CREATE TABLE OrderRecord (
-   id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,								-- 주문번호
+   id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,		-- 주문번호
    menuId  			BIGINT     			NOT NULL,										-- 메뉴아이디
    quantity      	INT         		NOT NULL,										-- 주문수량 
    regDate 			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 결제날짜 
-   CONSTRAINT		Menu_menuId_FK 	FOREIGN KEY(menuId) REFERENCES Menu(id),
-   CONSTRAINT		SalesRecord_orderNumber_FK 	FOREIGN KEY(orderNumber) REFERENCES SalesRecord(orderNumber) ON DELETE CASCADE
+   CONSTRAINT		Menu_menuId_FK 	FOREIGN KEY(menuId) REFERENCES Menu(id)
 );
 
 -- 비회원등록
@@ -142,7 +140,9 @@ SELECT * FROM SalesRecord;
 SELECT * FROM OrderRecord;
 SELECT menuID, SUM(quantity) as quantity FROM OrderRecord WHERE Date(regDate) Between '2021-12-15 00:00:00' AND '2021-12-15 23:59:59' GROUP BY menuId;
 
-DELETE FROM Menu WHERE id=179;
+DELETE FROM Menu;
 DELETE FROM SalesRecord;
 
+INSERT INTO Customer(name,phone,birth,point) VALUES('홍길동','01012345678','19900101',0);
+INSERT INTO Customer(name,phone,birth,point) VALUES('김감자','01012345678','19900101',7000);
 

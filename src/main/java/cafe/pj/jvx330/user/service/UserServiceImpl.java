@@ -5,16 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cafe.pj.jvx330.domain.Customer;
+import cafe.pj.jvx330.domain.Employee;
 import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.user.dao.UserDao;
+import cafe.pj.jvx330.web.util.Validator;
 @Service("userService")
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserDao ud;
 
-	
+	@Autowired
+	private Validator validator;
 
 	public UserServiceImpl() {
 		
@@ -77,6 +79,22 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> findAllEmployee() {
 		return ud.findAllEmployee();
+	}
+
+	@Override
+	public void updatePointById(User user) {
+		ud.updatePointById(user);
+	}
+
+	@Override
+	public boolean isEmployee(String eid) {
+		User user = ud.findEmployeeByEid(eid);
+		
+		if (validator.isEmpty(user)) {
+			return false;
+		}
+		
+		return true;
 	}
 
 }

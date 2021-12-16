@@ -6,7 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class Setter_Date {
+import org.springframework.stereotype.Component;
+
+@Component("setterDate")
+public class SetterDate {
 	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public List<String> chooseDate(Calendar cal, int cnt, char dateType){

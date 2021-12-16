@@ -24,7 +24,7 @@ public abstract class CafeController {
 	 * @return
 	 * @author 김보령
 	 */
-	private String returnOrderNumber() {
+	protected String returnOrderNumber() {
 		
 		// 만일 서버 내 첫 주문이라면 a-001 반환
 		if (validator.isEmpty(order_number)) {

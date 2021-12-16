@@ -1,17 +1,42 @@
 package cafe.pj.jvx330.web.command;
 
+import java.util.Date;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+
+@Getter
+@Setter
+@Slf4j
+@ToString
 public class MenuCommand {
 	private long id;
 	private char menuType;
 	private String menuName;
-	private double menuPrice;
+	private String menuPrice;
 	private boolean stock;
 	private String imgPath;
 	
-	public MenuCommand(long id, String menuName, double menuPrice) {
+	public MenuCommand() {
+		
+	}
+	
+	public MenuCommand(long id, String menuName, String menuPrice) {
 		this.id = id;
 		this.menuName = menuName;
 		this.menuPrice = menuPrice;
+	}
+
+	public MenuCommand(long id, char menuType, String menuName, String menuPrice, boolean stock, String imgPath) {
+		super();
+		this.id = id;
+		this.menuType = menuType;
+		this.menuName = menuName;
+		this.menuPrice = menuPrice;
+		this.stock = stock;
+		this.imgPath = imgPath;
 	}
 	
 	public long getId() {
@@ -32,10 +57,10 @@ public class MenuCommand {
 	public void setMenuName(String menuName) {
 		this.menuName = menuName;
 	}
-	public double getMenuPrice() {
+	public String getMenuPrice() {
 		return menuPrice;
 	}
-	public void setMenuPrice(double menuPrice) {
+	public void setMenuPrice(String menuPrice) {
 		this.menuPrice = menuPrice;
 	}
 	public boolean isStock() {

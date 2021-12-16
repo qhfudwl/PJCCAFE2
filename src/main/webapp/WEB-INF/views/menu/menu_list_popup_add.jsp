@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +13,8 @@
 <section id="addContent">
 <h3>메뉴 추가</h3>
 	<div id="addMenuPopUp">
-	<form method="post" action="addMenu" name="addMenuForm" enctype="multipart/form-data">
-		<input class="hidden" type="text" name="menuType" value="${menu.menuType}" />
+	<form:form method="post" modelAttribute="menuCommand" action="addMenu" path="addMenuForm" enctype="multipart/form-data">
+		<form:input class="hidden" path="menuType" />
 		<input class="hidden" type="text" name="id" value="0" />
 		<input type="text" class="hidden" name="close" value="${close}" /> 
 		<table>
@@ -22,16 +23,22 @@
 				<td>
 					<input id="addImgFile" type="file" name="file" />
 					<label for="addImgFile">업로드</label>
-					<input type="text" name="imgPath"  />
+					<form:input path="imgPath" readonly="true" />
 				</td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="menuName" placeholder="메뉴 이름 입력"/></td>
+				<td>
+					<form:input path="menuName" placeholder="메뉴 이름 입력"/>
+					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("menuNameErr")}</p></c:if>
+				</td>
 			</tr>
 			<tr>
 				<th>가격</th>
-				<td><input type="text" name="menuPrice" placeholder="메뉴 가격 입력"/> 원</td>
+				<td>
+					<form:input path="menuPrice" placeholder="메뉴 가격 입력"/> <span>원</span>
+					<c:if test="${not empty errMsg}"><p class="errMsg">${errMsg.get("menuPriceErr")}</p></c:if>
+				</td>
 			</tr>
 			<tr>
 				<th>재고유무</th>
@@ -44,8 +51,9 @@
 			</tr>
 		</table>
 		<input type="submit" value="추가하기" />
-	</form>
+	</form:form>
 	<script>
+		/* 파일 이름 넣어주기 */
 		$("#addMenuPopUp").mousemove(function() {
 			let imgPath = $("input[type=file]").val();
 			let arr = imgPath.split("\\");

@@ -21,8 +21,11 @@ import cafe.pj.jvx330.web.command.EmployeeCommand;
 public class UserLogController extends UserController {
 	
 	@GetMapping("/user/viewLogin")
-	public String viewLogin(HttpSession session) {
-		return "user/login";
+	public ModelAndView viewLogin() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("employeeCommand", new EmployeeCommand());
+		mav.setViewName("user/login");
+		return mav;
 	}
 	
 	@GetMapping("/user/logout")
@@ -37,53 +40,34 @@ public class UserLogController extends UserController {
 	}
 	
 	@PostMapping("/user/checkAdmin")
-	public ModelAndView checkAdmin(@ModelAttribute EmployeeCommand employeeCommand, HttpSession session) {
+	public ModelAndView checkAdmin(@ModelAttribute("employeeCommand") EmployeeCommand employeeCommand, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 		Map<String, String> errMsg = new HashMap<>();
 		
-		if (validator.isEmpty(employeeCommand.getEid())) {
+		User user = us.findEmployeeByEid(employeeCommand.getEid());
+		Employee inputEp = convertEmployeeCommandToEmployee(employeeCommand);
+		Employee admin = (Employee)user;
+		
+		// 유효성 검사
+		if (validator.isEmpty(employeeCommand.getEid())) { // 아이디 미입력
 			errMsg.put("idErr", "아이디를 입력해주세요.");
-			mav.addObject("errMsg", errMsg);
-			mav.addObject(employeeCommand);
-			mav.setViewName("user/login");
-			return mav;
-		}
-		
-		List<User> users = us.findAllEmployee();
-		boolean check = false;
-		
-		for (User u : users) {
-			if (u instanceof Employee) {
-				Employee e = (Employee)u;
-				if (e.getEid().equals(employeeCommand.getEid())) {
-					check = true;
-				}
+		} else {
+			if (!us.isEmployee(employeeCommand.getEid())) {
+				errMsg.put("idErr", "아이디가 존재하지 않습니다.");
 			}
 		}
 		
-		
-		if (!check) {
-			errMsg.put("idErr", "아이디가 존재하지 않습니다.");
-			mav.addObject("errMsg", errMsg);
-			mav.addObject(employeeCommand);
-			mav.setViewName("user/login");
-			return mav;
+		if (validator.isEmpty(employeeCommand.getPasswd())) { // 비밀번호 미입력
+			errMsg.put("pwErr", "비밀번호를 입력해주세요.");
+		} else {
+			if (!inputEp.getPasswd().equals(admin.getPasswd())) {
+				errMsg.put("pwErr", "비밀번호 불일치");
+			}
 		}
 
-		User user = us.findEmployeeByEid(employeeCommand.getEid());
-		Employee inputEp = new Employee();
-		inputEp.setEid(employeeCommand.getEid());
-		inputEp.setPasswd(employeeCommand.getPasswd());
-		
-		Employee admin = (Employee)user;
-		
-		
-		if (!inputEp.getPasswd().equals(admin.getPasswd())) {
-			errMsg.put("pwErr", "비밀번호 불일치");
-			mav.addObject("errMsg", errMsg);
-			mav.addObject(employeeCommand);
-			mav.setViewName("user/login");
+		if (!errMsg.isEmpty()) {
+			setModelAndViewE(mav, errMsg, employeeCommand, "user/login");
 			return mav;
 		}
 		

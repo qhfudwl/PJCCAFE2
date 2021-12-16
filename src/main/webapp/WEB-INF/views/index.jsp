@@ -18,6 +18,7 @@
 		<form action="addSales" method="post">
 		<input class="hidden" type="submit" value="완료" />
 			<div id="salesItemWrap">
+				<c:if test="${empty sales}"><p id="noOrder">현재 주문이 없습니다.</p></c:if>
 				<c:forEach var="salesOrder" items="${sales}">
 					<ul class="salesItem">
 						<li class="salesNumber">

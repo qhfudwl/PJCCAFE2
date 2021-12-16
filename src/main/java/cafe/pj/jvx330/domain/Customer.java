@@ -2,6 +2,7 @@ package cafe.pj.jvx330.domain;
 
 import java.util.Date;
 
+
 public class Customer extends User {
 	private String customerName;
 	private String phone;

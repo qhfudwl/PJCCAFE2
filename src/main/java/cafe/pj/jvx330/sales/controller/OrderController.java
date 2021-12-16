@@ -1,18 +1,25 @@
 package cafe.pj.jvx330.sales.controller;
 
 import java.net.http.HttpRequest;
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,63 +28,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.Employee;
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.domain.Product;
+import cafe.pj.jvx330.domain.Sales;
+import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.menu.service.MenuService;
-
+import cafe.pj.jvx330.user.service.UserService;
+import cafe.pj.jvx330.user.service.UserServiceImpl;
+import cafe.pj.jvx330.web.command.CustomerCommand;
+import cafe.pj.jvx330.web.command.OrderCommand;
+import cafe.pj.jvx330.web.command.OrderItemsCommand;
+import cafe.pj.jvx330.web.controller.CafeController;
+/**
+ * 
+ * @author 윤효
+ *
+ */
 @Controller
-public class OrderController {
+public class OrderController extends SalesController{
 		@Resource(name="menuService")
 		MenuService ms;
 		
-		
-	
-		//처음예제
-		/*
-		RequestBody
-		Json 형태로 받은 HTTP Body 데이터를 MessageConverter를 통해 변환시킴
-		값을 주입하지 않고 변환을 시키므로(엄밀히는 Reflection을 사용하여 할당), 변수들의 생성자나 Setter함수가 없어도 정상적으로 값이 할당됨
-
-		*/
-		
-		/* 
-		@RequestMapping(value="/sayHello",method=RequestMethod.GET)
-		public ModelAndView sayHello() {
-
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("order/order");
-			return mav;
-		}
-		
-		
-		@RequestMapping(value="/sayHello",method=RequestMethod.POST)
-		@ResponseBody
-		public HashMap<String,Object> requestBody(@RequestBody HashMap<String,Object> map){
-			HashMap<String,Object> map2 = new HashMap<String, Object>();
-			System.out.println("hi");
-			System.out.println(map.get("id"));
-			//jsp에 값 전달하기
-			map2.put("name", "yoon");
-			return map2;
-		}
-		*/
-	
-	
-		/*
-		@RequestMapping(value="/sayHello",method=RequestMethod.POST)
-		public String requestBody(@RequestParam("test") String test){
-			
-			System.out.println(test);
-			return "order/orderList";
-		}
-		*/
-		
+		@Resource(name="userService")
+		UserService cs;
 		
 		List<Product> order = new ArrayList<>();
-	
-		
-		
 		
 		/**
 		 *  주문 화면 불러오기 
@@ -93,6 +70,8 @@ public class OrderController {
 			//HttpSession session = request.getSession();
 			//Employee employee= (Employee)session.getAttribute("manager");
 			//String Mposition = employee.getPosition();
+			HttpSession session = request.getSession();
+			session.setAttribute("contentName", "주문목록");
 			
 			//직원 정보 임시
 			String mPosition = "Manager";
@@ -182,15 +161,7 @@ public class OrderController {
 				menu.setMenuPrice(menuPrice);
 				order.add(new Product(menu,quantity));
 			}		
-			
-			//화면에 뿌려주기
-			/*
-			addMenuList.put("id", id);
-			addMenuList.put("menuName", menuName);
-			addMenuList.put("menuPrice", menuPrice);
-			addMenuList.put("quantity", quantity);
-		    */
-			
+
 			addMenuList.put("order",order);
 		    return addMenuList;
 			
@@ -200,8 +171,8 @@ public class OrderController {
 		
 		
 		
-		
-		
+		@Autowired
+		private UserService us ;
 		
 		
 		/**
@@ -216,29 +187,59 @@ public class OrderController {
 		 */
 		
 		//고객 찾기 팝업창
-		@GetMapping("findUserForPoint")
-		public String findUserForPoint() {
-			
+		@GetMapping("findUserForPointForm")
+		public String findUserForPointForm() {
 			return "order/findUserForPoint";
 		}
 		
-		//고객 선택 팝업창
-		@GetMapping("findUserResultForPoint")
-		public String findUserResultForPoint() {
+		//폰 번호 받아오기 		
+		@PostMapping("findUserForPoint")
+		public ModelAndView findUserForPoint(@RequestParam String popUpPhoneValue) {
+			List<User> user = us.findUsersByPhone(popUpPhoneValue);
+			List<Customer> cust = new ArrayList<Customer>();
+			for(User user1 :user) {
+				cust.add((Customer)user1);
+			}
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("cust",cust);
+			mav.setViewName("order/findUserResultForPoint");
 			
-			return "order/findUserResultForPoint";
+			return mav;
+		}
+		Customer customer = new Customer();
+		//고객 정보 보관하기
+		@PostMapping("saveUserPoint")
+		@ResponseBody
+		public void saveUserPoint(@RequestBody HashMap<String,Object> map) {
+			System.out.println("saveUserPoint");	
+			customer.setId(Long.parseLong(map.get("userId").toString()));
+			customer.setCustomerName(map.get("userName").toString());
+			customer.setPhone(map.get("userPhone").toString());
+			customer.setBirth(map.get("userBirth").toString());
+			customer.setPoint(Double.parseDouble(map.get("userPoint").toString()));
+			return;
 		}
 		
 		//회원가입 팝업창
-		@GetMapping("joinUserForPoint")
-		public String joinUserForPoint() {
+		@PostMapping("joinUserForPoint")
+		public String joinUserForPointForm() {
 			
 			return "order/joinUserForPoint";
 		}
 			
-				
 		
-		
+		//회원가입 후 결과창
+		@PostMapping("joinUserResultForPoint")
+		@ResponseBody
+		public void joinUserResultForPointForm(@RequestBody HashMap<String,Object> map) {
+			String name = map.get("userName").toString();
+			String phone = map.get("userPhone").toString();;
+			String birth = map.get("userBirth").toString();;
+			User user = new Customer(name,phone,birth,0);
+			System.out.println(name+phone+birth);
+			us.addUser(user);
+			return;
+		}
 		
 		
 		
@@ -255,6 +256,27 @@ public class OrderController {
 		 * 		2 - 주문최스금액 5,000원 이하면 경고창
 		 */
 		
+		//포인트 사용 팝업창 띄우기
+		@GetMapping("usePointPopup")
+		public ModelAndView usePointPopupForm() {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("userPoint", customer.getPoint());
+			mav.setViewName("order/usePoint");
+			return mav;
+		}
+		
+		
+		//포인트 사용하기
+		@PostMapping("usePoint")
+		public void usePointPopup() {
+			
+			
+		}
+		
+		
+		
+		
+		
 		/**
 		 * 전체취소 누르면
 		 *		1 - 좌측 화면에 모든 값 초기화
@@ -268,17 +290,101 @@ public class OrderController {
 		 * 			2-1 카드 결제 금액 자동 입력
 		 */
 		
+		ModelAndView mav = new ModelAndView();
 		
 		
+		@PostMapping("saveOrder")
+		@ResponseBody
+		public HashMap<String,Object> save_order(@ModelAttribute("order") OrderCommand order, HttpServletRequest request) {
+			System.out.println(order.getNowOrder().get(0).getMenuId());
+			
+			
+			//주문번호 구하기
+			String orderNumber = returnOrderNumber();
+			
+			//매장or포장 구하기
+			char place = order.getPlace();
+			
+			//주문한 메뉴 추가하기
+			List<Product> menuItems = new ArrayList<Product>();
+			for(OrderItemsCommand oic:order.getNowOrder()) {
+				Menu menu = ms.findMenuById(oic.getMenuId());
+				int quantity = oic.getQuantity();
+				menuItems.add(new Product(orderNumber,menu,quantity,new Date()));
+			
+			}
+
+			//사용한 포인트
+			double usePoint = Double.parseDouble(order.getUsePoint());
+			
+			
+			//총합산(amount) 구하기
+			double amount=0;
+			for(Product product : menuItems) {
+				amount += product.getMenu().getMenuPrice()*product.getQuantity();
+			}
+			
+			//실판매 금액
+			double totalPrice = amount;
+			
+			//받을 금액
+			amount -= usePoint;
+				
+			//포인트 계산하기
+			double savePoint = amount * 0.1;
+			
+			//고객 구하기
+			User user;
+			//회원일 경우 회원 정보 저장
+			if(order.getCustomer().getId()!=1) {
+				user = cs.findUserById(order.getCustomer().getId());
+				Customer customer = (Customer)user;
+				customer.setPoint(savePoint);
+				user = customer;
+			}
+			//비회원일 경우 id값은 1
+			else {
+				user = new Customer();
+				user.setId(order.getCustomer().getId());
+			}
+			 
+			Sales sales = new Sales();
+			sales.setUser(user);
+			sales.setOrderNumber(orderNumber);
+			sales.setPlace(place);
+			sales.setAmount(amount);
+			sales.setUsePoint(usePoint);
+			sales.setOrder(menuItems);
+			sales.setRegDate(new Date());
+			
+			//세션에 자료 보내기 
+			HttpSession session = request.getSession();
+			
+			TreeMap<String,Sales> salesMap = (TreeMap<String, Sales>) session.getAttribute("sales");
+			if(validator.isEmpty(salesMap)) {
+				salesMap = new TreeMap<String, Sales>();
+			}
+			salesMap.put(orderNumber, sales);
+			session.setAttribute("sales", salesMap);
+			
+			
+			mav.addObject("sales", sales);
+			HashMap<String,Object> fakeMap = new HashMap<String, Object>();
+			return fakeMap;
+			
+			
 		
+		}
 		
-		
-		
-		
-		
-		
-		
-		
+		@PostMapping("compOrder")
+		public ModelAndView complete_order() {
+			
+
+			
+			mav.setViewName("order/completeOrder");
+			return mav;
+		}
+
 		/**
 		 * 취소 누를 때
 		 * 		1 - 좌측창에서 미리 메뉴를 눌렀을 경우
@@ -286,6 +392,17 @@ public class OrderController {
 		 * 		2 - 좌측창에서 미리 메뉴를 안눌렀을 경우
 		 * 			2-1 아무 반응 없음
 		 */
+		
+		
+		@PostMapping("/order")
+		public String cancelOrder(HttpServletRequest request, @RequestParam("leastOrderNumber") String leastorderNumber) {
+			HttpSession session = request.getSession();
+			TreeMap<String,Sales> map = (TreeMap<String, Sales>) session.getAttribute("sales");
+			System.out.println(leastorderNumber);
+			map.remove(leastorderNumber);
+			return "redirect:/order";
+		}
+		
 		
 		
 		/**

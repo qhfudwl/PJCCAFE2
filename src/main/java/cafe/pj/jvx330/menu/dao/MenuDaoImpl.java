@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,14 +17,12 @@ public class MenuDaoImpl implements MenuDao {
 	private JdbcTemplate jt;
 
 	@Override
-	public Menu addMenu(Menu menu) {
+	public void addMenu(Menu menu) {
 		String sql = "INSERT INTO Menu(menuType, menuName, menuPrice, stock, imgPath)"
 				+ " VALUES (?, ?, ?, ?, ?)";
 		
 		jt.update(sql, String.valueOf(menu.getMenuType()), menu.getMenuName(),
 				menu.getMenuPrice(), menu.isStock(), menu.getImgPath());
-		
-		return null;
 	}
 
 	@Override
@@ -81,6 +80,30 @@ public class MenuDaoImpl implements MenuDao {
 		String sql = "DELETE FROM Menu WHERE id=?";
 		
 		jt.update(sql, id);
+	}
+
+	@Override
+	public Menu findLastMenuByMenuType(char menuType) {
+		
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath, regDate"
+				+ " FROM Menu WHERE id=(SELECT MAX(id) FROM Menu WHERE menuType=?)";
+		
+		return jt.queryForObject(sql, new MenuRowMapper(), String.valueOf(menuType));
+	}
+
+	@Override
+	public Menu findMenuByMenuName(String menuName) {
+		
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath, regDate"
+				+ " FROM Menu WHERE menuName=?";
+		
+		Menu menu = null;
+		try {
+			menu = jt.queryForObject(sql, new MenuRowMapper(), menuName);
+		} catch (EmptyResultDataAccessException e) {
+			menu = null;
+		}
+		return menu;
 	}
 
 }
