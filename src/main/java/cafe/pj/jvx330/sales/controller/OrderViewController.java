@@ -27,7 +27,7 @@ import cafe.pj.jvx330.web.command.SalesCommand;
  *
  */
 @Controller("web.controller.indexViewController")
-public class IndexViewController extends SalesController {
+public class OrderViewController extends SalesController {
    
    /**
     * 
@@ -91,6 +91,7 @@ public class IndexViewController extends SalesController {
    @GetMapping("/addOrderRecordByBatch")
 	public ModelAndView addOrderRecordByBatch(HttpSession session) {
 		Map<String, List<Product>> order = checkOrderInSession(session);
+//		compSalesList
 		List<Product> finalOrder = new ArrayList<Product>();
 		List<Product> temp_order = new ArrayList<Product>();
 		
