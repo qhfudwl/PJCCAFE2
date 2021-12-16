@@ -41,7 +41,11 @@ import cafe.pj.jvx330.web.command.CustomerCommand;
 import cafe.pj.jvx330.web.command.OrderCommand;
 import cafe.pj.jvx330.web.command.OrderItemsCommand;
 import cafe.pj.jvx330.web.controller.CafeController;
-
+/**
+ * 
+ * @author 윤효
+ *
+ */
 @Controller
 public class OrderController extends SalesController{
 		@Resource(name="menuService")
@@ -50,52 +54,7 @@ public class OrderController extends SalesController{
 		@Resource(name="userService")
 		UserService cs;
 		
-	
-		//처음예제
-		/*
-		RequestBody
-		Json 형태로 받은 HTTP Body 데이터를 MessageConverter를 통해 변환시킴
-		값을 주입하지 않고 변환을 시키므로(엄밀히는 Reflection을 사용하여 할당), 변수들의 생성자나 Setter함수가 없어도 정상적으로 값이 할당됨
-
-		*/
-		
-		/* 
-		@RequestMapping(value="/sayHello",method=RequestMethod.GET)
-		public ModelAndView sayHello() {
-
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName("order/order");
-			return mav;
-		}
-		
-		
-		@RequestMapping(value="/sayHello",method=RequestMethod.POST)
-		@ResponseBody
-		public HashMap<String,Object> requestBody(@RequestBody HashMap<String,Object> map){
-			HashMap<String,Object> map2 = new HashMap<String, Object>();
-			System.out.println("hi");
-			System.out.println(map.get("id"));
-			//jsp에 값 전달하기
-			map2.put("name", "yoon");
-			return map2;
-		}
-		*/
-	
-	
-		/*
-		@RequestMapping(value="/sayHello",method=RequestMethod.POST)
-		public String requestBody(@RequestParam("test") String test){
-			
-			System.out.println(test);
-			return "order/orderList";
-		}
-		*/
-		
-		
 		List<Product> order = new ArrayList<>();
-	
-		
-		
 		
 		/**
 		 *  주문 화면 불러오기 
@@ -202,15 +161,7 @@ public class OrderController extends SalesController{
 				menu.setMenuPrice(menuPrice);
 				order.add(new Product(menu,quantity));
 			}		
-			
-			//화면에 뿌려주기
-			/*
-			addMenuList.put("id", id);
-			addMenuList.put("menuName", menuName);
-			addMenuList.put("menuPrice", menuPrice);
-			addMenuList.put("quantity", quantity);
-		    */
-			
+
 			addMenuList.put("order",order);
 		    return addMenuList;
 			
@@ -357,9 +308,7 @@ public class OrderController extends SalesController{
 			//주문한 메뉴 추가하기
 			List<Product> menuItems = new ArrayList<Product>();
 			for(OrderItemsCommand oic:order.getNowOrder()) {
-				Menu menu = new Menu();
-				System.out.println("menuId"+oic.getMenuId());
-				menu = ms.findMenuById(oic.getMenuId());
+				Menu menu = ms.findMenuById(oic.getMenuId());
 				int quantity = oic.getQuantity();
 				menuItems.add(new Product(menu,quantity,new Date()));
 			
@@ -418,6 +367,7 @@ public class OrderController extends SalesController{
 			salesMap.put(orderNumber, sales);
 			session.setAttribute("sales", salesMap);
 			
+			
 			mav.addObject("sales", sales);
 			HashMap<String,Object> fakeMap = new HashMap<String, Object>();
 			return fakeMap;
@@ -434,15 +384,7 @@ public class OrderController extends SalesController{
 			mav.setViewName("order/completeOrder");
 			return mav;
 		}
-		
 
-		
-		
-		
-		
-		
-		
-		
 		/**
 		 * 취소 누를 때
 		 * 		1 - 좌측창에서 미리 메뉴를 눌렀을 경우
@@ -450,6 +392,17 @@ public class OrderController extends SalesController{
 		 * 		2 - 좌측창에서 미리 메뉴를 안눌렀을 경우
 		 * 			2-1 아무 반응 없음
 		 */
+		
+		
+		@PostMapping("/order")
+		public String cancelOrder(HttpServletRequest request, @RequestParam("leastOrderNumber") String leastorderNumber) {
+			HttpSession session = request.getSession();
+			TreeMap<String,Sales> map = (TreeMap<String, Sales>) session.getAttribute("sales");
+			System.out.println(leastorderNumber);
+			map.remove(leastorderNumber);
+			return "redirect:/order";
+		}
+		
 		
 		
 		/**

@@ -58,9 +58,7 @@ body{
 
 /*  가게 정보 보여주기  */
 #storeInfoWrap{
-  margin-top:50px;.orderListTable{
-
-  }
+  margin-top:50px;
 }
 
 /*  주문내역  */
@@ -135,11 +133,11 @@ line-height: 30px;
 
 /*  버튼   */
 #comporderBtnWrap{
-  width: 310px;
-  margin: 30px auto 0;
+  width: 320px;
+  margin: 30px auto 80px;
 }
 .orderListBtnCom{
-  
+  display: block;
   height: 50px;
   width: 150px;
   background: #596271;
@@ -155,6 +153,13 @@ line-height: 30px;
   cursor: pointer;
 }
 
+.orderListCommitBtn{
+	float:left;
+}
+.orderListCancelBtn{
+	margin-left:20px;
+	float:left;
+}
 
 
 

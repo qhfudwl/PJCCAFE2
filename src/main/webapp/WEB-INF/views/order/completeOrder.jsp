@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -15,6 +14,8 @@
 <title>영수증</title>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/incl/header.jsp"></jsp:include>
+
 <section id="mainContainer">
 
   <div id="userInfoWrap">
@@ -32,9 +33,15 @@
           <p>[지점] : 대구</p>
         </div>
         <div class="orderInfo">
-          <p class="orderNumber">[주문번호] : <span>A01</span></p>
-          <p class="todayDate">[주문날짜] : <span>2021년 12월 16일 12시 28분 33초</span></p>
-          <p class="place">[포장여부] : 매장</p>
+          <p class="orderNumber">[주문번호] : <span>${sales.orderNumber }</span></p>
+          <p class="todayDate">[주문날짜] : <span><fmt:formatDate value="${sales.regDate}" pattern="yyyy-MM-dd"/></span></p>
+          <c:if test="${sales.place == 'I'.charAt(0)}">
+         	 <p class="place">[포장여부] : 매장</p>
+          </c:if>
+          <c:if test="${sales.place == 'O'.charAt(0)}">
+          	<p class="place">[포장여부] : 포장</p>
+          </c:if>
+          
         </div>
       </div>
       <div id="orderListWrap">
@@ -46,25 +53,25 @@
             <th>수량</th>
             <th>금액</th>
           </tr>
-          <tr>
-            <td>카페라떼</td>
-            <td>1,000</td>
-            <td>3</td>
-            <td>3,000</td>
-          </tr>
-
-
+          <c:forEach var="mItems" items="${sales.order }">
+          	<tr>
+          		<td>${mItems.menu.menuName }</td>
+          		<td>${mItems.quantity }</td>
+          		<td><fmt:formatNumber value="${mItems.menu.menuPrice }" pattern=",###" type="currency" /></td>
+          		<td><fmt:formatNumber value="${mItems.menu.menuPrice * mItems.quantity }" pattern=",###" type="currency" /></td>
+          	</tr>
+          </c:forEach>
           <tr class="borderLine">
             <td colspan="3">판매금액</td>
-            <td class="rightSideWrap">43,000</td>
+            <td class="rightSideWrap"><fmt:formatNumber value="${sales.amount + sales.usePoint}" pattern=",###" type="currency" /></td>
           </tr>
           <tr>
             <td colspan="3">사용한 포인트</td>
-            <td class="rightSideWrap">0</td>
+            <td class="rightSideWrap"><fmt:formatNumber value="${sales.usePoint }" pattern=",###" type="currency" /></td>
           </tr>
           <tr>
             <td colspan="3">합계 금액</td>
-            <td class="rightSideWrap">43,000</td>
+            <td class="rightSideWrap"><fmt:formatNumber value="${sales.amount }" pattern=",###" type="currency" /></td>
           </tr>
         </table>
       </div>
@@ -73,30 +80,44 @@
         <table class="userInfoTable">
           <tr>
             <th>고객명:</th>
-            <td>김**</td>
+            <c:if test="${sales.user.id == 1 }"><td>/</td></c:if>
+            <c:if test="${sales.user.id != 1 }"><td>${fn:substring(sales.user.customerName,0,1) }**</td></c:if>
           </tr>
           <tr>
             <th>휴대폰번호:</th>
-            <td>010-1234-****</td>
+            <c:if test="${sales.user.id == 1 }"><td>/</td></c:if>
+            <c:if test="${sales.user.id != 1 }"><td>${fn:substring(sales.user.phone,0,6) }*****</td></c:if>
+            
           </tr>
           <tr>
             <th>사용 포인트:</th>
-            <td>0</td>
+            <c:if test="${sales.user.id == 1 }"><td>0</td></c:if>
+            <c:if test="${sales.user.id != 1 }"><td><fmt:formatNumber value="${sales.usePoint }" pattern=",###" type="currency" /></td></c:if>
+            
           </tr>
           <tr>
             <th>적립된 포인트:</th>
-            <td>100</td>
+            <c:if test="${sales.user.id == 1 }"><td>0</td></c:if>
+            <c:if test="${sales.user.id != 1 }"><td><fmt:formatNumber value="${sales.amount * 0.1 }" pattern=",###" type="currency" /></td></c:if>
+            
           </tr>
           <tr>
             <th>남은 포인트:</th>
-            <td>1,000</td>
+            <c:if test="${sales.user.id == 1 }"><td>0</td></c:if>
+            <c:if test="${sales.user.id != 1 }"><td><fmt:formatNumber value="${sales.user.point }" pattern=",###" type="currency" /></td></c:if>
+            
           </tr>
           
         </table>
       </div>
       <div id="comporderBtnWrap">
-        <button type="button" class="orderListBtnCom">확인</button>
-        <button type="button" class="orderListBtnCom">취소</button>
+        <form action="order" method="get" >
+        <button type="submit" class="orderListBtnCom orderListCommitBtn">확인</button>
+        </form>
+        <form action="order" method="post" >
+        <input type="hidden" name="leastOrderNumber" value="${sales.orderNumber }"/>
+        <button type="submit" class="orderListBtnCom orderListCancelBtn">취소</button>
+       	</form>
       </div>
     </div>
   </div>
