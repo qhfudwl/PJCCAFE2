@@ -36,17 +36,22 @@ public class Setter_dateTest {
 		List<Product> order = null;
 		
 		sdt.test_findOrderRecord();
+		
 	}
 	
 	public void test_findOrderRecord() {
 		List<OrderStorage> osList = new ArrayList<OrderStorage>();
-		osList.addAll(ss.findOrderRecordForMenu('D')) ;
+		osList.addAll(ss.findOrderRecordForMenu('M','B')) ;
 		
 		for(int i=0; i<osList.size(); i++) {
 			System.out.println("weekDate : " + osList.get(i).getWeekDate()+" menuName: " + osList.get(i).getMenuName() + 
-					" / Quantity : " + osList.get(i).getQuantity()); 
+					" / Quantity : " + osList.get(i).getQuantity()
+					+ "/ Price : " + osList.get(i).getPrice()); 
+			
 		}
 		
 	}
+	
+	
 	
 }

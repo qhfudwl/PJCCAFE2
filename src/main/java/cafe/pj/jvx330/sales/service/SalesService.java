@@ -2,6 +2,7 @@ package cafe.pj.jvx330.sales.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
@@ -31,11 +32,14 @@ public interface SalesService {
 	 * sd에서 받은 List<Product> 로 
 	 * 화면에 뿌리기 위해 필요한 List<OrderStorage> 반
 	 */
-	List<OrderStorage> findOrderRecordForMenu(char dateType);
+	List<OrderStorage> findOrderRecordForMenu(char dateType, char menuType);
 
 	List<Product> sumOrder(List<Product> temp_order);
 	
 	List<SalesStorage> findSaleRecord(char dateType);
 	
 	List<Sales> findSalesByCustomerId(long customerId);
+	
+	void addOrderRecord(List<Product> order);
+	
 }

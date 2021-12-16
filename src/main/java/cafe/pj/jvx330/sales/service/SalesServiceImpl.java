@@ -5,7 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -24,7 +27,7 @@ import cafe.pj.jvx330.sales.dao.SalesDao;
 import cafe.pj.jvx330.sales.util.SalesStorage;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.web.util.OrderStorage;
-import cafe.pj.jvx330.web.util.Setter_Date;
+import cafe.pj.jvx330.web.util.SetterDate;
 
 @Component("salesService")
 public class SalesServiceImpl implements SalesService{
@@ -39,7 +42,7 @@ public class SalesServiceImpl implements SalesService{
 	private MenuService ms;
 	
 	@Resource(name="setterDate")
-	private Setter_Date sed;
+	private SetterDate sed;
 	
 	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -86,12 +89,12 @@ public class SalesServiceImpl implements SalesService{
 		sd.removeSales(orderNumber);
 	}
 	
-	public List<OrderStorage> findOrderRecordForMenu(char dateType){
+	public List<OrderStorage> findOrderRecordForMenu(char dateType, char menuType){
 		Menu menu = null;
+		List<Product> order = new ArrayList<Product>();
 		Calendar now = Calendar.getInstance(); // 오늘 날짜 
 		Calendar cal = Calendar.getInstance(); // 다음 범위 지정을 위해 범위 시작 날짜를 기억하는 용도
 		List<OrderStorage> osList = new ArrayList<OrderStorage>();
-		List<Product> order = new ArrayList<Product>();
 		
 		int nof = 0;
 		if(dateType == 'M') {// 기간 Type 별로 반복 횟수 지정
@@ -102,7 +105,7 @@ public class SalesServiceImpl implements SalesService{
 			if(now.get(Calendar.DAY_OF_YEAR) <= 30) {
 				nof = now.get(Calendar.DAY_OF_YEAR); //나오는 값이 31개보다 적거나 같을 때
 			} else { // 1월 31보다 클 경우
-				nof = now.get(Calendar.DAY_OF_MONTH);// 30으로 변경 
+				nof = 30;
 			}
 
 		} else { // dateType == 'W'
@@ -125,17 +128,20 @@ public class SalesServiceImpl implements SalesService{
 			for(int j = iNum; j<order.size();j++) { // osList 세팅
 				OrderStorage os = new OrderStorage();
 				menu = ms.findMenuById(order.get(j).getMenu().getId());
-				order.get(j).setMenu(menu);
-				
-				os.setMenuName(order.get(j).getMenu().getMenuName());
-				os.setWeekDate(sDateList.get(0)+" ~ "+sDateList.get(1));
-				//언제~ 언제까지
-				os.setQuantity(order.get(j).getQuantity());
-				os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(i).getQuantity());
-			
-				iNum++;
-				
-				osList.add(os);
+				if(menuType == 'T' || menuType == menu.getMenuType()) { 
+					// menuType 에 따라 세팅.
+					order.get(j).setMenu(menu);
+					
+					os.setMenuName(order.get(j).getMenu().getMenuName());
+					os.setWeekDate(sDateList.get(0)+" ~ "+sDateList.get(1));
+					os.setQuantity(order.get(j).getQuantity());
+					os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(j).getQuantity());
+					iNum++;
+					
+					osList.add(os);
+				} else {
+					
+				}
 			}
 			try { // String to Calendar
 				Date date = format.parse(sDateList.get(0)); 
@@ -149,7 +155,19 @@ public class SalesServiceImpl implements SalesService{
 	}
 	
 	public List<Product> sumOrder(List<Product> temp_order){
-		List<Product> order = null;
+		Map<Long, Integer> map = new HashMap<Long, Integer>();
+		map = temp_order.stream().collect(Collectors.toMap(e -> e.getMenu().getId(), e -> e.getQuantity(), Integer::sum));
+		Product product = new Product();
+		
+		
+		List<Long> keyList = new ArrayList<Long>(map.keySet());
+		List<Integer> valueList = new ArrayList<Integer>(map.values());
+		
+		List<Product> order = new ArrayList<Product>();
+		
+		for(int i=0;i<keyList.size();i++) {			
+			order.add(new Product(new Menu(keyList.get(i)),valueList.get(i)));
+		}
 		
 		return order;
 	}
@@ -203,7 +221,9 @@ public class SalesServiceImpl implements SalesService{
 			sList = sd.findSalesByDate(s1, s2);
 			
 			
-			
+			if(sList.size()==0) {
+				
+			}else {
 			for(Sales s : sList) {
 				tAmount += s.getAmount();
 				tusePoint += s.getUsePoint();
@@ -229,7 +249,7 @@ public class SalesServiceImpl implements SalesService{
 			
 			//리스트에 저장
 			sstorageList.add(sstorage);
-			
+			}
 			//System.out.println();
 			//System.out.println();
 			//for(SalesStorage s : sstorageList) {
@@ -244,7 +264,15 @@ public class SalesServiceImpl implements SalesService{
 	public List<Sales> findSalesByCustomerId(long customerId) {
 		return sd.findSalesByCustomerId(customerId);
 	}
+
+	//batch.
+	public void addOrderRecord(List<Product> order) {
+		int batchSize = 0;
+
+		batchSize = sd.addOrderRecord(order).length;
+	}
 	
+	/*
 	public static void main(String[] args) {
 		GenericApplicationContext context = 
 				new AnnotationConfigApplicationContext(DataSourceConfig.class);
@@ -253,5 +281,5 @@ public class SalesServiceImpl implements SalesService{
 		
 		
 		
-	}
+	}*/
 }

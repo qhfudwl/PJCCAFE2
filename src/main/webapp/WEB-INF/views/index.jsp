@@ -55,7 +55,7 @@
 		</script>
 	</div>
 	<section id="orderCompletedContent">
-	<form>
+	<form action="addOrderRecordByBatch" method="GET">
 		<h3 class="headerMent">픽업 완료 목록</h3>
 		<ul>
 		<c:if test="${not empty compSales}">
@@ -83,6 +83,7 @@
 	$("#orderCompletedContent input[type=radio] + label").click(function() {
 		popupSalesView();
 	})
+	
 	function popupSalesView() {
 		let windowWidth = window.screen.width;
 		let windowHeight = window.screen.height;

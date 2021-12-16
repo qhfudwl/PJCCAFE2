@@ -571,7 +571,7 @@ function sendUserInfo(custId, custName,custPhone,custBirth,custPoint){
 		data: JSON.stringify(json),
 		contentType: "application/json; charset=UTF-8"	,
 		//async:false	,
-		success:function(){
+		success:function(data){
 			
 			}
 		})

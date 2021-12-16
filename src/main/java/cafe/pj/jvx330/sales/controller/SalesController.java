@@ -60,8 +60,10 @@ public class SalesController extends CafeController {
 		if (validator.isEmpty(order)) {
 			Map<String, List<Product>> makeOrder = new HashMap<>();
 			session.setAttribute("order", makeOrder);
+			
 			order = (Map<String, List<Product>>) session.getAttribute("order");
 		}
 		return order;
 	}
+	
 }

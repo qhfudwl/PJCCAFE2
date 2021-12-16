@@ -1,0 +1,133 @@
+@charset "utf-8";
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    font-size: 1em;
+}
+li { list-style:  none;}
+
+section { 
+    width: 80%;
+    margin: 0 auto;
+}
+#SelectMenuContent { position:relative;}
+
+#titleWrap{
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
+    border-bottom: 2px solid #596271;
+   	box-sizing: border-box;
+}
+
+#searchWrap{
+	position: absolute; top: 0; right: 20px;
+	height:50px;
+	line-height: 60px;
+}
+#searchWrap input[type=text]{
+	padding: 2px;
+	margin: 0 10px 0 0;
+}
+#searchWrap input[type=submit]{
+	padding: 5px 15px;
+	border-radius: 5px;
+	background-color: #dfe2dc; 
+	transition-duration: 0.3s;
+}
+#searchWrap input[type=submit]:hover{
+	background-color: #9dc970;
+}
+
+#menuWrap {
+	margin: 20px 0;
+}
+
+#menuForm{
+	margin: 20px 0 0 0;
+}
+.buttonWrap { 
+    width: 60%;
+    margin: 0 auto;
+}
+.buttonWrap ul { 
+    display: flex;
+    justify-content: space-around;
+}
+.buttonWrap ul li {
+    font-size: 1.5em;
+} 
+.buttonWrap button:hover{ background: #9dc970;}
+
+.menuHover, .periodHover { background: #9dc970;}
+
+
+#periodWrap {
+    
+}
+#periodWrap ul {
+
+}
+#periodWrap ul li {
+    text-align: center;
+}
+#periodWrap button{
+	width:100px;
+	height: 40px;
+	border-radius: 5px;	
+	cursor: pointer;
+}
+
+
+#typeWrap {}
+#typeWrap ul { } 
+#typeWrap ul li { }
+#typeWrap button {
+    width: 100px;
+    height: 40px; 
+    border-radius: 5px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+#RecordTable{
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    margin: 0 auto;
+    border-color: #fff;
+}
+#RecordTable tr:nth-child(even) {
+	box-sizing:border-box;
+	background-color: #eaeaea;
+}
+#RecordTable tr:nth-child(odd) {
+	background-color: #f4f4f4;
+}
+
+
+#RecordTable th{
+	height: 60px; 
+	background-color: #596271;
+	color: #fff;	
+}
+#RecordTable td{height: 45px; }
+.hDate { width: 35%;}
+.hMenuName { width: 32%;}
+.hQuantity { width: 12%;}
+.hPrice { width: 21%;}
+
+.dName {
+	padding-left: 15px;
+	text-align: left; 
+}
+.dPrice { 
+	text-align: right;
+	padding-right:15px;
+}
+
+
+
+
+

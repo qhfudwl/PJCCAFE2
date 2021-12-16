@@ -208,18 +208,28 @@ public class OrderController extends SalesController{
 			
 			return mav;
 		}
-		Customer customer = new Customer();
+		Customer customer;
 		//고객 정보 보관하기
 		@PostMapping("saveUserPoint")
 		@ResponseBody
-		public void saveUserPoint(@RequestBody HashMap<String,Object> map) {
-			System.out.println("saveUserPoint");	
+		public HashMap<String,Object> saveUserPoint(@RequestBody HashMap<String,Object> map) {
+			/*System.out.println("saveUserPoint");	
 			customer.setId(Long.parseLong(map.get("userId").toString()));
 			customer.setCustomerName(map.get("userName").toString());
 			customer.setPhone(map.get("userPhone").toString());
 			customer.setBirth(map.get("userBirth").toString());
 			customer.setPoint(Double.parseDouble(map.get("userPoint").toString()));
 			return;
+			
+			*/
+			
+			HashMap<String,Object> save = map;
+			customer = (Customer)cs.findUserById(Long.parseLong(map.get("userId").toString()));
+			
+			
+			
+			
+			return save;
 		}
 		
 		//회원가입 팝업창

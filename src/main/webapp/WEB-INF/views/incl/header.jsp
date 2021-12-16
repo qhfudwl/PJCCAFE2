@@ -35,7 +35,9 @@
             </form>
            </li>
            <li<% if("메뉴별 판매내역".equals(contentName)) {%> class="on"<%} %>>
-            <form>
+			<form name="orderRecordByMenu" action="${pageContext.request.contextPath}/sales/viewOrderRecordByMenu" method="get">
+				<input class="display_none" type="text" value="D" name="periodType"/>
+				<input class="display_none" type="text" value="T" name="menuType"/>			
             	<input type="submit" value="메뉴별 판매내역"/>
             </form>
            </li>

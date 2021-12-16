@@ -2,6 +2,7 @@ package cafe.pj.jvx330.sales.dao;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
@@ -34,5 +35,7 @@ public interface SalesDao {
 	List<Product> findOrderRecordForMenu(String date1, String date2);
 	
 	List<Sales> findSalesByCustomerId(long customerId);
+	int[] addOrderRecord(List<Product> order);
+//	int[] addOrderRecord(Map<Long, Integer> map);
 
 }

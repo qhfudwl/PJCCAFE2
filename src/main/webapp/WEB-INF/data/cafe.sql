@@ -50,15 +50,12 @@ CREATE TABLE SalesRecord (
 );
 
 CREATE TABLE OrderRecord (
-   id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+   id         		BIGINT         		PRIMARY KEY GENERATED ALWAYS AS IDENTITY,		-- 주문번호
    menuId  			BIGINT     			NOT NULL,										-- 메뉴아이디
    quantity      	INT         		NOT NULL,										-- 주문수량 
    regDate 			TIMESTAMP			NOT NULL   	DEFAULT CURRENT_TIMESTAMP,			-- 결제날짜 
    CONSTRAINT		Menu_menuId_FK 	FOREIGN KEY(menuId) REFERENCES Menu(id)
 );
-
-
-
 
 -- 비회원등록
 INSERT INTO Customer(name,phone,birth,point) VALUES('김아루','010-0000-0000','00000000',0);
@@ -102,48 +99,48 @@ insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) value
 insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '708', 1000, 500,'2021-12-14 00:02:11');
 
 -- orderRecord 추가
-insert into OrderRecord(orderNumber, menuId, quantity) values('100',1,1);
-insert into OrderRecord(orderNumber, menuId, quantity) values('100',2,2);
-insert into OrderRecord(orderNumber, menuId, quantity) values('100',3,3);
+insert into OrderRecord(menuId, quantity) values(1,1);
+insert into OrderRecord(menuId, quantity) values(2,2);
+insert into OrderRecord(menuId, quantity) values(3,3);
 
-insert into OrderRecord(orderNumber, menuId, quantity) values('200',1,1);
-insert into OrderRecord(orderNumber, menuId, quantity) values('200',3,3);
+insert into OrderRecord(menuId, quantity) values(1,1);
+insert into OrderRecord(menuId, quantity) values(3,3);
 
-insert into OrderRecord(orderNumber, menuId, quantity) values('300',1,1);
-insert into OrderRecord(orderNumber, menuId, quantity) values('400',4,4);
-insert into OrderRecord(orderNumber, menuId, quantity) values('500',5,5);
+insert into OrderRecord(menuId, quantity) values(1,1);
+insert into OrderRecord(menuId, quantity) values(4,4);
+insert into OrderRecord(menuId, quantity) values(5,5);
 
-insert into OrderRecord(orderNumber, menuId, quantity) values('600',5,5);
-insert into OrderRecord(orderNumber, menuId, quantity) values('600',2,2);
-insert into OrderRecord(orderNumber, menuId, quantity) values('600',3,3);
+insert into OrderRecord(menuId, quantity) values(5,5);
+insert into OrderRecord(menuId, quantity) values(2,2);
+insert into OrderRecord(menuId, quantity) values(3,3);
 
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',1,1, '2021-11-03 00:02:10');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-11-03 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-11-03 00:02:10');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-11-03 00:02:11');
 
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-12-05 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-12-05 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-12-05 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-12-05 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-05 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-05 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-05 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-05 00:02:11');
 
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-11-30 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-11-30 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-11-30 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-11-30 00:02:11');
 
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-12-01 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-12-01 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-01 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-01 00:02:11');
 
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-10-12 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,2, '2021-10-13 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',1,2, '2021-10-17 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',1,2, '2021-10-28 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',3,1, '2021-10-28 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-10-12 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-10-13 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,2, '2021-10-17 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,2, '2021-10-28 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(3,1, '2021-10-28 00:02:11');
 
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',1,1, '2021-09-01 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',3,1, '2021-09-03 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',5,1, '2021-09-09 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',1,1, '2021-09-09 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',1,1, '2021-09-09 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,1, '2021-09-11 00:02:11');
-insert into OrderRecord(orderNumber, menuId, quantity, regDate) values('100',2,1, '2021-09-11 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-09-01 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(3,1, '2021-09-03 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(5,1, '2021-09-09 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-09-09 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-09-09 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-09-11 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-09-11 00:02:11');
 
 
 
@@ -152,6 +149,7 @@ SELECT * FROM Employee;
 SELECT * FROM Menu;
 SELECT * FROM SalesRecord;
 SELECT * FROM OrderRecord;
+SELECT menuID, SUM(quantity) as quantity FROM OrderRecord WHERE Date(regDate) Between '2021-12-15 00:00:00' AND '2021-12-15 23:59:59' GROUP BY menuId;
 
 DELETE FROM Menu;
 DELETE FROM SalesRecord;
