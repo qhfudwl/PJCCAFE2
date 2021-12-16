@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -409,14 +410,16 @@ public class OrderController extends SalesController{
 			
 			//세션에 자료 보내기 
 			HttpSession session = request.getSession();
-			HashMap<String,Sales> salesMap = (HashMap<String, Sales>) session.getAttribute("sales");
+			
+			TreeMap<String,Sales> salesMap = (TreeMap<String, Sales>) session.getAttribute("sales");
 			if(validator.isEmpty(salesMap)) {
-				salesMap = new HashMap<String, Sales>();
+				salesMap = new TreeMap<String, Sales>();
 			}
 			salesMap.put(orderNumber, sales);
 			session.setAttribute("sales", salesMap);
 			
-			System.out.println("mapsize"+salesMap.size());
+			
+
 			mav.addObject("sales", sales);
 			HashMap<String,Object> fakeMap = new HashMap<String, Object>();
 			return fakeMap;
