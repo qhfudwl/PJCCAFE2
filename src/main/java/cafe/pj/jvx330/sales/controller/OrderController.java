@@ -418,8 +418,6 @@ public class OrderController extends SalesController{
 			salesMap.put(orderNumber, sales);
 			session.setAttribute("sales", salesMap);
 			
-			
-
 			mav.addObject("sales", sales);
 			HashMap<String,Object> fakeMap = new HashMap<String, Object>();
 			return fakeMap;

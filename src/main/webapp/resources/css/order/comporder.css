@@ -1,0 +1,184 @@
+@charset "UTF-8";
+
+body{
+
+}
+
+#mainContainer{
+  width: 90%; margin: 0 auto;
+  background: #fff;
+
+}
+
+
+/*
+    관리자 정보/날짜
+*/
+#userInfoWrap{
+  height: 50px; line-height: 50px;
+  border-bottom: 2px solid #596271;
+}
+.userInfoCom{
+  padding: 0 20px;
+}
+.employeeInfo{
+  float: left;
+}
+.nowDate{
+  float: right;
+}
+
+/*
+    주문하기 메인 컨테이너
+*/
+#allOrderWrap{
+  clear: both;
+  width: 35%; height: calc(100% - 50px);
+  margin: 0 auto;
+  padding:20px 0; box-sizing: border-box;
+  min-width: 600px;
+  
+}
+#receiptWrap{
+  width: 100%; height: 100%; box-sizing: border-box;
+  padding: 0 30px 30px ;
+  border : 5px solid #9dc970;
+}
+/* 카페로고 */
+
+#loginLogoWrap{
+  position: relative;
+  width: 100%;
+  height: 130px; line-height: 130px;
+}
+#cafeLogo {
+	text-transform: uppercase; font-size: 3.5em; position: absolute; left: 50%; top: 10%;
+	transform: translateX(-50%); font-weight: 800; text-shadow: 0 -4px 1px #9dc970;
+}
+
+/*  가게 정보 보여주기  */
+#storeInfoWrap{
+  margin-top:50px;.orderListTable{
+
+  }
+}
+
+/*  주문내역  */
+#orderListWrap{
+  margin: 30px 0;
+  width: 100%;
+}
+.orderListTable {
+  margin:10px 0;
+  width: 100%;
+  border-top: 1px double #000;
+  border-bottom: 1px dotted #000;
+}
+.orderListTable tr{
+  height: 35px;
+}
+.orderListTable th{
+  height: 45px;
+  border-bottom: 1px dotted #000;
+}
+
+.borderLine{
+  border-top: 1px dotted #000;
+}
+
+.orderListTable tr td {
+  
+  padding: 0 15px;
+}
+.orderListTable tr td:nth-child(1){
+  text-align: left;
+}
+.orderListTable tr td:nth-child(2){
+  text-align: center;
+}
+.orderListTable tr td:nth-child(3){
+  text-align: center;
+}
+.orderListTable tr td:nth-child(4), .rightSideWrap{
+  text-align: right !important;
+}
+
+.userInfoTable{
+  margin:10px 0;
+  width: 100%;
+  border-top: 1px double #000;
+  border-bottom: 1px dotted #000;
+}
+.userInfoTable tr{
+line-height: 30px;
+}
+.userInfoTable tr th{
+  text-align: justify;
+  width: 120px;
+  padding: 0 15px;
+  white-space: nowrap;
+}
+.userInfoTable tr td{
+  text-align: right;
+  padding: 0 15px;
+}
+.userInfoTable tr:nth-child(1) td, .userInfoTable tr:nth-child(2) td{
+  text-align: left;
+}
+
+
+
+
+/*  포인트내역  */
+
+
+
+/*  버튼   */
+#comporderBtnWrap{
+  width: 310px;
+  margin: 30px auto 0;
+}
+.orderListBtnCom{
+  
+  height: 50px;
+  width: 150px;
+  background: #596271;
+  color:#fff;
+  box-sizing: border-box;
+  border: none;
+  outline:  none;
+  margin:0; padding: 0;
+  font-size: 1em;
+}
+.orderListBtnCom:hover{
+  background: #9dc970;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

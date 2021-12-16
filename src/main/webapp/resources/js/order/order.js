@@ -235,7 +235,7 @@ function orderMenuListAjax(json){
 		contentType: "application/json; charset=UTF-8",
 		success: function(data){
 			//for (key in json) { console.log('key:' + key + ' / ' + 'value:' + json[key]); }
-
+			//$.each(data,fuction(key,value){...})
 			//console.log(data["order"][0])
 			//alert('successs');
 			$('.addMenuList').remove();
