@@ -54,6 +54,13 @@ public interface UserService {
 	 */
 	User updateUserById(User user);
 	
+	/**
+	 * id로 해당 회원의 포인트 업데이트
+	 * @param user
+	 * @return
+	 */
+	void updatePointById(User user);
+	
 	
 	/**
 	 * 회원 아이디로 회원을 찾아온다.
@@ -76,4 +83,12 @@ public interface UserService {
 	 * @author 김보령
 	 */
 	List<User> findAllEmployee();
+	
+	/**
+	 * 해당 직원이 있는 아이디인지 확인하기
+	 * 있으면 참 / 없으면 거짓
+	 * @param eid
+	 * @return
+	 */
+	boolean isEmployee(String eid);
 }

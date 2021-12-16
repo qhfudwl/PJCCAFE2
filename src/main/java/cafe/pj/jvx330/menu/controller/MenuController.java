@@ -1,6 +1,8 @@
 package cafe.pj.jvx330.menu.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.service.MenuService;
@@ -20,7 +22,7 @@ public class MenuController extends CafeController {
 	 * @param menu
 	 * @return
 	 */
-	public MenuCommand convertMenuToMenuCommand(Menu menu) {
+	protected MenuCommand convertMenuToMenuCommand(Menu menu) {
 		MenuCommand menuCommand = new MenuCommand();
 		
 		long id = menu.getId();
@@ -50,5 +52,33 @@ public class MenuController extends CafeController {
 		return menuCommand;
 	}
 	
-	
+	protected Menu convertMenuCommandToMenu(HttpServletRequest request, MenuCommand menuCommand, String imgPath) {
+		Menu menu = new Menu();
+		
+		long id = menuCommand.getId();
+		char menuType = menuCommand.getMenuType();
+		String menuName = menuCommand.getMenuName();
+		double menuPrice = Double.parseDouble(menuCommand.getMenuPrice());
+		boolean stock = menuCommand.isStock();
+		
+		if (!validator.isEmpty(id)) {
+			menu.setId(id);
+		}
+		if (!validator.isEmpty(menuType)) {
+			menu.setMenuType(menuType);
+		}
+		if (!validator.isEmpty(menuName)) {
+			menu.setMenuName(menuName);
+		}
+		if (!validator.isEmpty(menuPrice)) {
+			menu.setMenuPrice(menuPrice);
+		}
+		menu.setStock(stock);
+		if (validator.isEmpty(imgPath)) {
+			imgPath = "placeholdImg.png";
+		}
+		menu.setImgPath(fileAux.getRelativePath(request, menuType, menuName, imgPath));
+		
+		return menu;
+	}
 }

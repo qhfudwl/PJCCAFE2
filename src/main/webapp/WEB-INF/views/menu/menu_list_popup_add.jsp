@@ -53,6 +53,7 @@
 		<input type="submit" value="추가하기" />
 	</form:form>
 	<script>
+		/* 파일 이름 넣어주기 */
 		$("#addMenuPopUp").mousemove(function() {
 			let imgPath = $("input[type=file]").val();
 			let arr = imgPath.split("\\");

@@ -82,7 +82,7 @@ public class MenuListController extends MenuController {
 			mav.addObject("menuCommand", menuCommand);
 			mav.setViewName("menu/menu_list_popup_update");
 			return mav;
-		} else if (!validator.isImgName(menuCommand.getMenuName())) { // 이름에 핫 / 아이스가 없는 경우
+		} else if (!validator.isImgName(menuCommand.getMenuName()) && menuCommand.getMenuType() != 'F') { // 이름에 핫 / 아이스가 없는 경우
 			errMsg.put("menuNameErr", "메뉴 이름 앞에 아이스 혹은 핫을 붙혀주세요.");
 			mav.addObject("errMsg", errMsg);
 			mav.addObject("menuCommand", menuCommand);
@@ -97,10 +97,9 @@ public class MenuListController extends MenuController {
 		} 
 		
 		// 메뉴 이미지 경로가 어떻게 될 지 모르기때문에 일단 빈 문자열을 적용
-		Menu menu = new Menu(menuCommand.getId(), menuCommand.getMenuType(), 
-				menuCommand.getMenuName(), Double.parseDouble(menuCommand.getMenuPrice()), menuCommand.isStock(),"");
+		Menu menu = convertMenuCommandToMenu(request, menuCommand, "");
 		
-		String imgPath = null; // 이미지 경로
+		String imgPath = ""; // 이미지 경로
 		
 		// 만일 파일을 골랐다면
 		if (!validator.isEmpty(file.getOriginalFilename())) {
@@ -141,6 +140,8 @@ public class MenuListController extends MenuController {
 		ModelAndView mav = new ModelAndView();
 		
 		Map<String, String> errMsg = new HashMap<>();
+		System.out.println(menuCommand.getMenuName());
+		System.out.println(ms.isMenuName(menuCommand.getMenuName()));
 		
 		// 유효성 검사
 		if(validator.isEmpty(menuCommand.getMenuName())) { // 이름이 없을 경우
@@ -175,9 +176,7 @@ public class MenuListController extends MenuController {
 			return mav;
 		}
 		
-		Menu menu = new Menu(menuCommand.getMenuType(),
-				menuCommand.getMenuName(), Double.parseDouble(menuCommand.getMenuPrice()), menuCommand.isStock(),
-				fileAux.getRelativePath(request, menuCommand.getMenuType(), menuCommand.getMenuName(), menuCommand.getImgPath()));
+		Menu menu = convertMenuCommandToMenu(request, menuCommand, menuCommand.getImgPath());
 		
 		fileAux.uploadImgFile(request, file, menu);
 		

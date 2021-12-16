@@ -49,10 +49,12 @@ public class FileAuxiliaryFunction {
 			typePath = "food" + pathForm;
 		}
 		
-		if (menuName.substring(0, 1).equals("아")) {
-			tempPath = "ice" + pathForm;
-		}else if (menuName.substring(0, 1).equals("핫")) {
-			tempPath = "hot" + pathForm;
+		if (menuType != 'F') { // 카테고리가 푸드이면 ice 나 hot 을 붙히면 안된다.
+			if (menuName.substring(0, 1).equals("아")) {
+				tempPath = "ice" + pathForm;
+			}else if (menuName.substring(0, 1).equals("핫")) {
+				tempPath = "hot" + pathForm;
+			}
 		}
 		
 		return rootPath + attachPath + typePath + tempPath;
@@ -80,10 +82,8 @@ public class FileAuxiliaryFunction {
 		
 		if(!file.isEmpty()) {
 			file.transferTo(new File(filePath));
-			System.out.println("파일 업로드 완료");
 			return true;
 		}
-		System.out.println("이미 존재하는 파일입니다.");
 		return false;
 	}
 	
@@ -102,10 +102,8 @@ public class FileAuxiliaryFunction {
 		
 		if(file.exists()) { // 파일이 있다면 삭제
 			file.delete();
-			System.out.println("파일 삭제 완료");
 			return true;
 		}
-		System.out.println("파일이 없습니다.");
 		return false;
 	}
 	
@@ -128,6 +126,9 @@ public class FileAuxiliaryFunction {
 	 * @return
 	 */
 	public String getRelativePath(HttpServletRequest request, char menuType, String menuName, String imgName) {
+		if (imgName.contains("placeholdImg")) {
+			return request.getContextPath() + "/resources/img/" + imgName;
+		}
 		return makePath(menuType, menuName, "/", request) + imgName;
 	}
 }

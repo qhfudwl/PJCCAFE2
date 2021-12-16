@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -131,7 +132,16 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User findEmployeeByEid(String eid) {
 		String sql = "SELECT id, eid, passwd, position, regDate From Employee WHERE eid=?";
-		return jt.queryForObject(sql, new EmployeeRowMapper(), eid);
+		
+		User user = null;
+		
+		try {
+			user = jt.queryForObject(sql, new EmployeeRowMapper(), eid);
+		} catch (EmptyResultDataAccessException e) {
+			user = null;
+		}
+		
+		return user;
 	}
 
 
@@ -139,6 +149,13 @@ public class UserDaoImpl implements UserDao {
 	public List<User> findAllEmployee() {
 		String sql = "SELECT id, eid, passwd, position, regDate From Employee";
 		return jt.query(sql, new EmployeeRowMapper());
+	}
+
+
+	@Override
+	public void updatePointById(User user) {
+		String sql = "UPDATE Customer SET point=? WHERE id=?";
+		jt.update(sql, ((Customer)user).getPoint(), user.getId());
 	}
 	
 }

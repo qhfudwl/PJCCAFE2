@@ -8,9 +8,15 @@ body, html {height: 100%;}
 	font-size: 18px; width: 95%; border-bottom: 2px solid #596271; margin: 0 auto;
 	line-height: 60px; font-weight: normal;
 }
+#orders {
+	width: 60%;
+}
 #salesItemWrap {
-	display : grid; grid-template-columns : auto auto auto auto; gap : 20px;
+	display : grid; grid-template-columns : 22% 22% 22% 22%; gap : 3%;
 	flex-basis: 50%; padding: 20px;
+}
+#noOrder {
+	text-align: center; font-weight: bold; color: #9dc970;
 }
 #salesItemWrap input[name=orderNumber] {
 	display: none;
@@ -33,7 +39,7 @@ body, html {height: 100%;}
 #salesItemWrap .salesMenu { padding: 10px 0 5px; font-weight: bold; color: #596271; }
 #salesItemWrap .salesDate { padding-top: 10px; color: #596271; font-size: 12px;}
 #orderCompletedContent {
-	background-color : #dfe1dc; width: 500px; position: relative;
+	background-color : #dfe1dc; min-width: 400px; position: relative;
 	padding: 0 10px 10px 10px; box-sizing: border-box;
 	border-radius: 0 0 20px 20px;
 }

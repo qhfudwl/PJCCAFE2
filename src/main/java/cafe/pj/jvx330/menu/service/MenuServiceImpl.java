@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.dao.MenuDao;
@@ -21,6 +22,7 @@ public class MenuServiceImpl implements MenuService {
 	@Autowired
 	private Validator validator;
 
+	@Transactional
 	@Override
 	public Menu addMenu(Menu menu) {
 		md.addMenu(menu);
@@ -64,6 +66,7 @@ public class MenuServiceImpl implements MenuService {
 		return md.findLastMenuByMenuType(menuType);
 	}
 
+	@Transactional
 	@Override
 	public boolean isMenuName(String menuName) {
 		Menu menu = md.findMenuByMenuName(menuName);

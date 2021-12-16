@@ -13,6 +13,7 @@ public class Validator {
 	 * 빈 객체인지 확인
 	 * @param obj
 	 * @return
+	 * @author 김보령
 	 */
 	public boolean isEmpty(Object obj) {
 		if(obj == null || obj.equals("")) {
@@ -46,6 +47,7 @@ public class Validator {
 	 * 현재 받은 문자열이 숫자인지 확인
 	 * @param str
 	 * @return
+	 * @author 김보령
 	 */
 	public boolean isNumber(String str) {
 		char[] cArr = {};
@@ -68,6 +70,7 @@ public class Validator {
 	 * 이름에 아이스나 핫이 있는지 확인
 	 * @param str
 	 * @return
+	 * @author 김보령
 	 */
 	public boolean isImgName(String str) {
 		String first_word = str.substring(0, 1);
@@ -78,7 +81,6 @@ public class Validator {
 		} else if (first_word.equals("핫")) {
 			return true;
 		}
-		
 		return false;
 	}
 }

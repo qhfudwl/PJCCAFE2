@@ -19,6 +19,11 @@ import cafe.pj.jvx330.web.command.ProductCommand;
 import cafe.pj.jvx330.web.command.SalesCommand;
 import cafe.pj.jvx330.web.controller.CafeController;
 
+/**
+ * Sales 관련 부모 컨트롤러
+ * @author 김보령
+ *
+ */
 public class SalesController extends CafeController {
 	@Resource(name="salesService")
 	SalesService ss;
@@ -44,6 +49,11 @@ public class SalesController extends CafeController {
 		return order;
 	}
 	
+	/**
+	 * session 내 order 를 반환
+	 * @param session
+	 * @return
+	 */
 	protected Map<String, List<Product>> checkOrderInSession(HttpSession session) {
 		Map<String, List<Product>> order = (Map<String, List<Product>>)session.getAttribute("order");
 		// order 가 null 이면 실행

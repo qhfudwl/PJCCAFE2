@@ -23,7 +23,8 @@
 				<td>
 					<input type="file" id="updateImgFile" name="file" />
 					<label for="updateImgFile">업로드</label>
-					<form:input path="imgPath" />
+					<input id="viewImg" type="text" />
+					<form:input class="hidden" path="imgPath" />
 				</td>
 			</tr>
 			<tr>
@@ -56,6 +57,22 @@
 	</div>
 </section>
 	<script>
+		/* 보이는 텍스트에 현재 이미지 이름 넣어주기 */
+		$("#updateMenuPopUp").mousemove(function() {
+			let imgPathFile = $("input[type=file]").val();
+			let arrFile = imgPathFile.split("\\");
+			let imgNameFile = arrFile[arrFile.length - 1];
+			
+			let imgPathText = $("#imgPath").val();
+			let arrText = imgPathText.split("/");
+			let imgNameText = arrText[arrText.length - 1];
+			
+			if (imgNameFile == "") {
+				$("#viewImg").val(imgNameText);
+			} else {
+				$("#viewImg").val(imgNameFile);
+			}
+		});
 		window.onload = function() {
 			let stock = $("#checkStock").text();
 			if (stock == "true"){

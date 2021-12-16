@@ -38,7 +38,7 @@
 	background-color: #9dc970;
 }
 #itemWrap {
-	display: grid; gap: 10px; grid-template-columns : auto auto auto;
+	display: grid; gap: 5px; grid-template-columns : auto auto auto;
 	padding: 5px 20px; transition-duration: 0.3s;
 }
 @media all and (min-width: 1700px) {
@@ -54,7 +54,7 @@
 #itemWrap .item .imgWrap img { display: block; margin: 0 auto; }
 #itemWrap .item ul {
 	width: 60%; background-color: #dfe1dc; height: 100%; box-sizing: border-box;
-	padding: 20px; display: flex; flex-flow: column nowrap; justify-content: center;
+	padding: 0 20px; display: flex; flex-flow: column nowrap; justify-content: center;
 }
 #itemWrap .menuPrice {padding-bottom: 5px;}
 #itemWrap .menuName {
