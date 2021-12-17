@@ -138,12 +138,10 @@ public class SalesServiceImpl implements SalesService{
 					os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(j).getQuantity());
 					os.setMenuId(order.get(j).getMenu().getId());
 					 
-					iNum++;
 					
 					osList.add(os);
-				} else {
-					
 				}
+				iNum++;
 			}
 			try { // String to Calendar
 				Date date = format.parse(sDateList.get(0)); 
