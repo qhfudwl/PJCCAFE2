@@ -113,5 +113,13 @@ public class SalesDaoImpl implements SalesDao {
 			}
 		});
 	}
+
+	@Override
+	public void addSalesIncludingRegDate(Sales sales) {
+		String sql = "INSERT INTO SalesRecord(customerId, orderNumber, amount, usePoint, place, regDate)"
+				+ " VALUES (?, ?, ?, ?, ?, ?)";
+		jt.update(sql, sales.getUser().getId(), sales.getOrderNumber(), sales.getAmount(),
+				sales.getUsePoint(), String.valueOf(sales.getPlace()), sales.getRegDate());
+	}
 	
 }

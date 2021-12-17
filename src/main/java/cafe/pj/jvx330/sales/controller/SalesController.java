@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -65,5 +66,20 @@ public class SalesController extends CafeController {
 		}
 		return order;
 	}
-	
+
+	/**
+	 * session 내 compSales 반환
+	 * @param session
+	 * @return
+	 */
+	protected Map<String, Sales> checkCompSalesInSession(HttpSession session) {
+		Map<String, Sales> compSales = (Map<String, Sales>)session.getAttribute("compSales");
+		if (validator.isEmpty(compSales)) {
+			Map<String, Sales> makeCompSales = new TreeMap<>();
+			session.setAttribute("compSales", makeCompSales);
+			
+			compSales = (Map<String, Sales>) session.getAttribute("compSales");
+		}
+		return compSales;
+	}
 }

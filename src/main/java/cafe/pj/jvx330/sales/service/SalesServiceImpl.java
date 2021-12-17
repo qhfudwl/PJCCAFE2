@@ -271,6 +271,11 @@ public class SalesServiceImpl implements SalesService{
 
 		batchSize = sd.addOrderRecord(order).length;
 	}
+
+	@Override
+	public void addSalesIncludingRegDate(Sales sales) {
+		sd.addSalesIncludingRegDate(sales);
+	}
 	
 	/*
 	public static void main(String[] args) {

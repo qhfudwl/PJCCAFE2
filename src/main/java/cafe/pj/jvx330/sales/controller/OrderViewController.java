@@ -30,9 +30,10 @@ import cafe.pj.jvx330.web.command.SalesCommand;
 public class OrderViewController extends SalesController {
    
    /**
-    * 
+    * session 내 order 리스트가 있다면 오늘 날짜의 
     * @param session
     * @return
+    * @author 김보령
     */
    @GetMapping("/indexView")
    public ModelAndView indexView(HttpSession session) {
@@ -44,32 +45,39 @@ public class OrderViewController extends SalesController {
       
       // session 내 order 길이가 1 이상일 때(원소가 하나라도 있을 때)
       // compSales를 만들어주고, mav에 넣어준다.
-      if (order.size() > 0){
-         List<Sales> compSales = ss.findSalesByDate(today);
-         for (Sales s : compSales) {
-            s.setOrder(order.get(s.getOrderNumber()));
-         }
-         mav.addObject("compSales", compSales);
-      }
+//      if (order.size() > 0){
+//         List<Sales> compSales = ss.findSalesByDate(today);
+//         for (Sales s : compSales) {
+//            s.setOrder(order.get(s.getOrderNumber()));
+//         }
+//         mav.addObject("compSales", compSales);
+//      }
       mav.setViewName("index");
       
       return mav;
    }
    
+   /**
+    * 
+    * @param salesCommand
+    * @param session
+    * @return
+    * @author 김보령
+    */
    @PostMapping("/addSales")
    public ModelAndView addSales(@ModelAttribute SalesCommand salesCommand, 
          HttpSession session) {
       // 현재 session 에 저장되어있는 Sales 들
       Map<String, Sales> salesList = (Map<String, Sales>) session.getAttribute("sales");
+      Map<String, Sales> compSales = checkCompSalesInSession(session);
       
       // session 내 salesList 의 해당 주문번호의 sales 반환
       Sales sales = salesList.get(salesCommand.getOrderNumber());
       
-      // SalesRecord 에 추가
-      ss.addSales(sales);
-      
-      // 오늘 날짜
-      Date today = getNowDate();
+      // SalesRecord 에 추가 (날짜포함)
+      ss.addSalesIncludingRegDate(sales);
+      // session 내 compSales 에 Sales 추가
+      compSales.put(sales.getOrderNumber(), sales);
       
       // session에 order 가 있는지 확인하고 있으면 그걸 반환 / 없으면 새로 만들어서 넣은 후 그걸 다시 받아서 반환
       Map<String, List<Product>> order = checkOrderInSession(session);
@@ -86,6 +94,7 @@ public class OrderViewController extends SalesController {
       return mav;
    }
    
+   // order 삭제해야한다.
    @GetMapping("/addOrderRecordByBatch")
 	public ModelAndView addOrderRecordByBatch(HttpSession session) {
 		Map<String, List<Product>> order = checkOrderInSession(session);
