@@ -136,7 +136,7 @@ public class SalesServiceImpl implements SalesService{
 					os.setWeekDate(sDateList.get(0)+" ~ "+sDateList.get(1));
 					os.setQuantity(order.get(j).getQuantity());
 					os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(j).getQuantity());
-					os.setMenuId(order.get(i).getMenu().getId());
+					os.setMenuId(order.get(j).getMenu().getId());
 					 
 					iNum++;
 					

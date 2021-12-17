@@ -5,7 +5,7 @@ public class OrderStorage implements Comparable<OrderStorage>{
 	private String menuName;
 	private int quantity;
 	private double price;
-	private Long menuId;
+	private long menuId;
 	
 	
 	public OrderStorage() {
@@ -61,9 +61,9 @@ public class OrderStorage implements Comparable<OrderStorage>{
 	
 	@Override
 	public int compareTo(OrderStorage os) {
-	if (os.quantity < quantity) {
+	if (os.quantity > quantity) {
 	return 1;
-	} else if (os.quantity > quantity) {
+	} else if (os.quantity < quantity) {
 	return -1;
 	}
 	return 0;
