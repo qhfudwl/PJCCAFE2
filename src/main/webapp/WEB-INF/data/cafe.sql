@@ -151,10 +151,10 @@ insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) value
 -- orderRecord 추가
 
 
-insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-11-03 00:02:10');
-insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-11-03 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(23,1, '2021-11-03 00:02:10');
+insert into OrderRecord(menuId, quantity, regDate) values(24,2, '2021-11-03 00:02:11');
 
-insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-15 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(25,2, '2021-12-15 00:02:11');
 insert into OrderRecord(menuId, quantity, regDate) values(5,2, '2021-12-15 00:02:11');
 insert into OrderRecord(menuId, quantity, regDate) values(1,2, '2021-12-15 00:02:11');
 insert into OrderRecord(menuId, quantity, regDate) values(3,2, '2021-12-15 00:02:11');
