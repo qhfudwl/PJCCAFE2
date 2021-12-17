@@ -110,6 +110,19 @@ public class OrderViewController extends SalesController {
 		
 		ss.addOrderRecord(finalOrder);
 		
+		Map<String, Sales> compSales = checkCompSalesInSession(session);
+		List<String> compKeySet = new ArrayList<String>(compSales.keySet());
+		
+		order.forEach((key, productList) -> {
+			for(int i=0; i<compKeySet.size(); i++) {
+				if(key == compKeySet.get(i)) {
+					compSales.remove(key); //compSales 에서 키값(오더넘버) 같은 애 지우기.
+				}
+			}
+		});
+		
+		session.removeAttribute("order");		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("index");
 		
