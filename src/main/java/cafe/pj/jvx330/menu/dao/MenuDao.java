@@ -81,5 +81,17 @@ public interface MenuDao {
 	 * @param menu
 	 * @author 김보령
 	 */
-	void removeMenuById(long id); 
+	void removeMenuById(long id);
+
+	
+	
+	
+	/**
+	 * 
+	 * 날짜 기준으로 메뉴 찾기 
+	 *	-출시 한달 기준
+	 * @author 윤효심
+	 * 
+	 */
+	List<Menu> findNewMenus(String date1, String date2); 
 }

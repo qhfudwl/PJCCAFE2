@@ -1,5 +1,9 @@
 package cafe.pj.jvx330.menu.service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -74,6 +78,33 @@ public class MenuServiceImpl implements MenuService {
 			return false;
 		}
 		return true;
+	}
+	
+	
+	
+	
+	public List<Menu> findNewMenus(){
+		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:ss:mm");
+		Date date = new Date();
+		LocalDate ld = new LocalDate();
+		date = format.parse()
+				format.parse(sDateList.get(0)); */
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(sdf.format(cal.getTime()));
+		String date1 = sdf.format(cal.getTime());
+		
+		cal.add(Calendar.DATE, 1-cal.get(Calendar.DAY_OF_MONTH));
+		System.out.println(sdf.format(cal.getTime()));
+		String date2 = sdf.format(cal.getTime());
+		
+		List<Menu> menu = md.findNewMenus(date1,date2);
+		
+		System.out.println("himenus"+menu.get(0).getMenuName());
+		
+		return menu;
+
 	}
 	
 	

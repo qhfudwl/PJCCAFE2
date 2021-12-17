@@ -78,4 +78,17 @@ public interface MenuService {
 	 * @author 김보령
 	 */
 	void removeMenuById(long id); 
+
+
+	/**
+	 * 
+	 * 신제품 찾기
+	 *	-출시 한달 기준
+	 * @author 윤효심
+	 * 
+	 */
+	List<Menu> findNewMenus();
+
+
+
 }
