@@ -78,7 +78,8 @@ public class FileAuxiliaryFunction {
 			throws IllegalStateException, IOException {
 		
 		String fileName = file.getOriginalFilename();
-		String filePath = getAbsolutePath(request, menu.getMenuType(), menu.getMenuName()) + fileName;
+		String filePath = getRelativePath(request, menu.getMenuType(), menu.getMenuName(), fileName);
+//		String filePath = getAbsolutePath(request, menu.getMenuType(), menu.getMenuName()) + fileName;
 		
 		if(!file.isEmpty()) {
 			file.transferTo(new File(filePath));
