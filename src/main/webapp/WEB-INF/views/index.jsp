@@ -95,6 +95,9 @@
 		</ul>
 		<input type="submit" name="settlement" value="정산하기"/>
 	</form>
+	<form id="popReceipt" name="popReceipt" action="popSalesView" method="post">
+		<input type="hidden" name="pageName" value="index"/>
+	</form>
 	</section>
 	<script>
 	$("#orderCompletedContent input[type=radio] + label").click(function() {
@@ -102,17 +105,24 @@
 	})
 	
 	function popupSalesView() {
+		/*
 		let windowWidth = window.screen.width;
 		let windowHeight = window.screen.height;
 		
 		let popupX = (windowWidth/2) - 250;
 		let popupY = (windowHeight/2) - 250;
 		
-		let popUpdateMenuUrl = getContextPath() + "/menu/popSalesView";
+		let popUpdateMenuUrl = getContextPath() + "popSalesView";
 		let popUpdateMenuOption = "width=500px, height=500px, top=" + popupY + "px, left=" + popupX + "px";
 		let popUpdateMenuTitle = "영수증 보기";
 		
 		window.open(popUpdateMenuUrl, popUpdateMenuTitle, popUpdateMenuOption);
+		
+		myForm.method="post";
+		myForm.target="popReceipt";
+		
+		myForm.submit();
+		*/
 	}
 	</script>
 </section>

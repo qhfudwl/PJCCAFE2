@@ -137,23 +137,16 @@ insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) value
 insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '7080', 1000, 500,'2021-12-14 00:02:11');
 
 -- orderRecord 추가
-insert into OrderRecord(menuId, quantity) values(1,1);
-insert into OrderRecord(menuId, quantity) values(2,2);
-insert into OrderRecord(menuId, quantity) values(3,3);
 
-insert into OrderRecord(menuId, quantity) values(1,1);
-insert into OrderRecord(menuId, quantity) values(3,3);
-
-insert into OrderRecord(menuId, quantity) values(1,1);
-insert into OrderRecord(menuId, quantity) values(4,4);
-insert into OrderRecord(menuId, quantity) values(5,5);
-
-insert into OrderRecord(menuId, quantity) values(5,5);
-insert into OrderRecord(menuId, quantity) values(2,2);
-insert into OrderRecord(menuId, quantity) values(3,3);
 
 insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-11-03 00:02:10');
 insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-11-03 00:02:11');
+
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-15 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(5,2, '2021-12-15 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,2, '2021-12-15 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(3,2, '2021-12-15 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-15 00:02:11');
 
 insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-05 00:02:11');
 insert into OrderRecord(menuId, quantity, regDate) values(2,2, '2021-12-05 00:02:11');
@@ -179,6 +172,31 @@ insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-09-09 00:02
 insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-09-09 00:02:11');
 insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-09-11 00:02:11');
 insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-09-11 00:02:11');
+
+insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-07-11 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,2, '2021-07-11 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(3,1, '2021-07-11 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-07-11 00:02:11');
+
+insert into OrderRecord(menuId, quantity, regDate) values(7,1, '2021-07-05 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(7,1, '2021-07-03 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(7,1, '2021-07-01 00:02:11');
+
+insert into OrderRecord(menuId, quantity, regDate) values(3,1, '2021-06-30 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-06-30 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(6,1, '2021-06-30 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(7,1, '2021-06-30 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(4,1, '2021-06-30 00:02:11');
+
+insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-06-01 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(5,1, '2021-06-01 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(7,1, '2021-06-01 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-06-01 00:02:11');
+insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-06-01 00:02:11');
+
+insert into OrderRecord(menuId, quantity, regDate) values(1,1, '2021-06-03 00:02:11');
+
+
 
 
 -- 각 table 보기
