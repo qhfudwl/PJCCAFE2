@@ -26,13 +26,15 @@
 	       </form>
        </div>
        
+       
+       
        	<div id="menuWrap">
 	        <form action="viewOrderRecordByMenu" id="periodForm" method="GET">  
 	            <div id="periodWrap" class="buttonWrap">
 	            <input type="hidden" value ="T" name="menuType"/>
 	            <input type="hidden" value ="" name="searchTxt"/>
 	                <ul>
-	                    <li><button type="submit" name="periodType" class="periodHover" value="D">일간</button></li>
+	                    <li><button type="submit" name="periodType" class="active" value="D">일간</button></li>
 	                    <li><button type="submit" name="periodType" value="W">주간</button></li>
 	                    <li><button type="submit" name="periodType" value="M">월간</button></li>
 	                </ul>
@@ -43,7 +45,7 @@
 	        	<input type="hidden" value ="" name="searchTxt"/>
 	            <div id="typeWrap" class="buttonWrap">
 	                <ul>
-	                    <li><button type="submit" name="menuType" class="menuHover" value="T">전체</button></li>
+	                    <li><button type="submit" name="menuType" id="totalBtn" class="active" value="T">전체</button></li>
 	                    <li><button type="submit" name="menuType" value="B">음료</button></li>
 	                    <li><button type="submit" name="menuType" value="C">커피</button></li>
 	                    <li><button type="submit" name="menuType" value="F">푸드</button></li>  
@@ -52,6 +54,21 @@
 	        </form>
         </div>
     </section>
+    
+  <!--   <script>
+	       $('#periodWrap button').trigger(function(e){
+	           if($(this).hasClass('active')){
+	   
+	            } else {
+	                   $('#periodWrap button').removeClass('active');
+	                   $(this).addClass('active');
+	                   if($("#totalBtn").hasClass('active')){}
+	                   $('#typeWrap button').removeClass('active');
+	                   
+	                /*    updateForm.submit(); */
+	               }
+	            });
+       </script> -->
 
 	<section id="RecordContent">
 		<div id="RecordWrap">

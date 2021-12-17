@@ -97,6 +97,9 @@ function resetMenuList(){
 	$('.mBeverage').hide();
 	
 	$('.mFood').hide();	
+	
+	$('.mBestMenu').hide();	
+	$('.mNewMenu').hide();	
 }
 
 
@@ -171,18 +174,19 @@ window.onload=function(){
 	//재고없으면
 	for(let i=0;i<$('.mList').length;i++){
 		if($('.mList').eq(i).find($('.stock')).val()=='false'){
-		$('.mList').eq(i).find($('.menuImgWrap > img')).addClass('soldout');
-		$('.mList').eq(i).find($('.menuNamePriceWrap')).css({backgroundColor:'#7a7a7a'});
+			console.log('재고가없어')
+		$('.mList').eq(i).find($('.menuImgWrap')).find('img').attr('src','resources/img/sold_out.png');
 		$('.mList').eq(i).find($('.menuImgWrap')).css({cursor:'default'})
-		return;
-	}
+
+		}
 	}
 	
 }
 
 /* 메뉴아이템 선택 시 좌측 창에 메뉴 추가 */
 let checktuple = true;
-$('.mList').on('click',function(e){
+$(document).on("click",".mList",function(e){
+//$('.mList').on('click',function(e){
 	e.preventDefault();
 	
 	let id = $(this).find($('.menuId')).val();
@@ -195,13 +199,11 @@ $('.mList').on('click',function(e){
 	
 	//재고없으면
 	if($(this).find($('.stock')).val()=='false'){
-		$(this).find($('.menuNamePriceWrap')).css({backgroundColor:'#7a7a7a'});
+		$(this).find($('.menuImgWrap > img')).attr('src','resources/img/sold_out.png');
 		$(this).find($('.menuImgWrap')).css({cursor:'default'})
 		return;
 	}
-	
-	
-	
+
 	//중복메뉴이면 
 		if($('.addMenuList').length==0) { checktuple = true; }
 		for(let i =0; i<$('.addMenuList').length;i++){
@@ -827,13 +829,79 @@ function callCompOrder(){
 	$('#goCompOrder').submit();
 }
 
-
-
-
-
-$(document).ready(function(){
+$('.bestMenuItem').on('click',function(e){
+	e.preventDefault();
+	$.ajax({
+		url:"bestmenu",
+		type:"post",
+		contentType: "application/json; charset=UTF-8"	,
+		//async:false	,
+		success:function(data){
+			//console.log(data[0].id);
+				//기존 메뉴 초기화
+				resetMenuList();
+				for(let i=0;i<data.length;i++){
+					$('.menuItemsWrap').find('ul').append(
+						"<li class='mList mBestMenu'><a href='#'>"+
+					"<input type='hidden' name='menuId' class='menuId' value='"+data[i].id+"'/>"+
+					"<input type='hidden' name='stock' class='stock' value='"+data[i].stock+"'/>"+
+					"<div class='menuImgWrap'>"+
+					"<img src='"+data[i].imgPath+"' alt='menuImg'>"+
+					"<div class='menuNamePriceWrap'>"+
+					"<p class='menuName'>"+data[i].menuName+"</p>"+
+					"<p class='menuPrice'>"+numberWithCommas(data[i].menuPrice)+"원</p>"+
+					"</div></div></a></li>");
+					
+					isNulltoStock();
+				}
+				
+			}
+		})
 	
 })
+function isNulltoStock(){
+	for(let i=0;i<$('.mList').length;i++){
+		if($('.mList').eq(i).find($('.stock')).val()=='false'){
+			console.log('재고가없어2')
+		$('.mList').eq(i).find($('.menuImgWrap')).find('img').attr('src','resources/img/sold_out.png');
+		$('.mList').eq(i).find($('.menuImgWrap')).css({cursor:'default'})
+
+		}
+	}
+}
+
+
+
+$('.newMenuItem').on('click',function(e){
+	e.preventDefault();
+	$.ajax({
+		url:"newmenu",
+		type:"post",
+		contentType: "application/json; charset=UTF-8"	,
+		//async:false	,
+		success:function(data){
+			console.log(data[0].id);
+				//기존 메뉴 초기화
+				resetMenuList();
+				for(let i=0;i<data.length;i++){
+					$('.menuItemsWrap').find('ul').append(
+						"<li class='mList mNewMenu'><a href='#'>"+
+					"<input type='hidden' name='menuId' class='menuId' value='"+data[i].id+"'/>"+
+					"<input type='hidden' name='stock' class='stock' value='"+data[i].stock+"'/>"+
+					"<div class='menuImgWrap'>"+
+					"<img src='"+data[i].imgPath+"' alt='menuImg'>"+
+					"<div class='menuNamePriceWrap'>"+
+					"<p class='menuName'>"+data[i].menuName+"</p>"+
+					"<p class='menuPrice'>"+numberWithCommas(data[i].menuPrice)+"원</p>"+
+					"</div></div></a></li>");
+				}
+			}
+		})
+	
+})
+
+
+
 
 
 

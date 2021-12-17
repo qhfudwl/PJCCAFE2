@@ -48,7 +48,7 @@ section {
 	margin: 20px 0 0 0;
 }
 .buttonWrap { 
-    width: 60%;
+    width: 30%;
     margin: 0 auto;
 }
 .buttonWrap ul { 
@@ -58,9 +58,24 @@ section {
 .buttonWrap ul li {
     font-size: 1.5em;
 } 
-.buttonWrap button:hover{ background: #9dc970;}
 
-.menuHover, .periodHover { background: #9dc970;}
+.buttonWrap button {
+	outline: none; border: 0; 
+	background-color: #dfe2dc; 
+	padding: 10px 10px; 
+	width: 80px;
+    margin:0 30px; 
+    font-size: 14px; 
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+/* .buttonWrap button:hover{ background: #9dc970;} */
+
+.buttonWrap .active { background: #9dc970;}
+#menuWrap button:hover{ background: #9dc970;}
+#typeWrap button:hover{ background: #9dc970;}
+
+
 
 
 #periodWrap {
@@ -72,24 +87,13 @@ section {
 #periodWrap ul li {
     text-align: center;
 }
-#periodWrap button{
-	width:100px;
-	height: 40px;
-	border-radius: 5px;	
-	cursor: pointer;
-}
+#periodWrap button{}
 
 
 #typeWrap {}
 #typeWrap ul { } 
 #typeWrap ul li { }
-#typeWrap button {
-    width: 100px;
-    height: 40px; 
-    border-radius: 5px;
-    padding: 0 10px;
-    cursor: pointer;
-}
+#typeWrap button {}
 
 #RecordTable{
     width: 100%;

@@ -404,8 +404,8 @@ body{
 .addMenuList{
 	cursor: pointer;
 }
-.orderListTable tr:hover{
-	background: #9dc970;
+.orderListTable tr:hover, .addMenuList:hover{
+	background: #9dc970 !important;
 }
 .addMenuListHover{
 	background: #f00;
