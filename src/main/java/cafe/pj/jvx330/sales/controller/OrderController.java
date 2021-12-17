@@ -223,22 +223,10 @@ public class OrderController extends SalesController{
 		@PostMapping("saveUserPoint")
 		@ResponseBody
 		public HashMap<String,Object> saveUserPoint(@RequestBody HashMap<String,Object> map) {
-			/*System.out.println("saveUserPoint");	
-			customer.setId(Long.parseLong(map.get("userId").toString()));
-			customer.setCustomerName(map.get("userName").toString());
-			customer.setPhone(map.get("userPhone").toString());
-			customer.setBirth(map.get("userBirth").toString());
-			customer.setPoint(Double.parseDouble(map.get("userPoint").toString()));
-			return;
-			
-			*/
-			
+
 			HashMap<String,Object> save = map;
 			customer = (Customer)cs.findUserById(Long.parseLong(map.get("userId").toString()));
-			
-			
-			
-			
+						
 			return save;
 		}
 		
@@ -358,7 +346,7 @@ public class OrderController extends SalesController{
 			if(order.getCustomer().getId()!=1) {
 				user = cs.findUserById(order.getCustomer().getId());
 				Customer customer = (Customer)user;
-				customer.setPoint(savePoint);
+				customer.setPoint(customer.getPoint()+savePoint);
 				user = customer;
 				//cs.updatePointById(user);
 			}

@@ -275,6 +275,7 @@ public class SalesServiceImpl implements SalesService{
 	@Override
 	public void addSalesIncludingRegDate(Sales sales) {
 		sd.addSalesIncludingRegDate(sales);
+		us.updatePointById(sales.getUser());
 	}
 	
 	/*
