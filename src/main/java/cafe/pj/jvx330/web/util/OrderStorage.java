@@ -3,8 +3,10 @@ package cafe.pj.jvx330.web.util;
 public class OrderStorage implements Comparable<OrderStorage>{
 	private String weekDate;
 	private String menuName;
-	int quantity;
-	double price;
+	private int quantity;
+	private double price;
+	private Long menuId;
+	
 	
 	public OrderStorage() {
 		
@@ -14,6 +16,7 @@ public class OrderStorage implements Comparable<OrderStorage>{
 		this.menuName = menuName;
 		this.quantity = quantity;
 		this.price = price;
+		
 	}
 
 	public String getWeekDate() {
@@ -46,6 +49,14 @@ public class OrderStorage implements Comparable<OrderStorage>{
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	public Long getMenuId() {
+		return menuId;
+	}
+
+	public void setMenuId(Long menuId) {
+		this.menuId = menuId;
 	}
 	
 	@Override
