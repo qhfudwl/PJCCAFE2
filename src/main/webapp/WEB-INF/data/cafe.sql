@@ -176,7 +176,7 @@ SELECT menuID, SUM(quantity) as quantity FROM OrderRecord WHERE Date(regDate) Be
 
 DELETE FROM Menu;
 DELETE FROM SalesRecord;
-DELETE FROM Menu WHERE menuType='F';
+DELETE FROM Menu WHERE menuType='C';
 
 INSERT INTO Customer(name,phone,birth,point) VALUES('홍길동','01012345678','19900101',0);
 INSERT INTO Customer(name,phone,birth,point) VALUES('김감자','01012345678','19900101',7000);
@@ -203,7 +203,6 @@ INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','
 
 INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫아포가토',1000.0,true,'resources/img/coffee/hot/핫아포가토.jpg','2021-10-01 12:00:00');
 INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫에스프레소',1000.0,true,'resources/img/coffee/hot/핫에스프레소.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫카라멜라떼마끼아또',1500.0,true,'resources/img/coffee/hot/핫카라멜라떼마끼아또.jpg','2021-10-01 12:00:00');
 INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫카페라떼',1500.0,true,'resources/img/coffee/hot/핫카페라떼.jpg','2021-10-01 12:00:00');
 INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫카페모카',1500.0,true,'resources/img/coffee/hot/핫카페모카.jpg','2021-10-01 12:00:00');
 INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스아인슈패너',2300.0,true,'resources/img/coffee/ice/아이스아인슈패너.jpg','2021-10-01 12:00:00');
