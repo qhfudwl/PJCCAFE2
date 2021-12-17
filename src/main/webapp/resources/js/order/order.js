@@ -662,7 +662,6 @@ $('.orderListPointBtn').on('click',function(){
 	let popupY= (document.body.offsetHeight / 2) - (popupHeight / 2);
 	// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
 	
-	
 	window.open("usePointPopup", "title", "width=500, height = 500, top="+ popupY + ", left="+ popupX + ""); //선언과 초기화 동시에 해도 됨
 	}
 	
