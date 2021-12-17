@@ -250,11 +250,11 @@ public class SalesServiceImpl implements SalesService{
 			//리스트에 저장
 			sstorageList.add(sstorage);
 			}
-			//System.out.println();
-			//System.out.println();
-			//for(SalesStorage s : sstorageList) {
-				//System.out.println(s);
-			//}
+			System.out.println();
+			System.out.println();
+			for(SalesStorage s : sstorageList) {
+				System.out.println(s);
+			}
 		}
 		
 		return sstorageList;
