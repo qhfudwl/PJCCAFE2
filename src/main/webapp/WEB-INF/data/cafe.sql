@@ -58,27 +58,42 @@ CREATE TABLE OrderRecord (
 );
 
 -- 비회원등록
-INSERT INTO Customer(name,phone,birth,point) VALUES('김아루','010-0000-0000','00000000',0);
-INSERT INTO Customer(name,phone,birth,point) VALUES('최향기','010-0000-0000','00000000',0);
+INSERT INTO Customer(name,phone,birth,point) VALUES('비회원','','',0);
 
 
 -- 관리자등록
 INSERT INTO Employee(eId,passwd,position) VALUES('manager','manager','M');
 
 -- 메뉴등록
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','핫윈터블로썸',1000.0,true,'/cafe/resources/img/beverage/hot/핫윈터블로썸.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','핫크리스마스라떼',1000.0,true,'/cafe/resources/img/beverage/hot/핫크리스마스_라떼.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','핫크리스마스초코',1000.0,true,'/cafe/resources/img/beverage/hot/핫크리스마스_초코.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','핫프루티하동',1000.0,true,'/cafe/resources/img/beverage/hot/핫프루티하동.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스스트로베리그라니따',1800.0,true,'/cafe/resources/img/beverage/ice/아이스스트로베리그라니따.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스시트러스',1800.0,true,'/cafe/resources/img/beverage/ice/아이스시트러스.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스유채꿀애플스파클링',1800.0,true,'/cafe/resources/img/beverage/ice/아이스유채꿀애플스파클링.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스청포도콤부차',2500.0,true,'/cafe/resources/img/beverage/ice/아이스청포도콤부차.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스코코넛커피그라니따',2500.0,true,'/cafe/resources/img/beverage/ice/아이스코코넛커피그라니따.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스키위주스',2500.0,true,'/cafe/resources/img/beverage/ice/아이스키위주스.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스흑당펄밀크티',2500.0,true,'/cafe/resources/img/beverage/ice/아이스흑당펄밀크티.jpg','2021-10-01 12:00:00');
 
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','아이스자몽에이드',1000.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','아이스레몬에이드',1000.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('B','핫자스민티',1000.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫아메리카노',1500.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스아메리카노',1500.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫카페라떼',2000.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스카페라떼',2000.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','핫카페모카',2500.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('C','아이스카페모카',2500.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('F','햄치즈샌드위치',3000.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('F','촉촉한초코칩쿠키',1000.0,true,'resources/img/IceAmericano.jpg');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath) VALUES('F','알록달록마카롱',1000.0,true,'resources/img/IceAmericano.jpg');
+
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫아포가토',1000.0,true,'/cafe/resources/img/coffee/hot/핫아포가토.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫에스프레소',1000.0,true,'/cafe/resources/img/coffee/hot/핫에스프레소.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫카라멜라떼마끼아또',1500.0,true,'/cafe/resources/img/coffee/hot/핫카라멜라떼마끼아또.png','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫카페라떼',1500.0,true,'/cafe/resources/img/coffee/hot/핫카페라떼.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫카페모카',1500.0,true,'/cafe/resources/img/coffee/hot/핫카페모카.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스아인슈패너',2300.0,true,'/cafe/resources/img/coffee/ice/아이스아인슈패너.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스연유콜드브루플로트',2300.0,true,'/cafe/resources/img/coffee/ice/아이스연유콜드브루플로트.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스카라멜라떼마끼아또',2300.0,true,'/cafe/resources/img/coffee/ice/아이스카라멜라떼마끼아또.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스카페라떼',3000.0,true,'/cafe/resources/img/coffee/ice/아이스카페라떼.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스카페모카',3000.0,true,'/cafe/resources/img/coffee/ice/아이스카페모카.jpg','2021-10-01 12:00:00');
+
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','BLT샌드위치',45000.0,true,'/cafe/resources/img/food/BLT샌드위치.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','다크타르트',3000.0,true,'/cafe/resources/img/food/다크타르트.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','딸기크레이프',6500.0,true,'/cafe/resources/img/food/딸기크레이프.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','에그타르트',3000.0,true,'/cafe/resources/img/food/에그타르트.jpg','2021-10-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','햄&치즈크라상',3500.0,true,'/cafe/resources/img/food/햄&치즈크라상.jpg','2021-10-01 12:00:00');
 
 -- saleRecord 추가
 insert into SalesRecord(customerId,orderNumber, amount, usePoint, regDate) values(1, '110', 1000, 500,'2021-03-01 00:02:11');
@@ -166,7 +181,7 @@ insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-09-11 00:02
 insert into OrderRecord(menuId, quantity, regDate) values(2,1, '2021-09-11 00:02:11');
 
 
-
+-- 각 table 보기
 SELECT * FROM Customer;
 SELECT * FROM Employee;
 SELECT * FROM Menu;
@@ -174,49 +189,19 @@ SELECT * FROM SalesRecord;
 SELECT * FROM OrderRecord;
 SELECT menuID, SUM(quantity) as quantity FROM OrderRecord WHERE Date(regDate) Between '2021-12-15 00:00:00' AND '2021-12-15 23:59:59' GROUP BY menuId;
 
-DELETE FROM Menu;
+-- 테이블 전체 삭제
+DELETE FROM OrderRecord;
 DELETE FROM SalesRecord;
+DELETE FROM Employee;
+DELETE FROM Customer;
+DELETE FROM Menu;
+
 DELETE FROM Menu WHERE menuType='F';
 
 INSERT INTO Customer(name,phone,birth,point) VALUES('홍길동','01012345678','19900101',0);
 INSERT INTO Customer(name,phone,birth,point) VALUES('김감자','01012345678','19900101',7000);
 
 
-
-
-
-
--- 메뉴 추가
-
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','핫윈터블로썸',1000.0,true,'resources/img/beverage/hot/핫윈터블로썸.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','핫크리스마스라떼',1000.0,true,'resources/img/beverage/hot/핫크리스마스_라떼.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','핫크리스마스초코',1000.0,true,'resources/img/beverage/hot/핫크리스마스_초코.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','핫프루티하동',1000.0,true,'resources/img/beverage/hot/핫프루티하동.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스스트로베리그라니따',1800.0,true,'resources/img/beverage/ice/아이스스트로베리그라니따.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스시트러스',1800.0,true,'resources/img/beverage/ice/아이스시트러스.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스유채꿀애플스파클링',1800.0,true,'resources/img/beverage/ice/아이스유채꿀애플스파클링.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스청포도콤부차',2500.0,true,'resources/img/beverage/ice/아이스청포도콤부차.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스코코넛커피그라니따',2500.0,true,'resources/img/beverage/ice/아이스코코넛커피그라니따.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스키위주스',2500.0,true,'resources/img/beverage/ice/아이스키위주스.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스흑당펄밀크티',2500.0,true,'resources/img/beverage/ice/아이스흑당펄밀크티.jpg','2021-10-01 12:00:00');
-
-
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫아포가토',1000.0,true,'resources/img/coffee/hot/핫아포가토.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫에스프레소',1000.0,true,'resources/img/coffee/hot/핫에스프레소.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫카라멜라떼마끼아또',1500.0,true,'resources/img/coffee/hot/핫카라멜라떼마끼아또.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫카페라떼',1500.0,true,'resources/img/coffee/hot/핫카페라떼.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','핫카페모카',1500.0,true,'resources/img/coffee/hot/핫카페모카.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스아인슈패너',2300.0,true,'resources/img/coffee/ice/아이스아인슈패너.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스연유콜드브루플로트',2300.0,true,'resources/img/coffee/ice/아이스연유콜드브루플로트.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스카라멜라떼마끼아또',2300.0,true,'resources/img/coffee/ice/아이스카라멜라떼마끼아또.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스카페라떼',3000.0,true,'resources/img/coffee/ice/아이스카페라떼.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('C','아이스카페모카',3000.0,true,'resources/img/coffee/ice/아이스카페모카.jpg','2021-10-01 12:00:00');
-
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','BLT샌드위치',45000.0,true,'resources/img/food/BLT샌드위치.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','다크타르트',3000.0,true,'resources/img/food/다크타르트.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','딸기크레이프',6500.0,true,'resources/img/food/딸기크레이프.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','에그타르트',3000.0,true,'resources/img/food/에그타르트.jpg','2021-10-01 12:00:00');
-INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('F','햄&치즈크라상',3500.0,true,'resources/img/food/햄&치즈크라상.jpg','2021-10-01 12:00:00');
 
 
 
