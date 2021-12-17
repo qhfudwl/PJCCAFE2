@@ -104,7 +104,7 @@
 						<ul>
 							<li><a href="#" class="menuItemCom menuItemCaltCom bestMenuItem">인기메뉴</a></li>
 							<li><a href="#" class="menuItemCom menuItemCaltCom newMenuItem">신메뉴</a></li>
-							<li><a href="#" class="menuItemCom menuItemCaltCom totalMenuItem calSelected">전체메뉴</a></li>
+							<li><a href="#" class="menuItemCom menuItemCaltCom totalMenuItem">전체메뉴</a></li> <!--  calSelected -->
 						</ul>
 					</div>
 					<div class="menuNameWrap">

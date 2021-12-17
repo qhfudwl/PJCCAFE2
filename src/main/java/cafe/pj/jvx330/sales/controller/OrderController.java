@@ -346,9 +346,9 @@ public class OrderController extends SalesController{
 			if(order.getCustomer().getId()!=1) {
 				user = cs.findUserById(order.getCustomer().getId());
 				Customer customer = (Customer)user;
-				customer.setPoint(customer.getPoint()+savePoint);
+				customer.setPoint(customer.getPoint()+savePoint - usePoint);
 				user = customer;
-				//cs.updatePointById(user);
+				cs.updatePointById(user);
 			}
 			//비회원일 경우 id값은 1
 			else {

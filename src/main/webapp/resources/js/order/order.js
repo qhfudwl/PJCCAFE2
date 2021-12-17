@@ -100,6 +100,8 @@ function resetMenuList(){
 	
 	$('.mBestMenu').hide();	
 	$('.mNewMenu').hide();	
+	
+
 }
 
 
@@ -830,6 +832,7 @@ function callCompOrder(){
 
 $('.bestMenuItem').on('click',function(e){
 	e.preventDefault();
+	resetMenuList();
 	$.ajax({
 		url:"bestmenu",
 		type:"post",
@@ -838,7 +841,7 @@ $('.bestMenuItem').on('click',function(e){
 		success:function(data){
 			//console.log(data[0].id);
 				//기존 메뉴 초기화
-				resetMenuList();
+
 				for(let i=0;i<data.length;i++){
 					$('.menuItemsWrap').find('ul').append(
 						"<li class='mList mBestMenu'><a href='#'>"+
@@ -872,6 +875,7 @@ function isNulltoStock(){
 
 
 $('.newMenuItem').on('click',function(e){
+
 	e.preventDefault();
 	$.ajax({
 		url:"newmenu",
@@ -881,7 +885,7 @@ $('.newMenuItem').on('click',function(e){
 		success:function(data){
 			console.log(data[0].id);
 				//기존 메뉴 초기화
-				resetMenuList();
+				
 				for(let i=0;i<data.length;i++){
 					$('.menuItemsWrap').find('ul').append(
 						"<li class='mList mNewMenu'><a href='#'>"+

@@ -59,8 +59,10 @@ CREATE TABLE OrderRecord (
 
 -- 비회원등록
 INSERT INTO Customer(name,phone,birth,point) VALUES('비회원','','',0);
-INSERT INTO Customer(name,phone,birth,point) VALUES('정원식','01012341234','960630',10000);
-INSERT INTO Customer(name,phone,birth,point) VALUES('정투식','01012341234','900403',0);
+INSERT INTO Customer(name,phone,birth,point) VALUES('정원식','01012341234','19960630',10000);
+INSERT INTO Customer(name,phone,birth,point) VALUES('정투식','01012341234','19900403',0);
+
+UPDATE Customer 
 
 -- 관리자등록
 INSERT INTO Employee(eId,passwd,position) VALUES('manager','manager','M');
