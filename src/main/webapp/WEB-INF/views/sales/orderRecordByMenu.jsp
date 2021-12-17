@@ -51,68 +51,14 @@
 	                    <li><button type="submit" name="menuType" id="beverageBtn" value="B">음료</button></li>
 	                    <li><button type="submit" name="menuType" id="coffeeBtn" value="C">커피</button></li>
 	                    <li><button type="submit" name="menuType" id="foodBtn" value="F">푸드</button></li>  
-</ul>
-</div>
- <input type="hidden" value="${menuType}" id="hiddenBtnM" >
+					</ul>
+				</div>
+				 <input type="hidden" value="${menuType}" id="hiddenBtnM" >
 	        </form>
         </div>
     </section>
-    
-  <script>
-  	window.onload = function() {
-		$("button[name=periodType]").removeClass();
-		$("button[name=menuType]").removeClass();
-if($("#hiddenBtnP").val() == "D"){
-			$("#dDate").addClass("on");
-			$("#totalBtn").addClass("on");
-if($("#hiddenBtnM").val() == "T"){
-				$("#dDate").addClass("on");
-				$("#totalBtn").addClass("on");
-			} else if($("hiddenBtnM").val() == "B"){
-				$("#dDate").addClass("on");
-				$("#beverageBtn").addClass("on");
-			} else if($("hiddenBtnM").val() == "C"){
-				$("#dDate").addClass("on");
-				$("#coffeeBtn").addClass("on");
-			} else if($("hiddenBtnM").val() == "F"){
-				$("#dDate").addClass("on");
-				$("#foodBtn").addClass("on");
-			}
-		} else if($("#hiddenBtnP").val() == "W"){
-			$("#wDate").addClass("on");
-			$("#totalBtn").addClass("on");
-if($("#hiddenBtnM").val() == "T"){
-				$("#wDate").addClass("on");
-				$("#totalBtn").addClass("on");
-			} else if($("hiddenBtnM").val() == "B"){
-				$("#wDate").addClass("on");
-				$("#beverageBtn").addClass("on");
-			} else if($("hiddenBtnM").val() == "C"){
-				$("#wDate").addClass("on");
-				$("#coffeeBtn").addClass("on");
-			} else if($("hiddenBtnM").val() == "F"){
-				$("#wDate").addClass("on");
-				$("#foodBtn").addClass("on");
-			}
-		} else if($("#hiddenBtnP").val() == "M"){
-			$("#mDate").addClass("on");
-			$("#totalBtn").addClass("on");
-if($("#hiddenBtnM").val() == "T"){
-				$("#mDate").addClass("on");
-				$("#totalBtn").addClass("on");
-			} else if($("hiddenBtnM").val() == "B"){
-				$("#mDate").addClass("on");
-				$("#beverageBtn").addClass("on");
-			} else if($("hiddenBtnM").val() == "C"){
-				$("#mDate").addClass("on");
-				$("#coffeeBtn").addClass("on");
-			} else if($("hiddenBtnM").val() == "F"){
-				$("#mDate").addClass("on");
-				$("#foodBtn").addClass("on");
-			}
-		}
-	}
-    </script>
+					    
+					  
 
 	<section id="RecordContent">
  <div id="RecordWrap">
