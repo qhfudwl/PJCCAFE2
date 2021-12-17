@@ -8,14 +8,14 @@ section {position:relative ;width: 60%; height: 100%; margin: auto;}
 .submitim{outline: none; border: 0; background-color: #dfe2dc; padding: 10px 10px; width: 80px;
     margin: 3.3px 10px 10px 0; font-size: 14px; float: right; transition-duration: 0.2s;}
 .submitim:hover{background-color: #9dc970;}
-#SearchWrap{border: 1px solid #596271; border-radius: 30px; width: 500px; position: absolute; top: 70px;
+#SearchWrap{border: 1px solid #596271; border-radius: 30px; width: 500px; position: absolute; top: 60px;
         left: 50%; transform: translate(-50%,0); z-index: 9999;}
 #SearchWrap input[type=submit] {width: 80px; height: 35px; line-height: 17px; border-radius: 50px;}
-#SearchWrap select{outline: none; border: 0; background-color: #eaeaea;
-    height: 30px; margin-left: 10px; line-height:30px; text-align: center; border-radius: 15px 0 0 15px;}
-#SearchWrap input[type=text]{margin-left: 10px; outline: none; border: 0; background-color: #f4f4f4;
-	margin-top: 10px;width: 300px; height: 30px;}
-#SearchWrap input[type=submit]{margin: 3.3px 3px 0 0;}
+#SearchWrap > select{outline: none; border: 0; background-color: #eaeaea;
+    height: 30px; margin-left: 10px; margin-bottom:5px; line-height:30px; text-align: center; border-radius: 15px 0 0 15px;}
+#SearchWrap input[type=text]{margin-left: 10px; margin-bottom:11px; outline: none; border: 0; background-color:#f4f4f4;
+	margin-top: 10px; width: 300px; height: 30px;}
+#SearchWrap input[type=submit]{margin: 8px 6px 0 0;}
 
 #userlistWrap{position: relative; top: 80px; width: 100%;}
 #userlist{width: 100%;}
@@ -37,10 +37,11 @@ section {position:relative ;width: 60%; height: 100%; margin: auto;}
 #userlist tr td{text-indent:10px;}
 .ordernumin {display:none;}
 .name label{padding: 0; top: 0; left: 0; position:absolute; width: 100%; height: 100%; box-sizing: border-box;}
-.name label:hover{border: 1px solid #9dc970;}
-.active{border: 4px solid #9dc970;}
+.name label:hover{border:2px solid #9dc970;}
+/*.active{background-color: #9dc970;}*/
 
 #userlist tr:nth-child(even){box-sizing: border-box; background-color:#eaeaea;}
+/*#userlist tr.active{background-color:#9dc970;}*/
 #userlist tr:nth-child(odd){box-sizing: border-box; background-color:#f4f4f4;}
 
 

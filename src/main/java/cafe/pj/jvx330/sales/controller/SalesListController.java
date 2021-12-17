@@ -32,6 +32,11 @@ public class SalesListController extends SalesController{
 	HttpServletRequest request, HttpSession session) throws IllegalStateException, IOException{
 		List<OrderStorage> osList = ss.findOrderRecordForMenu(period, menu);
 		
+		for(OrderStorage os : osList) {
+			System.out.println(os.getMenuName() + " : " + os.getWeekDate());
+		}
+		System.out.println("--------------------------");
+		
 		ModelAndView mav = new ModelAndView();
 		session.setAttribute("contentName", "메뉴별 판매내역");
 		mav.addObject("osList", osList);
@@ -62,8 +67,10 @@ public class SalesListController extends SalesController{
 	public ModelAndView viewSalesType(@RequestParam("datePicker") char type) {
 		List<SalesStorage> sList = ss.findSaleRecord(type);
 		ModelAndView mav = new ModelAndView();
+		System.out.println(type);
 		mav.addObject("sList",sList);
 		//System.out.println(sList);
+		mav.addObject("datePicker", type);
 		mav.setViewName("sales/sales_view_main");
 		
 		return mav;

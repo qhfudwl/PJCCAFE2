@@ -5,6 +5,7 @@ import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -100,17 +102,10 @@ public class OrderController extends SalesController{
 			mav.addObject("CoffeeMenus",CoffeeMenus);
 			mav.addObject("FoodMenus",FoodMenus);
 			mav.setViewName("order/order");
+		
 			
-			ms.findNewMenus();
-			List<OrderStorage> os = ss.findOrderRecordForMenu('M','T');
-			Collections.sort(os);
-			String thismonth = os.get(0).getWeekDate();
-			for(OrderStorage data: os ) {
-				
-				if(data.getMenuName().equals(thismonth)) {
-					System.out.println(data.getMenuName());
-				}
-			}
+			
+			
 			return mav;
 		}
 		
@@ -228,22 +223,10 @@ public class OrderController extends SalesController{
 		@PostMapping("saveUserPoint")
 		@ResponseBody
 		public HashMap<String,Object> saveUserPoint(@RequestBody HashMap<String,Object> map) {
-			/*System.out.println("saveUserPoint");	
-			customer.setId(Long.parseLong(map.get("userId").toString()));
-			customer.setCustomerName(map.get("userName").toString());
-			customer.setPhone(map.get("userPhone").toString());
-			customer.setBirth(map.get("userBirth").toString());
-			customer.setPoint(Double.parseDouble(map.get("userPoint").toString()));
-			return;
-			
-			*/
-			
+
 			HashMap<String,Object> save = map;
 			customer = (Customer)cs.findUserById(Long.parseLong(map.get("userId").toString()));
-			
-			
-			
-			
+						
 			return save;
 		}
 		
@@ -322,7 +305,7 @@ public class OrderController extends SalesController{
 		@PostMapping("saveOrder")
 		@ResponseBody
 		public HashMap<String,Object> save_order(@ModelAttribute("order") OrderCommand order, HttpServletRequest request) {
-			System.out.println(order.getNowOrder().get(0).getMenuId());
+			//System.out.println(order.getNowOrder().get(0).getMenuId());
 			
 			
 			//주문번호 구하기
@@ -363,7 +346,7 @@ public class OrderController extends SalesController{
 			if(order.getCustomer().getId()!=1) {
 				user = cs.findUserById(order.getCustomer().getId());
 				Customer customer = (Customer)user;
-				customer.setPoint(savePoint);
+				customer.setPoint(customer.getPoint()+savePoint);
 				user = customer;
 				//cs.updatePointById(user);
 			}
@@ -463,8 +446,53 @@ public class OrderController extends SalesController{
 		
 		
 		
+		/*
+		 * 
+		 * 인기메뉴 불러오기
+		 * 		(바로 지난달 판매내역을 불러올 수 있도록 리팩토링 필요)
+		 */
+		@PostMapping("bestmenu")
+		@ResponseBody
+		public ResponseEntity<?> getBestMenu(){
+			List<Menu> bestMenu = new ArrayList<Menu>();
+			
+			//월별 판매내역
+			List<OrderStorage> os = ss.findOrderRecordForMenu('M', 'T');
+			
+			//지난 달 판매내역
+			List<OrderStorage> lastMSalesList =new ArrayList<OrderStorage>();
+			for(OrderStorage data : os) {
+				if(data.getWeekDate().equals(os.get(0).getWeekDate())) {
+					lastMSalesList.add(data);
+				}
+			}
+			
+			//판매수량별로 오름차순정렬
+			Collections.sort(lastMSalesList);
+			
+			//정렬한 데이터를 메뉴리스트로 순서대로 변환
+			for(OrderStorage data : lastMSalesList) {
+				bestMenu.add(ms.findMenuById(data.getMenuId()));
+			}
+			
+			return ResponseEntity.ok(bestMenu);
+		}
 		
 		
+		
+		/*
+		 * 신메뉴 불러오기
+		 * 		- 이번 달에 새롭게 등록된 메뉴 리스트 불러오기
+		 */
+		
+		@PostMapping("newmenu")
+		@ResponseBody
+		public ResponseEntity<?> getnewmenu(){
+			
+			List<Menu> newMenu = ms.findNewMenus();
+			return ResponseEntity.ok(newMenu);
+		}
+
 		
 		
 		

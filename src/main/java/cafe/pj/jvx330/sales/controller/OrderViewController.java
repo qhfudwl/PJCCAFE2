@@ -36,25 +36,11 @@ public class OrderViewController extends SalesController {
     * @author 김보령
     */
    @GetMapping("/indexView")
-   public ModelAndView indexView(HttpSession session) {
-      Map<String, List<Product>> order = checkOrderInSession(session);
-      Date today = getNowDate();
+   public String indexView(HttpSession session) {
       session.setAttribute("contentName", "주문현황");
 
       ModelAndView mav = new ModelAndView();
-      
-      // session 내 order 길이가 1 이상일 때(원소가 하나라도 있을 때)
-      // compSales를 만들어주고, mav에 넣어준다.
-//      if (order.size() > 0){
-//         List<Sales> compSales = ss.findSalesByDate(today);
-//         for (Sales s : compSales) {
-//            s.setOrder(order.get(s.getOrderNumber()));
-//         }
-//         mav.addObject("compSales", compSales);
-//      }
-      mav.setViewName("index");
-      
-      return mav;
+      return "index";
    }
    
    /**

@@ -328,12 +328,16 @@ body{
 .menuImgWrap{
   width: 177px;
   height: 290px;
+  
   position: relative;
   border: 1px solid #dfe2dc;
   border-radius: 5px;
 }
 .menuImgWrap img{
-  width: 100%; height: 220px;
+  width: 160px; height: auto;
+  position:absolute;
+  left:calc(50% - 75px);
+  top:25px;
 }
 
 /* 이미지 가격 */
@@ -358,6 +362,8 @@ body{
 .menuName{
   /* display: inline-flex; */
   font-weight: 600;
+  width: 90%;
+  text-align:center;
   font-size: 1.1em;
   line-height: 14px;
 }
@@ -404,8 +410,8 @@ body{
 .addMenuList{
 	cursor: pointer;
 }
-.orderListTable tr:hover{
-	background: #9dc970;
+.orderListTable tr:hover, .addMenuList:hover{
+	background: #9dc970 !important;
 }
 .addMenuListHover{
 	background: #f00;

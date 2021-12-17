@@ -6,8 +6,10 @@
 /*버튼리스트*/
 #salesbtnWrap{width: 100%;}
 #timebtn{width: 50%;margin: 0 auto 30px; text-align: center;}
-#timebtn button{outline: none; border: 0; background-color: #dfe2dc; padding: 10px 10px; width: 80px;
+
+.timebtnin{outline: none; border: 0; background-color: #dfe2dc; padding: 10px 10px; width: 80px;
     margin:0 30px; font-size: 14px; transition-duration: 0.2s;}
+.active{background-color: #9dc970;}
 #timebtn button:hover{background-color: #9dc970;}
 
 

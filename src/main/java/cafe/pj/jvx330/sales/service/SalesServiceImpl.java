@@ -136,14 +136,12 @@ public class SalesServiceImpl implements SalesService{
 					os.setWeekDate(sDateList.get(0)+" ~ "+sDateList.get(1));
 					os.setQuantity(order.get(j).getQuantity());
 					os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(j).getQuantity());
-					os.setMenuId(order.get(i).getMenu().getId());
+					os.setMenuId(order.get(j).getMenu().getId());
 					 
-					iNum++;
 					
 					osList.add(os);
-				} else {
-					
 				}
+				iNum++;
 			}
 			try { // String to Calendar
 				Date date = format.parse(sDateList.get(0)); 
@@ -255,7 +253,7 @@ public class SalesServiceImpl implements SalesService{
 			//System.out.println();
 			//System.out.println();
 			//for(SalesStorage s : sstorageList) {
-				//System.out.println(s);
+			//	System.out.println(s);
 			//}
 		}
 		
@@ -277,6 +275,7 @@ public class SalesServiceImpl implements SalesService{
 	@Override
 	public void addSalesIncludingRegDate(Sales sales) {
 		sd.addSalesIncludingRegDate(sales);
+		us.updatePointById(sales.getUser());
 	}
 	
 	/*

@@ -75,7 +75,7 @@ public class UserListController extends UserController{
 	public ModelAndView updateUserbtn(@RequestParam("usersId") long usersId) {
 		User user = us.findUserById(usersId);
 		
-		System.out.println(user.getId());
+		//System.out.println(user.getId());
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("user" ,user);
@@ -97,7 +97,7 @@ public class UserListController extends UserController{
 				customerCommand.getPhone(),customerCommand.getBirth(),customerCommand.getPoint(),
 				customerCommand.getRegDate());
 		us.updateUserById(user);
-		System.out.println(user);
+		//System.out.println(user);
 		//List<User> users =us.findAllUsers();
 		
 		ModelAndView mav = new ModelAndView();
