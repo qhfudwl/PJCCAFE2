@@ -72,6 +72,7 @@ public class SalesDaoImpl implements SalesDao {
 	}
 	
 	public List<Product> findOrderRecordForMenu(String sDate1, String sDate2){
+		System.out.println("sale date sDate"+sDate1+sDate2);
 		String sql = "SELECT menuID, SUM(quantity) as quantity FROM OrderRecord WHERE Date(regDate) Between ? AND ? GROUP BY menuId";
 		List<Product> order = jt.query(sql, new ProductRowMapper(), java.sql.Date.valueOf(sDate1), java.sql.Date.valueOf(sDate2));
 		return order;

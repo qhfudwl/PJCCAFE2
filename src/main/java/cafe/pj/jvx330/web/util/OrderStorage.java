@@ -1,6 +1,6 @@
 package cafe.pj.jvx330.web.util;
 
-public class OrderStorage {
+public class OrderStorage implements Comparable<OrderStorage>{
 	private String weekDate;
 	private String menuName;
 	int quantity;
@@ -47,6 +47,18 @@ public class OrderStorage {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	@Override
+	public int compareTo(OrderStorage os) {
+	if (os.quantity < quantity) {
+	return 1;
+	} else if (os.quantity > quantity) {
+	return -1;
+	}
+	return 0;
+	}
+
+	
 	
 	
 }

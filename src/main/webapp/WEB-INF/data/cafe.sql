@@ -180,3 +180,7 @@ DELETE FROM SalesRecord;
 INSERT INTO Customer(name,phone,birth,point) VALUES('홍길동','01012345678','19900101',0);
 INSERT INTO Customer(name,phone,birth,point) VALUES('김감자','01012345678','19900101',7000);
 
+
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스아아아아아아',1000.0,true,'resources/img/IceAmericano.jpg','2021-12-01 12:00:00');
+INSERT INTO Menu(menuType,menuName,menuPrice,stock,imgPath,regDate) VALUES('B','아이스뜨아아아',1000.0,true,'resources/img/IceAmericano.jpg','2021-11-01 12:00:00');
+

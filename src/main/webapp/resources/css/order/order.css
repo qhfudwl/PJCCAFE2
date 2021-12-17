@@ -421,8 +421,14 @@ body{
 	cursor: pointer;
 }
 
+.isStock{
+	background: #fff5f5;
+}
 
-
+.soldout{
+	position:relative;
+	width:100%; height:100%;
+}
 
 
 

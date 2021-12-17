@@ -136,7 +136,6 @@
 						<h3 class="hidden">메뉴</h3>
 						<ul>					
 							<c:forEach var="beverages" items="${BeverageMenus }">
-								<input type="hidden" name="stock" value="${beverages.stock }"/>
 								
 								
 								<c:choose>
@@ -151,6 +150,8 @@
 								</c:otherwise>
 								</c:choose>
 									<input type="hidden" name="menuId" class="menuId" value="${beverages.id }"/>
+									<input type="hidden" name="stock" class="stock" value="${beverages.stock }"/>
+									
 										<div class="menuImgWrap">
 											<img src="${beverages.imgPath }" alt="menuImg">
 											<div class="menuNamePriceWrap">
@@ -162,7 +163,6 @@
 							</c:forEach>
 							
 							<c:forEach var="coffees" items="${CoffeeMenus }">
-								<input type="hidden" name="stock" value="${coffees.stock }"/>
 								
 								<c:choose>
 								<c:when test = "${fn:contains(coffees.menuName,'핫') }">
@@ -176,6 +176,8 @@
 								</c:otherwise>
 								</c:choose>
 									<input type="hidden" name="menuId" class="menuId" value="${coffees.id }"/>
+									<input type="hidden" name="stock" class="stock" value="${coffees.stock }"/>
+									
 										<div class="menuImgWrap">
 											<img src="${coffees.imgPath }" alt="menuImg">
 											<div class="menuNamePriceWrap">
@@ -187,9 +189,10 @@
 							</c:forEach>
 							
 							<c:forEach var="foods" items="${FoodMenus }">
-								<input type="hidden" name="stock" value="${foods.stock }"/>
 									<li class="mList mFood"><a href="#">
 										<input type="hidden" name="menuId" class="menuId" value="${foods.id }"/>
+										<input type="hidden" name="stock" class="stock" value="${foods.stock }"/>
+										
 										<div class="menuImgWrap">
 											<img src="${foods.imgPath }" alt="menuImg">
 											<div class="menuNamePriceWrap">
@@ -211,8 +214,7 @@
 							<li><a href="#" class="menuItemCom funcButtonCom funcCustomerSelectBtn">고객선택</a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom funcOrderBtn">주문하기</a></li>
 						</ul>
-						
-						
+							
 					</div>
 
 				</div>
