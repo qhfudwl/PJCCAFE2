@@ -33,7 +33,7 @@
 	            <input type="hidden" value ="T" name="menuType"/>
 	            <input type="hidden" value ="" name="searchTxt"/>
 	                <ul>
-	                    <li><button type="submit" id="dDate" name="periodType" class="active" value="D">일간</button></li>
+	                    <li><button type="submit" id="dDate" name="periodType" value="D">일간</button></li>
 	                    <li><button type="submit" id="wDate" name="periodType" value="W">주간</button></li>
 	                    <li><button type="submit" id="mDate" name="periodType" value="M">월간</button></li>
 	                </ul>

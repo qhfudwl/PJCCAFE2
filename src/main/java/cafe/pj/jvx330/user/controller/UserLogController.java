@@ -54,14 +54,14 @@ public class UserLogController extends UserController {
 			errMsg.put("idErr", "아이디를 입력해주세요.");
 		} else {
 			if (!us.isEmployee(employeeCommand.getEid())) {
-				errMsg.put("idErr", "아이디가 존재하지 않습니다.");
+				errMsg.put("idErr", "존재하지 않은 아이디입니다.");
 			}
 		}
 		
 		if (validator.isEmpty(employeeCommand.getPasswd())) { // 비밀번호 미입력
 			errMsg.put("pwErr", "비밀번호를 입력해주세요.");
 		} else {
-			if (!inputEp.getPasswd().equals(admin.getPasswd())) {
+			if (us.isEmployee(employeeCommand.getEid()) && !inputEp.getPasswd().equals(admin.getPasswd())) {
 				errMsg.put("pwErr", "비밀번호 불일치");
 			}
 		}
