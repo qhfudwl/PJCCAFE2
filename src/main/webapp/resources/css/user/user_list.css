@@ -26,7 +26,7 @@ section {position:relative ;width: 60%; height: 100%; margin: auto;}
 .hbirth{width: 21%;}
 .hpoint{width: 21%;}
 .hregDate{width: 23%;}
-
+#inlabel1{display: none;}
 .name{text-align: center;}
 .phone{text-align: center;}
 .birth{text-align: center;}
@@ -43,7 +43,7 @@ section {position:relative ;width: 60%; height: 100%; margin: auto;}
 #userlist tr:nth-child(even){box-sizing: border-box; background-color:#eaeaea;}
 /*#userlist tr.active{background-color:#9dc970;}*/
 #userlist tr:nth-child(odd){box-sizing: border-box; background-color:#f4f4f4;}
-
+#userlist tr:eq(1){display: none;}
 
 /*#SearchWrap{position: relative; border: 1px solid #596271; border-radius: 30px; width: 500px;}
 	#userlistWrap{position: relative; top: 10px; width: 100%;}*/

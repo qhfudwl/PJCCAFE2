@@ -33,18 +33,19 @@
                         <div id="userlistWrap">
                             <table id="userlist">
                                    <tr><th class="hname">이름</th><th class="hphone">폰번호</th><th class="hbirth">생년월일</th><th class="hpoint">포인트</th><th class="hregDate">가입일자</th></tr>
-                                   <c:forEach var="users" items="${users}">
-                                    <tr class="">
-                                        <td class="name">${users.customerName}
-                                            <label for="label${users.id}" class="userincubate"></label>
-                                            <input id="label${users.id}" class="ordernumin" type="radio" name="usersId" value ="${users.id}"/>
-                                        </td>
-                                        <td class="phone">${users.phone}</td>
-                                        <td class="birth">${users.birth}</td>
-                                        <td class="point"><fmt:formatNumber value="${users.point}" pattern=",###" type="currency" currencySymbol="" /> P</td>
-                                        <td class="regDate">${users.regDate}</td>
+                                   <c:forEach var="user" items="${users}">
+                                   <c:if test="${uesr.id ne 1}">
+                                    	<tr class="">
+                                       		<td class="name">${user.customerName}
+                                            	<label id="inlabel${user.id}" for="label${user.id}" class="userincubate"></label>
+                                            	<input id="label${user.id}" class="ordernumin" type="radio" name="usersId" value ="${user.id}"/>
+                                        	</td>
+                                        	<td class="phone">${user.phone}</td>
+                                        	<td class="birth">${user.birth}</td>
+                                        	<td class="point"><fmt:formatNumber value="${user.point}" pattern=",###" type="currency" currencySymbol="" /> P</td>
+                                        	<td class="regDate">${user.regDate}</td>
                                     </tr>
-                                    
+                                    </c:if>
                                 </c:forEach>
                             </table>
                         </div>
@@ -55,6 +56,7 @@
                         <%--$('.userincubate').hover(function(){
                         	$(this).css("background-color", "yellow");
                         }--%>
+                        
                         $('.userincubate').click(function(){
                         	
                         	$('.userincubate').closest('tr:nth-child(even)').css("background-color", "#eaeaea");
