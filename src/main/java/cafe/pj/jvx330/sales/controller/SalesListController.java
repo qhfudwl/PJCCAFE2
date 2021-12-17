@@ -62,8 +62,10 @@ public class SalesListController extends SalesController{
 	public ModelAndView viewSalesType(@RequestParam("datePicker") char type) {
 		List<SalesStorage> sList = ss.findSaleRecord(type);
 		ModelAndView mav = new ModelAndView();
+		System.out.println(type);
 		mav.addObject("sList",sList);
 		//System.out.println(sList);
+		mav.addObject("datePicker", type);
 		mav.setViewName("sales/sales_view_main");
 		
 		return mav;
