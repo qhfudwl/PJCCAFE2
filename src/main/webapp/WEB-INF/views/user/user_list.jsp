@@ -34,9 +34,9 @@
                             <table id="userlist">
                                    <tr><th class="hname">이름</th><th class="hphone">폰번호</th><th class="hbirth">생년월일</th><th class="hpoint">포인트</th><th class="hregDate">가입일자</th></tr>
                                    <c:forEach var="users" items="${users}">
-                                    <tr>
+                                    <tr class="">
                                         <td class="name">${users.customerName}
-                                            <label for="label${users.id}" class="label"></label>
+                                            <label for="label${users.id}" class="userincubate"></label>
                                             <input id="label${users.id}" class="ordernumin" type="radio" name="usersId" value ="${users.id}"/>
                                         </td>
                                         <td class="phone">${users.phone}</td>
@@ -52,13 +52,22 @@
                     
                         
                         <script>
-                        
-                        $('.label').click(function(){
-                            if($(this).hasClass('active')){     
+                        <%--$('.userincubate').hover(function(){
+                        	$(this).css("background-color", "yellow");
+                        }--%>
+                        $('.userincubate').click(function(){
+                        	
+                        	$('.userincubate').closest('tr:nth-child(even)').css("background-color", "#eaeaea");
+                        	$('.userincubate').closest('tr:nth-child(odd)').css("background-color", "#f4f4f4");
+                        	$(this).closest('tr').css("background-color", "#9dc970");
+                        	
+                            <%--if($(this).hasClass('active')){     
                             } else {
-                                   $('.label').removeClass('active');
+                                   $('.userincubate').removeClass('active')
                                    $(this).addClass('active')
-                            }
+                                   $('.active').closest('tr').css("background-color", "#9dc970");
+                                   
+                            }--%>
 
                       });
                         //$(this).click(function(e){
