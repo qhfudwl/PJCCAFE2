@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.domain.Product;
+import cafe.pj.jvx330.sales.dao.ProductRowMapper;
 
 @Repository("menuDao")
 public class MenuDaoImpl implements MenuDao {
@@ -105,5 +107,21 @@ public class MenuDaoImpl implements MenuDao {
 		}
 		return menu;
 	}
+	
+	
+	
+	public List<Menu> findNewMenus(String data1, String data2){
+		
+		String sql = "SELECT id, menuType, menuName, menuPrice, stock, imgPath, regDate FROM Menu WHERE Date(regDate) Between ? AND ?";
+		List<Menu> menus = jt.query(sql, new MenuRowMapper(), java.sql.Date.valueOf(data2), java.sql.Date.valueOf(data1));
+		return menus;
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

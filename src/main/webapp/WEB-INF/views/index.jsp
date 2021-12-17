@@ -59,6 +59,7 @@
 		<h3 class="headerMent">픽업 완료 목록</h3>
 		<ul>
 		<c:if test="${not empty compSales}">
+		<%--
 			<c:forEach var="compSalesItem" items="${compSales}">
 				<li>
 					<p class="orderN">${compSalesItem.orderNumber} : </p>
@@ -72,6 +73,22 @@
 					<p class="regD">/ ${compSalesItem.regDate}</p>
 					<input class="hidden" id="compSales${compSalesItem.orderNumber}" type="radio" value="${compSalesItem.orderNumber}" />
 					<label for="compSales${compSalesItem.orderNumber}"></label>
+				</li>
+			</c:forEach>
+			 --%>
+			<c:forEach var="compSalesItem" items="${compSales}">
+				<li>
+					<p class="orderN">${compSalesItem.value.orderNumber} : </p>
+					<p class="shortening">
+						<c:forEach var="compProduct" items="${compSalesItem.value.order}" varStatus="status">
+							${compProduct.menu.menuName} ${compProduct.quantity}
+							<c:if test="${not status.last}">, </c:if>
+						</c:forEach>
+					</p>
+					<p class="totalP">(<fmt:formatNumber value="${compSalesItem.value.getTotalPrice()}" pattern=",###" type="currency" currencySymbol="" /> 원)</p>
+					<p class="regD">(<fmt:formatDate value="${compSalesItem.value.regDate}" pattern="yy년 MM월 dd일"/>)</p>
+					<input class="hidden" id="compSales${compSalesItem.value.orderNumber}" type="radio" value="${compSalesItem.value.orderNumber}" />
+					<label for="compSales${compSalesItem.value.orderNumber}"></label>
 				</li>
 			</c:forEach>
 		</c:if>

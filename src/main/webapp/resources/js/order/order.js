@@ -167,6 +167,19 @@ $('.mItemSubTypeIce').on('click',function(e){
 	}	
 })
 
+window.onload=function(){
+	//재고없으면
+	for(let i=0;i<$('.mList').length;i++){
+		if($('.mList').eq(i).find($('.stock')).val()=='false'){
+		$('.mList').eq(i).find($('.menuImgWrap > img')).addClass('soldout');
+		$('.mList').eq(i).find($('.menuNamePriceWrap')).css({backgroundColor:'#7a7a7a'});
+		$('.mList').eq(i).find($('.menuImgWrap')).css({cursor:'default'})
+		return;
+	}
+	}
+	
+}
+
 /* 메뉴아이템 선택 시 좌측 창에 메뉴 추가 */
 let checktuple = true;
 $('.mList').on('click',function(e){
@@ -179,6 +192,15 @@ $('.mList').on('click',function(e){
 	menuPrice = menuPrice.replace("원","");
 	let quantity=1;
 	let totalMenuPrice = Number(menuPrice)*quantity;
+	
+	//재고없으면
+	if($(this).find($('.stock')).val()=='false'){
+		$(this).find($('.menuNamePriceWrap')).css({backgroundColor:'#7a7a7a'});
+		$(this).find($('.menuImgWrap')).css({cursor:'default'})
+		return;
+	}
+	
+	
 	
 	//중복메뉴이면 
 		if($('.addMenuList').length==0) { checktuple = true; }
@@ -305,6 +327,9 @@ $(document).on("click",".addMenuList",function(){
 	}
 	
 })
+
+
+
 
 /* 수량 업다운 만들기 */
 /* 수량 다운 */
@@ -806,7 +831,9 @@ function callCompOrder(){
 
 
 
-
+$(document).ready(function(){
+	
+})
 
 
 

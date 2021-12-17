@@ -9,6 +9,13 @@ import cafe.pj.jvx330.domain.Sales;
 
 public interface SalesDao {
 	void addSales(Sales sales);
+
+	/**
+	 * 날짜를 포함한 Sales 객체 DB에 저장
+	 * @param sales
+	 */
+	void addSalesIncludingRegDate(Sales sales);
+	
 	List<Sales> findSalesByDate(Date date1, Date date2);
 	
 	List<Sales> findSalesByDate(Date date);

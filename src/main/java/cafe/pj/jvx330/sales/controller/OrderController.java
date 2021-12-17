@@ -5,6 +5,8 @@ import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,12 +37,14 @@ import cafe.pj.jvx330.domain.Product;
 import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.menu.service.MenuService;
+import cafe.pj.jvx330.sales.service.SalesService;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.user.service.UserServiceImpl;
 import cafe.pj.jvx330.web.command.CustomerCommand;
 import cafe.pj.jvx330.web.command.OrderCommand;
 import cafe.pj.jvx330.web.command.OrderItemsCommand;
 import cafe.pj.jvx330.web.controller.CafeController;
+import cafe.pj.jvx330.web.util.OrderStorage;
 /**
  * 
  * @author 윤효
@@ -53,6 +57,9 @@ public class OrderController extends SalesController{
 		
 		@Resource(name="userService")
 		UserService cs;
+		
+		@Resource(name="salesService")
+		SalesService ss;
 		
 		List<Product> order = new ArrayList<>();
 		
@@ -71,7 +78,7 @@ public class OrderController extends SalesController{
 			//Employee employee= (Employee)session.getAttribute("manager");
 			//String Mposition = employee.getPosition();
 			HttpSession session = request.getSession();
-			session.setAttribute("contentName", "주문목록");
+			session.setAttribute("contentName", "주문하기");
 			
 			//직원 정보 임시
 			String mPosition = "Manager";
@@ -94,8 +101,16 @@ public class OrderController extends SalesController{
 			mav.addObject("FoodMenus",FoodMenus);
 			mav.setViewName("order/order");
 			
-			System.out.println("hi");
-			
+			ms.findNewMenus();
+			List<OrderStorage> os = ss.findOrderRecordForMenu('M','T');
+			Collections.sort(os);
+			String thismonth = os.get(0).getWeekDate();
+			for(OrderStorage data: os ) {
+				
+				if(data.getMenuName().equals(thismonth)) {
+					System.out.println(data.getMenuName());
+				}
+			}
 			return mav;
 		}
 		
@@ -322,7 +337,7 @@ public class OrderController extends SalesController{
 				Menu menu = ms.findMenuById(oic.getMenuId());
 				int quantity = oic.getQuantity();
 				menuItems.add(new Product(orderNumber,menu,quantity,new Date()));
-				System.out.println(menu.getMenuPrice());
+				
 			}
 
 			//사용한 포인트
@@ -350,6 +365,7 @@ public class OrderController extends SalesController{
 				Customer customer = (Customer)user;
 				customer.setPoint(savePoint);
 				user = customer;
+				//cs.updatePointById(user);
 			}
 			//비회원일 경우 id값은 1
 			else {
@@ -378,6 +394,34 @@ public class OrderController extends SalesController{
 			
 			
 			mav.addObject("sales", sales);
+			/*
+			System.out.println("sales id"+sales.getId());
+			System.out.println("sales orderNumber"+sales.getOrderNumber());
+			System.out.println("sales place"+sales.getPlace());
+			System.out.println("sales amount"+sales.getAmount());
+			System.out.println("sales usePoint"+sales.getUsePoint());
+			System.out.println("sales regDate"+sales.getRegDate());
+			System.out.println("sales user getid"+sales.getUser().getId());
+			System.out.println("sales user getregdate"+sales.getUser().getRegDate());
+			for(Product pro : sales.getOrder()) {
+				System.out.println("sales order ordernumber"+pro.getOrderNumber());
+				System.out.println("sales order quantity "+pro.getQuantity());
+				System.out.println("sales order regDate"+pro.getRegDate());
+				System.out.println("sales order menu id"+pro.getMenu().getId());
+				System.out.println("sales order menu imgpath"+pro.getMenu().getImgPath());
+				System.out.println("sales order menu menuname"+pro.getMenu().getMenuName());
+				System.out.println("sales order menu menuprice"+pro.getMenu().getMenuPrice());
+				System.out.println("sales order menu menutype"+pro.getMenu().getMenuType());
+				System.out.println("sales order menu regdate"+pro.getMenu().getRegDate());
+
+
+			}
+			System.out.println("sales user totalprice function "+sales.getTotalPrice());
+
+			*/
+			
+			
+
 			HashMap<String,Object> fakeMap = new HashMap<String, Object>();
 			return fakeMap;
 			
@@ -387,8 +431,6 @@ public class OrderController extends SalesController{
 		
 		@PostMapping("compOrder")
 		public ModelAndView complete_order() {
-			
-
 			
 			mav.setViewName("order/completeOrder");
 			return mav;
@@ -410,8 +452,7 @@ public class OrderController extends SalesController{
 			map.remove(leastorderNumber);
 			return "redirect:/order";
 		}
-		
-		
+				
 		
 		/**
 		 * 인기메뉴/신메뉴/모든메뉴 누를 때

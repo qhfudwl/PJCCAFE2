@@ -136,6 +136,8 @@ public class SalesServiceImpl implements SalesService{
 					os.setWeekDate(sDateList.get(0)+" ~ "+sDateList.get(1));
 					os.setQuantity(order.get(j).getQuantity());
 					os.setPrice(order.get(j).getMenu().getMenuPrice() * order.get(j).getQuantity());
+					os.setMenuId(order.get(i).getMenu().getId());
+					 
 					iNum++;
 					
 					osList.add(os);
@@ -270,6 +272,11 @@ public class SalesServiceImpl implements SalesService{
 		int batchSize = 0;
 
 		batchSize = sd.addOrderRecord(order).length;
+	}
+
+	@Override
+	public void addSalesIncludingRegDate(Sales sales) {
+		sd.addSalesIncludingRegDate(sales);
 	}
 	
 	/*
