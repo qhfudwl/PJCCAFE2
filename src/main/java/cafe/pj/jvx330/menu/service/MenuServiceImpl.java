@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.dao.MenuDao;
+import cafe.pj.jvx330.menu.util.FileAuxiliaryFunction;
 import cafe.pj.jvx330.web.util.Validator;
 
 @Service("menuService")
@@ -25,6 +27,8 @@ public class MenuServiceImpl implements MenuService {
 	
 	@Autowired
 	private Validator validator;
+	@Autowired
+	private FileAuxiliaryFunction fileAux;
 
 	@Transactional
 	@Override
@@ -60,9 +64,11 @@ public class MenuServiceImpl implements MenuService {
 		return menu;
 	}
 
+	@Transactional
 	@Override
-	public void removeMenuById(long id) {
-		md.removeMenuById(id);
+	public void removeMenuById(HttpServletRequest request, Menu menu) {
+		fileAux.removeImgFile(request, menu, fileAux.getImgName(menu.getImgPath()));
+		md.removeMenuById(menu.getId());
 	}
 
 	@Override
@@ -79,10 +85,8 @@ public class MenuServiceImpl implements MenuService {
 		}
 		return true;
 	}
-	
-	
-	
-	
+
+	@Override
 	public List<Menu> findNewMenus(){
 		/*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:ss:mm");
 		Date date = new Date();

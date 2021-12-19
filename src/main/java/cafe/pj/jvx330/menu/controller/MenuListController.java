@@ -46,6 +46,15 @@ public class MenuListController extends MenuController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("menus", menus);
 		mav.addObject("choiceMenu", choiceMenu);
+		
+		// 검색어가 있을 경우 넣기
+		if(!validator.isEmpty(request.getParameter("searchText"))) {
+			String searchText = request.getParameter("searchText");
+			mav.addObject("searchText", searchText);
+		} else {
+			mav.addObject("searchText", "");
+		}
+		
 		mav.setViewName("menu/menu_list");
 		
 		return mav;
@@ -136,8 +145,6 @@ public class MenuListController extends MenuController {
 		ModelAndView mav = new ModelAndView();
 		
 		Map<String, String> errMsg = new HashMap<>();
-		System.out.println(menuCommand.getMenuName());
-		System.out.println(ms.isMenuName(menuCommand.getMenuName()));
 		
 		// 유효성 검사
 		if(validator.isEmpty(menuCommand.getMenuName())) { // 이름이 없을 경우
@@ -186,8 +193,8 @@ public class MenuListController extends MenuController {
 			@RequestParam("choiceMenu") char choiceMenu) {
 		
 		Menu menu = ms.findMenuById(choiceItem);
-		fileAux.removeImgFile(request, menu, fileAux.getImgName(menu.getImgPath()));
-		ms.removeMenuById(menu.getId());
+//		fileAux.removeImgFile(request, menu, fileAux.getImgName(menu.getImgPath()));
+		ms.removeMenuById(request, menu);
 		
 		ModelAndView mav = new ModelAndView();
 		// 리다이렉트 시 메뉴 타입을 get으로 넘겨준다

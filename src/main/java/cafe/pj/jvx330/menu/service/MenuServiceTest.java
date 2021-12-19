@@ -2,6 +2,8 @@ package cafe.pj.jvx330.menu.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
@@ -81,8 +83,8 @@ public class MenuServiceTest {
 		System.out.println(m);
 	}
 	
-	public void removeMenuByIdTest(long id) {
-		ms.removeMenuById(id);
+	public void removeMenuByIdTest(HttpServletRequest request, Menu menu) {
+		ms.removeMenuById(request, menu);
 		findAllMenus();
 	}
 }

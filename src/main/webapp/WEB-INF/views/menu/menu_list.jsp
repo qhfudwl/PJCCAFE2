@@ -33,12 +33,19 @@
 	<div id="menuListWrap">
 		<form name="updateMenuForm" method="post">
 		<div id="updateMenuWrap">
-			<input type="submit" name="updateMenu" value="추가" id="addMenu" />
-			<input type="submit" name="updateMenu" value="수정" id="updateMenu" />
-			<input type="submit" name="updateMenu" value="삭제" id="removeMenu" />
+			<div id="searchWrap">
+				<input type="text" name="searchText" placeholder="검색어 입력" value="${searchText}" />
+				<input type="submit" value="검색" id="searchMenu" name="updateMenu"/>
+			</div>
+			<div id="updateWrap">
+				<input type="submit" name="updateMenu" value="추가" id="addMenu" />
+				<input type="submit" name="updateMenu" value="수정" id="updateMenu" />
+				<input type="submit" name="updateMenu" value="삭제" id="removeMenu" />
+			</div>
 		</div>
 		<div id="itemWrap">
 			<c:forEach var="m" items="${menus}">
+			<c:if test="${m.menuName.contains(searchText)}">
 				<div class="item">
 					<div class="imgWrap">
 						<img height="145px" src="${m.imgPath}"/>
@@ -59,6 +66,7 @@
 						</li>
 					</ul>
 				</div>
+			</c:if>
 			</c:forEach>
 		</div>
 		<input class="hidden" value="${choiceMenu}" name="choiceMenu" id="hiddenChoiceMenu" type="text"/>
@@ -91,8 +99,12 @@
 				if ($("input[name=choiceItem]:checked").val() == null) {
 					alert("먼저 메뉴를 선택해주세요!");
 				} else {
-					removeSubmit("removeMenu");
+					updateSubmit("removeMenu", "post");
 				}
+			})
+			$("#searchMenu").click(function(e) {
+				e.preventDefault();
+				updateSubmit("viewMenuList", "get");
 			})
 			function popupUpdateMenu(goUrl, popWidth, popHeight) {
 				let windowWidth = window.screen.width;
@@ -115,13 +127,13 @@
 				updateMenuForm.submit();
 				
 			}
-			function removeSubmit(goUrl) {
+			function updateSubmit(goUrl, methodForm) {
 				
 				let popUpdateMenuUrl = getContextPath() + "/menu/" + goUrl;
 				let updateMenuForm = document.updateMenuForm;
 				
 				updateMenuForm.action = popUpdateMenuUrl;
-				updateMenuForm.method = "post";
+				updateMenuForm.method = methodForm;
 				
 				updateMenuForm.submit();
 			}

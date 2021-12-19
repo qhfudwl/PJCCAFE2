@@ -26,8 +26,8 @@
 #menuSnb button.on::before { width: 50%; }
 #menuListContent {min-width: 1200px; width: 95%; margin: 0 auto;}
 #updateMenuWrap {
-	display: flex; flex-flow: row wrap; justify-content: flex-end; align-items: center;
-	padding: 0 20px 10px;
+	display: flex; flex-flow: row wrap; justify-content: space-between; align-items: center;
+	padding: 0 20px 10px; position: relative;
 }
 #updateMenuWrap input[type=submit] {
 	outline: none; background-color: #dfe2dc; border: 0; border-radius: 5px; cursor: pointer;
@@ -36,6 +36,16 @@
 }
 #updateMenuWrap input[type=submit]:hover {
 	background-color: #9dc970;
+}
+#searchWrap {
+	border-radius: 30px; background-color: #dfe1dc;
+}
+#searchWrap input[type=text] {
+	outline: none; border: 0; line-height: 30px; border-radius: 30px;
+	text-indent: 10px; width: 350px; font-size: 14px; background-color: #dfe1dc;
+}
+#searchWrap input[type=submit] {
+	border-radius: 30px; font-size: 14px; padding: 5px 15px; color: #596271;
 }
 #itemWrap {
 	display: grid; gap: 5px; grid-template-columns : auto auto auto;

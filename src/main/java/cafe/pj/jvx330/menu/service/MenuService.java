@@ -2,6 +2,9 @@ package cafe.pj.jvx330.menu.service;
 
 import cafe.pj.jvx330.domain.Menu;
 import java.util.List;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 /**
  * 
  * @author 김보령
@@ -77,7 +80,7 @@ public interface MenuService {
 	 * @param menu
 	 * @author 김보령
 	 */
-	void removeMenuById(long id); 
+	void removeMenuById(HttpServletRequest request, Menu menu); 
 
 
 	/**
@@ -88,7 +91,4 @@ public interface MenuService {
 	 * 
 	 */
 	List<Menu> findNewMenus();
-
-
-
 }
