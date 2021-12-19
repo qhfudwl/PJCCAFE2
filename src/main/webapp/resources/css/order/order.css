@@ -232,14 +232,6 @@ body{
 
 
 
-
-
-
-
-
-
-
-
 /*
     (우) 주문선택
 */
@@ -261,11 +253,7 @@ body{
   text-align: center;
   border-radius: 5px;
 }
-/*
-.menuItemCom:hover{
-  background: #9dc970;
-}
-*/
+
 .calSelected, .typeSelected, .subTypeSelected, .menuItemHover{
  	background: #9dc970;
 }
@@ -287,9 +275,7 @@ body{
    width: 33%;
    
 }
-.menuListWrap ul li a{
-  
-}
+
 
 /* 메뉴종류 */
 .menuNameWrap ul {

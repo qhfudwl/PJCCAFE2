@@ -25,9 +25,9 @@
 			<div id="orderWrap">
 				<!--
     
-      (좌) 주문내역
+     			 (좌) 주문내역
       
-      -->
+     			 -->
       
 				<div class="leftSideWrap halfSideWrap">
 					<h2 class="hidden">주문내역</h2>
@@ -207,7 +207,7 @@
 					</div>
 					<div class="funcButtonsWrap oneRow">
 						<h3 class="hidden">기능</h3>
-						<form id="goCompOrder" action="compOrder" method="post"></form>
+						<form id="goCompOrder" action="compOrder" method="get"></form>
 						<ul>
 							<li><a href="#" class="menuItemCom funcButtonCom funcAllCancelBtn">전체취소</a></li>
 							<li><a href="#" class="menuItemCom funcButtonCom"></a></li>
