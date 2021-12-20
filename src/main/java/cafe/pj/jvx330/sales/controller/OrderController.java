@@ -356,7 +356,7 @@ public class OrderController extends SalesController {
 	public ResponseEntity<?> getBestMenu() {
 		List<Menu> bestMenu = new ArrayList<Menu>();
 
-		// 월별 판매내역
+		// 월별 판매내역 (주문내역테이블)
 		List<OrderStorage> os = ss.findOrderRecordForMenu('M', 'T');
 
 		// 해당달 판매내역
