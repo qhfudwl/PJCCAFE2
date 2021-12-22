@@ -63,7 +63,7 @@ public class SalesServiceTest {
 		System.out.println("test : " + p3.getMenu().getId());
 		
 		
-		sst.summOrder(order);
+//		sst.summOrder(order);
 //		sst.addOrderRecordTest(order);
 		
 //		System.out.println(sst);
