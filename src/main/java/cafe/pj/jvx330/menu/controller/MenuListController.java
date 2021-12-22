@@ -111,10 +111,10 @@ public class MenuListController extends MenuController {
 			// 이 전 이미지 경로에 placeholdImg 가 포함되어있을 경우 해당 파일은 지우면 안된다.
 			// 그냥 새로운 파일만 업로드 및 적용해야한다.
 			if (!menuCommand.getImgPath().contains("placeholdImg")) {
-				fileAux.removeImgFile(request, menu, fileAux.getImgName(menuCommand.getImgPath()));
+				fileAux.removeImgFile(request, menu.getMenuType(), menu.getMenuName(), fileAux.getImgName(menuCommand.getImgPath()));
 			}
 			imgPath = file.getOriginalFilename();
-			fileAux.uploadImgFile(request, file, menu);
+			fileAux.uploadImgFile(request, file, menu.getMenuType(), menu.getMenuName());
 		} else { // 파일을 고르지 않았다면 이 전 이미지는 삭제하면 안된다.
 			imgPath = fileAux.getImgName(menuCommand.getImgPath());	
 		}
@@ -171,7 +171,7 @@ public class MenuListController extends MenuController {
 		
 		Menu menu = convertMenuCommandToMenu(request, menuCommand, menuCommand.getImgPath());
 		
-		fileAux.uploadImgFile(request, file, menu);
+		fileAux.uploadImgFile(request, file, menu.getMenuType(), menu.getMenuName());
 		
 		ms.addMenu(menu);
 		

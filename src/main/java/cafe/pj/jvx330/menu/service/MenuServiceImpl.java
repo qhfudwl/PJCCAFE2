@@ -67,7 +67,7 @@ public class MenuServiceImpl implements MenuService {
 	@Transactional
 	@Override
 	public void removeMenuById(HttpServletRequest request, Menu menu) {
-		fileAux.removeImgFile(request, menu, fileAux.getImgName(menu.getImgPath()));
+		fileAux.removeImgFile(request, menu.getMenuType(), menu.getMenuName(), fileAux.getImgName(menu.getImgPath()));
 		md.removeMenuById(menu.getId());
 	}
 
