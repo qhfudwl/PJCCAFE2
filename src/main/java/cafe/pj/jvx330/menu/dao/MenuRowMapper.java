@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.menu.domain.Menu;
 
 /**
  * 모든 칼럼 정보를 담은 메뉴 객체를 뽑을 때 사용

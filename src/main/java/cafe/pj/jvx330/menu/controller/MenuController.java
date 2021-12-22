@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.menu.domain.Menu;
 import cafe.pj.jvx330.menu.service.MenuService;
 import cafe.pj.jvx330.menu.util.FileAuxiliaryFunction;
 import cafe.pj.jvx330.web.command.MenuCommand;

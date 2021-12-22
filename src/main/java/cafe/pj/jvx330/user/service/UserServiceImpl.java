@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cafe.pj.jvx330.domain.Employee;
-import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.user.dao.UserDao;
+import cafe.pj.jvx330.user.domain.Employee;
+import cafe.pj.jvx330.user.domain.User;
 import cafe.pj.jvx330.web.util.Validator;
 @Service("userService")
 public class UserServiceImpl implements UserService{

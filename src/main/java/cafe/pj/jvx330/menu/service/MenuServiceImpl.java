@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.dao.MenuDao;
+import cafe.pj.jvx330.menu.domain.Menu;
 import cafe.pj.jvx330.menu.util.FileAuxiliaryFunction;
 import cafe.pj.jvx330.web.util.Validator;
 

@@ -9,12 +9,12 @@ import java.util.TreeMap;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import cafe.pj.jvx330.domain.Menu;
-import cafe.pj.jvx330.domain.Product;
-import cafe.pj.jvx330.domain.Sales;
-import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.menu.domain.Menu;
 import cafe.pj.jvx330.menu.service.MenuService;
+import cafe.pj.jvx330.sales.domain.Product;
+import cafe.pj.jvx330.sales.domain.Sales;
 import cafe.pj.jvx330.sales.service.SalesService;
+import cafe.pj.jvx330.user.domain.User;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.web.command.ProductCommand;
 import cafe.pj.jvx330.web.command.SalesCommand;

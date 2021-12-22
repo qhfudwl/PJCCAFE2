@@ -2,7 +2,7 @@ package cafe.pj.jvx330.user.dao;
 
 import java.util.List;
 
-import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.user.domain.User;
 
 public interface UserDao {
 	

@@ -6,9 +6,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 import cafe.pj.jvx330.sales.service.SalesService;
 import org.springframework.web.servlet.ModelAndView;
-import cafe.pj.jvx330.domain.Customer;
-import cafe.pj.jvx330.domain.Employee;
-import cafe.pj.jvx330.domain.User;
+
+import cafe.pj.jvx330.user.domain.Customer;
+import cafe.pj.jvx330.user.domain.Employee;
+import cafe.pj.jvx330.user.domain.User;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.web.command.CustomerCommand;
 import cafe.pj.jvx330.web.command.EmployeeCommand;
@@ -17,7 +18,6 @@ import cafe.pj.jvx330.web.util.Validator;
 public class UserController {
 	@Resource(name="validator")
 	protected Validator validator;
-	
 	@Resource(name="userService")
 	UserService us;
 	@Resource(name="salesService")

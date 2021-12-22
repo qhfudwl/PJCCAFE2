@@ -1,6 +1,8 @@
-package cafe.pj.jvx330.domain;
+package cafe.pj.jvx330.sales.domain;
 
 import java.util.Date;
+
+import cafe.pj.jvx330.menu.domain.Menu;
 
 public class Product {
 	

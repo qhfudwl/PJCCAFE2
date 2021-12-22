@@ -6,10 +6,10 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import cafe.pj.jvx330.domain.Customer;
-import cafe.pj.jvx330.domain.Product;
-import cafe.pj.jvx330.domain.Sales;
-import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.sales.domain.Product;
+import cafe.pj.jvx330.sales.domain.Sales;
+import cafe.pj.jvx330.user.domain.Customer;
+import cafe.pj.jvx330.user.domain.User;
 
 public class SalesRowMapper implements RowMapper<Sales>{
 	

@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import cafe.pj.jvx330.domain.Customer;
-import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.user.domain.Customer;
+import cafe.pj.jvx330.user.domain.User;
 
 public class UserRowMapper implements RowMapper<User>{
 	

@@ -13,9 +13,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import cafe.pj.jvx330.domain.Customer;
-import cafe.pj.jvx330.domain.Employee;
-import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.user.domain.Customer;
+import cafe.pj.jvx330.user.domain.Employee;
+import cafe.pj.jvx330.user.domain.User;
 
 @Component("userDao")
 public class UserDaoImpl implements UserDao {

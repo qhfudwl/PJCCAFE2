@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import cafe.pj.jvx330.domain.Customer;
-import cafe.pj.jvx330.domain.Sales;
-import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.sales.domain.Sales;
+import cafe.pj.jvx330.user.domain.Customer;
+import cafe.pj.jvx330.user.domain.User;
 import cafe.pj.jvx330.web.command.CustomerCommand;
 
 @Controller

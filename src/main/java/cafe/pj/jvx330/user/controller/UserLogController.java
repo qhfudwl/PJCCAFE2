@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
-import cafe.pj.jvx330.domain.Employee;
-import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.user.domain.Employee;
+import cafe.pj.jvx330.user.domain.User;
 import cafe.pj.jvx330.web.command.EmployeeCommand;
 
 @Controller("user.controller.userLoginController")

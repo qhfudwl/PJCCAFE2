@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cafe.pj.jvx330.domain.Menu;
-import cafe.pj.jvx330.domain.Product;
-import cafe.pj.jvx330.domain.Sales;
-import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.menu.domain.Menu;
+import cafe.pj.jvx330.sales.domain.Product;
+import cafe.pj.jvx330.sales.domain.Sales;
+import cafe.pj.jvx330.user.domain.User;
 import cafe.pj.jvx330.web.command.ProductCommand;
 import cafe.pj.jvx330.web.command.SalesCommand;
 
