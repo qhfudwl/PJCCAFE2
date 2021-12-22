@@ -11,9 +11,12 @@ import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.service.MenuService;
 import cafe.pj.jvx330.menu.util.FileAuxiliaryFunction;
 import cafe.pj.jvx330.web.command.MenuCommand;
-import cafe.pj.jvx330.web.controller.CafeController;
+import cafe.pj.jvx330.web.util.Validator;
 
-public class MenuController extends CafeController {
+public class MenuController {
+	@Resource(name="validator")
+	protected Validator validator;
+	
 	@Resource(name="menuService")
 	MenuService ms;
 	

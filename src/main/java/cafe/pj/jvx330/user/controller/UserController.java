@@ -12,10 +12,12 @@ import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.web.command.CustomerCommand;
 import cafe.pj.jvx330.web.command.EmployeeCommand;
-import cafe.pj.jvx330.web.command.MenuCommand;
-import cafe.pj.jvx330.web.controller.CafeController;
+import cafe.pj.jvx330.web.util.Validator;
 
-public class UserController extends CafeController {
+public class UserController {
+	@Resource(name="validator")
+	protected Validator validator;
+	
 	@Resource(name="userService")
 	UserService us;
 	@Resource(name="salesService")

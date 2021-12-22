@@ -96,16 +96,12 @@ public class MenuServiceImpl implements MenuService {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		//System.out.println(sdf.format(cal.getTime()));
 		String date1 = sdf.format(cal.getTime());
 		
 		cal.add(Calendar.DATE, 1-cal.get(Calendar.DAY_OF_MONTH));
-		//System.out.println(sdf.format(cal.getTime()));
 		String date2 = sdf.format(cal.getTime());
 		
 		List<Menu> menu = md.findNewMenus(date1,date2);
-		
-		//System.out.println("himenus"+menu.get(0).getMenuName());
 		
 		return menu;
 
