@@ -65,6 +65,7 @@ public class UserDaoImpl implements UserDao {
 		
 		jt.update(sql, ((Customer)user).getCustomerName(), ((Customer)user).getPhone(),
 				((Customer)user).getBirth(), ((Customer)user).getPoint(), user.getId());
+		
 		return user;		
 	}
 	
