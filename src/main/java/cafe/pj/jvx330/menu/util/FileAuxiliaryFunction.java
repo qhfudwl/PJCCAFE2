@@ -69,18 +69,8 @@ public class FileAuxiliaryFunction {
 	 * @return
 	 */
 	public String getImgName(String imgPath) {
-		String[] arr = null;
-		
-		if (imgPath.contains("\\")) {
-			arr = imgPath.trim().split("\\\\");
-		} else {
-			arr = imgPath.trim().split("/");
-		}
-		
-		log.info(imgPath);
-		log.info(arr[arr.length-1]);
-		
-		return arr[arr.length-1];
+		File file = new File(imgPath);
+		return file.getName();
 	}
 	
 	/**
