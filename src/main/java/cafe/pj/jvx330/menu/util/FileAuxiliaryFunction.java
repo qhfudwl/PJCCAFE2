@@ -29,42 +29,34 @@ public class FileAuxiliaryFunction {
 	 * @param request
 	 * @return
 	 */
-	public String makePath(HttpServletRequest request, char menuType, String menuName, String pathForm) {
+	public String makePath(HttpServletRequest request, char menuType, String menuName, char pathType) {
 		String rootPath = "";
 		String attachPath = "";
 		String typePath = "";
 		String tempPath = "";
+		String pathForm = File.separator; // 해당 OS의 구분자
 		
-		if (pathForm.equals("\\")) { // 절대 경로
-			String rootPathOrigin = request.getSession().getServletContext().getRealPath("/"); // 서버 context root 절대 경로
-			String[] rootPathArr = null;
-			
-			if (rootPathOrigin.contains("\\")) { // window 일 경우
-				rootPathArr = rootPathOrigin.trim().split("\\\\"); // "\"로 배열을 나눈다.
-				rootPath = String.join("/", rootPathArr);
-			} else if (rootPathOrigin.contains("/")) { // window 외 OS 일 경우
-				rootPath = rootPathOrigin; // 그대로 대입
-			}
-			
-		} else { // 상대 경로
-			rootPath = request.getContextPath();
+		if (pathType == 'A') { // 절대 경로
+			rootPath = request.getSession().getServletContext().getRealPath("/"); // 서버 context root 절대 경로
+		} else if (pathType == 'R') { // 상대 경로
+			rootPath = request.getContextPath() + pathForm;
 		}
 
-		attachPath = "/resources/img/";
+		attachPath = "resources" + pathForm + "img" + pathForm;
 
 		if (menuType == 'C') {
-			typePath = "coffee/";
+			typePath = "coffee" + pathForm;
 		} else if (menuType == 'B') {
-			typePath = "beverage/";
+			typePath = "beverage" + pathForm;
 		} else if (menuType == 'F') {
-			typePath = "food/";
+			typePath = "food" + pathForm;
 		}
 		
 		if (menuType != 'F') { // 카테고리가 푸드이면 ice 나 hot 을 붙히면 안된다.
 			if (menuName.substring(0, 1).equals("아")) {
-				tempPath = "ice/";
+				tempPath = "ice" + pathForm;
 			}else if (menuName.substring(0, 1).equals("핫")) {
-				tempPath = "hot/";
+				tempPath = "hot" + pathForm;
 			}
 		}
 		
@@ -77,18 +69,18 @@ public class FileAuxiliaryFunction {
 	 * @return
 	 */
 	public String getImgName(String imgPath) {
-		String[] arr = imgPath.trim().split("/");
-		String imgName = null;
+		String[] arr = null;
 		
-		if (imgPath.contains("\\")) { // window 일 경우
+		if (imgPath.contains("\\")) {
 			arr = imgPath.trim().split("\\\\");
-			imgPath = arr[arr.length-1];
-		} else if (imgPath.contains("/")) { // window 외 OS 일 경우
+		} else {
 			arr = imgPath.trim().split("/");
-			imgPath = arr[arr.length-1];
 		}
 		
-		return imgPath;
+		log.info(imgPath);
+		log.info(arr[arr.length-1]);
+		
+		return arr[arr.length-1];
 	}
 	
 	/**
@@ -143,7 +135,7 @@ public class FileAuxiliaryFunction {
 	 * @return
 	 */
 	public String getAbsolutePath(HttpServletRequest request, char menuType, String menuName) {
-		return makePath(request, menuType, menuName, "\\");
+		return makePath(request, menuType, menuName, 'A');
 	}
 	
 	/**
@@ -158,6 +150,7 @@ public class FileAuxiliaryFunction {
 		if (imgName.contains("placeholdImg")) { // 빈 이미지일 경우
 			return request.getContextPath() + "/resources/img/" + imgName;
 		}
-		return makePath(request, menuType, menuName, "/") + imgName;
+		log.info(makePath(request, menuType, menuName, 'R') + imgName);
+		return makePath(request, menuType, menuName, 'R') + imgName;
 	}
 }
