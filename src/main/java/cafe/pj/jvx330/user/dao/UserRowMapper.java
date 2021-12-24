@@ -7,7 +7,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import cafe.pj.jvx330.domain.Customer;
 import cafe.pj.jvx330.domain.User;
-
+//인터페이스를 상속 받을 때 implements
+//클래스 extends
 public class UserRowMapper implements RowMapper<User>{
 	
 

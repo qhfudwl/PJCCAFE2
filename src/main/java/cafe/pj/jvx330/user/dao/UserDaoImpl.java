@@ -48,8 +48,8 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public List<User> findAllUsers() {
-		
-		List<User> users = jt.query("SELECT id, name, phone, birth, point, regDate From Customer ORDER BY id ", new UserRowMapper());
+		List<User> users = jt.query("SELECT id, name, phone, birth, point, regDate "
+				+ "From Customer ORDER BY id ", new UserRowMapper());
 		return users;
 	}
 	
@@ -62,13 +62,12 @@ public class UserDaoImpl implements UserDao {
 		
 		String sql = "UPDATE Customer SET name = ?,phone = ?,birth = ?,point = ? WHERE id = ?";
 		
-		
 		jt.update(sql, ((Customer)user).getCustomerName(), ((Customer)user).getPhone(),
 				((Customer)user).getBirth(), ((Customer)user).getPoint(), user.getId());
 		return user;		
 	}
 	
-	
+	//안씀
 	public void updateUser(User user) {
 		String sql = "UPDATE Customer SET nema = ?, phone = ?, birth = ?, point = ? ";
 		jt.query(sql, new UserRowMapper());

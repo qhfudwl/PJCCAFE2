@@ -57,6 +57,8 @@ public class SalesListController extends SalesController{
 		List<SalesStorage> sList = ss.findSaleRecord('D');
 		ModelAndView mav = new ModelAndView();
 		session.setAttribute("contentName", "판매내역");
+		/*,@RequestParam("datePicker") char datePicker
+		mav.addObject("D",datePicker);*/
 		mav.addObject("sList",sList);
 		mav.setViewName("sales/sales_view_main");
 		

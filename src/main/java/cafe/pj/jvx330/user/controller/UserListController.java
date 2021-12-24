@@ -61,7 +61,6 @@ public class UserListController extends UserController{
 		//List<User> users = us.findAllUsers();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("close","close");
-		
 		mav.setViewName("user/popup_add_user");
 		
 		return mav;

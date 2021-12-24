@@ -3,6 +3,8 @@ package cafe.pj.jvx330.domain;
 import java.util.Date;
 
 // abstract 는 생성자 자체를 new User로 만들 수 없음. 
+// 부모의 private 멤버변수는
+// get set으로 사용 가능하다.
 public abstract class User {
 	protected long id;
 	protected Date regDate;
