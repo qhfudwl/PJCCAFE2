@@ -32,20 +32,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import cafe.pj.jvx330.domain.Customer;
-import cafe.pj.jvx330.domain.Employee;
-import cafe.pj.jvx330.domain.Menu;
-import cafe.pj.jvx330.domain.Product;
-import cafe.pj.jvx330.domain.Sales;
-import cafe.pj.jvx330.domain.User;
+import cafe.pj.jvx330.menu.domain.Menu;
 import cafe.pj.jvx330.menu.service.MenuService;
+import cafe.pj.jvx330.sales.domain.Product;
+import cafe.pj.jvx330.sales.domain.Sales;
 import cafe.pj.jvx330.sales.service.SalesService;
+import cafe.pj.jvx330.user.domain.Customer;
+import cafe.pj.jvx330.user.domain.Employee;
+import cafe.pj.jvx330.user.domain.User;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.user.service.UserServiceImpl;
 import cafe.pj.jvx330.web.command.CustomerCommand;
 import cafe.pj.jvx330.web.command.OrderCommand;
 import cafe.pj.jvx330.web.command.OrderItemsCommand;
-import cafe.pj.jvx330.web.controller.CafeController;
 import cafe.pj.jvx330.web.util.OrderStorage;
 
 /**

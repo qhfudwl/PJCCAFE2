@@ -66,7 +66,8 @@
 			
 			let imgPathText = $("#imgPath").val();
 			let arrText = imgPathText.split("/");
-			let imgNameText = arrText[arrText.length - 1];
+			let imgNameTextArr = (arrText[arrText.length - 1]).split("\\");
+			let imgNameText = imgNameTextArr[imgNameTextArr.length - 1];
 			
 			if (imgNameFile == "") {
 				$("#viewImg").val(imgNameText);

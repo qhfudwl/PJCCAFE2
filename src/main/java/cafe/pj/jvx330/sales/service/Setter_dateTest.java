@@ -12,10 +12,10 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.stereotype.Component;
 
 import cafe.pj.jvx330.config.DataSourceConfig;
-import cafe.pj.jvx330.domain.Product;
-import cafe.pj.jvx330.domain.Sales;
 import cafe.pj.jvx330.sales.dao.SalesDao;
 import cafe.pj.jvx330.sales.dao.SalesDaoImpl;
+import cafe.pj.jvx330.sales.domain.Product;
+import cafe.pj.jvx330.sales.domain.Sales;
 import cafe.pj.jvx330.web.util.OrderStorage;
 
 @Component("setter_dateTest")

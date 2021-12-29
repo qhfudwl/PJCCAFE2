@@ -1,4 +1,4 @@
-package cafe.pj.jvx330.domain;
+package cafe.pj.jvx330.menu.domain;
 
 import java.util.Date;
 

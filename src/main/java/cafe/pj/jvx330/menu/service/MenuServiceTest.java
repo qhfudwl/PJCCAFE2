@@ -10,7 +10,7 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.stereotype.Component;
 
 import cafe.pj.jvx330.config.DataSourceConfig;
-import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.menu.domain.Menu;
 import cafe.pj.jvx330.web.util.Validator;
 
 @Component("menuServiceTest")
@@ -32,10 +32,10 @@ public class MenuServiceTest {
 //		mst.findAllMenusByMenuTypeTest('C');
 //		mst.updateMenuByIdTest(new Menu(4, 'C', "핫아메리카노", 5000, true));
 //		mst.removeMenuByIdTest(4);
-		mst.findLastMenuByMenuTypeTest();
-		float a = 0;
-		Validator v = new Validator();
-		System.out.println(v.isEmpty(a));
+//		mst.findLastMenuByMenuTypeTest();
+//		float a = 0;
+//		Validator v = new Validator();
+//		System.out.println(v.isEmpty(a));
 	}
 	
 	public void findLastMenuByMenuTypeTest() {

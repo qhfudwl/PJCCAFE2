@@ -12,8 +12,8 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import cafe.pj.jvx330.domain.Product;
-import cafe.pj.jvx330.domain.Sales;
+import cafe.pj.jvx330.sales.domain.Product;
+import cafe.pj.jvx330.sales.domain.Sales;
 
 @Component("SalesDao")
 public class SalesDaoImpl implements SalesDao {

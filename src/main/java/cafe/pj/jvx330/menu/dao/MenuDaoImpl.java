@@ -8,9 +8,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import cafe.pj.jvx330.domain.Menu;
-import cafe.pj.jvx330.domain.Product;
+import cafe.pj.jvx330.menu.domain.Menu;
 import cafe.pj.jvx330.sales.dao.ProductRowMapper;
+import cafe.pj.jvx330.sales.domain.Product;
 
 @Repository("menuDao")
 public class MenuDaoImpl implements MenuDao {

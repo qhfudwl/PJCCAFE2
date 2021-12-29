@@ -9,7 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 import cafe.pj.jvx330.config.DataSourceConfig;
-import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.menu.domain.Menu;
 
 @SpringJUnitConfig(classes= {DataSourceConfig.class})
 public class MenuDaoTest {

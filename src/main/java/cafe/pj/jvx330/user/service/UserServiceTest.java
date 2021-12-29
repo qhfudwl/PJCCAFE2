@@ -8,9 +8,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.stereotype.Component;
 
 import cafe.pj.jvx330.config.DataSourceConfig;
-import cafe.pj.jvx330.domain.Customer;
-import cafe.pj.jvx330.domain.User;
 import cafe.pj.jvx330.user.dao.UserDao;
+import cafe.pj.jvx330.user.domain.Customer;
+import cafe.pj.jvx330.user.domain.User;
 
 @Component("userServiceTest")
 public class UserServiceTest {

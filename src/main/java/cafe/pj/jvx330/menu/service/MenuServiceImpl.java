@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cafe.pj.jvx330.domain.Menu;
 import cafe.pj.jvx330.menu.dao.MenuDao;
+import cafe.pj.jvx330.menu.domain.Menu;
 import cafe.pj.jvx330.menu.util.FileAuxiliaryFunction;
 import cafe.pj.jvx330.web.util.Validator;
 
@@ -67,7 +67,7 @@ public class MenuServiceImpl implements MenuService {
 	@Transactional
 	@Override
 	public void removeMenuById(HttpServletRequest request, Menu menu) {
-		fileAux.removeImgFile(request, menu, fileAux.getImgName(menu.getImgPath()));
+		fileAux.removeImgFile(request, menu.getMenuType(), menu.getMenuName(), fileAux.getImgName(menu.getImgPath()));
 		md.removeMenuById(menu.getId());
 	}
 
@@ -96,16 +96,12 @@ public class MenuServiceImpl implements MenuService {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		//System.out.println(sdf.format(cal.getTime()));
 		String date1 = sdf.format(cal.getTime());
 		
 		cal.add(Calendar.DATE, 1-cal.get(Calendar.DAY_OF_MONTH));
-		//System.out.println(sdf.format(cal.getTime()));
 		String date2 = sdf.format(cal.getTime());
 		
 		List<Menu> menu = md.findNewMenus(date1,date2);
-		
-		//System.out.println("himenus"+menu.get(0).getMenuName());
 		
 		return menu;
 

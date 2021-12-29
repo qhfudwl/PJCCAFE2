@@ -1,10 +1,11 @@
 package cafe.pj.jvx330.menu.service;
 
-import cafe.pj.jvx330.domain.Menu;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+
+import cafe.pj.jvx330.menu.domain.Menu;
 /**
  * 
  * @author 김보령

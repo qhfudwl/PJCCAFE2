@@ -19,11 +19,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import cafe.pj.jvx330.config.DataSourceConfig;
-import cafe.pj.jvx330.domain.Menu;
-import cafe.pj.jvx330.domain.Product;
-import cafe.pj.jvx330.domain.Sales;
+import cafe.pj.jvx330.menu.domain.Menu;
 import cafe.pj.jvx330.menu.service.MenuService;
 import cafe.pj.jvx330.sales.dao.SalesDao;
+import cafe.pj.jvx330.sales.domain.Product;
+import cafe.pj.jvx330.sales.domain.Sales;
 import cafe.pj.jvx330.sales.util.SalesStorage;
 import cafe.pj.jvx330.user.service.UserService;
 import cafe.pj.jvx330.web.util.OrderStorage;

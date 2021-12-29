@@ -1,8 +1,11 @@
-package cafe.pj.jvx330.domain;
+package cafe.pj.jvx330.sales.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import cafe.pj.jvx330.menu.domain.Menu;
+import cafe.pj.jvx330.user.domain.User;
 
 public class Sales {
 	private long id;

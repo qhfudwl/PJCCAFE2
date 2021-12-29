@@ -2,7 +2,7 @@ package cafe.pj.jvx330.web.command;
 
 import java.util.Date;
 
-import cafe.pj.jvx330.domain.Menu;
+import cafe.pj.jvx330.menu.domain.Menu;
 /*
  * 211212 임시 
  * 사용안

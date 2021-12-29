@@ -11,8 +11,8 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.stereotype.Component;
 
 import cafe.pj.jvx330.config.DataSourceConfig;
-import cafe.pj.jvx330.domain.Menu;
-import cafe.pj.jvx330.domain.Product;
+import cafe.pj.jvx330.menu.domain.Menu;
+import cafe.pj.jvx330.sales.domain.Product;
 
 @Component("salesServiceTest")
 public class SalesServiceTest {
@@ -63,7 +63,7 @@ public class SalesServiceTest {
 		System.out.println("test : " + p3.getMenu().getId());
 		
 		
-		sst.summOrder(order);
+//		sst.summOrder(order);
 //		sst.addOrderRecordTest(order);
 		
 //		System.out.println(sst);

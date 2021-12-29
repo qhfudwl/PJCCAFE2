@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import cafe.pj.jvx330.domain.Product;
-import cafe.pj.jvx330.domain.Sales;
+import cafe.pj.jvx330.sales.domain.Product;
+import cafe.pj.jvx330.sales.domain.Sales;
 import cafe.pj.jvx330.sales.util.SalesStorage;
 import cafe.pj.jvx330.web.util.OrderStorage;
 
