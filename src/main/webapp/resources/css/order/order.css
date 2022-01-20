@@ -1,0 +1,427 @@
+@charset "UTF-8";
+
+body{
+
+}
+
+#mainContainer{
+  width: 60%; margin: 0 auto;
+  height: 100vh;
+  background: #fff;
+  min-width: 1140px;
+  min-height: 100vh;
+  max-height: 100vh;
+  
+}
+
+/*
+    관리자 정보/날짜
+*/
+#userInfoWrap{
+  height: 50px; line-height: 50px;
+
+  border-bottom: 2px solid #596271;
+}
+.userInfoCom{
+  padding: 0 20px;
+}
+.employeeInfo{
+  float: left;
+}
+.nowDate{
+  float: right;
+}
+
+/*
+    주문하기 메인 컨테이너
+*/
+#allOrderWrap{
+  clear: both;
+    width: 100%;height: calc(100% - 50px);
+  padding:10px 0; box-sizing: border-box;
+}
+#orderWrap{
+  width: 100%;height: 100%;
+
+}
+.halfSideWrap{
+  
+}
+
+
+/*
+    (좌) 주문내역
+*/
+.leftSideWrap{
+  position: relative;
+  float:left;
+  width: 49.5%; height: 100%;
+
+}
+.leftSideFuncWrap{
+  width: 100%;
+  position: absolute; bottom:0;
+}
+
+/* 테이블 */
+.orderListTableWrap{
+  overflow-y: scroll;
+  margin-top: 2px;
+  height: calc(100% - 470px);
+  width: 100%;
+}
+.orderListTable{
+  width: 100%;
+  border: 1px solid #fff;
+}
+.orderListTable tr th,td{
+  border: 1px solid #fff;
+  height: 70px;
+  padding:0 15px;
+}
+.orderListTable tr th{
+  background: #596271;
+  color:#fff;
+}
+/*
+.orderListTable tr:nth-child(2n){
+  background: #f4f4f4;
+}
+.orderListTable tr:nth-child(2n+1){
+  background: #eaeaea;
+}
+*/
+
+.addMenuList:nth-child(2n){
+  background: #f4f4f4;
+}
+.addMenuList:nth-child(2n+1){
+  background: #eaeaea;
+}
+.orderListTable tr th:nth-child(1){
+  width: 40%;
+}
+.orderListTable tr th:nth-child(2){
+  width: 15%;
+}
+.orderListTable tr th:nth-child(3){
+  width: 15%;
+}
+.orderListTable tr th:nth-child(4){
+  width: 30%;
+}
+
+.orderListTable tr td:nth-child(2){
+  text-align: left;
+}
+.orderListTable tr td:nth-child(3){
+  text-align: center;
+}
+.orderListTable tr td:nth-child(4){
+  text-align: center;
+}
+.orderListTable tr td:nth-child(5){
+  text-align: right;
+}
+
+/* 버튼단추 */
+.orderListBtnCom{
+  height: 50px;
+  background: #596271;
+  color:#fff;
+  box-sizing: border-box;
+  border: none;
+  outline:  none;
+  margin:0; padding: 0;
+  font-size: 1em;
+}
+.orderListBtn:hover{
+  background: #9dc970;
+
+}
+
+
+
+
+
+.orderListBtnFirst{
+  display: flex;
+  justify-content: space-between;
+  
+}
+.orderListBtnFirst button:nth-child(1){
+  width: 15%;
+  font-weight: 800;
+  font-size: 1.3em;
+}
+.orderListBtnFirst button:nth-child(2){
+  width: 15%;
+  font-weight: 800;
+  font-size: 1.3em;
+}
+.orderListBtnFirst button:nth-child(3){
+  width: 20%;
+}
+.orderListBtnFirst button:nth-child(4){
+  width: 48%;
+  text-align: right;
+  padding-right: 30px;
+  color:#7ddf24;
+}
+
+.orderListBtnSecond{
+  margin: 2px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.orderListBtnSecond button:nth-child(1){
+  width: 40%;
+}
+.orderListBtnSecond button:nth-child(2){
+  width: 40%;
+}
+.orderListBtnSecond button:nth-child(3){
+  width: 19%;
+}
+
+/* 고객 포인트 정보 */
+.customerInfoTable{
+  width: 100%;
+}
+.customerInfoTable tr, .customerInfoTable th, .customerInfoTable td {
+    border: 1px solid #DFE2DC;
+}
+.customerInfoTable th{
+  width: 18%;
+}
+.customerInfoTable td{
+  width: 32%;
+  text-align: right;
+}
+
+/* 총 판매 가격 안내 테이블 */
+.orderPriceTable{
+  width: 100%;
+  background: #596271;
+  color:#fff;
+}
+.orderPriceTable  tr{
+	border: 1px solid #fff;
+}
+.orderPriceTable  th{
+	border: 1px solid #fff;
+}
+.orderPriceTable  td{
+   border: 1px solid #fff; 
+}
+.orderPriceTable th{
+  width: 20%;
+  font-size: 1em;
+}
+.orderPriceTable td{
+  width: 80%;
+  text-align: right;
+  font-size: 1.1em;
+  height: 70px;
+}
+.totalPrice{
+  font-size: 1.5em;
+  font-weight: 700;
+  color:#7ddf24;
+}
+
+
+
+/*
+    (우) 주문선택
+*/
+.rightSideWrap{
+  position: relative;
+  float:right;
+  width: 49.5%; height: 100%;
+}
+/* 공통 부분 */
+.menuItemCom{
+  display: block;
+  width: 100%;
+  height: 50px;
+  background: #dfe2dc;
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 10px 30px; box-sizing: border-box;
+  vertical-align: middle;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.calSelected, .typeSelected, .subTypeSelected, .menuItemHover{
+ 	background: #9dc970;
+}
+.oneRow{
+  clear: both;
+  margin:2px 0;
+}
+
+
+/* 주요메뉴 */
+
+.menuListWrap ul{
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+}
+.menuListWrap ul li {
+  float:left;
+   width: 33%;
+   
+}
+
+
+/* 메뉴종류 */
+.menuNameWrap ul {
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+}
+.menuNameWrap ul li{
+  float: left;
+  width: 33%;
+}
+
+/* 메뉴 서브 카테고리*/
+.menuSubCategoryWrap ul li a{
+  padding: 10px 10px;
+}
+
+
+/* 메뉴 */
+.menuItemsWrap{
+  width: 563px;
+  height:calc(100% - 270px);
+  overflow-y: scroll;
+}
+.menuItemsWrap ul {
+  /* display: flex;
+  justify-content: space-between; */
+ /* width: 560px; */
+
+}
+.menuItemsWrap ul li{
+  float: left;
+  margin: 0 2px 2px 0;
+}
+/* 이미지 */
+.menuImgWrap{
+  width: 177px;
+  height: 290px;
+  
+  position: relative;
+  border: 1px solid #dfe2dc;
+  border-radius: 5px;
+}
+.menuImgWrap img{
+  width: 160px; height: auto;
+  position:absolute;
+  left:calc(50% - 75px);
+  top:25px;
+}
+
+/* 이미지 가격 */
+
+.menuNamePriceWrap{
+  position: absolute;bottom:0;left: 0;
+  width: 100%;
+  height: 70px;
+  background: #dfe2dc;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  /* text-align: center; */
+
+}
+.menuImgWrap:hover .menuNamePriceWrap{
+  background: #9dc970; 
+  /* border: 1px solid #9dc970; */
+}
+
+.menuName{
+  /* display: inline-flex; */
+  font-weight: 600;
+  width: 90%;
+  text-align:center;
+  font-size: 1.1em;
+  line-height: 14px;
+}
+.menuPrice{
+
+}
+
+
+
+
+/* 기능 */
+.funcButtonsWrap{
+    position: absolute; bottom: 0; z-index:1; 
+  width: 100%;
+}
+.funcButtonsWrap ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.funcButtonsWrap ul li{
+  float: left;
+  width: 24.5%;
+}
+.funcButtonCom{
+  height: 100px;
+  line-height: 100px;
+  padding: 0px 20px;
+  background: #a0a09f;
+}
+
+.funcButtonHover{
+ 	background: #9dc970;
+}
+
+/*
+	js 연결 초기값
+	
+*/
+
+.mCBSubType, .mBeverage, .mCoffee, .mFood, .mCoffeeHot, .mCoffeeIce, .mBeverageHot, .mBeverageIce {
+	display: none;
+}
+.addMenuList{
+	cursor: pointer;
+}
+.orderListTable tr:hover, .addMenuList:hover{
+	background: #9dc970 !important;
+}
+.addMenuListHover{
+	background: #f00;
+}
+
+.selectedMenuList{
+	background: #9dc970;
+}
+
+
+.orderListBtn:hover{
+	background: #9dc970;
+	cursor: pointer;
+}
+
+.isStock{
+	background: #fff5f5;
+}
+
+.soldout{
+	position:relative;
+	width:100%; height:100%;
+}
+
+
+
+

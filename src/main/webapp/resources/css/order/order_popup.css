@@ -1,0 +1,178 @@
+body{
+  overflow: hidden;
+
+}
+.popUpContainerWrap{
+  width: 500px; height: 500px;
+  border:5px solid #9dc970;
+  box-sizing: border-box;
+}
+
+/* 타이틀 */
+.popUpTitleWrap{
+  position: relative;
+  height: 100px; line-height: 100px;
+  text-align: center;
+
+}
+.popUpTitleWrap::after{
+  content:"";
+  position: absolute; bottom:0; left:5%;
+  width: 90%; height: 2px;
+  background: #596271;
+}
+
+/* 내용 */
+.popUpContainer{
+  width: 100%; height: 400px;
+
+  text-align: center;
+}
+
+/* 검색창 */
+.popUpSearchWrap, .popUpResultWrap{
+  text-align: left;
+  width: 400px; margin:0 auto;
+}
+.popUpSearchWrap > h2, .popUpResultWrap > h2{
+  font-weight: 400;
+  font-size: 1em;
+}
+.popUpSearchWrap {
+  margin-top:90px;
+}
+
+/* 검색창 - input text */
+.popUpInputPhoneArea, .joinAreaCom, .popUpInputUserPointArea{
+  width: 400px;
+	height: 50px;
+	border: 1px solid #eee;
+	font-size: 0.8em;
+	padding-left: 10px;
+	vertical-align: middle;
+	box-sizing: border-box;
+  
+  margin-top:10px;
+}
+
+
+/* 공통 - 버튼 */
+.btnCom{
+  display: flex;
+	justify-content: center;
+	align-items : center;
+	line-height: 40px;
+	text-align: center;
+	width: 100px;
+	height: 40px;
+	border:1px solid rgba(0,0,0,0);
+	background: #dfe2dc;
+	font-size: 0.8em;
+
+}
+.btnCom:hover{
+  cursor: pointer;
+  background: #9dc970;
+}
+.popUpBtnWrap{
+  width: 400px;
+  margin:0 auto;
+}
+.searchBtn{
+  width: 100%;
+  line-height: 40px;
+  margin: 15px 0 5px;
+}
+.subBtnCom{
+  width: 49.4%;
+  background: none;
+  border: 1px solid #dfe2dc;
+}
+.subBtnCom:hover{
+  background: none;
+  border: 1px solid #9dc970;
+}
+.joinBtn, .joinSubmitBtn, .submitBtn, .usePointBtn {
+  float:left;
+}
+.cancelBtn{
+  float:right;
+}
+
+
+/* 팝업 결과 테이블 */
+.userListTableWrap{
+  margin: 60px 0 20px;
+  height: 200px;
+  width: 100%;
+
+}
+.userListTable{
+  width: 100%;
+  height: 200px;
+  font-size: 0.9em;
+  text-align: center;
+  border: 1px solid #fff;
+}
+.userListTable tr th,td{
+  border: 1px solid #fff;
+  height: 50px;
+  padding:0 15px;
+}
+.userListTable tr th{
+  background: #596271;
+  color:#fff;
+}
+.userListTable tr:nth-child(2n){
+  background: #f4f4f4;
+}
+.userListTable tr:nth-child(2n+1){
+  background: #eaeaea;
+}
+.userListTable tr:hover{
+  cursor: pointer;
+  background: #9dc970;
+}
+.userListTable tr:first-child{
+  cursor:default;
+}
+
+
+/* 회원가입 */
+
+.popUpJoinWrap, .popUpUserPointWrap{
+  text-align: left;
+  width: 400px; margin:25px auto 10px;
+}
+.popUpJoinWrap p , .popUpUserPointWrap p{
+  font-weight: 400;
+  font-size: 1em;
+}
+
+.subBtnJoinCom{
+  border:1px solid rgba(0,0,0,0);
+  background: #dfe2dc;
+}
+.subBtnJoinCom:hover{
+  background: #9dc970;
+}
+.joinAreaCom{
+  margin-bottom: 10px;
+}
+
+.selectedCustomer{
+	background: #9dc970 !important;
+}
+
+
+
+/* 사용할 포인트 팝업창 */
+
+
+.popUpUserPointWrap{
+	margin-top: 90px;
+}
+
+
+
+

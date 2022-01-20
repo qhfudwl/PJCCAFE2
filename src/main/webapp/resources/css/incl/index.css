@@ -1,0 +1,70 @@
+@charset "UTF-8";
+body, html {height: 100%;}
+#indexContent {
+	display: flex; flex-flow: row nowrap; justify-content: center;
+	width: 100%; min-width: 1100px; height: calc(100% - 170px);
+}
+#indexContent .headerMent {
+	font-size: 18px; width: 95%; border-bottom: 2px solid #596271; margin: 0 auto;
+	line-height: 60px; font-weight: normal;
+}
+#orders {
+	width: 60%;
+}
+#salesItemWrap {
+	display : grid; grid-template-columns : 22% 22% 22% 22%; gap : 3%;
+	flex-basis: 50%; padding: 20px;
+}
+@media all and (max-width: 1430px) {
+	#salesItemWrap {grid-template-columns : 31% 31% 31%;}
+}
+#noOrder {
+	text-align: center; font-weight: bold; color: #9dc970;
+}
+#salesItemWrap input[name=orderNumber] {
+	display: none;
+}
+#salesItemWrap input[name=orderNumber] + label {
+	position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+	border-radius: 15px; transition-duration: 0.3s;
+}
+#salesItemWrap input[name=orderNumber] + label:hover {
+	box-shadow: 0 0 10px #596271;
+}
+#salesItemWrap .in_out {padding-top: 10px; color: #596271;}
+#salesItemWrap .salesItem {
+	background-color: #eeefed; padding: 15px; border-radius: 15px;
+	font-size: 14px; position: relative;
+}
+#salesItemWrap .salesNumber { 
+	color: #72a53f; font-weight: 700; font-size: 16px;
+}
+#salesItemWrap .salesMenu { padding: 10px 0 5px; font-weight: bold; color: #596271; }
+#salesItemWrap .salesDate { padding-top: 10px; color: #596271; font-size: 12px;}
+#orderCompletedContent {
+	background-color : #dfe1dc; min-width: 400px; position: relative;
+	padding: 0 10px 10px 10px; box-sizing: border-box;
+	border-radius: 0 0 20px 20px;
+}
+#orderCompletedContent p { float: left; line-height: 30px; padding: 0 5px; }
+#orderCompletedContent .shortening {
+	width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+#orderCompletedContent ul {padding-top: 20px;}
+#orderCompletedContent li {
+	line-height: 30px; height: 30px; margin-bottom: 5px; font-size: 13px;
+	transition-duration: 0.2s; position: relative; border-radius: 10px;
+}
+#orderCompletedContent input[type=radio] + label {
+	position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+	cursor: pointer;
+}
+#orderCompletedContent ul li:hover {
+	background-color: #596271; color: #bbda9c;
+}
+input[value="정산하기"] {
+	position: absolute; right: 20px; top: 11px; transition-duration: 0.3s;
+	outline: none; padding: 10px 30px; border: 0; border-radius: 5px;
+	background-color: #596271; font-size: 14px; color: #fff; font-weight: bold;
+}
+input[value="정산하기"]:hover {background-color: #9dca6f;}
